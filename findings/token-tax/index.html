@@ -138,6 +138,7 @@
 }
 </script>
 
+<script src="../../assets/util.js"></script>
 <script>
 (function(){
   "use strict";
@@ -173,7 +174,7 @@
       const valueText = r != null ? "×" + r.toFixed(2) : "لم يُقَس بعد";
       const valueClass = "bar-value" + (r != null ? " measured" : "");
       return "<tr>"
-        + '<td class="bar-label">' + t.name + "</td>"
+        + '<td class="bar-label">' + MiqyasUtil.escapeHtml(t.name) + "</td>"
         + '<td class="bar-cell"><div class="' + trackClass + '"><div class="bar-fill" style="width:' + pct + '%"></div></div></td>'
         + '<td class="' + valueClass + '">' + valueText + "</td>"
         + "</tr>";

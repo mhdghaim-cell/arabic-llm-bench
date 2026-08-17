@@ -210,6 +210,7 @@
 }
 </script>
 
+<script src="../assets/util.js"></script>
 <script src="../assets/card.js"></script>
 <script>
 (function(){
@@ -260,15 +261,15 @@
       if(!inTier.length) return;
       html += '<section class="tier"><div class="tier-head">'
             + '<span class="tier-num">'+String(tier.id).padStart(2,"0")+'</span>'
-            + '<h2>'+tier.title+'</h2></div>'
-            + '<p class="tier-note">'+tier.note+'</p>';
+            + '<h2>'+MiqyasUtil.escapeHtml(tier.title)+'</h2></div>'
+            + '<p class="tier-note">'+MiqyasUtil.escapeHtml(tier.note)+'</p>';
       inTier.forEach(t => {
         html += '<article class="entry">'
-          + '<div class="term"><h3>'+t.ar+'</h3><span class="en" dir="ltr">'+t.en+'</span></div>'
-          + '<button class="card-btn" data-term="'+t.ar+'">بطاقة ↓</button>'
-          + '<p class="plain">'+t.plain+'</p>'
-          + '<p class="analogy">'+t.analogy+'</p>'
-          + '<p class="why"><b>لماذا يهمك؟</b> '+t.why+'</p>'
+          + '<div class="term"><h3>'+MiqyasUtil.escapeHtml(t.ar)+'</h3><span class="en" dir="ltr">'+MiqyasUtil.escapeHtml(t.en)+'</span></div>'
+          + '<button class="card-btn" data-term="'+MiqyasUtil.escapeHtml(t.ar)+'">بطاقة ↓</button>'
+          + '<p class="plain">'+MiqyasUtil.escapeHtml(t.plain)+'</p>'
+          + '<p class="analogy">'+MiqyasUtil.escapeHtml(t.analogy)+'</p>'
+          + '<p class="why"><b>لماذا يهمك؟</b> '+MiqyasUtil.escapeHtml(t.why)+'</p>'
           + '</article>';
       });
       html += '</section>';

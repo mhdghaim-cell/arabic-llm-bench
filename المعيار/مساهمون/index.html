@@ -81,6 +81,7 @@
 }
 </script>
 
+<script src="../../assets/util.js"></script>
 <script>
 (function(){
   "use strict";
@@ -107,9 +108,9 @@
       return;
     }
     let rows = contributors.map(c =>
-      "<tr><td>" + c.name + '</td><td class="num">' + (c.prompts_authored || 0)
+      "<tr><td>" + MiqyasUtil.escapeHtml(c.name) + '</td><td class="num">' + (c.prompts_authored || 0)
       + '</td><td class="num">' + (c.runs_submitted || 0)
-      + "</td><td>" + (c.first_contribution || "—") + "</td></tr>"
+      + "</td><td>" + MiqyasUtil.escapeHtml(c.first_contribution || "—") + "</td></tr>"
     ).join("");
     out.innerHTML = '<table class="data-table"><thead><tr>'
       + "<th>الاسم</th><th>طلبات كتبها</th><th>تشغيلات أرسلها</th><th>أول مساهمة</th>"

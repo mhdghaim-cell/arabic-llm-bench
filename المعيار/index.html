@@ -98,6 +98,7 @@
 }
 </script>
 
+<script src="../assets/util.js"></script>
 <script>
 (function(){
   "use strict";
@@ -119,14 +120,14 @@
   function renderRubricKey(rubric){
     const el = document.getElementById("rubric-key");
     el.innerHTML = rubric.dimensions.map(d =>
-      "<div><b>" + d.name + "</b> — " + (d.description || "") + "</div>"
+      "<div><b>" + MiqyasUtil.escapeHtml(d.name) + "</b> — " + MiqyasUtil.escapeHtml(d.description || "") + "</div>"
     ).join("") + "<div>المقياس لكل بُعد: ٠–" + rubric.scale[1] + "</div>";
   }
 
   function scoreCell(run, dimId){
     const v = run.scores && run.scores[dimId];
     if (v == null) return '<td class="num">—</td>';
-    return '<td class="num"><a class="score-link measured" href="' + receiptHref(run.run_id) + '" target="_blank" rel="noopener">' + v + "</a></td>";
+    return '<td class="num"><a class="score-link measured" href="' + receiptHref(run.run_id) + '" target="_blank" rel="noopener">' + MiqyasUtil.escapeHtml(v) + "</a></td>";
   }
 
   function renderResultsTable(data){
@@ -138,13 +139,13 @@
     }
     const dims = data.rubric.dimensions;
     let head = "<tr><th>النموذج</th><th>الجهاز</th><th>التكميم</th>"
-      + dims.map(d => "<th>" + d.name + "</th>").join("")
+      + dims.map(d => "<th>" + MiqyasUtil.escapeHtml(d.name) + "</th>").join("")
       + "<th>الإجمالي</th></tr>";
     let rows = runs.map(run => {
       const overall = run.overall != null
-        ? '<a class="score-link measured" href="' + receiptHref(run.run_id) + '" target="_blank" rel="noopener">' + run.overall + "</a>"
+        ? '<a class="score-link measured" href="' + receiptHref(run.run_id) + '" target="_blank" rel="noopener">' + MiqyasUtil.escapeHtml(run.overall) + "</a>"
         : "—";
-      return "<tr><td>" + run.model + "</td><td>" + run.hardware + "</td><td>" + (run.quantization || "—") + "</td>"
+      return "<tr><td>" + MiqyasUtil.escapeHtml(run.model) + "</td><td>" + MiqyasUtil.escapeHtml(run.hardware) + "</td><td>" + MiqyasUtil.escapeHtml(run.quantization || "—") + "</td>"
         + dims.map(d => scoreCell(run, d.id)).join("")
         + '<td class="num">' + overall + "</td></tr>";
     }).join("");
@@ -161,9 +162,9 @@
     }
     let rows = entries.map(e => {
       const overall = e.overall != null
-        ? '<a class="score-link measured" href="' + receiptHref(e.run_id) + '" target="_blank" rel="noopener">' + e.overall + "</a>"
+        ? '<a class="score-link measured" href="' + receiptHref(e.run_id) + '" target="_blank" rel="noopener">' + MiqyasUtil.escapeHtml(e.overall) + "</a>"
         : "—";
-      return "<tr><td>" + e.model + " <span class=\"tag\">مساهمة مجتمعية</span></td><td>" + e.hardware + "</td><td>" + (e.contributor || "—") + '</td><td class="num">' + overall + "</td></tr>";
+      return "<tr><td>" + MiqyasUtil.escapeHtml(e.model) + " <span class=\"tag\">مساهمة مجتمعية</span></td><td>" + MiqyasUtil.escapeHtml(e.hardware) + "</td><td>" + MiqyasUtil.escapeHtml(e.contributor || "—") + '</td><td class="num">' + overall + "</td></tr>";
     }).join("");
     area.innerHTML = '<table class="data-table"><thead><tr><th>النموذج</th><th>الجهاز</th><th>المساهم</th><th>الإجمالي</th></tr></thead><tbody>' + rows + "</tbody></table>"
       + '<p class="hint">اضغط أي رقم لرؤية الإيصال الخام. <span dir="ltr">فحص ↗</span></p>';

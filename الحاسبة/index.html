@@ -256,6 +256,7 @@
 }
 </script>
 
+<script src="../assets/util.js"></script>
 <script src="../assets/card.js"></script>
 <script>
 (function(){
@@ -369,7 +370,7 @@
   function populateTokenizerSelect(){
     const sel = document.getElementById("tokenizer-select");
     sel.innerHTML = TOK_DATA.tokenizers.map(t =>
-      '<option value="' + t.id + '"' + (t.id === TOK_DATA.default_tokenizer ? " selected" : "") + ">" + t.name + "</option>"
+      '<option value="' + MiqyasUtil.escapeHtml(t.id) + '"' + (t.id === TOK_DATA.default_tokenizer ? " selected" : "") + ">" + MiqyasUtil.escapeHtml(t.name) + "</option>"
     ).join("");
   }
 

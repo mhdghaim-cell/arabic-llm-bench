@@ -279,6 +279,7 @@
 }
 </script>
 
+<script src="../assets/util.js"></script>
 <script>
 (function(){
   "use strict";
@@ -296,7 +297,7 @@
   function renderRubric(rubric){
     const el = document.getElementById("rubric-key");
     el.innerHTML = rubric.dimensions.map(d =>
-      "<div><b>" + d.name + "</b> — " + (d.description || "") + "</div>"
+      "<div><b>" + MiqyasUtil.escapeHtml(d.name) + "</b> — " + MiqyasUtil.escapeHtml(d.description || "") + "</div>"
     ).join("") + "<div>المقياس لكل بُعد: ٠–" + rubric.scale[1] + "</div>";
   }
 
