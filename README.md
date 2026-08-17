@@ -6,10 +6,8 @@
 
 - **مجاني ومفتوح** — بلا تسجيل، بلا إعلانات، بلا تتبّع.
 - **لا نخترع القياسات** — أي قيمة لم تُقَس بعد تظهر كـ«لم يُقَس بعد»، لا رقم افتراضي.
-- **يعمل بلا اتصال** بعد التحميل الأول، ويعمل مباشرة من `file://` أيضًا.
 
-موقع ثابت (static site): HTML/CSS/JS خالص بلا إطار عمل وبلا خطوة بناء إلزامية،
-جاهز للنشر على GitHub Pages.
+
 
 ## البنية
 
@@ -67,8 +65,7 @@ anyone can inspect or reuse.
   "لم يُقَس بعد" (not measured yet), never a placeholder number.
 - **Works offline** after first load, and directly from `file://`.
 
-A static site: plain HTML/CSS/JS, no framework, no required build step,
-deployable to GitHub Pages as-is.
+
 
 ### Running locally
 
