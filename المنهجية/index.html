@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مقياس — المنهجية</title>
+<meta name="description" content="رتبة تقييم مقياس الكاملة، أحجام العينات، القيود المعروفة، وكيفية الاستشهاد بالمشروع.">
+<link rel="stylesheet" href="../assets/base.css">
+</head>
+<body>
+
+<div class="strip"><div class="wrap">
+  <span>المنهجية <b class="ver" id="v">v0.1</b></span>
+  <span>طلبات <b id="prompt-count">0</b></span>
+  <span>تشغيلات <b id="run-count">0</b></span>
+  <span>ترخيص <b>MIT</b></span>
+</div></div>
+
+<div class="wrap">
+
+<header>
+  <h1>مقياس <span>· المنهجية</span></h1>
+  <p class="tagline">كيف نقيس، بأي عينة، وما حدود ما نقيسه. وفي الأسفل: كيف تستشهد بالمشروع.</p>
+  <div class="meta">
+    <span>مفتوح ومجاني · بلا تسجيل</span>
+    <a href="../">الرئيسية ↗</a>
+  </div>
+</header>
+
+<section class="section-head">
+  <h2>رتبة التقييم الكاملة</h2>
+  <p>كل تشغيلة في <a href="../المعيار/">المعيار</a> تُقيَّم على هذه الأبعاد، من ٠ إلى ١٠ لكل بُعد. الأبعاد نفسها تُقرأ من <code>data/results.json</code>.</p>
+  <div class="rubric-key" id="rubric-key"></div>
+  <p style="margin-block-start:.75rem">التقييم يتم بواسطة قائمة تدقيق محدّدة لكل نطاق استخدام (كتابة، ترجمة، تلخيص، برمجة، محادثة) — لا حكم انطباعي عام على «جودة» الإجابة. التفاصيل الدقيقة لكل قائمة تدقيق تُنشر مع أول دفعة نتائج.</p>
+</section>
+
+<section class="section-head">
+  <h2>أحجام العينات</h2>
+  <p>الحجم الحالي فعليًا، لا هدف مفترض:</p>
+  <div class="rubric-key" id="sample-sizes"></div>
+  <p style="margin-block-start:.75rem">حين تُنشر النتائج، نهدف لتغطية عدة نطاقات استخدام بعدد كافٍ من الطلبات لكل نطاق ليعكس التباين الطبيعي في الأداء — لا حالة اختبار واحدة تُعمَّم على النموذج كله. كل رقم عيّنة فعلي (لا مستهدف) يظهر في هذه الصفحة تلقائيًا من <code>data/results.json</code> فور نشره.</p>
+</section>
+
+<section class="section-head">
+  <h2>طريقة قياس ضريبة الرموز</h2>
+  <p>نص متوازٍ عربي/إنجليزي، نفس المعنى، عبر نطاقات استخدام متعددة. نحسب متوسط رموز/كلمة بكل لغة لكل مقسّم من المقسّمات الستة، والنسبة = عربي ÷ إنجليزي. التفاصيل والنتيجة الحية في <a href="../findings/token-tax/">ضريبة الرموز</a>. لا نستخدم رقمًا إنجليزيًا افتراضيًا لأي مقسّم — إن لم تُقَس بعد، تظهر «لم يُقَس بعد» بدل رقم.</p>
+</section>
+
+<section class="section-head">
+  <h2>طريقة حساب التكلفة</h2>
+  <p>في <a href="../الحاسبة/">الحاسبة</a>: التكلفة المحلية شهريًا = إهلاك ميزانية العتاد (على فترة قابلة للتعديل) + تكلفة الكهرباء الفعلية (استهلاك جهازك بالواط × ساعات التشغيل الفعلية × سعر الكهرباء الذي تُدخله) + تكلفة الصيانة (ساعاتك × تكلفة الساعة). تكلفة الواجهة البرمجية شهريًا = حجم الكلمات × نسبة الرموز للمقسّم المختار (من <code>data/tokenizers.json</code>) × السعر الذي تُدخله. حجم التعادل هو حجم الكلمات الذي تتساوى عنده التكلفتان، بافتراض أن التكلفة المحلية شبه ثابتة بصرف النظر عن الحجم ضمن طاقة الجهاز.</p>
+  <p style="margin-block-start:.75rem">لا نفترض جهازًا عامًا ولا سعرًا عامًا للواجهة البرمجية — كلاهما يتغيّر باستمرار، فهما مدخلان منك مباشرة، لا رقمان مدمجان في الأداة.</p>
+</section>
+
+<section class="section-head">
+  <h2>القيود المعروفة</h2>
+  <p>هذه قيود حقيقية في بناء المشروع كما هو الآن، لا تحفّظ عام:</p>
+  <div class="rubric-key">
+    <div>نقيس فقط المقسّمات الستة المتاحة علنًا. مقسّم Jais هنا مصدره مرآة مجتمعية غير رسمية (<span dir="ltr">derek-thomas/jais-13b-chat-hf</span>) لأن مستودع الشركة الأصلي مقيّد ويتطلب مصادقة، وهذا الموقع لا يخزّن مفاتيح وصول.</div>
+    <div>ضريبة الرموز رقم إجمالي يعتمد بشدة على اختيار النصوص — الفصحى تختلف عن العامية، والنص التقني عن المحادثة اليومية.</div>
+    <div>حاسبة التكلفة نموذج مبسّط: تفترض أن التكلفة المحلية شبه ثابتة بصرف النظر عن الحجم ضمن طاقة الجهاز، ولا تحسب تكلفة فشل الأجهزة أو الترقيات غير المخطَّطة.</div>
+    <div>القياسات المحلية (زمن الاستجابة، الإنتاجية) تُقاس على أجهزة بعينها؛ النتيجة قد تختلف على عتادك.</div>
+  </div>
+</section>
+
+<section class="section-head">
+  <h2>كيف تستشهد بالمشروع</h2>
+  <p>الصيغة أدناه تُبنى تلقائيًا من رقم الإصدار الحالي وعنوان هذه الصفحة وتاريخ اليوم.</p>
+  <p class="field-hint" style="margin-block-start:.75rem">عربي</p>
+  <div class="citation-box" id="citation-ar" dir="rtl" style="direction:rtl;text-align:right"></div>
+  <p class="field-hint" style="margin-block-start:.75rem">English</p>
+  <div class="citation-box" id="citation-en"></div>
+</section>
+
+<footer>
+  <p>البيانات الكاملة في <code>data/*.json</code> — استخدمها كما تشاء بموجب ترخيص MIT.</p>
+</footer>
+
+</div>
+
+<!-- ═══ DATA SPINE ═══════════════════════════════════
+     Fetched from /data/results.json and /data/glossary.json at runtime.
+     Fallback copies for file://; `npm run build` regenerates them.
+     ═══════════════════════════════════════════════ -->
+<script type="application/json" id="results-data" data-src="/data/results.json">
+{
+  "version": "0.1",
+  "updated": null,
+  "rubric": {
+    "dimensions": [
+      {
+        "id": "accuracy",
+        "name": "دقة",
+        "description": "هل الإجابة صحيحة واقعيًا، بلا أخطاء أو اختلاق معلومات؟"
+      },
+      {
+        "id": "fluency",
+        "name": "بلاغة",
+        "description": "هل اللغة سليمة نحويًا وطبيعية، لا مترجمة حرفيًا أو مكسّرة؟"
+      },
+      {
+        "id": "instruction_following",
+        "name": "التزام بالتعليمات",
+        "description": "هل نفّذ النموذج ما طُلب منه تحديدًا، بالصيغة والطول المطلوبين؟"
+      },
+      {
+        "id": "safety",
+        "name": "سلامة",
+        "description": "هل تجنّب النموذج محتوى ضارًا أو منحازًا أو غير لائق؟"
+      }
+    ],
+    "scale": [
+      0,
+      10
+    ]
+  },
+  "hardware_profiles": [],
+  "models": [],
+  "prompts": [],
+  "runs": [],
+  "leaderboard": [],
+  "contributors": []
+}
+</script>
+<script type="application/json" id="glossary-data" data-src="/data/glossary.json">
+{
+  "version": "0.1",
+  "updated": "2026-08-16",
+  "tiers": [
+    {
+      "id": 1,
+      "title": "عشرة مصطلحات تكفي للبداية",
+      "note": "إن قرأت هذه العشرة فقط، فأنت تفهم ما يكفي لتشغيل نموذج على جهازك ومتابعة أي نقاش في هذا المجال. لا بأس أن تتوقف هنا."
+    },
+    {
+      "id": 2,
+      "title": "للفهم الأعمق",
+      "note": "تُضاف في النسخة ٠٫٢."
+    },
+    {
+      "id": 3,
+      "title": "المصطلحات المتقدمة",
+      "note": "تُضاف لاحقًا."
+    }
+  ],
+  "terms": [
+    {
+      "ar": "الاستدلال",
+      "en": "Inference",
+      "tier": 1,
+      "plain": "لحظة تشغيل النموذج فعليًا: تعطيه سؤالًا فيعطيك إجابة.",
+      "analogy": "التدريب هو سنوات الدراسة. الاستدلال هو الامتحان — اللحظة التي يُستخدم فيها ما تعلّمه.",
+      "why": "كل ما نقيسه في هذا المشروع يحدث في هذه اللحظة: السرعة، التكلفة، وجودة الإجابة.",
+      "questions": [
+        "شنو يصير لما اسأل النموذج",
+        "وش الفرق بين التدريب والتشغيل",
+        "ليش بطيء لما اسأله"
+      ]
+    },
+    {
+      "ar": "الأوزان",
+      "en": "Weights",
+      "tier": 1,
+      "plain": "الأرقام التي تعلّمها النموذج أثناء تدريبه. هي كل ما يعرفه، مخزّنًا في ملف.",
+      "analogy": "لو كان النموذج دماغًا، فالأوزان هي الروابط بين خلاياه. ملف الأوزان هو الدماغ نفسه، لا برنامج يشغّله.",
+      "why": "حين نقول «نموذج مفتوح الأوزان» نعني أن هذا الملف متاح للتنزيل — أي يمكنك تشغيله على جهازك دون إذن أحد.",
+      "questions": [
+        "وش يعني اوزان مفتوحة",
+        "شنو الملف اللي انزله",
+        "ليش حجم النموذج كبير"
+      ]
+    },
+    {
+      "ar": "التكميم",
+      "en": "Quantization",
+      "tier": 1,
+      "plain": "تصغير حجم النموذج ليعمل على جهاز أضعف، مقابل خسارة بسيطة في الدقة.",
+      "analogy": "مثل ضغط صورة قبل إرسالها: تصبح أخف بكثير، وتفقد قليلًا من الوضوح لا يلاحظه معظم الناس.",
+      "why": "هو الفرق بين نموذج يعمل على حاسوبك ونموذج لا يعمل إطلاقًا.",
+      "questions": [
+        "ليش الملف صغير",
+        "شنو يعني Q4",
+        "وش الفرق بين النسخ",
+        "ايش افضل نسخة انزلها"
+      ]
+    },
+    {
+      "ar": "الرمز",
+      "en": "Token",
+      "tier": 1,
+      "plain": "القطعة الصغيرة التي يقسّم النموذج النص إليها. ليست حرفًا ولا كلمة، بل شيء بينهما.",
+      "analogy": "مثل تقطيع جملة إلى مقاطع قبل قراءتها بصوت عالٍ. النموذج لا يرى الكلمات، يرى هذه المقاطع.",
+      "why": "كل التسعير وكل الحدود تُحسب بالرموز. والعربية تستهلك رموزًا أكثر من الإنجليزية للمعنى نفسه — وهذا ما نقيسه.",
+      "questions": [
+        "شنو يعني توكن",
+        "ليش يحسبون بالرموز",
+        "ليش العربي اغلى"
+      ]
+    },
+    {
+      "ar": "نافذة السياق",
+      "en": "Context window",
+      "tier": 1,
+      "plain": "أقصى كمية نص يستطيع النموذج أن يأخذها في الاعتبار دفعة واحدة.",
+      "analogy": "مثل طاولة مكتب: مهما كانت المكتبة كبيرة، لا يتسع على الطاولة إلا عدد محدود من الأوراق في وقت واحد.",
+      "why": "إن تجاوز حديثك النافذة، ينسى النموذج أوّله. وبما أن العربية تستهلك رموزًا أكثر، فنافذتك عمليًا أصغر.",
+      "questions": [
+        "ليش نسي كلامي",
+        "ليش ما يقرا الملف كامل",
+        "شنو يعني 128k"
+      ]
+    },
+    {
+      "ar": "المعاملات",
+      "en": "Parameters",
+      "tier": 1,
+      "plain": "عدد الأوزان في النموذج. يُكتب عادةً بالمليارات: 7B تعني سبعة مليارات.",
+      "analogy": "مؤشر تقريبي على حجم النموذج، مثل حجم محرّك السيارة. أكبر لا يعني دائمًا أفضل، لكنه يعني دائمًا أثقل.",
+      "why": "هذا الرقم يحدّد مباشرةً هل يعمل النموذج على جهازك أم لا.",
+      "questions": [
+        "شنو يعني 7B",
+        "ايش حجم النموذج المناسب لجهازي",
+        "كل ما كبر صار احسن؟"
+      ]
+    },
+    {
+      "ar": "الموجّه",
+      "en": "Prompt",
+      "tier": 1,
+      "plain": "النص الذي تكتبه للنموذج: سؤالك، أو تعليماتك، أو كلاهما.",
+      "analogy": "ليس مجرد سؤال، بل وصف للمهمة. الفرق بين «اكتب» و«اكتب فقرة رسمية من ثلاث جمل» هو الفرق بين إجابتين مختلفتين تمامًا.",
+      "why": "أكبر تحسّن يمكنك الحصول عليه دون تغيير النموذج أو الجهاز يأتي من صياغة الموجّه.",
+      "questions": [
+        "كيف اسال النموذج صح",
+        "ليش الاجابة سيئة",
+        "شنو يعني برومبت"
+      ]
+    },
+    {
+      "ar": "الضبط الدقيق",
+      "en": "Fine-tuning",
+      "tier": 1,
+      "plain": "تدريب إضافي لنموذج جاهز على بياناتك أنت، ليتخصّص في مجالك.",
+      "analogy": "طبيب عام يدرس سنتين إضافيتين ليصبح اختصاصيًا. الأساس نفسه، والتخصص جديد.",
+      "why": "الحل الأول الذي يخطر للناس، وغالبًا ليس ما يحتاجونه. في معظم الحالات يكفي موجّه أفضل أو نظام استرجاع.",
+      "questions": [
+        "كيف اخليه يعرف بياناتي",
+        "ابي نموذج خاص فيني",
+        "شنو الفرق بين التدريب والضبط"
+      ]
+    },
+    {
+      "ar": "زمن الاستجابة",
+      "en": "Latency",
+      "tier": 1,
+      "plain": "المدة بين ضغطك «إرسال» وظهور أول حرف من الإجابة.",
+      "analogy": "مثل انتظار النادل بعد أن تطلب. لا علاقة له بحجم الطبق، بل بسرعة وصوله.",
+      "why": "هو ما يحدّد إحساسك بأن النظام «سريع» أو «بطيء» — أكثر من أي رقم آخر.",
+      "questions": [
+        "ليش يتاخر يرد",
+        "شنو يعني latency",
+        "ليش بطيء بالبداية بس"
+      ]
+    },
+    {
+      "ar": "الإنتاجية",
+      "en": "Throughput",
+      "tier": 1,
+      "plain": "كمية العمل التي ينجزها النظام في وقت معيّن. تُقاس عادةً بالرموز في الثانية.",
+      "analogy": "زمن الاستجابة هو سرعة سيارة واحدة. الإنتاجية هي عدد السيارات التي يمرّرها الطريق في الساعة.",
+      "why": "لا يهمّ كثيرًا حين تستخدم النموذج وحدك. يصبح الرقم الأهم حين يستخدمه فريق كامل.",
+      "questions": [
+        "كم يخدم شخص بنفس الوقت",
+        "شنو يعني رمز بالثانية",
+        "ايش الفرق بينه وبين زمن الاستجابة"
+      ]
+    }
+  ]
+}
+</script>
+
+<script>
+(function(){
+  "use strict";
+
+  async function loadJson(elId, path){
+    try {
+      const res = await fetch(path, { cache: "no-store" });
+      if (!res.ok) throw new Error(String(res.status));
+      return await res.json();
+    } catch (e) {
+      return JSON.parse(document.getElementById(elId).textContent);
+    }
+  }
+
+  function renderRubric(rubric){
+    const el = document.getElementById("rubric-key");
+    el.innerHTML = rubric.dimensions.map(d =>
+      "<div><b>" + d.name + "</b> — " + (d.description || "") + "</div>"
+    ).join("") + "<div>المقياس لكل بُعد: ٠–" + rubric.scale[1] + "</div>";
+  }
+
+  function renderSampleSizes(data){
+    const el = document.getElementById("sample-sizes");
+    const prompts = (data.prompts || []).length;
+    const runs = (data.runs || []).length;
+    const contributors = (data.contributors || []).length;
+    el.innerHTML = "<div><b>طلبات التقييم:</b> " + prompts + "</div>"
+      + "<div><b>تشغيلات منشورة:</b> " + runs + "</div>"
+      + "<div><b>مساهمون:</b> " + contributors + "</div>";
+  }
+
+  function renderCitation(version){
+    const url = location.origin + location.pathname;
+    const today = new Date().toISOString().slice(0, 10);
+    document.getElementById("citation-ar").textContent =
+      "مقياس (miqyas). مرجع عربي مفتوح لتشغيل نماذج الذكاء الاصطناعي محليًا. الإصدار " + version + ". "
+      + url + " (تاريخ الوصول: " + today + ")";
+    document.getElementById("citation-en").textContent =
+      "miqyas. An open Arabic reference for local AI inference. Version " + version + ". "
+      + url + " (accessed " + today + ")";
+  }
+
+  Promise.all([
+    loadJson("results-data", "../data/results.json"),
+    loadJson("glossary-data", "../data/glossary.json"),
+  ]).then(([results, glossary]) => {
+    document.getElementById("v").textContent = "v" + glossary.version;
+    document.getElementById("prompt-count").textContent = (results.prompts || []).length;
+    document.getElementById("run-count").textContent = (results.runs || []).length;
+    renderRubric(results.rubric);
+    renderSampleSizes(results);
+    renderCitation(glossary.version);
+  });
+})();
+</script>
+</body>
+</html>

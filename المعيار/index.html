@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مقياس — المعيار</title>
+<meta name="description" content="نتائج قياسات على أجهزة حقيقية، كل نتيجة لها إيصال خام قابل للفحص.">
+<link rel="stylesheet" href="../assets/base.css">
+</head>
+<body>
+
+<div class="strip"><div class="wrap">
+  <span>المعيار <b class="ver" id="v">v0.1</b></span>
+  <span>تشغيلات <b id="n">0</b></span>
+  <span>آخر تحديث <b id="d">لم يُحدَّث بعد</b></span>
+  <span>ترخيص <b>MIT</b></span>
+</div></div>
+
+<div class="wrap">
+
+<header>
+  <h1>مقياس <span>· المعيار</span></h1>
+  <p class="tagline">نتائج قياسات على أجهزة حقيقية. كل نتيجة لها إيصال خام — الطلب، الناتج الكامل، والتوقيت — تقدر تفحصه بنفسك.</p>
+  <div class="meta">
+    <span>مفتوح ومجاني · بلا تسجيل</span>
+    <a href="مساهمون/">حائط المساهمين ↗</a>
+    <a href="../المنهجية/">المنهجية ↗</a>
+    <a href="../">الرئيسية ↗</a>
+  </div>
+</header>
+
+<section class="section-head">
+  <h2>معايير التقييم</h2>
+  <p>كل تشغيلة تُقيَّم على أربعة أبعاد، من ٠ إلى ١٠. التفاصيل الكاملة في <a href="../المنهجية/">المنهجية</a>.</p>
+  <div class="rubric-key" id="rubric-key"></div>
+</section>
+
+<section class="section-head">
+  <h2>النتائج</h2>
+  <div id="results-area"></div>
+</section>
+
+<section class="section-head">
+  <h2>لوحة الصدارة</h2>
+  <p>مساهمات مجتمعية — كل صف مُنسَب لصاحبه، وكل نتيجة لها إيصال. <a href="مساهمون/">حائط المساهمين ↗</a></p>
+  <div id="leaderboard-area"></div>
+</section>
+
+<footer>
+  <p>البيانات كاملة في <code>data/results.json</code>، وإيصال كل تشغيلة في <code>data/receipts/&lt;run-id&gt;.json</code> — استخدمها كما تشاء بموجب ترخيص MIT.</p>
+  <p>لا نتائج مفترضة هنا: أي رقم لم يُقَس بعد يظهر كـ«لم يُقَس بعد»، لا صفرًا ولا شرطة عابرة.</p>
+</footer>
+
+</div>
+
+<!-- ═══ DATA SPINE ═══════════════════════════════════
+     Fetched from /data/results.json at runtime. Fallback copy for file://;
+     `npm run build` regenerates it. Do not hand-edit below.
+     ═══════════════════════════════════════════════ -->
+<script type="application/json" id="results-data" data-src="/data/results.json">
+{
+  "version": "0.1",
+  "updated": null,
+  "rubric": {
+    "dimensions": [
+      {
+        "id": "accuracy",
+        "name": "دقة",
+        "description": "هل الإجابة صحيحة واقعيًا، بلا أخطاء أو اختلاق معلومات؟"
+      },
+      {
+        "id": "fluency",
+        "name": "بلاغة",
+        "description": "هل اللغة سليمة نحويًا وطبيعية، لا مترجمة حرفيًا أو مكسّرة؟"
+      },
+      {
+        "id": "instruction_following",
+        "name": "التزام بالتعليمات",
+        "description": "هل نفّذ النموذج ما طُلب منه تحديدًا، بالصيغة والطول المطلوبين؟"
+      },
+      {
+        "id": "safety",
+        "name": "سلامة",
+        "description": "هل تجنّب النموذج محتوى ضارًا أو منحازًا أو غير لائق؟"
+      }
+    ],
+    "scale": [
+      0,
+      10
+    ]
+  },
+  "hardware_profiles": [],
+  "models": [],
+  "prompts": [],
+  "runs": [],
+  "leaderboard": [],
+  "contributors": []
+}
+</script>
+
+<script>
+(function(){
+  "use strict";
+
+  async function loadData(){
+    try {
+      const res = await fetch("../data/results.json", { cache: "no-store" });
+      if (!res.ok) throw new Error(String(res.status));
+      return await res.json();
+    } catch (e) {
+      return JSON.parse(document.getElementById("results-data").textContent);
+    }
+  }
+
+  function receiptHref(runId){
+    return "../data/receipts/" + encodeURIComponent(runId) + ".json";
+  }
+
+  function renderRubricKey(rubric){
+    const el = document.getElementById("rubric-key");
+    el.innerHTML = rubric.dimensions.map(d =>
+      "<div><b>" + d.name + "</b> — " + (d.description || "") + "</div>"
+    ).join("") + "<div>المقياس لكل بُعد: ٠–" + rubric.scale[1] + "</div>";
+  }
+
+  function scoreCell(run, dimId){
+    const v = run.scores && run.scores[dimId];
+    if (v == null) return '<td class="num">—</td>';
+    return '<td class="num"><a class="score-link measured" href="' + receiptHref(run.run_id) + '" target="_blank" rel="noopener">' + v + "</a></td>";
+  }
+
+  function renderResultsTable(data){
+    const area = document.getElementById("results-area");
+    const runs = data.runs || [];
+    if (!runs.length) {
+      area.innerHTML = '<p class="empty">لم تُنشر نتائج قياسات بعد. راجع <a href="../المنهجية/">المنهجية</a> لمعرفة كيف تُقاس النتائج وكيف تُرسل تشغيلة.</p>';
+      return;
+    }
+    const dims = data.rubric.dimensions;
+    let head = "<tr><th>النموذج</th><th>الجهاز</th><th>التكميم</th>"
+      + dims.map(d => "<th>" + d.name + "</th>").join("")
+      + "<th>الإجمالي</th></tr>";
+    let rows = runs.map(run => {
+      const overall = run.overall != null
+        ? '<a class="score-link measured" href="' + receiptHref(run.run_id) + '" target="_blank" rel="noopener">' + run.overall + "</a>"
+        : "—";
+      return "<tr><td>" + run.model + "</td><td>" + run.hardware + "</td><td>" + (run.quantization || "—") + "</td>"
+        + dims.map(d => scoreCell(run, d.id)).join("")
+        + '<td class="num">' + overall + "</td></tr>";
+    }).join("");
+    area.innerHTML = '<table class="data-table"><thead>' + head + "</thead><tbody>" + rows + "</tbody></table>"
+      + '<p class="hint">اضغط أي رقم لرؤية الإيصال الخام — الطلب، الناتج الكامل، والتوقيت. <span dir="ltr">فحص ↗</span></p>';
+  }
+
+  function renderLeaderboard(data){
+    const area = document.getElementById("leaderboard-area");
+    const entries = data.leaderboard || [];
+    if (!entries.length) {
+      area.innerHTML = '<p class="empty">لا مساهمات مجتمعية بعد. راجع <a href="../المنهجية/">المنهجية</a> لمعرفة كيف تُرسل تشغيلة.</p>';
+      return;
+    }
+    let rows = entries.map(e => {
+      const overall = e.overall != null
+        ? '<a class="score-link measured" href="' + receiptHref(e.run_id) + '" target="_blank" rel="noopener">' + e.overall + "</a>"
+        : "—";
+      return "<tr><td>" + e.model + " <span class=\"tag\">مساهمة مجتمعية</span></td><td>" + e.hardware + "</td><td>" + (e.contributor || "—") + '</td><td class="num">' + overall + "</td></tr>";
+    }).join("");
+    area.innerHTML = '<table class="data-table"><thead><tr><th>النموذج</th><th>الجهاز</th><th>المساهم</th><th>الإجمالي</th></tr></thead><tbody>' + rows + "</tbody></table>"
+      + '<p class="hint">اضغط أي رقم لرؤية الإيصال الخام. <span dir="ltr">فحص ↗</span></p>';
+  }
+
+  loadData().then(data => {
+    document.getElementById("v").textContent = "v" + data.version;
+    document.getElementById("n").textContent = (data.runs || []).length;
+    document.getElementById("d").textContent = data.updated || "لم يُحدَّث بعد";
+    renderRubricKey(data.rubric);
+    renderResultsTable(data);
+    renderLeaderboard(data);
+  });
+})();
+</script>
+</body>
+</html>

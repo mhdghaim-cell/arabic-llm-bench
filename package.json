@@ -1,0 +1,11 @@
+{
+  "name": "miqyas",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "مقياس — مرجع عربي مفتوح لتشغيل نماذج الذكاء الاصطناعي محليًا.",
+  "scripts": {
+    "build": "node scripts/inline.mjs"
+  },
+  "license": "MIT"
+}

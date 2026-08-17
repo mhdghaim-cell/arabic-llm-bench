@@ -1,0 +1,75 @@
+{
+  "version": "0.1",
+  "updated": null,
+  "note": "لم يُقَس بعد. تُملأ القيم الرقمية من قياسات فعلية على نصوص عربية وإنجليزية متوازية — لا قيم مفترضة.",
+  "default_tokenizer": "gpt-4o",
+  "tokenizers": [
+    {
+      "id": "gpt-4o",
+      "name": "GPT-4o",
+      "encoding": "o200k_base",
+      "provider": "OpenAI",
+      "hf_model": "Xenova/gpt-4o",
+      "english_tokens_per_word": null,
+      "arabic_tokens_per_word": null,
+      "ratio": null,
+      "sample_size": null
+    },
+    {
+      "id": "gpt-3.5-4",
+      "name": "GPT-3.5 / GPT-4",
+      "encoding": "cl100k_base",
+      "provider": "OpenAI",
+      "hf_model": "Xenova/gpt-3.5-turbo",
+      "english_tokens_per_word": null,
+      "arabic_tokens_per_word": null,
+      "ratio": null,
+      "sample_size": null
+    },
+    {
+      "id": "llama-3",
+      "name": "Llama 3",
+      "encoding": null,
+      "provider": "Meta",
+      "hf_model": "Xenova/llama-3-tokenizer",
+      "english_tokens_per_word": null,
+      "arabic_tokens_per_word": null,
+      "ratio": null,
+      "sample_size": null
+    },
+    {
+      "id": "mistral",
+      "name": "Mistral",
+      "encoding": null,
+      "provider": "Mistral AI",
+      "hf_model": "Xenova/mistral-tokenizer-v3",
+      "english_tokens_per_word": null,
+      "arabic_tokens_per_word": null,
+      "ratio": null,
+      "sample_size": null
+    },
+    {
+      "id": "jais",
+      "name": "Jais",
+      "encoding": null,
+      "provider": "G42 / Inception",
+      "hf_model": "derek-thomas/jais-13b-chat-hf",
+      "hf_model_note": "مرآة مجتمعية غير رسمية — مستودع Inception الرسمي مقيّد ويتطلب مصادقة، وهذا الموقع لا يخزّن مفاتيح وصول.",
+      "english_tokens_per_word": null,
+      "arabic_tokens_per_word": null,
+      "ratio": null,
+      "sample_size": null
+    },
+    {
+      "id": "command-r",
+      "name": "Command R",
+      "encoding": null,
+      "provider": "Cohere",
+      "hf_model": "Xenova/c4ai-command-r-v01-tokenizer",
+      "english_tokens_per_word": null,
+      "arabic_tokens_per_word": null,
+      "ratio": null,
+      "sample_size": null
+    }
+  ]
+}

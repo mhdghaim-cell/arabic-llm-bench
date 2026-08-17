@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مقياس — الأداة</title>
+<meta name="description" content="قسّم نصًا عربيًا عبر ستة مقسّمات رموز مختلفة، وقارن استهلاك الرموز بالعربية مقابل الإنجليزية.">
+<link rel="stylesheet" href="../assets/base.css">
+<style>
+  .sample-btn{margin-inline-start:.5rem}
+  .field-row{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+  #word-count-line{font-family:var(--mono);font-size:.72rem;color:var(--dim);margin-block-start:.5rem;font-variant-numeric:tabular-nums}
+  .chips-label{font-family:var(--mono);font-size:.72rem;color:var(--dim);margin-block-start:1.75rem}
+  .privacy-note{font-size:.8125rem;color:var(--dim);margin-block-start:.75rem;max-width:38rem}
+</style>
+</head>
+<body>
+
+<div class="strip"><div class="wrap">
+  <span>الأداة <b class="ver" id="v">v0.1</b></span>
+  <span>مقسّمات <b id="n">6</b></span>
+  <span>آخر تحديث <b id="d">لم يُحدَّث بعد</b></span>
+  <span>ترخيص <b>MIT</b></span>
+</div></div>
+
+<div class="wrap">
+
+<header>
+  <h1>مقياس <span>· الأداة</span></h1>
+  <p class="tagline">اكتب نصًا عربيًا وشاهد كيف تقسّمه ستة مقسّمات رموز مختلفة إلى قطع — وكم قطعة أكثر تحتاجها العربية مقارنة بالإنجليزية لنفس المعنى.</p>
+  <div class="meta">
+    <span>يعمل كاملًا في متصفحك · لا يُرسَل نصك لأي خادم</span>
+    <a href="../">الرئيسية ↗</a>
+  </div>
+  <p class="privacy-note">التقسيم يحدث محليًا في متصفحك عبر <span dir="ltr">transformers.js</span>. النصّ الذي تكتبه لا يغادر جهازك أبدًا.</p>
+</header>
+
+<div class="controls" style="position:static">
+  <div class="field-row">
+    <label for="input" class="hint" style="margin-block-start:0">ألصق نصًا عربيًا هنا، أو</label>
+    <button class="card-btn sample-btn" id="sample-btn" type="button">جرّب نصًا نموذجيًا</button>
+  </div>
+  <textarea id="input" class="field-textarea" style="margin-block-start:.5rem" placeholder="الذكاء الاصطناعي التوليدي يغيّر طريقة عملنا…" rows="4"></textarea>
+  <p id="word-count-line">الكلمات (بالفراغات): <b id="word-count">0</b></p>
+  <p class="loading" id="loading" hidden></p>
+</div>
+
+<section class="result-block">
+  <p class="result-label" id="result-tokenizer">النسبة إلى الإنجليزية</p>
+  <p class="result-number measured" id="result-number">—</p>
+  <p class="result-sub" id="result-sub">اكتب نصًا لقياس الرموز.</p>
+  <button class="card-btn" id="card-btn" type="button" style="margin-block-start:1rem">احفظ البطاقة ↓</button>
+</section>
+
+<p class="chips-label" id="chips-label" hidden>قطع المقسّم الرئيسي</p>
+<div class="token-chips" id="chips"></div>
+
+<table class="data-table">
+  <thead>
+    <tr>
+      <th>المقسّم</th>
+      <th>الرموز</th>
+      <th>رمز/كلمة</th>
+      <th>النسبة إلى الإنجليزية</th>
+    </tr>
+  </thead>
+  <tbody id="table-body"></tbody>
+</table>
+
+<footer>
+  <p>الأرقام المرجعية للإنجليزية (المستخدمة في حساب النسبة) مصدرها <code>data/tokenizers.json</code>. حتى تُقاس، تظهر النسبة كـ«لم يُقَس بعد» — لا رقم مفترض.</p>
+  <p>عدد الكلمات يُحسب بالفراغات بين الكلمات، وهو تقريب معروف الحدود.</p>
+</footer>
+
+</div>
+
+<canvas id="cv" width="1200" height="1200"></canvas>
+
+<!-- ═══ DATA SPINE ═══════════════════════════════════
+     Fetched from /data/tokenizers.json at runtime. Fallback copy for
+     file://; `npm run build` regenerates it. Do not hand-edit below.
+     ═══════════════════════════════════════════════ -->
+<script type="application/json" id="tokenizers-data" data-src="/data/tokenizers.json">
+{
+  "version": "0.1",
+  "updated": null,
+  "note": "لم يُقَس بعد. تُملأ القيم الرقمية من قياسات فعلية على نصوص عربية وإنجليزية متوازية — لا قيم مفترضة.",
+  "default_tokenizer": "gpt-4o",
+  "tokenizers": [
+    {
+      "id": "gpt-4o",
+      "name": "GPT-4o",
+      "encoding": "o200k_base",
+      "provider": "OpenAI",
+      "hf_model": "Xenova/gpt-4o",
+      "english_tokens_per_word": null,
+      "arabic_tokens_per_word": null,
+      "ratio": null,
+      "sample_size": null
+    },
+    {
+      "id": "gpt-3.5-4",
+      "name": "GPT-3.5 / GPT-4",
+      "encoding": "cl100k_base",
+      "provider": "OpenAI",
+      "hf_model": "Xenova/gpt-3.5-turbo",
+      "english_tokens_per_word": null,
+      "arabic_tokens_per_word": null,
+      "ratio": null,
+      "sample_size": null
+    },
+    {
+      "id": "llama-3",
+      "name": "Llama 3",
+      "encoding": null,
+      "provider": "Meta",
+      "hf_model": "Xenova/llama-3-tokenizer",
+      "english_tokens_per_word": null,
+      "arabic_tokens_per_word": null,
+      "ratio": null,
+      "sample_size": null
+    },
+    {
+      "id": "mistral",
+      "name": "Mistral",
+      "encoding": null,
+      "provider": "Mistral AI",
+      "hf_model": "Xenova/mistral-tokenizer-v3",
+      "english_tokens_per_word": null,
+      "arabic_tokens_per_word": null,
+      "ratio": null,
+      "sample_size": null
+    },
+    {
+      "id": "jais",
+      "name": "Jais",
+      "encoding": null,
+      "provider": "G42 / Inception",
+      "hf_model": "derek-thomas/jais-13b-chat-hf",
+      "hf_model_note": "مرآة مجتمعية غير رسمية — مستودع Inception الرسمي مقيّد ويتطلب مصادقة، وهذا الموقع لا يخزّن مفاتيح وصول.",
+      "english_tokens_per_word": null,
+      "arabic_tokens_per_word": null,
+      "ratio": null,
+      "sample_size": null
+    },
+    {
+      "id": "command-r",
+      "name": "Command R",
+      "encoding": null,
+      "provider": "Cohere",
+      "hf_model": "Xenova/c4ai-command-r-v01-tokenizer",
+      "english_tokens_per_word": null,
+      "arabic_tokens_per_word": null,
+      "ratio": null,
+      "sample_size": null
+    }
+  ]
+}
+</script>
+
+<script src="../assets/card.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  let DATA = null;
+  let worker = null;
+  let ready = false;
+  let loadingStarted = false;
+  let debounceTimer = null;
+  let pendingText = null;
+  let lastReqId = 0;
+  let lastResult = null;
+  const progressById = {};
+
+  const SAMPLE_TEXT = "الذكاء الاصطناعي التوليدي يغيّر طريقة عملنا، لكن أغلب الأدوات لا تزال تُقاس بالإنجليزية فقط.";
+
+  const els = {
+    textarea: document.getElementById("input"),
+    wordCount: document.getElementById("word-count"),
+    loading: document.getElementById("loading"),
+    resultNumber: document.getElementById("result-number"),
+    resultLabel: document.getElementById("result-tokenizer"),
+    resultSub: document.getElementById("result-sub"),
+    chips: document.getElementById("chips"),
+    chipsLabel: document.getElementById("chips-label"),
+    tbody: document.getElementById("table-body"),
+    cardBtn: document.getElementById("card-btn"),
+    sampleBtn: document.getElementById("sample-btn"),
+  };
+
+  async function loadData(){
+    try {
+      const res = await fetch("../data/tokenizers.json", { cache: "no-store" });
+      if (!res.ok) throw new Error(String(res.status));
+      return await res.json();
+    } catch (e) {
+      return JSON.parse(document.getElementById("tokenizers-data").textContent);
+    }
+  }
+
+  function wordCount(text){
+    const words = text.trim().split(/\s+/).filter(Boolean);
+    return words.length;
+  }
+
+  function escapeHtml(s){
+    return s.replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  }
+
+  function defaultTokenizer(){
+    return DATA.tokenizers.find(t => t.id === DATA.default_tokenizer) || DATA.tokenizers[0];
+  }
+
+  function ensureWorker(){
+    if (worker) return;
+    worker = new Worker("./tokenizer-worker.js", { type: "module" });
+    worker.onmessage = onWorkerMessage;
+  }
+
+  function startLoading(){
+    if (loadingStarted) return;
+    loadingStarted = true;
+    ensureWorker();
+    els.loading.hidden = false;
+    renderLoadingStatus();
+    const list = DATA.tokenizers.map(t => ({ id: t.id, hf: t.hf_model })).filter(t => t.hf);
+    worker.postMessage({ type: "init", tokenizers: list });
+  }
+
+  function renderLoadingStatus(){
+    const total = DATA.tokenizers.length;
+    const done = Object.values(progressById).filter(p => p.status === "ready" || p.status === "error").length;
+    els.loading.textContent = "جارٍ تحميل المقسّمات لأول مرة… (" + done + "/" + total + ") — تُحمَّل مرة واحدة وتبقى في المتصفح";
+  }
+
+  function onWorkerMessage(e){
+    const msg = e.data;
+    if (msg.type === "progress") {
+      progressById[msg.id] = msg;
+      renderLoadingStatus();
+    } else if (msg.type === "init-done") {
+      ready = true;
+      els.loading.hidden = true;
+      if (pendingText !== null) runTokenize(pendingText);
+    } else if (msg.type === "tokenize-result") {
+      renderResults(msg);
+    }
+  }
+
+  function onInput(){
+    const text = els.textarea.value;
+    els.wordCount.textContent = wordCount(text);
+    clearTimeout(debounceTimer);
+    if (!text.trim()) {
+      clearResults();
+      return;
+    }
+    debounceTimer = setTimeout(() => {
+      if (!loadingStarted) startLoading();
+      if (ready) runTokenize(text);
+      else pendingText = text;
+    }, 450);
+  }
+
+  function runTokenize(text){
+    pendingText = null;
+    const reqId = ++lastReqId;
+    worker.postMessage({ type: "tokenize", reqId, text, chipsFor: DATA.default_tokenizer });
+  }
+
+  function renderResults(msg){
+    if (msg.reqId !== lastReqId) return; // stale response
+    const words = wordCount(els.textarea.value);
+    lastResult = { words, counts: msg.counts, errors: msg.errors, chips: msg.chips };
+
+    let rows = "";
+    DATA.tokenizers.forEach(t => {
+      const count = msg.counts[t.id];
+      const err = msg.errors[t.id];
+      const tpw = (count != null && words > 0) ? (count / words) : null;
+      const ratio = (tpw != null && t.english_tokens_per_word) ? (tpw / t.english_tokens_per_word) : null;
+      rows += "<tr>"
+        + "<td>" + t.name + "</td>"
+        + '<td class="num">' + (err ? "تعذّر التحميل" : (count != null ? count : "—")) + "</td>"
+        + '<td class="num">' + (tpw != null ? tpw.toFixed(2) : "—") + "</td>"
+        + '<td class="num">' + (ratio != null ? ("×" + ratio.toFixed(2)) : "لم يُقَس بعد") + "</td>"
+        + "</tr>";
+    });
+    els.tbody.innerHTML = rows;
+
+    const def = defaultTokenizer();
+    const defCount = msg.counts[def.id];
+    const defTpw = (defCount != null && words > 0) ? (defCount / words) : null;
+    const defRatio = (defTpw != null && def.english_tokens_per_word) ? (defTpw / def.english_tokens_per_word) : null;
+
+    els.resultLabel.textContent = "النسبة إلى الإنجليزية · " + def.name;
+    els.resultNumber.textContent = defRatio != null ? ("×" + defRatio.toFixed(2)) : "لم يُقَس بعد";
+    els.resultSub.textContent = defTpw != null
+      ? ("رموز لكل كلمة (عربي، مقاس الآن): " + defTpw.toFixed(2) + " — الكلمات: " + words + " — الرموز: " + defCount)
+      : "اكتب نصًا لقياس الرموز.";
+
+    if (msg.chips && msg.chips.length) {
+      els.chipsLabel.hidden = false;
+      els.chips.innerHTML = msg.chips.map(t => '<span class="token-chip">' + escapeHtml(t) + "</span>").join("");
+    } else {
+      els.chipsLabel.hidden = true;
+      els.chips.innerHTML = "";
+    }
+  }
+
+  function clearResults(){
+    els.tbody.innerHTML = "";
+    els.chips.innerHTML = "";
+    els.chipsLabel.hidden = true;
+    els.resultNumber.textContent = "—";
+    els.resultSub.textContent = "اكتب نصًا لقياس الرموز.";
+    lastResult = null;
+  }
+
+  els.textarea.addEventListener("input", onInput);
+  els.sampleBtn.addEventListener("click", () => {
+    els.textarea.value = SAMPLE_TEXT;
+    onInput();
+    els.textarea.focus();
+  });
+
+  els.cardBtn.addEventListener("click", async () => {
+    if (!DATA) return;
+    const def = defaultTokenizer();
+    const cv = document.getElementById("cv");
+    const words = lastResult ? lastResult.words : 0;
+    const count = lastResult ? lastResult.counts[def.id] : null;
+    const tpw = (lastResult && words > 0 && count != null) ? count / words : null;
+    const ratio = (tpw != null && def.english_tokens_per_word) ? tpw / def.english_tokens_per_word : null;
+    const ratioText = ratio != null ? ("×" + ratio.toFixed(2)) : "لم يُقَس بعد";
+
+    await MiqyasCard.renderCard({
+      canvas: cv,
+      label: "مقياس · الأداة   " + def.name,
+      footerUrl: "miqyas.ai/الأداة",
+      draw(ctx, g){
+        let y = 300;
+        ctx.font = "700 150px 'IBM Plex Mono'";
+        ctx.fillStyle = g.colors.signal;
+        ctx.direction = "ltr"; ctx.textAlign = "right";
+        ctx.fillText(ratioText, g.right, y);
+        ctx.direction = "rtl";
+        y += 110;
+
+        ctx.font = "500 42px 'IBM Plex Sans Arabic'";
+        ctx.fillStyle = g.colors.dim;
+        ctx.fillText("النسبة إلى الإنجليزية · " + def.name, g.right, y);
+        y += 110;
+
+        ctx.font = "400 38px 'IBM Plex Mono'";
+        ctx.fillStyle = g.colors.ink;
+        ctx.direction = "ltr"; ctx.textAlign = "right";
+        ctx.fillText("words " + words + "   tokens " + (count != null ? count : "—"), g.right, y);
+        ctx.direction = "rtl";
+      },
+    });
+    MiqyasCard.downloadCanvas(cv, "miqyas-tokenizer-" + def.id + ".png");
+  });
+
+  loadData().then(data => {
+    DATA = data;
+    document.getElementById("v").textContent = "v" + DATA.version;
+    document.getElementById("n").textContent = DATA.tokenizers.length;
+    document.getElementById("d").textContent = DATA.updated || "لم يُحدَّث بعد";
+    let rows = "";
+    DATA.tokenizers.forEach(t => {
+      rows += "<tr><td>" + t.name + "</td><td class=\"num\">—</td><td class=\"num\">—</td><td class=\"num\">—</td></tr>";
+    });
+    els.tbody.innerHTML = rows;
+    els.resultLabel.textContent = "النسبة إلى الإنجليزية · " + defaultTokenizer().name;
+  });
+})();
+</script>
+</body>
+</html>

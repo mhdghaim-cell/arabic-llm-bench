@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مقياس — المسرد</title>
+<meta name="description" content="مسرد عربي لمصطلحات تشغيل نماذج الذكاء الاصطناعي محليًا.">
+<link rel="stylesheet" href="../assets/base.css">
+</head>
+<body>
+
+<div class="strip"><div class="wrap">
+  <span>المسرد <b class="ver" id="v">v0.1</b></span>
+  <span>مصطلحات <b id="n">10</b></span>
+  <span>آخر تحديث <b id="d">2026-08-16</b></span>
+  <span>ترخيص <b>MIT</b></span>
+</div></div>
+
+<div class="wrap">
+
+<header>
+  <h1>مقياس <span>· المسرد</span></h1>
+  <p class="tagline">مصطلحات تشغيل نماذج الذكاء الاصطناعي محليًا، بالعربية. لأننا لا نتفق حتى على تسمية الأشياء.</p>
+  <div class="meta">
+    <span>مفتوح ومجاني · بلا تسجيل</span>
+    <a href="#" id="repo">المستودع ↗</a>
+    <a href="#" id="fix">اقترح تصحيحًا ↗</a>
+    <a href="../">الرئيسية ↗</a>
+  </div>
+</header>
+
+<div class="controls">
+  <input id="q" class="search-input" type="search" placeholder="ابحث عن مصطلح — أو اكتب سؤالك كما يخطر لك" autocomplete="off">
+  <p class="hint">لا تحتاج إلى معرفة المصطلح. جرّب «ليش الملف صغير» أو «وش يعني Q4».</p>
+  <p class="search-count" id="count"></p>
+</div>
+
+<main id="out"></main>
+
+<footer>
+  <p>هذا المسرد يُحدَّث كل أسبوعين. كل تصحيح يُنسب لصاحبه في سجل التغييرات.</p>
+  <p>البيانات كاملة في <code>data/glossary.json</code> — استخدمها كما تشاء بموجب ترخيص MIT.</p>
+  <p style="margin-block-start:.75rem">للاستشهاد: <code>مقياس — المسرد العربي للذكاء الاصطناعي المحلي، v0.1، 2026.</code></p>
+</footer>
+
+</div>
+
+<canvas id="cv" width="1200" height="1200"></canvas>
+
+<!-- ═══ DATA SPINE ═══════════════════════════════════
+     Fetched from /data/glossary.json at runtime. This block is a fallback
+     copy for when fetch fails (e.g. opened via file://) — `npm run build`
+     regenerates it from the real file so the two can never drift. Do not
+     hand-edit the JSON below; edit /data/glossary.json instead.
+     ═══════════════════════════════════════════════ -->
+<script type="application/json" id="glossary-data" data-src="/data/glossary.json">
+{
+  "version": "0.1",
+  "updated": "2026-08-16",
+  "tiers": [
+    {
+      "id": 1,
+      "title": "عشرة مصطلحات تكفي للبداية",
+      "note": "إن قرأت هذه العشرة فقط، فأنت تفهم ما يكفي لتشغيل نموذج على جهازك ومتابعة أي نقاش في هذا المجال. لا بأس أن تتوقف هنا."
+    },
+    {
+      "id": 2,
+      "title": "للفهم الأعمق",
+      "note": "تُضاف في النسخة ٠٫٢."
+    },
+    {
+      "id": 3,
+      "title": "المصطلحات المتقدمة",
+      "note": "تُضاف لاحقًا."
+    }
+  ],
+  "terms": [
+    {
+      "ar": "الاستدلال",
+      "en": "Inference",
+      "tier": 1,
+      "plain": "لحظة تشغيل النموذج فعليًا: تعطيه سؤالًا فيعطيك إجابة.",
+      "analogy": "التدريب هو سنوات الدراسة. الاستدلال هو الامتحان — اللحظة التي يُستخدم فيها ما تعلّمه.",
+      "why": "كل ما نقيسه في هذا المشروع يحدث في هذه اللحظة: السرعة، التكلفة، وجودة الإجابة.",
+      "questions": [
+        "شنو يصير لما اسأل النموذج",
+        "وش الفرق بين التدريب والتشغيل",
+        "ليش بطيء لما اسأله"
+      ]
+    },
+    {
+      "ar": "الأوزان",
+      "en": "Weights",
+      "tier": 1,
+      "plain": "الأرقام التي تعلّمها النموذج أثناء تدريبه. هي كل ما يعرفه، مخزّنًا في ملف.",
+      "analogy": "لو كان النموذج دماغًا، فالأوزان هي الروابط بين خلاياه. ملف الأوزان هو الدماغ نفسه، لا برنامج يشغّله.",
+      "why": "حين نقول «نموذج مفتوح الأوزان» نعني أن هذا الملف متاح للتنزيل — أي يمكنك تشغيله على جهازك دون إذن أحد.",
+      "questions": [
+        "وش يعني اوزان مفتوحة",
+        "شنو الملف اللي انزله",
+        "ليش حجم النموذج كبير"
+      ]
+    },
+    {
+      "ar": "التكميم",
+      "en": "Quantization",
+      "tier": 1,
+      "plain": "تصغير حجم النموذج ليعمل على جهاز أضعف، مقابل خسارة بسيطة في الدقة.",
+      "analogy": "مثل ضغط صورة قبل إرسالها: تصبح أخف بكثير، وتفقد قليلًا من الوضوح لا يلاحظه معظم الناس.",
+      "why": "هو الفرق بين نموذج يعمل على حاسوبك ونموذج لا يعمل إطلاقًا.",
+      "questions": [
+        "ليش الملف صغير",
+        "شنو يعني Q4",
+        "وش الفرق بين النسخ",
+        "ايش افضل نسخة انزلها"
+      ]
+    },
+    {
+      "ar": "الرمز",
+      "en": "Token",
+      "tier": 1,
+      "plain": "القطعة الصغيرة التي يقسّم النموذج النص إليها. ليست حرفًا ولا كلمة، بل شيء بينهما.",
+      "analogy": "مثل تقطيع جملة إلى مقاطع قبل قراءتها بصوت عالٍ. النموذج لا يرى الكلمات، يرى هذه المقاطع.",
+      "why": "كل التسعير وكل الحدود تُحسب بالرموز. والعربية تستهلك رموزًا أكثر من الإنجليزية للمعنى نفسه — وهذا ما نقيسه.",
+      "questions": [
+        "شنو يعني توكن",
+        "ليش يحسبون بالرموز",
+        "ليش العربي اغلى"
+      ]
+    },
+    {
+      "ar": "نافذة السياق",
+      "en": "Context window",
+      "tier": 1,
+      "plain": "أقصى كمية نص يستطيع النموذج أن يأخذها في الاعتبار دفعة واحدة.",
+      "analogy": "مثل طاولة مكتب: مهما كانت المكتبة كبيرة، لا يتسع على الطاولة إلا عدد محدود من الأوراق في وقت واحد.",
+      "why": "إن تجاوز حديثك النافذة، ينسى النموذج أوّله. وبما أن العربية تستهلك رموزًا أكثر، فنافذتك عمليًا أصغر.",
+      "questions": [
+        "ليش نسي كلامي",
+        "ليش ما يقرا الملف كامل",
+        "شنو يعني 128k"
+      ]
+    },
+    {
+      "ar": "المعاملات",
+      "en": "Parameters",
+      "tier": 1,
+      "plain": "عدد الأوزان في النموذج. يُكتب عادةً بالمليارات: 7B تعني سبعة مليارات.",
+      "analogy": "مؤشر تقريبي على حجم النموذج، مثل حجم محرّك السيارة. أكبر لا يعني دائمًا أفضل، لكنه يعني دائمًا أثقل.",
+      "why": "هذا الرقم يحدّد مباشرةً هل يعمل النموذج على جهازك أم لا.",
+      "questions": [
+        "شنو يعني 7B",
+        "ايش حجم النموذج المناسب لجهازي",
+        "كل ما كبر صار احسن؟"
+      ]
+    },
+    {
+      "ar": "الموجّه",
+      "en": "Prompt",
+      "tier": 1,
+      "plain": "النص الذي تكتبه للنموذج: سؤالك، أو تعليماتك، أو كلاهما.",
+      "analogy": "ليس مجرد سؤال، بل وصف للمهمة. الفرق بين «اكتب» و«اكتب فقرة رسمية من ثلاث جمل» هو الفرق بين إجابتين مختلفتين تمامًا.",
+      "why": "أكبر تحسّن يمكنك الحصول عليه دون تغيير النموذج أو الجهاز يأتي من صياغة الموجّه.",
+      "questions": [
+        "كيف اسال النموذج صح",
+        "ليش الاجابة سيئة",
+        "شنو يعني برومبت"
+      ]
+    },
+    {
+      "ar": "الضبط الدقيق",
+      "en": "Fine-tuning",
+      "tier": 1,
+      "plain": "تدريب إضافي لنموذج جاهز على بياناتك أنت، ليتخصّص في مجالك.",
+      "analogy": "طبيب عام يدرس سنتين إضافيتين ليصبح اختصاصيًا. الأساس نفسه، والتخصص جديد.",
+      "why": "الحل الأول الذي يخطر للناس، وغالبًا ليس ما يحتاجونه. في معظم الحالات يكفي موجّه أفضل أو نظام استرجاع.",
+      "questions": [
+        "كيف اخليه يعرف بياناتي",
+        "ابي نموذج خاص فيني",
+        "شنو الفرق بين التدريب والضبط"
+      ]
+    },
+    {
+      "ar": "زمن الاستجابة",
+      "en": "Latency",
+      "tier": 1,
+      "plain": "المدة بين ضغطك «إرسال» وظهور أول حرف من الإجابة.",
+      "analogy": "مثل انتظار النادل بعد أن تطلب. لا علاقة له بحجم الطبق، بل بسرعة وصوله.",
+      "why": "هو ما يحدّد إحساسك بأن النظام «سريع» أو «بطيء» — أكثر من أي رقم آخر.",
+      "questions": [
+        "ليش يتاخر يرد",
+        "شنو يعني latency",
+        "ليش بطيء بالبداية بس"
+      ]
+    },
+    {
+      "ar": "الإنتاجية",
+      "en": "Throughput",
+      "tier": 1,
+      "plain": "كمية العمل التي ينجزها النظام في وقت معيّن. تُقاس عادةً بالرموز في الثانية.",
+      "analogy": "زمن الاستجابة هو سرعة سيارة واحدة. الإنتاجية هي عدد السيارات التي يمرّرها الطريق في الساعة.",
+      "why": "لا يهمّ كثيرًا حين تستخدم النموذج وحدك. يصبح الرقم الأهم حين يستخدمه فريق كامل.",
+      "questions": [
+        "كم يخدم شخص بنفس الوقت",
+        "شنو يعني رمز بالثانية",
+        "ايش الفرق بينه وبين زمن الاستجابة"
+      ]
+    }
+  ]
+}
+</script>
+
+<script src="../assets/card.js"></script>
+<script>
+(function(){
+  "use strict";
+  const out = document.getElementById("out");
+  const q = document.getElementById("q");
+  const countEl = document.getElementById("count");
+  let DATA = null;
+
+  async function loadData(){
+    try {
+      const res = await fetch("../data/glossary.json", { cache: "no-store" });
+      if (!res.ok) throw new Error(String(res.status));
+      return await res.json();
+    } catch (e) {
+      return JSON.parse(document.getElementById("glossary-data").textContent);
+    }
+  }
+
+  const norm = s => (s||"")
+    .replace(/[ً-ْـ]/g,"")      // strip harakat + tatweel
+    .replace(/[أإآ]/g,"ا").replace(/ى/g,"ي").replace(/ة/g,"ه")
+    .toLowerCase().trim();
+
+  function matches(t, needle){
+    if(!needle) return true;
+    const hay = norm([t.ar,t.en,t.plain,t.analogy,t.why,(t.questions||[]).join(" ")].join(" "));
+    return needle.split(/\s+/).every(w => hay.includes(w));
+  }
+
+  function render(){
+    const needle = norm(q.value);
+    const hits = DATA.terms.filter(t => matches(t, needle));
+    countEl.textContent = needle
+      ? hits.length + " من " + DATA.terms.length
+      : "";
+
+    if(!hits.length){
+      out.innerHTML = '<p class="empty">لا يوجد مصطلح مطابق — بعد.<br>أرسل لي ما تبحث عنه وسأضيفه.</p>';
+      return;
+    }
+
+    let html = "";
+    DATA.tiers.forEach(tier => {
+      const inTier = hits.filter(t => t.tier === tier.id);
+      if(!inTier.length) return;
+      html += '<section class="tier"><div class="tier-head">'
+            + '<span class="tier-num">'+String(tier.id).padStart(2,"0")+'</span>'
+            + '<h2>'+tier.title+'</h2></div>'
+            + '<p class="tier-note">'+tier.note+'</p>';
+      inTier.forEach(t => {
+        html += '<article class="entry">'
+          + '<div class="term"><h3>'+t.ar+'</h3><span class="en" dir="ltr">'+t.en+'</span></div>'
+          + '<button class="card-btn" data-term="'+t.ar+'">بطاقة ↓</button>'
+          + '<p class="plain">'+t.plain+'</p>'
+          + '<p class="analogy">'+t.analogy+'</p>'
+          + '<p class="why"><b>لماذا يهمك؟</b> '+t.why+'</p>'
+          + '</article>';
+      });
+      html += '</section>';
+    });
+    out.innerHTML = html;
+  }
+
+  /* ── share card ──────────────────────────────────── */
+  const cv = document.getElementById("cv");
+
+  async function makeCard(term){
+    const t = DATA.terms.find(x => x.ar === term);
+    if(!t) return;
+
+    await MiqyasCard.renderCard({
+      canvas: cv,
+      label: "مقياس · المسرد   v" + DATA.version,
+      footerUrl: "miqyas.ai/المسرد",
+      draw(ctx, g){
+        let y = 220;
+
+        ctx.font = "700 104px 'IBM Plex Sans Arabic'";
+        ctx.fillStyle = g.colors.ink;
+        ctx.fillText(t.ar, g.right, y);
+        y += 62;
+
+        ctx.font = "400 34px 'IBM Plex Mono'";
+        ctx.fillStyle = g.colors.dim;
+        ctx.direction = "ltr"; ctx.textAlign = "right";
+        ctx.fillText(t.en, g.right, y);
+        ctx.direction = "rtl";
+        y += 96;
+
+        const pf = "500 46px 'IBM Plex Sans Arabic'";
+        ctx.fillStyle = g.colors.ink;
+        g.wrap(t.plain, pf, g.maxW).forEach(l => { ctx.font = pf; ctx.fillText(l, g.right, y); y += 68; });
+        y += 34;
+
+        const af = "400 40px 'IBM Plex Sans Arabic'";
+        const aLines = g.wrap(t.analogy, af, g.maxW - 44);
+        ctx.fillStyle = g.colors.rule;
+        ctx.fillRect(g.right + 2, y - 44, 3, aLines.length * 62);
+        ctx.fillStyle = g.colors.dim;
+        aLines.forEach(l => { ctx.font = af; ctx.fillText(l, g.right - 30, y); y += 62; });
+        y += 48;
+
+        ctx.font = "600 38px 'IBM Plex Sans Arabic'";
+        ctx.fillStyle = g.colors.signal;
+        ctx.fillText("لماذا يهمك؟", g.right, y);
+        y += 60;
+        const wf = "400 38px 'IBM Plex Sans Arabic'";
+        ctx.fillStyle = g.colors.ink;
+        g.wrap(t.why, wf, g.maxW).forEach(l => { ctx.font = wf; ctx.fillText(l, g.right, y); y += 58; });
+      },
+    });
+
+    MiqyasCard.downloadCanvas(cv, "miqyas-" + t.en.toLowerCase().replace(/\s+/g,"-") + ".png");
+  }
+
+  out.addEventListener("click", e => {
+    const b = e.target.closest(".card-btn");
+    if(b) makeCard(b.dataset.term);
+  });
+
+  q.addEventListener("input", render);
+
+  loadData().then(data => {
+    DATA = data;
+    document.getElementById("v").textContent = "v" + DATA.version;
+    document.getElementById("n").textContent = DATA.terms.length;
+    document.getElementById("d").textContent = DATA.updated;
+    render();
+  });
+})();
+</script>
+</body>
+</html>

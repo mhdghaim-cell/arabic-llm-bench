@@ -1,0 +1,286 @@
+/* مقياس — shared design system.
+   Ported from the single-file glossary reference. Do not redesign here;
+   page-specific additions belong in a small <style> block on that page,
+   layered on top of these tokens and components. */
+
+/* Self-hosted, subset to Arabic + Latin + the punctuation this site uses
+   (see scripts/subset-fonts.sh — regenerate there, never hand-edit these
+   files). No CDN: required for the site to work offline after first load. */
+@font-face{
+  font-family:"IBM Plex Sans Arabic"; font-style:normal; font-weight:400;
+  font-display:swap; src:url("fonts/sans-arabic-400.woff2") format("woff2");
+}
+@font-face{
+  font-family:"IBM Plex Sans Arabic"; font-style:normal; font-weight:500;
+  font-display:swap; src:url("fonts/sans-arabic-500.woff2") format("woff2");
+}
+@font-face{
+  font-family:"IBM Plex Sans Arabic"; font-style:normal; font-weight:600;
+  font-display:swap; src:url("fonts/sans-arabic-600.woff2") format("woff2");
+}
+@font-face{
+  font-family:"IBM Plex Sans Arabic"; font-style:normal; font-weight:700;
+  font-display:swap; src:url("fonts/sans-arabic-700.woff2") format("woff2");
+}
+@font-face{
+  font-family:"IBM Plex Mono"; font-style:normal; font-weight:400;
+  font-display:swap; src:url("fonts/mono-400.woff2") format("woff2");
+}
+@font-face{
+  font-family:"IBM Plex Mono"; font-style:normal; font-weight:500;
+  font-display:swap; src:url("fonts/mono-500.woff2") format("woff2");
+}
+
+:root{
+  --ink:#12161C; --paper:#FAF9F6; --rule:#D8D5CE;
+  --signal:#B8342A; --verify:#1B5E4A; --dim:#6E7178;
+  --ar:"IBM Plex Sans Arabic",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:var(--ar); font-size:16px; line-height:1.85;
+  padding-block-end:5rem;
+}
+h1,h2,h3,h4{line-height:1.15}
+.wrap{max-width:60rem;margin-inline:auto;padding-inline:1.25rem}
+
+/* ── focus & motion (site-wide) ─────────────────────── */
+a:focus-visible, button:focus-visible, input:focus-visible,
+textarea:focus-visible, select:focus-visible, [tabindex]:focus-visible{
+  outline:2px solid var(--verify); outline-offset:2px;
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ── measurement strip — signature element, every page ─ */
+.strip{
+  border-block-end:1px solid var(--rule); background:var(--paper);
+  position:sticky; top:0; z-index:20;
+}
+.strip .wrap{
+  display:flex; flex-wrap:wrap; gap:.35rem 1.1rem;
+  font-family:var(--mono); font-size:.7rem; letter-spacing:.02em;
+  color:var(--dim); padding-block:.55rem; font-variant-numeric:tabular-nums;
+}
+.strip b{font-weight:500;color:var(--ink)}
+
+/* ── masthead ────────────────────────────────────────── */
+header{border-block-end:1px solid var(--rule);padding-block:3.5rem 2.25rem}
+h1{font-size:clamp(2.4rem,9vw,3.4rem);font-weight:700;letter-spacing:-.02em}
+h1 span{color:var(--dim);font-weight:400}
+.tagline{margin-block-start:.9rem;font-size:1.0625rem;max-width:34rem;color:var(--ink)}
+.meta{
+  margin-block-start:1.4rem;display:flex;flex-wrap:wrap;gap:.5rem .9rem;
+  font-family:var(--mono);font-size:.72rem;color:var(--dim)
+}
+.meta a{color:var(--verify);text-decoration:none;border-block-end:1px solid var(--rule)}
+.meta a:hover{border-color:var(--verify)}
+
+/* ── controls (search / input row) ──────────────────── */
+.controls{
+  padding-block:1.5rem;border-block-end:1px solid var(--rule);
+  position:sticky;top:2.1rem;background:var(--paper);z-index:10
+}
+.search-input{
+  width:100%;padding:.85rem 1rem;font-family:var(--ar);font-size:1rem;
+  background:#fff;border:1px solid var(--rule);border-radius:2px;color:var(--ink)
+}
+.search-input:focus{outline:2px solid var(--verify);outline-offset:1px;border-color:transparent}
+.search-input::placeholder{color:var(--dim)}
+.hint{margin-block-start:.55rem;font-size:.8125rem;color:var(--dim);line-height:1.6}
+.search-count{font-family:var(--mono);font-size:.72rem;color:var(--dim);margin-block-start:.55rem;font-variant-numeric:tabular-nums}
+
+/* ── tiers (grouped content sections) ───────────────── */
+.tier{padding-block-start:3rem}
+.tier-head{display:flex;align-items:baseline;gap:.75rem;flex-wrap:wrap}
+.tier-num{font-family:var(--mono);font-size:.72rem;color:var(--signal)}
+.tier h2{font-size:1.25rem;font-weight:600;letter-spacing:-.01em}
+.tier-note{font-size:.875rem;color:var(--dim);margin-block-start:.4rem;max-width:38rem}
+
+/* ── entries (four-layer card pattern) ──────────────── */
+.entry{
+  border-block-start:1px solid var(--rule);padding-block:1.75rem;
+  display:grid;grid-template-columns:1fr auto;gap:.5rem 1rem;align-items:start
+}
+.entry:first-of-type{margin-block-start:1.25rem}
+.term{grid-column:1;display:flex;align-items:baseline;gap:.75rem;flex-wrap:wrap}
+.term h3{font-size:1.375rem;font-weight:600;letter-spacing:-.01em}
+.en{font-family:var(--mono);font-size:.8125rem;color:var(--dim)}
+.plain{grid-column:1/-1;margin-block-start:.35rem;max-width:44rem}
+.analogy{
+  grid-column:1/-1;max-width:44rem;color:var(--dim);
+  border-inline-start:2px solid var(--rule);padding-inline-start:1rem;margin-block-start:.75rem
+}
+.why{grid-column:1/-1;max-width:44rem;margin-block-start:.85rem;font-size:.9375rem}
+.why b{color:var(--signal);font-weight:600}
+.card-btn{
+  grid-column:2;grid-row:1;font-family:var(--mono);font-size:.7rem;
+  background:none;border:1px solid var(--rule);border-radius:2px;
+  color:var(--dim);padding:.3rem .6rem;cursor:pointer;white-space:nowrap
+}
+.card-btn:hover{border-color:var(--verify);color:var(--verify)}
+
+.empty{padding-block:3rem;color:var(--dim);text-align:center;font-size:.9375rem}
+
+/* ── lede paragraph (landing intro, etc.) ───────────── */
+.lede{max-width:38rem;margin-block-start:1rem}
+
+/* ── tool cards (landing) ────────────────────────────── */
+.tool-grid{
+  display:grid; grid-template-columns:repeat(2,1fr); gap:1px;
+  background:var(--rule); border:1px solid var(--rule); margin-block-start:2.5rem;
+}
+.tool-card{
+  background:var(--paper); padding:1.75rem; display:flex; flex-direction:column; gap:.6rem;
+  text-decoration:none; color:inherit;
+}
+.tool-card:hover{background:#fff}
+.tool-card .name{font-size:1.25rem;font-weight:600;letter-spacing:-.01em;color:var(--ink)}
+.tool-card .desc{font-size:.9375rem;color:var(--ink);max-width:28rem}
+.tool-card .stats{
+  margin-block-start:.4rem;font-family:var(--mono);font-size:.72rem;color:var(--dim);
+  display:flex;flex-wrap:wrap;gap:.4rem 1rem;font-variant-numeric:tabular-nums;
+}
+@media (max-width:34rem){ .tool-grid{grid-template-columns:1fr} }
+
+/* ── measured value — the ONLY place --signal red appears ─
+   Apply to a number/result pulled from data, never to chrome. */
+.measured{color:var(--signal)}
+
+/* ── text input field (tokenizer playground, calculator) ─ */
+.field-textarea{
+  width:100%;min-height:8rem;padding:.85rem 1rem;font-family:var(--ar);
+  font-size:1.0625rem;line-height:1.85;background:#fff;border:1px solid var(--rule);
+  border-radius:2px;color:var(--ink);resize:vertical
+}
+.field-textarea:focus{outline:2px solid var(--verify);outline-offset:1px;border-color:transparent}
+.field-textarea::placeholder{color:var(--dim)}
+
+/* ── loading state ───────────────────────────────────── */
+.loading{font-family:var(--mono);font-size:.8125rem;color:var(--dim);padding-block:.5rem}
+
+/* ── headline result (tokenizer ratio, calculator cost) ─ */
+.result-block{padding-block:2rem;border-block:1px solid var(--rule);margin-block:2rem;text-align:center}
+.result-label{font-family:var(--mono);font-size:.75rem;color:var(--dim);letter-spacing:.02em}
+.result-number{font-size:clamp(3rem,14vw,5.5rem);font-weight:700;line-height:1;margin-block-start:.5rem;font-variant-numeric:tabular-nums}
+.result-sub{margin-block-start:.75rem;font-size:.9375rem;color:var(--dim)}
+
+/* ── data table (tokenizer comparison, benchmark results) ─ */
+.data-table{width:100%;border-collapse:collapse;margin-block-start:1rem;font-size:.9375rem}
+.data-table th,.data-table td{padding:.6rem .75rem;border-block-end:1px solid var(--rule);text-align:start}
+.data-table th{font-family:var(--mono);font-size:.7rem;color:var(--dim);font-weight:500}
+.data-table td.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.data-table tbody tr:hover{background:#fff}
+
+/* ── token chips (tokenizer playground) ─────────────────── */
+.token-chips{display:flex;flex-wrap:wrap;gap:.25rem;margin-block-start:1rem}
+.token-chip{
+  font-family:var(--mono);font-size:.75rem;padding:.15rem .4rem;border:1px solid var(--rule);
+  border-radius:2px;background:#fff;color:var(--ink);white-space:pre
+}
+
+@media (max-width:34rem){
+  .data-table{display:block;overflow-x:auto}
+}
+
+/* ── score-as-receipt link (benchmark table) ─────────────
+   The number stays red because it IS a measured value; the clickable
+   affordance rides on underline/cursor only — never a link color, per the
+   red-is-an-information-channel rule. */
+.score-link{color:inherit;text-decoration:none;cursor:pointer}
+.score-link:hover, .score-link:focus-visible{text-decoration:underline dotted}
+
+/* ── provenance tag (community submissions) ─────────────── */
+.tag{
+  display:inline-block;font-family:var(--mono);font-size:.65rem;
+  border:1px solid var(--rule);padding:.1rem .45rem;border-radius:2px;
+  color:var(--verify);white-space:nowrap
+}
+
+.section-head{padding-block-start:3rem}
+.section-head h2{font-size:1.25rem;font-weight:600;letter-spacing:-.01em}
+.section-head p{font-size:.875rem;color:var(--dim);margin-block-start:.4rem;max-width:38rem}
+
+/* ── rubric key (small legend of what score dimensions mean) ─ */
+.rubric-key{display:flex;flex-direction:column;gap:.5rem;margin-block-start:1rem;font-size:.875rem;color:var(--dim)}
+.rubric-key b{color:var(--ink);font-weight:500}
+
+/* ── form fields (calculator) ────────────────────────────── */
+.field{display:flex;flex-direction:column;gap:.35rem}
+.field label{font-size:.8125rem;color:var(--ink)}
+.field .field-hint{font-size:.72rem;color:var(--dim)}
+.field input[type="number"], .field input[type="text"]{
+  padding:.6rem .75rem;font-family:var(--mono);font-size:.9375rem;background:#fff;
+  border:1px solid var(--rule);border-radius:2px;color:var(--ink);
+  font-variant-numeric:tabular-nums;width:100%;
+}
+.field select{
+  padding:.6rem .75rem;font-family:var(--ar);font-size:.9375rem;background:#fff;
+  border:1px solid var(--rule);border-radius:2px;color:var(--ink);width:100%;
+}
+.field input:focus, .field select:focus{outline:2px solid var(--verify);outline-offset:1px;border-color:transparent}
+
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.25rem;margin-block-start:1.25rem}
+@media (max-width:34rem){ .form-grid{grid-template-columns:1fr} }
+
+.toggle-row{display:flex;align-items:center;gap:.6rem;margin-block-start:1.75rem}
+.toggle-row input[type="checkbox"]{width:1.1rem;height:1.1rem;accent-color:var(--verify)}
+.toggle-row label{font-size:.9375rem}
+.toggle-note{font-size:.8125rem;color:var(--dim);margin-block-start:.6rem;max-width:38rem;display:none}
+.toggle-note.show{display:block}
+
+/* ── output grid (calculator results) ────────────────────── */
+.output-grid{
+  display:grid; grid-template-columns:repeat(2,1fr); gap:1px;
+  background:var(--rule); border:1px solid var(--rule); margin-block-start:2rem;
+}
+.output-cell{background:var(--paper);padding:1.5rem;text-align:center}
+.output-cell .label{font-family:var(--mono);font-size:.7rem;color:var(--dim)}
+.output-cell .value{font-size:clamp(1.5rem,5vw,2.25rem);font-weight:700;margin-block-start:.4rem;font-variant-numeric:tabular-nums}
+@media (max-width:34rem){ .output-grid{grid-template-columns:1fr} }
+
+/* ── bar chart (findings) — a real <table>, so the accessible
+   "table view" and the visual chart are the same element, not two. ─ */
+.bar-table{width:100%;border-collapse:collapse;margin-block-start:1.5rem}
+.bar-table td{padding:.55rem 0;vertical-align:middle;border:none}
+.bar-table caption{caption-side:top;text-align:start;font-size:.8125rem;color:var(--dim);margin-block-end:.75rem}
+.bar-label{font-size:.875rem;color:var(--ink);width:9rem;white-space:nowrap;padding-inline-end:1rem}
+.bar-cell{width:100%}
+.bar-track{background:var(--paper);border:1px dashed var(--rule);height:.6rem;border-radius:3px;overflow:hidden}
+.bar-track.has-value{border-style:solid;background:var(--rule)}
+.bar-fill{height:100%;background:var(--signal);border-radius:3px}
+.bar-value{
+  font-family:var(--mono);font-size:.8125rem;color:var(--dim);width:8rem;
+  text-align:end;padding-inline-start:.75rem;white-space:nowrap;font-variant-numeric:tabular-nums;
+}
+.bar-value.measured{color:var(--signal)}
+@media (max-width:34rem){
+  .bar-table, .bar-table tbody, .bar-table tr{display:block;width:100%}
+  .bar-label{display:block;width:auto;padding-inline-end:0;margin-block-end:.25rem}
+  .bar-value{display:block;width:auto;text-align:start;padding-inline-start:0;margin-block-start:.25rem}
+}
+
+/* ── citation box (methodology) ──────────────────────── */
+.citation-box{
+  background:#fff;border:1px solid var(--rule);border-radius:2px;padding:1rem 1.15rem;
+  margin-block-start:.75rem;font-family:var(--mono);font-size:.8125rem;line-height:1.7;
+  color:var(--ink);direction:ltr;text-align:left;overflow-x:auto;white-space:pre-wrap;
+}
+
+/* ── footer ──────────────────────────────────────────── */
+footer{
+  margin-block-start:4rem;border-block-start:1px solid var(--rule);padding-block-start:1.75rem;
+  font-size:.8125rem;color:var(--dim);line-height:1.9
+}
+footer code{font-family:var(--mono);font-size:.75rem}
+.ver{font-family:var(--mono);font-size:.72rem;color:var(--signal)}
+
+canvas{display:none}
+
+@media (max-width:34rem){
+  .entry{grid-template-columns:1fr}
+  .card-btn{grid-column:1;grid-row:auto;justify-self:start;margin-block-start:.75rem}
+  .controls{position:static}
+}

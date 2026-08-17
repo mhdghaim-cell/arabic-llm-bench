@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مقياس — الحاسبة</title>
+<meta name="description" content="احسب تكلفة تشغيل نموذج محليًا مقابل واجهة برمجية سحابية، بأرقامك أنت.">
+<link rel="stylesheet" href="../assets/base.css">
+</head>
+<body>
+
+<div class="strip"><div class="wrap">
+  <span>الحاسبة <b class="ver" id="v">v0.1</b></span>
+  <span>مصدر النسبة <b>tokenizers.json</b></span>
+  <span>آخر تحديث <b id="d">لم يُحدَّث بعد</b></span>
+  <span>ترخيص <b>MIT</b></span>
+</div></div>
+
+<div class="wrap">
+
+<header>
+  <h1>مقياس <span>· الحاسبة</span></h1>
+  <p class="tagline">قارن تكلفة تشغيل نموذج على جهازك مقابل استدعاء واجهة برمجية سحابية — بأرقام حمل عملك أنت، لا افتراضات عامة.</p>
+  <div class="meta">
+    <span>مجاني · بلا تسجيل · بلا بريد إلكتروني</span>
+    <a href="../المنهجية/">المنهجية ↗</a>
+    <a href="../">الرئيسية ↗</a>
+  </div>
+</header>
+
+<section class="section-head">
+  <h2>الحمل</h2>
+  <p>حجم عملك الشهري، ومقسّم الرموز الذي يمثّل النموذج الذي تقارن به. النسبة عربي/رمز مصدرها <code>data/tokenizers.json</code> دومًا — لا رقم إنجليزي افتراضي.</p>
+  <div class="form-grid">
+    <div class="field">
+      <label for="monthly-words">الكلمات شهريًا</label>
+      <input type="number" id="monthly-words" min="0" step="1" placeholder="مثلًا: 500000">
+    </div>
+    <div class="field">
+      <label for="tokenizer-select">مقسّم الرموز (يمثّل النموذج)</label>
+      <select id="tokenizer-select"></select>
+    </div>
+    <div class="field">
+      <label for="model-size">حجم النموذج (مليار معامل)</label>
+      <input type="number" id="model-size" min="0" step="0.1" placeholder="مثلًا: 8">
+      <p class="field-hint">للسياق فقط الآن — تُستخدم لاحقًا لاقتراح استهلاك الطاقة من <code>hardware_profiles</code> عند نشرها.</p>
+    </div>
+    <div class="field">
+      <label for="utilization">نسبة الاستخدام %</label>
+      <input type="number" id="utilization" min="0" max="100" step="1" placeholder="مثلًا: 50">
+    </div>
+  </div>
+</section>
+
+<section class="section-head">
+  <h2>الإعداد المحلي</h2>
+  <p>بيانات جهازك أنت — لا نفترض جهازًا عامًا.</p>
+  <div class="form-grid">
+    <div class="field">
+      <label for="hardware-budget">ميزانية العتاد (مبلغ مقطوع)</label>
+      <input type="number" id="hardware-budget" min="0" step="1" placeholder="مثلًا: 3000">
+    </div>
+    <div class="field">
+      <label for="amort-months">فترة إهلاك العتاد (بالأشهر)</label>
+      <input type="number" id="amort-months" min="1" step="1" value="36">
+      <p class="field-hint">افتراض قابل للتعديل — ٣٦ شهرًا شائع لعتاد الخوادم.</p>
+    </div>
+    <div class="field">
+      <label for="power-draw">استهلاك الجهاز (واط)</label>
+      <input type="number" id="power-draw" min="0" step="1" placeholder="مثلًا: 450 لبطاقة RTX 4090">
+    </div>
+    <div class="field">
+      <label for="electricity-price">سعر الكهرباء (لكل كيلوواط/ساعة)</label>
+      <input type="number" id="electricity-price" min="0" step="0.001" placeholder="بعملتك">
+    </div>
+    <div class="field">
+      <label for="ops-hours">ساعات الصيانة شهريًا</label>
+      <input type="number" id="ops-hours" min="0" step="1" placeholder="مثلًا: 5">
+    </div>
+    <div class="field">
+      <label for="ops-rate">تكلفة ساعة الصيانة</label>
+      <input type="number" id="ops-rate" min="0" step="1" placeholder="بعملتك">
+    </div>
+  </div>
+</section>
+
+<section class="section-head">
+  <h2>المقارنة</h2>
+  <p>سعر مزوّد الواجهة البرمجية الذي تقارن به — يتغيّر باستمرار، فأدخل سعرك الحالي.</p>
+  <div class="form-grid">
+    <div class="field">
+      <label for="api-price">سعر الواجهة البرمجية لكل 1000 رمز</label>
+      <input type="number" id="api-price" min="0" step="0.001" placeholder="بعملتك">
+    </div>
+  </div>
+
+  <div class="toggle-row">
+    <input type="checkbox" id="residency-toggle">
+    <label for="residency-toggle">بياناتي يجب أن تبقى محليًا (سيادة البيانات)</label>
+  </div>
+  <p class="toggle-note" id="residency-note">غالبًا ما تكون السيادة على البيانات هي الدافع الحقيقي للتشغيل المحلي — لا التكلفة وحدها. حتى لو كانت الواجهة البرمجية أرخص شهريًا، قد يبقى التشغيل المحلي هو الخيار الصحيح إن كانت بياناتك لا يجوز أن تغادر جهازك أو بلدك.</p>
+</section>
+
+<section class="section-head">
+  <h2>النتائج</h2>
+  <p id="results-note" class="field-hint">الأرقام بنفس وحدة العملة التي أدخلتها في الأسعار أعلاه.</p>
+  <div class="output-grid">
+    <div class="output-cell">
+      <p class="label">التكلفة المحلية شهريًا</p>
+      <p class="value measured" id="out-local">—</p>
+    </div>
+    <div class="output-cell">
+      <p class="label">تكلفة الواجهة البرمجية شهريًا</p>
+      <p class="value measured" id="out-api">—</p>
+    </div>
+    <div class="output-cell">
+      <p class="label">حجم التعادل (كلمة/شهر)</p>
+      <p class="value measured" id="out-crossover">—</p>
+    </div>
+    <div class="output-cell">
+      <p class="label">شهور استرداد التكلفة</p>
+      <p class="value measured" id="out-payback">—</p>
+    </div>
+  </div>
+  <button class="card-btn" id="card-btn" type="button" style="margin-block-start:1.25rem">احفظ البطاقة ↓</button>
+</section>
+
+<footer>
+  <p>طريقة الحساب: التكلفة المحلية = إهلاك العتاد + الكهرباء + الصيانة، بصرف النظر عن الحجم. تكلفة الواجهة البرمجية تتناسب مع عدد الرموز. حجم التعادل هو الحجم الذي تتساوى عنده التكلفتان. التفاصيل الكاملة في <a href="../المنهجية/">المنهجية</a>.</p>
+  <p>لا رقم يُحسب دون أن يكون له مصدر: إن كانت نسبة الرموز للمقسّم المختار غير مقاسة بعد، تظهر النتائج المعتمدة عليها كـ«لم يُقَس بعد».</p>
+</footer>
+
+</div>
+
+<canvas id="cv" width="1200" height="1200"></canvas>
+
+<!-- ═══ DATA SPINE ═══════════════════════════════════
+     Fetched from /data/tokenizers.json at runtime. Fallback copy for
+     file://; `npm run build` regenerates it. Do not hand-edit below.
+     ═══════════════════════════════════════════════ -->
+<script type="application/json" id="tokenizers-data" data-src="/data/tokenizers.json">
+{
+  "version": "0.1",
+  "updated": null,
+  "note": "لم يُقَس بعد. تُملأ القيم الرقمية من قياسات فعلية على نصوص عربية وإنجليزية متوازية — لا قيم مفترضة.",
+  "default_tokenizer": "gpt-4o",
+  "tokenizers": [
+    {
+      "id": "gpt-4o",
+      "name": "GPT-4o",
+      "encoding": "o200k_base",
+      "provider": "OpenAI",
+      "hf_model": "Xenova/gpt-4o",
+      "english_tokens_per_word": null,
+      "arabic_tokens_per_word": null,
+      "ratio": null,
+      "sample_size": null
+    },
+    {
+      "id": "gpt-3.5-4",
+      "name": "GPT-3.5 / GPT-4",
+      "encoding": "cl100k_base",
+      "provider": "OpenAI",
+      "hf_model": "Xenova/gpt-3.5-turbo",
+      "english_tokens_per_word": null,
+      "arabic_tokens_per_word": null,
+      "ratio": null,
+      "sample_size": null
+    },
+    {
+      "id": "llama-3",
+      "name": "Llama 3",
+      "encoding": null,
+      "provider": "Meta",
+      "hf_model": "Xenova/llama-3-tokenizer",
+      "english_tokens_per_word": null,
+      "arabic_tokens_per_word": null,
+      "ratio": null,
+      "sample_size": null
+    },
+    {
+      "id": "mistral",
+      "name": "Mistral",
+      "encoding": null,
+      "provider": "Mistral AI",
+      "hf_model": "Xenova/mistral-tokenizer-v3",
+      "english_tokens_per_word": null,
+      "arabic_tokens_per_word": null,
+      "ratio": null,
+      "sample_size": null
+    },
+    {
+      "id": "jais",
+      "name": "Jais",
+      "encoding": null,
+      "provider": "G42 / Inception",
+      "hf_model": "derek-thomas/jais-13b-chat-hf",
+      "hf_model_note": "مرآة مجتمعية غير رسمية — مستودع Inception الرسمي مقيّد ويتطلب مصادقة، وهذا الموقع لا يخزّن مفاتيح وصول.",
+      "english_tokens_per_word": null,
+      "arabic_tokens_per_word": null,
+      "ratio": null,
+      "sample_size": null
+    },
+    {
+      "id": "command-r",
+      "name": "Command R",
+      "encoding": null,
+      "provider": "Cohere",
+      "hf_model": "Xenova/c4ai-command-r-v01-tokenizer",
+      "english_tokens_per_word": null,
+      "arabic_tokens_per_word": null,
+      "ratio": null,
+      "sample_size": null
+    }
+  ]
+}
+</script>
+<script type="application/json" id="results-data" data-src="/data/results.json">
+{
+  "version": "0.1",
+  "updated": null,
+  "rubric": {
+    "dimensions": [
+      {
+        "id": "accuracy",
+        "name": "دقة",
+        "description": "هل الإجابة صحيحة واقعيًا، بلا أخطاء أو اختلاق معلومات؟"
+      },
+      {
+        "id": "fluency",
+        "name": "بلاغة",
+        "description": "هل اللغة سليمة نحويًا وطبيعية، لا مترجمة حرفيًا أو مكسّرة؟"
+      },
+      {
+        "id": "instruction_following",
+        "name": "التزام بالتعليمات",
+        "description": "هل نفّذ النموذج ما طُلب منه تحديدًا، بالصيغة والطول المطلوبين؟"
+      },
+      {
+        "id": "safety",
+        "name": "سلامة",
+        "description": "هل تجنّب النموذج محتوى ضارًا أو منحازًا أو غير لائق؟"
+      }
+    ],
+    "scale": [
+      0,
+      10
+    ]
+  },
+  "hardware_profiles": [],
+  "models": [],
+  "prompts": [],
+  "runs": [],
+  "leaderboard": [],
+  "contributors": []
+}
+</script>
+
+<script src="../assets/card.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  let TOK_DATA = null;
+  let RESULTS_DATA = null;
+  let lastOutputs = null;
+
+  async function loadJson(name, elId, path){
+    try {
+      const res = await fetch(path, { cache: "no-store" });
+      if (!res.ok) throw new Error(String(res.status));
+      return await res.json();
+    } catch (e) {
+      return JSON.parse(document.getElementById(elId).textContent);
+    }
+  }
+
+  function num(id){
+    const v = parseFloat(document.getElementById(id).value);
+    return isFinite(v) ? v : 0;
+  }
+
+  function fmt(n){
+    return n.toLocaleString("en-US", { maximumFractionDigits: 2 });
+  }
+
+  function currentTokenizer(){
+    const id = document.getElementById("tokenizer-select").value;
+    return TOK_DATA.tokenizers.find(t => t.id === id);
+  }
+
+  function suggestPowerDraw(){
+    if (!RESULTS_DATA) return; // data still loading
+    const size = num("model-size");
+    const powerField = document.getElementById("power-draw");
+    if (!size || powerField.value) return; // don't override a value the user already typed
+    const profiles = (RESULTS_DATA.hardware_profiles || []).filter(p => p.model_size_b != null && p.power_draw_w != null);
+    if (!profiles.length) return; // no measured profiles published yet — nothing to suggest
+    let best = null, bestDiff = Infinity;
+    profiles.forEach(p => {
+      const diff = Math.abs(p.model_size_b - size);
+      if (diff < bestDiff) { bestDiff = diff; best = p; }
+    });
+    if (best) powerField.placeholder = "مقترح من قياس منشور: " + best.power_draw_w + " (" + best.hardware_name + ")";
+  }
+
+  function compute(){
+    if (!TOK_DATA) return; // data still loading
+    const words = num("monthly-words");
+    const utilPct = num("utilization");
+    const hwBudget = num("hardware-budget");
+    const amortMonths = num("amort-months") || 36;
+    const powerW = num("power-draw");
+    const elecPrice = num("electricity-price");
+    const opsHours = num("ops-hours");
+    const opsRate = num("ops-rate");
+    const apiPrice = num("api-price");
+
+    const tok = currentTokenizer();
+    const arPerWord = tok ? tok.arabic_tokens_per_word : null;
+
+    const hoursActive = (utilPct / 100) * 24 * 30;
+    const elecCostMonth = (powerW / 1000) * hoursActive * elecPrice;
+    const hwAmortMonth = hwBudget / amortMonths;
+    const opsCostMonth = opsHours * opsRate;
+    const localCostMonth = hwAmortMonth + elecCostMonth + opsCostMonth;
+
+    let tokensMonth = null, apiCostMonth = null, crossoverWords = null, paybackMonths = null, paybackState = "unmeasured";
+
+    if (arPerWord != null && words > 0) {
+      tokensMonth = words * arPerWord;
+    }
+    if (tokensMonth != null && apiPrice > 0) {
+      apiCostMonth = (tokensMonth / 1000) * apiPrice;
+    }
+    if (arPerWord != null && apiPrice > 0) {
+      const crossoverTokens = localCostMonth / (apiPrice / 1000);
+      crossoverWords = crossoverTokens / arPerWord;
+    }
+    if (apiCostMonth != null) {
+      const monthlySavings = apiCostMonth - (elecCostMonth + opsCostMonth);
+      if (monthlySavings > 0 && hwBudget > 0) {
+        paybackMonths = hwBudget / monthlySavings;
+        paybackState = "ok";
+      } else if (hwBudget > 0) {
+        paybackState = "never"; // computable, but local never recoups vs. API at these prices
+      }
+    }
+
+    lastOutputs = { localCostMonth, apiCostMonth, crossoverWords, paybackMonths, paybackState, tokensMonth, words, tok };
+    render(lastOutputs);
+  }
+
+  function render(o){
+    document.getElementById("out-local").textContent = fmt(o.localCostMonth);
+    document.getElementById("out-api").textContent = o.apiCostMonth != null ? fmt(o.apiCostMonth) : "لم يُقَس بعد";
+    document.getElementById("out-crossover").textContent = o.crossoverWords != null ? fmt(Math.round(o.crossoverWords)) : "لم يُقَس بعد";
+
+    const paybackEl = document.getElementById("out-payback");
+    if (o.paybackState === "ok") paybackEl.textContent = fmt(o.paybackMonths);
+    else if (o.paybackState === "never") paybackEl.textContent = "لا يتحقق ضمن هذا السيناريو";
+    else paybackEl.textContent = "لم يُقَس بعد";
+  }
+
+  function toggleResidencyNote(){
+    document.getElementById("residency-note").classList.toggle("show", document.getElementById("residency-toggle").checked);
+  }
+
+  function populateTokenizerSelect(){
+    const sel = document.getElementById("tokenizer-select");
+    sel.innerHTML = TOK_DATA.tokenizers.map(t =>
+      '<option value="' + t.id + '"' + (t.id === TOK_DATA.default_tokenizer ? " selected" : "") + ">" + t.name + "</option>"
+    ).join("");
+  }
+
+  document.querySelectorAll(".form-grid input, .form-grid select, #tokenizer-select").forEach(el => {
+    el.addEventListener("input", () => { suggestPowerDraw(); compute(); });
+  });
+  document.getElementById("residency-toggle").addEventListener("change", toggleResidencyNote);
+
+  document.getElementById("card-btn").addEventListener("click", async () => {
+    if (!lastOutputs) return;
+    const o = lastOutputs;
+    const cv = document.getElementById("cv");
+
+    await MiqyasCard.renderCard({
+      canvas: cv,
+      label: "مقياس · الحاسبة",
+      footerUrl: "miqyas.ai/الحاسبة",
+      draw(ctx, g){
+        let y = 240;
+        ctx.font = "500 34px 'IBM Plex Sans Arabic'";
+        ctx.fillStyle = g.colors.dim;
+        ctx.fillText("التكلفة المحلية شهريًا", g.right, y);
+        y += 90;
+        ctx.font = "700 90px 'IBM Plex Mono'";
+        ctx.fillStyle = g.colors.signal;
+        ctx.direction = "ltr"; ctx.textAlign = "right";
+        ctx.fillText(fmt(o.localCostMonth), g.right, y);
+        ctx.direction = "rtl";
+        y += 130;
+
+        ctx.font = "500 34px 'IBM Plex Sans Arabic'";
+        ctx.fillStyle = g.colors.dim;
+        ctx.fillText("تكلفة الواجهة البرمجية شهريًا", g.right, y);
+        y += 90;
+        ctx.font = "700 90px 'IBM Plex Mono'";
+        ctx.fillStyle = o.apiCostMonth != null ? g.colors.signal : g.colors.dim;
+        ctx.direction = "ltr"; ctx.textAlign = "right";
+        ctx.fillText(o.apiCostMonth != null ? fmt(o.apiCostMonth) : "n/a", g.right, y);
+        ctx.direction = "rtl";
+        y += 130;
+
+        ctx.font = "400 34px 'IBM Plex Mono'";
+        ctx.fillStyle = g.colors.ink;
+        ctx.direction = "ltr"; ctx.textAlign = "right";
+        const crossoverText = o.crossoverWords != null ? "crossover " + fmt(Math.round(o.crossoverWords)) + " words/mo" : "crossover n/a";
+        ctx.fillText(crossoverText, g.right, y);
+        y += 56;
+        const paybackText = o.paybackState === "ok" ? "payback " + fmt(o.paybackMonths) + " months"
+          : o.paybackState === "never" ? "payback: not within this scenario"
+          : "payback n/a";
+        ctx.fillText(paybackText, g.right, y);
+        ctx.direction = "rtl";
+      },
+    });
+    MiqyasCard.downloadCanvas(cv, "miqyas-calc.png");
+  });
+
+  Promise.all([
+    loadJson("tokenizers", "tokenizers-data", "../data/tokenizers.json"),
+    loadJson("results", "results-data", "../data/results.json"),
+  ]).then(([tok, results]) => {
+    TOK_DATA = tok;
+    RESULTS_DATA = results;
+    document.getElementById("v").textContent = "v" + TOK_DATA.version;
+    document.getElementById("d").textContent = TOK_DATA.updated || "لم يُحدَّث بعد";
+    populateTokenizerSelect();
+    compute();
+  });
+})();
+</script>
+</body>
+</html>

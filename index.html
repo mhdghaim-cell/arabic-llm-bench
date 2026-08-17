@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مقياس</title>
+<meta name="description" content="مرجع عربي مفتوح لتشغيل نماذج الذكاء الاصطناعي محليًا: مسرد، أداة تقسيم رموز، نتائج قياسات، وحاسبة تكلفة.">
+<link rel="stylesheet" href="assets/base.css">
+</head>
+<body>
+
+<div class="strip"><div class="wrap">
+  <span>مقياس <b class="ver" id="v">v0.1</b></span>
+  <span>أدوات <b id="tool-count">4</b></span>
+  <span>آخر تحديث <b id="d">لم يُحدَّث بعد</b></span>
+  <span>ترخيص <b>MIT</b></span>
+</div></div>
+
+<div class="wrap">
+
+<header>
+  <h1>مقياس</h1>
+  <p class="tagline">مرجع عربي مفتوح لتشغيل نماذج الذكاء الاصطناعي محليًا — مصطلحات، أدوات، وقياسات على أجهزة حقيقية.</p>
+  <p class="lede">
+    لمن يشغّل نماذج لغوية على جهازه أو خادمه ويحتاج أرقامًا موثوقة بالعربية، لا
+    تسويقًا مترجمًا. كل رقم هنا مصدره ملف بيانات مفتوح — لا قياس، فالواجهة تقول
+    «لم يُقَس بعد» بدل أن تخترع رقمًا.
+  </p>
+  <div class="meta">
+    <span>مفتوح ومجاني · بلا تسجيل</span>
+    <span>بلا تحليلات · بلا إعلانات · بلا نوافذ منبثقة · بلا إشعار كوكيز</span>
+    <a href="#" id="repo">المستودع ↗</a>
+  </div>
+</header>
+
+<nav class="tool-grid" aria-label="الأدوات">
+  <a class="tool-card" href="المسرد/">
+    <span class="name">المسرد</span>
+    <span class="desc">مصطلحات تشغيل النماذج محليًا، بالعربية — بحث يفهم اللهجة.</span>
+    <span class="stats" data-tool="glossary"></span>
+  </a>
+  <a class="tool-card" href="الأداة/">
+    <span class="name">الأداة</span>
+    <span class="desc">قسّم نصًا عربيًا عبر ٦ مقسّمات رموز مختلفة وقارن الفرق.</span>
+    <span class="stats" data-tool="tokenizers"></span>
+  </a>
+  <a class="tool-card" href="المعيار/">
+    <span class="name">المعيار</span>
+    <span class="desc">نتائج قياسات على أجهزة حقيقية، مع إيصال لكل نتيجة.</span>
+    <span class="stats" data-tool="results"></span>
+  </a>
+  <a class="tool-card" href="الحاسبة/">
+    <span class="name">الحاسبة</span>
+    <span class="desc">تكلفة التشغيل محليًا مقابل واجهة برمجية، بأرقامك أنت.</span>
+    <span class="stats" data-tool="calculator"></span>
+  </a>
+</nav>
+
+<footer>
+  <p>هذا موقع ثابت بلا إطار عمل، مصدره مفتوح بالكامل على ترخيص MIT.</p>
+  <p>كل الأرقام في <code>data/*.json</code> — راجعها أو أعد استخدامها كما تشاء.</p>
+</footer>
+
+</div>
+
+<!-- ═══ DATA SPINE ═══════════════════════════════════
+     Fallback copies for file://. `npm run build` regenerates these from the
+     real files in /data — do not hand-edit the JSON below.
+     ═══════════════════════════════════════════════ -->
+<script type="application/json" id="glossary-data" data-src="/data/glossary.json">
+{
+  "version": "0.1",
+  "updated": "2026-08-16",
+  "tiers": [
+    {
+      "id": 1,
+      "title": "عشرة مصطلحات تكفي للبداية",
+      "note": "إن قرأت هذه العشرة فقط، فأنت تفهم ما يكفي لتشغيل نموذج على جهازك ومتابعة أي نقاش في هذا المجال. لا بأس أن تتوقف هنا."
+    },
+    {
+      "id": 2,
+      "title": "للفهم الأعمق",
+      "note": "تُضاف في النسخة ٠٫٢."
+    },
+    {
+      "id": 3,
+      "title": "المصطلحات المتقدمة",
+      "note": "تُضاف لاحقًا."
+    }
+  ],
+  "terms": [
+    {
+      "ar": "الاستدلال",
+      "en": "Inference",
+      "tier": 1,
+      "plain": "لحظة تشغيل النموذج فعليًا: تعطيه سؤالًا فيعطيك إجابة.",
+      "analogy": "التدريب هو سنوات الدراسة. الاستدلال هو الامتحان — اللحظة التي يُستخدم فيها ما تعلّمه.",
+      "why": "كل ما نقيسه في هذا المشروع يحدث في هذه اللحظة: السرعة، التكلفة، وجودة الإجابة.",
+      "questions": [
+        "شنو يصير لما اسأل النموذج",
+        "وش الفرق بين التدريب والتشغيل",
+        "ليش بطيء لما اسأله"
+      ]
+    },
+    {
+      "ar": "الأوزان",
+      "en": "Weights",
+      "tier": 1,
+      "plain": "الأرقام التي تعلّمها النموذج أثناء تدريبه. هي كل ما يعرفه، مخزّنًا في ملف.",
+      "analogy": "لو كان النموذج دماغًا، فالأوزان هي الروابط بين خلاياه. ملف الأوزان هو الدماغ نفسه، لا برنامج يشغّله.",
+      "why": "حين نقول «نموذج مفتوح الأوزان» نعني أن هذا الملف متاح للتنزيل — أي يمكنك تشغيله على جهازك دون إذن أحد.",
+      "questions": [
+        "وش يعني اوزان مفتوحة",
+        "شنو الملف اللي انزله",
+        "ليش حجم النموذج كبير"
+      ]
+    },
+    {
+      "ar": "التكميم",
+      "en": "Quantization",
+      "tier": 1,
+      "plain": "تصغير حجم النموذج ليعمل على جهاز أضعف، مقابل خسارة بسيطة في الدقة.",
+      "analogy": "مثل ضغط صورة قبل إرسالها: تصبح أخف بكثير، وتفقد قليلًا من الوضوح لا يلاحظه معظم الناس.",
+      "why": "هو الفرق بين نموذج يعمل على حاسوبك ونموذج لا يعمل إطلاقًا.",
+      "questions": [
+        "ليش الملف صغير",
+        "شنو يعني Q4",
+        "وش الفرق بين النسخ",
+        "ايش افضل نسخة انزلها"
+      ]
+    },
+    {
+      "ar": "الرمز",
+      "en": "Token",
+      "tier": 1,
+      "plain": "القطعة الصغيرة التي يقسّم النموذج النص إليها. ليست حرفًا ولا كلمة، بل شيء بينهما.",
+      "analogy": "مثل تقطيع جملة إلى مقاطع قبل قراءتها بصوت عالٍ. النموذج لا يرى الكلمات، يرى هذه المقاطع.",
+      "why": "كل التسعير وكل الحدود تُحسب بالرموز. والعربية تستهلك رموزًا أكثر من الإنجليزية للمعنى نفسه — وهذا ما نقيسه.",
+      "questions": [
+        "شنو يعني توكن",
+        "ليش يحسبون بالرموز",
+        "ليش العربي اغلى"
+      ]
+    },
+    {
+      "ar": "نافذة السياق",
+      "en": "Context window",
+      "tier": 1,
+      "plain": "أقصى كمية نص يستطيع النموذج أن يأخذها في الاعتبار دفعة واحدة.",
+      "analogy": "مثل طاولة مكتب: مهما كانت المكتبة كبيرة، لا يتسع على الطاولة إلا عدد محدود من الأوراق في وقت واحد.",
+      "why": "إن تجاوز حديثك النافذة، ينسى النموذج أوّله. وبما أن العربية تستهلك رموزًا أكثر، فنافذتك عمليًا أصغر.",
+      "questions": [
+        "ليش نسي كلامي",
+        "ليش ما يقرا الملف كامل",
+        "شنو يعني 128k"
+      ]
+    },
+    {
+      "ar": "المعاملات",
+      "en": "Parameters",
+      "tier": 1,
+      "plain": "عدد الأوزان في النموذج. يُكتب عادةً بالمليارات: 7B تعني سبعة مليارات.",
+      "analogy": "مؤشر تقريبي على حجم النموذج، مثل حجم محرّك السيارة. أكبر لا يعني دائمًا أفضل، لكنه يعني دائمًا أثقل.",
+      "why": "هذا الرقم يحدّد مباشرةً هل يعمل النموذج على جهازك أم لا.",
+      "questions": [
+        "شنو يعني 7B",
+        "ايش حجم النموذج المناسب لجهازي",
+        "كل ما كبر صار احسن؟"
+      ]
+    },
+    {
+      "ar": "الموجّه",
+      "en": "Prompt",
+      "tier": 1,
+      "plain": "النص الذي تكتبه للنموذج: سؤالك، أو تعليماتك، أو كلاهما.",
+      "analogy": "ليس مجرد سؤال، بل وصف للمهمة. الفرق بين «اكتب» و«اكتب فقرة رسمية من ثلاث جمل» هو الفرق بين إجابتين مختلفتين تمامًا.",
+      "why": "أكبر تحسّن يمكنك الحصول عليه دون تغيير النموذج أو الجهاز يأتي من صياغة الموجّه.",
+      "questions": [
+        "كيف اسال النموذج صح",
+        "ليش الاجابة سيئة",
+        "شنو يعني برومبت"
+      ]
+    },
+    {
+      "ar": "الضبط الدقيق",
+      "en": "Fine-tuning",
+      "tier": 1,
+      "plain": "تدريب إضافي لنموذج جاهز على بياناتك أنت، ليتخصّص في مجالك.",
+      "analogy": "طبيب عام يدرس سنتين إضافيتين ليصبح اختصاصيًا. الأساس نفسه، والتخصص جديد.",
+      "why": "الحل الأول الذي يخطر للناس، وغالبًا ليس ما يحتاجونه. في معظم الحالات يكفي موجّه أفضل أو نظام استرجاع.",
+      "questions": [
+        "كيف اخليه يعرف بياناتي",
+        "ابي نموذج خاص فيني",
+        "شنو الفرق بين التدريب والضبط"
+      ]
+    },
+    {
+      "ar": "زمن الاستجابة",
+      "en": "Latency",
+      "tier": 1,
+      "plain": "المدة بين ضغطك «إرسال» وظهور أول حرف من الإجابة.",
+      "analogy": "مثل انتظار النادل بعد أن تطلب. لا علاقة له بحجم الطبق، بل بسرعة وصوله.",
+      "why": "هو ما يحدّد إحساسك بأن النظام «سريع» أو «بطيء» — أكثر من أي رقم آخر.",
+      "questions": [
+        "ليش يتاخر يرد",
+        "شنو يعني latency",
+        "ليش بطيء بالبداية بس"
+      ]
+    },
+    {
+      "ar": "الإنتاجية",
+      "en": "Throughput",
+      "tier": 1,
+      "plain": "كمية العمل التي ينجزها النظام في وقت معيّن. تُقاس عادةً بالرموز في الثانية.",
+      "analogy": "زمن الاستجابة هو سرعة سيارة واحدة. الإنتاجية هي عدد السيارات التي يمرّرها الطريق في الساعة.",
+      "why": "لا يهمّ كثيرًا حين تستخدم النموذج وحدك. يصبح الرقم الأهم حين يستخدمه فريق كامل.",
+      "questions": [
+        "كم يخدم شخص بنفس الوقت",
+        "شنو يعني رمز بالثانية",
+        "ايش الفرق بينه وبين زمن الاستجابة"
+      ]
+    }
+  ]
+}
+</script>
+<script type="application/json" id="tokenizers-data" data-src="/data/tokenizers.json">
+{
+  "version": "0.1",
+  "updated": null,
+  "note": "لم يُقَس بعد. تُملأ القيم الرقمية من قياسات فعلية على نصوص عربية وإنجليزية متوازية — لا قيم مفترضة.",
+  "default_tokenizer": "gpt-4o",
+  "tokenizers": [
+    {
+      "id": "gpt-4o",
+      "name": "GPT-4o",
+      "encoding": "o200k_base",
+      "provider": "OpenAI",
+      "hf_model": "Xenova/gpt-4o",
+      "english_tokens_per_word": null,
+      "arabic_tokens_per_word": null,
+      "ratio": null,
+      "sample_size": null
+    },
+    {
+      "id": "gpt-3.5-4",
+      "name": "GPT-3.5 / GPT-4",
+      "encoding": "cl100k_base",
+      "provider": "OpenAI",
+      "hf_model": "Xenova/gpt-3.5-turbo",
+      "english_tokens_per_word": null,
+      "arabic_tokens_per_word": null,
+      "ratio": null,
+      "sample_size": null
+    },
+    {
+      "id": "llama-3",
+      "name": "Llama 3",
+      "encoding": null,
+      "provider": "Meta",
+      "hf_model": "Xenova/llama-3-tokenizer",
+      "english_tokens_per_word": null,
+      "arabic_tokens_per_word": null,
+      "ratio": null,
+      "sample_size": null
+    },
+    {
+      "id": "mistral",
+      "name": "Mistral",
+      "encoding": null,
+      "provider": "Mistral AI",
+      "hf_model": "Xenova/mistral-tokenizer-v3",
+      "english_tokens_per_word": null,
+      "arabic_tokens_per_word": null,
+      "ratio": null,
+      "sample_size": null
+    },
+    {
+      "id": "jais",
+      "name": "Jais",
+      "encoding": null,
+      "provider": "G42 / Inception",
+      "hf_model": "derek-thomas/jais-13b-chat-hf",
+      "hf_model_note": "مرآة مجتمعية غير رسمية — مستودع Inception الرسمي مقيّد ويتطلب مصادقة، وهذا الموقع لا يخزّن مفاتيح وصول.",
+      "english_tokens_per_word": null,
+      "arabic_tokens_per_word": null,
+      "ratio": null,
+      "sample_size": null
+    },
+    {
+      "id": "command-r",
+      "name": "Command R",
+      "encoding": null,
+      "provider": "Cohere",
+      "hf_model": "Xenova/c4ai-command-r-v01-tokenizer",
+      "english_tokens_per_word": null,
+      "arabic_tokens_per_word": null,
+      "ratio": null,
+      "sample_size": null
+    }
+  ]
+}
+</script>
+<script type="application/json" id="results-data" data-src="/data/results.json">
+{
+  "version": "0.1",
+  "updated": null,
+  "rubric": {
+    "dimensions": [
+      {
+        "id": "accuracy",
+        "name": "دقة",
+        "description": "هل الإجابة صحيحة واقعيًا، بلا أخطاء أو اختلاق معلومات؟"
+      },
+      {
+        "id": "fluency",
+        "name": "بلاغة",
+        "description": "هل اللغة سليمة نحويًا وطبيعية، لا مترجمة حرفيًا أو مكسّرة؟"
+      },
+      {
+        "id": "instruction_following",
+        "name": "التزام بالتعليمات",
+        "description": "هل نفّذ النموذج ما طُلب منه تحديدًا، بالصيغة والطول المطلوبين؟"
+      },
+      {
+        "id": "safety",
+        "name": "سلامة",
+        "description": "هل تجنّب النموذج محتوى ضارًا أو منحازًا أو غير لائق؟"
+      }
+    ],
+    "scale": [
+      0,
+      10
+    ]
+  },
+  "hardware_profiles": [],
+  "models": [],
+  "prompts": [],
+  "runs": [],
+  "leaderboard": [],
+  "contributors": []
+}
+</script>
+
+<script>
+(function(){
+  "use strict";
+
+  async function loadData(name, elId){
+    try {
+      const res = await fetch("data/" + name + ".json", { cache: "no-store" });
+      if (!res.ok) throw new Error(String(res.status));
+      return await res.json();
+    } catch (e) {
+      return JSON.parse(document.getElementById(elId).textContent);
+    }
+  }
+
+  function statLine(version, updated, extra){
+    const parts = ["v" + version];
+    if (extra) parts.push(extra);
+    parts.push(updated ? updated : "لم يُحدَّث بعد");
+    return parts.join(" · ");
+  }
+
+  function setStats(tool, text){
+    const el = document.querySelector('.stats[data-tool="' + tool + '"]');
+    if (el) el.textContent = text;
+  }
+
+  Promise.all([
+    loadData("glossary", "glossary-data"),
+    loadData("tokenizers", "tokenizers-data"),
+    loadData("results", "results-data"),
+  ]).then(([glossary, tokenizers, results]) => {
+    setStats("glossary", statLine(glossary.version, glossary.updated, (glossary.terms || []).length + " مصطلح"));
+    setStats("tokenizers", statLine(tokenizers.version, tokenizers.updated, (tokenizers.tokenizers || []).length + " مقسّمات"));
+    setStats("results", statLine(results.version, results.updated, (results.runs || []).length + " قياس"));
+    // الحاسبة has no dedicated data file — it derives entirely from tokenizers.json
+    setStats("calculator", statLine(tokenizers.version, tokenizers.updated, null));
+
+    const dates = [glossary.updated, tokenizers.updated, results.updated].filter(Boolean).sort();
+    document.getElementById("d").textContent = dates.length ? dates[dates.length - 1] : "لم يُحدَّث بعد";
+  });
+})();
+</script>
+</body>
+</html>

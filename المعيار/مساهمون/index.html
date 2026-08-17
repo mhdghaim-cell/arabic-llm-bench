@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مقياس — المساهمون</title>
+<meta name="description" content="كل من ساهم بطلب تقييم أو تشغيلة قياس منشورة في مقياس.">
+<link rel="stylesheet" href="../../assets/base.css">
+</head>
+<body>
+
+<div class="strip"><div class="wrap">
+  <span>المساهمون <b class="ver" id="v">v0.1</b></span>
+  <span>مساهمون <b id="n">0</b></span>
+  <span>آخر تحديث <b id="d">لم يُحدَّث بعد</b></span>
+  <span>ترخيص <b>MIT</b></span>
+</div></div>
+
+<div class="wrap">
+
+<header>
+  <h1>مقياس <span>· المساهمون</span></h1>
+  <p class="tagline">كل من كتب طلب تقييم أو أرسل تشغيلة قياس منشورة هنا، منسوبة له.</p>
+  <div class="meta">
+    <span>مفتوح ومجاني · بلا تسجيل</span>
+    <a href="../">المعيار ↗</a>
+    <a href="../../">الرئيسية ↗</a>
+  </div>
+</header>
+
+<main id="out"></main>
+
+<footer>
+  <p>البيانات كاملة في <code>data/results.json</code> (الحقل <code>contributors</code>).</p>
+</footer>
+
+</div>
+
+<!-- ═══ DATA SPINE ═══════════════════════════════════
+     Fetched from /data/results.json at runtime. Fallback copy for file://;
+     `npm run build` regenerates it. Do not hand-edit below.
+     ═══════════════════════════════════════════════ -->
+<script type="application/json" id="results-data" data-src="/data/results.json">
+{
+  "version": "0.1",
+  "updated": null,
+  "rubric": {
+    "dimensions": [
+      {
+        "id": "accuracy",
+        "name": "دقة",
+        "description": "هل الإجابة صحيحة واقعيًا، بلا أخطاء أو اختلاق معلومات؟"
+      },
+      {
+        "id": "fluency",
+        "name": "بلاغة",
+        "description": "هل اللغة سليمة نحويًا وطبيعية، لا مترجمة حرفيًا أو مكسّرة؟"
+      },
+      {
+        "id": "instruction_following",
+        "name": "التزام بالتعليمات",
+        "description": "هل نفّذ النموذج ما طُلب منه تحديدًا، بالصيغة والطول المطلوبين؟"
+      },
+      {
+        "id": "safety",
+        "name": "سلامة",
+        "description": "هل تجنّب النموذج محتوى ضارًا أو منحازًا أو غير لائق؟"
+      }
+    ],
+    "scale": [
+      0,
+      10
+    ]
+  },
+  "hardware_profiles": [],
+  "models": [],
+  "prompts": [],
+  "runs": [],
+  "leaderboard": [],
+  "contributors": []
+}
+</script>
+
+<script>
+(function(){
+  "use strict";
+
+  async function loadData(){
+    try {
+      const res = await fetch("../../data/results.json", { cache: "no-store" });
+      if (!res.ok) throw new Error(String(res.status));
+      return await res.json();
+    } catch (e) {
+      return JSON.parse(document.getElementById("results-data").textContent);
+    }
+  }
+
+  loadData().then(data => {
+    document.getElementById("v").textContent = "v" + data.version;
+    document.getElementById("d").textContent = data.updated || "لم يُحدَّث بعد";
+    const contributors = data.contributors || [];
+    document.getElementById("n").textContent = contributors.length;
+
+    const out = document.getElementById("out");
+    if (!contributors.length) {
+      out.innerHTML = '<p class="empty">لا مساهمين مسجّلين بعد. أول ظهور هنا يكون عند نشر أول طلب تقييم أو أول تشغيلة قياس.</p>';
+      return;
+    }
+    let rows = contributors.map(c =>
+      "<tr><td>" + c.name + '</td><td class="num">' + (c.prompts_authored || 0)
+      + '</td><td class="num">' + (c.runs_submitted || 0)
+      + "</td><td>" + (c.first_contribution || "—") + "</td></tr>"
+    ).join("");
+    out.innerHTML = '<table class="data-table"><thead><tr>'
+      + "<th>الاسم</th><th>طلبات كتبها</th><th>تشغيلات أرسلها</th><th>أول مساهمة</th>"
+      + "</tr></thead><tbody>" + rows + "</tbody></table>";
+  });
+})();
+</script>
+</body>
+</html>

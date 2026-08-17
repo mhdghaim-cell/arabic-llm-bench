@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مقياس — ضريبة الرموز</title>
+<meta name="description" content="هل تحتاج العربية رموزًا أكثر من الإنجليزية للمعنى نفسه؟ استكشاف قيد القياس، برابط دائم.">
+<link rel="stylesheet" href="../../assets/base.css">
+</head>
+<body>
+
+<div class="strip"><div class="wrap">
+  <span>مكتشفة <b class="ver">token-tax</b></span>
+  <span>الحالة <b id="status">قيد القياس</b></span>
+  <span>آخر تحديث <b id="d">لم يُحدَّث بعد</b></span>
+  <span>ترخيص <b>MIT</b></span>
+</div></div>
+
+<div class="wrap">
+
+<header>
+  <h1>مقياس <span>· ضريبة الرموز</span></h1>
+  <p class="tagline">هل تحتاج النصوص العربية رموزًا أكثر من الإنجليزية للمعنى نفسه؟ وإن كان كذلك، بكم؟</p>
+  <div class="meta">
+    <span>رابط دائم: <span dir="ltr">/findings/token-tax/</span></span>
+    <a href="../../المنهجية/">المنهجية ↗</a>
+    <a href="../../">الرئيسية ↗</a>
+  </div>
+</header>
+
+<section class="section-head">
+  <h2>الملخص</h2>
+  <p>هذا استكشاف <b>قيد القياس</b>، لا نتيجة منشورة بعد. الفرضية التي نختبرها: عبر معظم مقسّمات الرموز الشائعة، يحتاج النص العربي عددًا أكبر من الرموز مقارنة بالنص الإنجليزي الذي يحمل المعنى نفسه — وهو ما يرفع تكلفة استخدام واجهات الذكاء الاصطناعي البرمجية على المستخدم العربي بشكل غير متناسب. الأرقام أدناه تُملأ تلقائيًا من <code>data/tokenizers.json</code> فور اكتمال القياس؛ لا رقم مفترض هنا حتى ذلك الحين.</p>
+</section>
+
+<section class="section-head">
+  <h2>الرسم</h2>
+  <p>نسبة الرموز (عربي ÷ إنجليزي) لكل مقسّم — كلما زاد الرقم، زادت «الضريبة» على النص العربي.</p>
+  <div id="chart-area"></div>
+</section>
+
+<section class="section-head">
+  <h2>الطريقة</h2>
+  <p>لكل مقسّم من المقسّمات الستة في <a href="../../الأداة/">الأداة</a>: نأخذ مجموعة جمل متوازية بالعربية والإنجليزية — نفس المعنى، مصادر مختلفة تغطي نطاقات استخدام متعددة (محادثة، توثيق تقني، أخبار) — نحسب عدد الرموز لكل جملة بكل لغة، ثم نأخذ متوسط رموز/كلمة لكل لغة عبر المجموعة كاملة. النسبة = متوسط رموز/كلمة عربي ÷ متوسط رموز/كلمة إنجليزي. المنهجية الكاملة وحجم العينة في <a href="../../المنهجية/">صفحة المنهجية</a>.</p>
+</section>
+
+<section class="section-head">
+  <h2>التحفظات</h2>
+  <p>ضريبة الرموز رقم إجمالي يعتمد بشدة على اختيار النصوص: الفصحى والعامية تختلفان، والنص التقني يختلف عن المحادثة اليومية. الرقم يقيس تكلفة الإدخال فقط — لا يقيس جودة فهم النموذج أو دقة إجابته. مقسّم «Jais» في هذا الموقع مصدره مرآة مجتمعية غير رسمية لأن مستودع الشركة الأصلي يتطلب مصادقة؛ التفاصيل في <a href="../../data/tokenizers.json">data/tokenizers.json</a>.</p>
+</section>
+
+<footer>
+  <p>البيانات الخام: <a href="../../data/tokenizers.json">data/tokenizers.json</a>. جرّب القياس بنصّك أنت في <a href="../../الأداة/">الأداة</a>.</p>
+  <p>للاستشهاد بهذه الصفحة، راجع <a href="../../المنهجية/">المنهجية</a>.</p>
+</footer>
+
+</div>
+
+<!-- ═══ DATA SPINE ═══════════════════════════════════
+     Fetched from /data/tokenizers.json at runtime. Fallback copy for
+     file://; `npm run build` regenerates it. Do not hand-edit below.
+     ═══════════════════════════════════════════════ -->
+<script type="application/json" id="tokenizers-data" data-src="/data/tokenizers.json">
+{
+  "version": "0.1",
+  "updated": null,
+  "note": "لم يُقَس بعد. تُملأ القيم الرقمية من قياسات فعلية على نصوص عربية وإنجليزية متوازية — لا قيم مفترضة.",
+  "default_tokenizer": "gpt-4o",
+  "tokenizers": [
+    {
+      "id": "gpt-4o",
+      "name": "GPT-4o",
+      "encoding": "o200k_base",
+      "provider": "OpenAI",
+      "hf_model": "Xenova/gpt-4o",
+      "english_tokens_per_word": null,
+      "arabic_tokens_per_word": null,
+      "ratio": null,
+      "sample_size": null
+    },
+    {
+      "id": "gpt-3.5-4",
+      "name": "GPT-3.5 / GPT-4",
+      "encoding": "cl100k_base",
+      "provider": "OpenAI",
+      "hf_model": "Xenova/gpt-3.5-turbo",
+      "english_tokens_per_word": null,
+      "arabic_tokens_per_word": null,
+      "ratio": null,
+      "sample_size": null
+    },
+    {
+      "id": "llama-3",
+      "name": "Llama 3",
+      "encoding": null,
+      "provider": "Meta",
+      "hf_model": "Xenova/llama-3-tokenizer",
+      "english_tokens_per_word": null,
+      "arabic_tokens_per_word": null,
+      "ratio": null,
+      "sample_size": null
+    },
+    {
+      "id": "mistral",
+      "name": "Mistral",
+      "encoding": null,
+      "provider": "Mistral AI",
+      "hf_model": "Xenova/mistral-tokenizer-v3",
+      "english_tokens_per_word": null,
+      "arabic_tokens_per_word": null,
+      "ratio": null,
+      "sample_size": null
+    },
+    {
+      "id": "jais",
+      "name": "Jais",
+      "encoding": null,
+      "provider": "G42 / Inception",
+      "hf_model": "derek-thomas/jais-13b-chat-hf",
+      "hf_model_note": "مرآة مجتمعية غير رسمية — مستودع Inception الرسمي مقيّد ويتطلب مصادقة، وهذا الموقع لا يخزّن مفاتيح وصول.",
+      "english_tokens_per_word": null,
+      "arabic_tokens_per_word": null,
+      "ratio": null,
+      "sample_size": null
+    },
+    {
+      "id": "command-r",
+      "name": "Command R",
+      "encoding": null,
+      "provider": "Cohere",
+      "hf_model": "Xenova/c4ai-command-r-v01-tokenizer",
+      "english_tokens_per_word": null,
+      "arabic_tokens_per_word": null,
+      "ratio": null,
+      "sample_size": null
+    }
+  ]
+}
+</script>
+
+<script>
+(function(){
+  "use strict";
+
+  async function loadData(){
+    try {
+      const res = await fetch("../../data/tokenizers.json", { cache: "no-store" });
+      if (!res.ok) throw new Error(String(res.status));
+      return await res.json();
+    } catch (e) {
+      return JSON.parse(document.getElementById("tokenizers-data").textContent);
+    }
+  }
+
+  function ratioOf(t){
+    if (t.ratio != null) return t.ratio;
+    if (t.arabic_tokens_per_word != null && t.english_tokens_per_word != null) {
+      return t.arabic_tokens_per_word / t.english_tokens_per_word;
+    }
+    return null;
+  }
+
+  function renderChart(data){
+    const area = document.getElementById("chart-area");
+    const ratios = data.tokenizers.map(ratioOf);
+    const measuredCount = ratios.filter(r => r != null).length;
+    const max = Math.max(0.001, ...ratios.filter(r => r != null)) * 1.2;
+
+    let rows = data.tokenizers.map((t, i) => {
+      const r = ratios[i];
+      const pct = r != null ? Math.min(100, (r / max) * 100) : 0;
+      const trackClass = "bar-track" + (r != null ? " has-value" : "");
+      const valueText = r != null ? "×" + r.toFixed(2) : "لم يُقَس بعد";
+      const valueClass = "bar-value" + (r != null ? " measured" : "");
+      return "<tr>"
+        + '<td class="bar-label">' + t.name + "</td>"
+        + '<td class="bar-cell"><div class="' + trackClass + '"><div class="bar-fill" style="width:' + pct + '%"></div></div></td>'
+        + '<td class="' + valueClass + '">' + valueText + "</td>"
+        + "</tr>";
+    }).join("");
+
+    area.innerHTML = '<table class="bar-table">'
+      + '<caption>' + measuredCount + ' من ' + data.tokenizers.length + ' مقسّمات مقاسة</caption>'
+      + "<tbody>" + rows + "</tbody></table>";
+  }
+
+  loadData().then(data => {
+    document.getElementById("d").textContent = data.updated || "لم يُحدَّث بعد";
+    const anyMeasured = data.tokenizers.some(t => ratioOf(t) != null);
+    document.getElementById("status").textContent = anyMeasured ? "مقاسة جزئيًا" : "قيد القياس";
+    renderChart(data);
+  });
+})();
+</script>
+</body>
+</html>
