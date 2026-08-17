@@ -257,6 +257,7 @@
       return;
     }
     debounceTimer = setTimeout(() => {
+      if (!DATA) { pendingText = text; return; } // tokenizers.json still loading — try again once it lands
       if (!loadingStarted) startLoading();
       if (ready) runTokenize(text);
       else pendingText = text;
@@ -374,6 +375,11 @@
     });
     els.tbody.innerHTML = rows;
     els.resultLabel.textContent = "النسبة إلى الإنجليزية · " + defaultTokenizer().name;
+    if (pendingText !== null) {
+      if (!loadingStarted) startLoading();
+      // startLoading() is async under the hood (worker init); tokenize fires
+      // once "init-done" arrives, same as the normal onInput path.
+    }
   });
 })();
 </script>

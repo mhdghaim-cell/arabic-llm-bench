@@ -230,6 +230,7 @@
   }
 
   const norm = s => (s||"")
+    .replace(/[​-‏‪-‮⁦-⁩﻿]/g,"")  // strip invisible bidi/formatting marks (common in pasted Arabic text)
     .replace(/[ً-ْـ]/g,"")      // strip harakat + tatweel
     .replace(/[أإآ]/g,"ا").replace(/ى/g,"ي").replace(/ة/g,"ه")
     .toLowerCase().trim();
@@ -241,6 +242,7 @@
   }
 
   function render(){
+    if (!DATA) return; // data still loading — the loadData().then() below re-renders once ready
     const needle = norm(q.value);
     const hits = DATA.terms.filter(t => matches(t, needle));
     countEl.textContent = needle
