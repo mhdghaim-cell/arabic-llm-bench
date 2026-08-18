@@ -1,0 +1,1 @@
+pbpaste > results/raw/w1_air_session.txt
