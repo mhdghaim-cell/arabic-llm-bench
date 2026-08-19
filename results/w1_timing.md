@@ -191,31 +191,49 @@ The largest model on the faster machine produced the least usable Arabic of the 
 
 ## Controlled comparison — the reasoning tax isolated
 
-`qwen3:1.7b` was re-run on Machine B with `"think": false`. Same model, same machine, same prompt, same seed. One variable.
+Both qwen3 models were re-run on Machine B with `"think": false`. Same model, same machine, same prompt, same seed, three runs each. One variable.
+
+### qwen3:1.7b
 
 | | Thinking on | Thinking off |
 |---|---|---|
-| Eval rate | 72.66 tok/s | 72.76 tok/s |
+| Median eval rate | 72.66 tok/s | 72.76 tok/s |
 | Tokens generated | 300 | 286 |
 | Stop reason | `length` (hit cap) | `stop` (natural) |
 | Arabic produced | **none** | full letter |
 | P5 score | 0 / 5 | 2 / 5 |
 
-Throughput is unchanged. Disabling reasoning did not make the model faster — it changed **where the tokens landed**. With reasoning on, the entire budget was consumed by English deliberation and the model never began writing. With reasoning off, the same budget produced a complete Arabic letter and terminated on its own.
+### qwen3:8b
 
-This isolates the reasoning tax as a controlled result rather than an inference from observation.
+| | Thinking on | Thinking off |
+|---|---|---|
+| Median eval rate | 19.48 tok/s | 19.40 tok/s |
+| Tokens generated | 300 | 121 |
+| Stop reason | `length` (hit cap) | `stop` (natural) |
+| Arabic produced | salutation only | **complete 4-sentence letter** |
+| Contamination | — | **none** |
+| P5 score | 1 / 5 | **5 / 5** |
 
-**Quality of the think-disabled output (2/5):** coherent formal Arabic and the data-sovereignty argument is present, but the model restates the prompt before beginning, produces roughly seven sentences against a four-sentence instruction, adds an unrequested apologetic clause (`أعذر أي تأثيرات`), leaves template placeholders (`[اسمك]`, `[الموقع]`), and contains a grammatical error in the key phrase — `السيادة البيانات` where `سيادة البيانات` is correct. Better than producing nothing; worse than `llama3.2:3b`.
+Throughput is unchanged in both cases. Disabling reasoning did not make either model faster — it changed **where the tokens landed**. With reasoning on, the budget was consumed by English deliberation. With reasoning off, the same budget produced Arabic and the models terminated on their own.
+
+`qwen3:8b` with reasoning disabled produced the best Arabic output recorded across both machines and all models: four sentences as instructed, correct formal register, `سيادة البيانات` spelled correctly, proper salutation and closing, and no foreign-script contamination of any kind.
+
+**The best result of the week came from turning off a model's default behaviour.**
 
 ---
 
-## Finding — bigger is slower and, here, worse
+## Correction — "bigger is worse" was an artifact
 
-On Machine B, ranked by speed: qwen3:1.7b (72.66) > llama3.2:1b (71.13) > llama3.2:3b (44.71) > qwen3:8b (19.48).
+An earlier reading of the thinking-enabled data suggested that larger models produced worse Arabic. The `think: false` runs disprove this.
 
-Ranked by usable Arabic output: llama3.2:3b (complete letter) > llama3.2:1b (complete but contaminated) > qwen3:8b (salutation only) > qwen3:1.7b (nothing).
+| Model | Thinking on | Thinking off |
+|---|---|---|
+| qwen3:1.7b | 0 / 5 | 2 / 5 |
+| qwen3:8b | 1 / 5 | **5 / 5** |
 
-`qwen3:8b` on Apple Silicon (19.48 tok/s) is only marginally faster than `llama3.2:1b` on a 2020 Intel Air (17.29 tok/s) — and produced far less Arabic.
+With reasoning disabled, the larger model is clearly better. The apparent inversion was caused entirely by the reasoning tax consuming a fixed token budget — the 8B spends more tokens deliberating, so under a cap it has proportionally less left for output. Scale helps; the default configuration hides it.
+
+Speed still declines with size (72.76 → 19.40 tok/s), but quality no longer moves against it.
 
 ---
 
