@@ -1,6 +1,6 @@
 # w1_timing — Week 1 timing and quality runs
 
-**مقياس** · Machine A (local) · 2026-08-17
+**مقياس** · Machine A (MacBook Air, Intel) and Machine B (Mac mini M4, rented) · 2026-08-17 to 2026-08-19
 
 ---
 
@@ -15,7 +15,7 @@
 | Disk free | 122 GB of 233 GB |
 | OS | macOS Sequoia 15.7.7 |
 | Base clock | 1.2 GHz — low-power chassis, sustained clocks limited by thermals |
-| Runtime | Ollama, CPU backend |
+| Runtime | Ollama 0.32.11, CPU backend |
 
 ---
 
@@ -73,38 +73,38 @@ All rates in tokens/second.
 
 ---
 
-## Clean state — llama3.2:3b control
+## Clean state — all three models (2026-08-19)
 
-| Run | Eval rate | Prompt rate | Tokens |
+Re-run of every model in clean state, with automatic logging, after the initial session recorded only `llama3.2:1b` to file. This closes the raw-log gap and provides a consistent clean-state baseline for cross-machine comparison.
+
+| Model | Run 1 | Run 2 | Run 3 | **Median** | Prompt (cold) | Tokens |
+|---|---|---|---|---|---|---|
+| llama3.2:1b | 21.57 | 20.61 | 18.50 | **20.61** | 68.54 | 291 (capped) |
+| qwen3:1.7b | 19.92 | 19.39 | 17.75 | **19.39** | 90.89 | 300 (capped) |
+| llama3.2:3b | 12.55 | 11.60 | 12.18 | **12.18** | 45.94 | 182 (natural) |
+
+---
+
+## ⚠️ CORRECTION REQUIRED — the 29% figure was published and is wrong
+
+**Published on X and LinkedIn, 2026-08-18:** "closing background applications made the model 29% faster (10.00 → 12.87 tok/s)."
+
+**Status: overstated.** That figure came from a single model measured in a single session. Re-running all three models in clean state on 2026-08-19 produces a materially different picture.
+
+| Model | Loaded | Clean | Effect |
 |---|---|---|---|
-| 1 | 14.36 | 53.38 | 116 |
-| 2 | **12.87** | 1583.11 | 182 |
-| 3 | 12.56 | 75.03 | 182 |
+| llama3.2:1b | 17.29 | 20.61 | **+19%** |
+| qwen3:1.7b | 18.47 | 19.39 | **+5%** |
+| llama3.2:3b | 10.00 | 12.18 | **+22%** |
 
-**Median: 12.87 tok/s.**
+**Corrected claim: background applications cost 5–22% of inference throughput on an 8 GB machine, varying by model.**
 
-### Finding — background applications cost 29% of inference speed
+Two compounding sources of error in the original figure:
 
-| State | Median | Swap used |
-|---|---|---|
-| Loaded | 10.00 tok/s | 2.48 GB |
-| Clean | 12.87 tok/s | 657 MB |
-| **Delta** | **+28.7%** | **−1.82 GB** |
+1. **Single-model generalisation.** `llama3.2:3b` showed the largest effect; `qwen3:1.7b` showed roughly a quarter of it. Reporting one model's result as a general number was unjustified.
+2. **Session variance.** The same model in the same clean state measured 12.87 on 2026-08-18 and 12.18 on 2026-08-19 — a 5% spread between sessions on an identical configuration. That variance is of the same order as the smallest observed effect, which means single-session measurements on this hardware cannot support tight claims.
 
-Memory pressure remained green in both states, so no thrashing occurred and both datasets are valid. The difference is swap activity, not pressure. On an 8 GB machine, ordinary working applications consume roughly a third of available inference throughput — an effect invisible on higher-memory hardware.
-
-### Memory snapshots
-
-| Metric | Loaded | Clean |
-|---|---|---|
-| Memory used | 6.71 GB | 6.82 GB |
-| Swap used | 2.48 GB | 657 MB |
-| Cached files | 1.34 GB | 1.15 GB |
-| App memory | 3.46 GB | 3.26 GB |
-| Wired | 2.33 GB | 2.31 GB |
-| Compressed | 871.9 MB | 1.22 GB |
-
-`llama-server` held 2.53 GB in both states. In the loaded state, Claude desktop across five processes held approximately 3.0 GB — more than the model being benchmarked.
+**Action:** publish the correction in the Week 1 Sunday thread as a dedicated section, not as a quiet edit. State the original number, the corrected range, and both reasons it was wrong.
 
 ---
 
@@ -164,14 +164,18 @@ All rates in tokens/second. Run-to-run spread under 1% on every model, versus ro
 
 ## Cross-machine comparison
 
+Machine A figures are clean-state medians from 2026-08-19; Machine B figures are from 2026-08-19. Both machines measured with the same script, prompt, parameters, and three-run protocol.
+
 | Model | Machine A | Machine B | Generation ratio | Prompt ratio |
 |---|---|---|---|---|
-| llama3.2:1b | 17.29 | 71.13 | **4.1x** | 8.2x |
-| qwen3:1.7b | 18.47 | 72.66 | **3.9x** | 3.7x |
-| llama3.2:3b | 12.87 | 44.71 | **3.5x** | 5.7x |
+| llama3.2:1b | 20.61 | 71.13 | **3.5x** | 9.6x |
+| qwen3:1.7b | 19.39 | 72.66 | **3.7x** | 3.5x |
+| llama3.2:3b | 12.18 | 44.71 | **3.7x** | 6.7x |
 | qwen3:8b | — (does not fit) | 19.48 | — | — |
 
-**Note on qwen3 comparability:** on Machine B, qwen3 engaged reasoning mode and returned an empty `response` field with content in `thinking`. On Machine A it produced Arabic prose directly. The two machines are therefore not measuring the same behaviour for this model family, most likely due to the Ollama version difference. The speed figures remain valid as throughput measurements; the quality figures are not comparable.
+Generation speedup is consistent at roughly **3.5–3.7x** across all three models. Prompt-processing speedup is larger and more variable (3.5–9.6x), reflecting that prompt processing is compute-bound and parallelisable — the workload a GPU is built for — while generation is bound by memory bandwidth.
+
+**Note on qwen3 comparability:** on Machine B, qwen3 engaged reasoning mode and returned an empty `response` field with content in `thinking`. On Machine A it produced Arabic prose directly. Ollama versions differ (0.32.11 vs 0.32.14), though the gap is small enough that a changed default or template handling is a likelier explanation than the version itself. Speed figures remain valid as throughput measurements; quality figures for this model family are not directly comparable across machines.
 
 ---
 
@@ -237,31 +241,34 @@ Speed still declines with size (72.76 → 19.40 tok/s), but quality no longer mo
 
 ---
 
-## Contamination artifacts — Machine B
+## Contamination artifacts — five source languages
 
-Foreign-script contamination persisted on Apple Silicon, confirming it is a property of the models rather than of the hardware or runtime.
+Foreign-script contamination appeared on both machines, across two runtime versions and two macOS versions. This rules out hardware and runtime as the cause; it is a property of the models.
 
-| Model | Machine | Artifact | Composition |
-|---|---|---|---|
-| llama3.2:1b | A | `البตENTIALية` | Arabic + Thai (U+0E15) + Latin + Arabic |
-| llama3.2:1b | A | `xйление` | Latin + 6 × Cyrillic |
-| llama3.2:1b | B | `verbessاء` | German stem + Arabic suffix |
-| llama3.2:1b | B | `accuracy` | Latin, mid-Arabic-sentence |
-| llama3.2:3b | B | `Confidentiality` و`Anonymity` | Latin, mid-Arabic-sentence |
+| Model | Machine | Artifact | Composition | Unicode verified |
+|---|---|---|---|---|
+| llama3.2:1b | A | `البตENTIALية` | Arabic + **Thai** + Latin + Arabic | U+0E15 THAI CHARACTER TO TAO |
+| llama3.2:1b | A | `xйление` | Latin + 6 × **Cyrillic** | U+0439 CYRILLIC SHORT I |
+| llama3.2:1b | A | `xửление` | Latin + **Vietnamese** + 5 × Cyrillic | U+1EED LATIN U WITH HORN AND HOOK |
+| llama3.2:1b | B | `verbessاء` | **German** stem + Arabic suffix | — |
+| llama3.2:1b | B | `accuracy` | **English**, mid-Arabic-sentence | — |
+| llama3.2:3b | B | `Confidentiality` و`Anonymity` | **English**, mid-Arabic-sentence | — |
 
-`verbess` is the stem of the German *verbessern* (to improve). Notably, `llama3.2:3b` used `Confidentiality` and `Anonymity` in Latin while correctly using السرية in the same sentence — the Arabic term was available to it.
+**Five source languages: Thai, Cyrillic, Vietnamese, German, English.**
 
-**Four distinct source languages observed** — Thai, Cyrillic, German, English — across two machines, two runtime versions, and two macOS versions.
+The Cyrillic and Vietnamese artifacts are the same failure with different fillers. Both are `x_ление`-shaped, with a single character substituted in the second position — `й` in one run, `ử` in another. The model is repeatedly reaching for a similar token sequence and filling one slot with whatever is available, rather than producing random noise.
+
+`llama3.2:3b` used `Confidentiality` and `Anonymity` in Latin while correctly using السرية in the same sentence, so the Arabic term was available to it and was not selected.
 
 ---
 
 ## Outstanding
 
-- [ ] Log CPU temperature / clock throttling across a long run (Machine A)
-- [ ] Record Ollama version on Machine A to quantify the runtime variable
+- [ ] **Publish the 29% correction in the Sunday thread** — see the flagged section above
+- [ ] LM Studio screenshots on Machine B (requires VNC; Apple Screen Sharing rejects the host)
 - [ ] P1, P2, P3, P4, P6, P7 quality runs on both machines
-- [ ] Screenshot: memory pressure graph showing yellow (loaded) → green (clean) transition
-- [ ] Screenshot: `البตENTIALية` corruption artifact
+- [ ] Log CPU temperature / clock throttling across a long run (Machine A)
+- [ ] Investigate whether the qwen3 thinking-mode difference is version-driven or template-driven
 
 ---
 
