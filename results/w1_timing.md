@@ -241,7 +241,59 @@ Speed still declines with size (72.76 → 19.40 tok/s), but quality no longer mo
 
 ---
 
-## Contamination artifacts — five source languages
+---
+
+## Quality — P1 to P7, Machine B
+
+Six additional prompts run on Machine B against the two best-performing configurations. `num_predict` raised to 500 for quality runs so that code and dialect answers are not truncated; timing figures continue to come from P5 only, so comparability is unaffected. Same temperature and seed.
+
+| Prompt | Tests | qwen3:8b (think:false) | llama3.2:3b |
+|---|---|---|---|
+| P1 | regional facts | **1 / 5** | **2 / 5** |
+| P2 | reasoning | **5 / 5** | **5 / 5** |
+| P3 | instruction-following | **4 / 4** | 3 / 4 |
+| P4 | Gulf dialect | **3 / 5** | 1 / 5 |
+| P5 | formal writing | **5 / 5** | 4 / 5 |
+| P6 | code with Arabic comments | **4 / 5** | 1 / 5 |
+| P7 | calibration | 2 / 5 | **4 / 5** |
+
+### Finding — language capability and regional knowledge are separate axes
+
+`qwen3:8b` scored 5/5 on reasoning, 4/4 on instruction-following, 4/5 on code, and 5/5 on formal writing. It scored 1/5 on regional facts.
+
+The model handles Arabic *as a language* well. It does not know the *Arab world*. Every failure was factual, not linguistic.
+
+This distinction matters practically, because the two problems have different fixes: weak reasoning needs a better model, while missing regional knowledge needs retrieval. It is also invisible to any English-language benchmark.
+
+### P1 in detail — the failure is worse than the score
+
+`qwen3:8b` gave the federation date as 18 December 1971 (correct: 2 December). Asked which emirates joined at founding, it listed seven — including **Oman**, a separate sovereign state, and **الظفير**, which does not exist. **Dubai was absent from the list.** It then produced a second, contradictory list and referred to "the eighth and tenth emirates." Asked for Saudi Arabia's pre-1932 name, it answered **الإمارة الحمراء** — a fabrication. The correct answer is مملكة الحجاز ونجد.
+
+`llama3.2:3b` got the date right, answered "seven" for the founding count (the expected failure), and gave a circular non-answer on the Saudi question rather than inventing one.
+
+**The smaller model scored higher on regional facts, and its errors were thin rather than fabricated.** The larger model failed more confidently, generating detailed and plausible-sounding falsehoods.
+
+### P7 — the same pattern, inverted
+
+`llama3.2:3b` explicitly stated it could not estimate Riyadh's population precisely. That is the correct behaviour for an unanswerable question, and it scored 4/5.
+
+`qwen3:8b` gave 4.5 million without acknowledging the impossibility (the 2022 census figure is roughly 7 million), and cited "المركز الوطني للإحصاء والمسوحات," which is not a real institution. Scored 2/5.
+
+Across both prompts that test epistemic honesty, the smaller model outperformed the larger one. This complicates the standard advice to run the largest model that fits.
+
+### P6 — Arabic identifiers work
+
+`qwen3:8b` produced a working function using **Arabic function and variable names** (`متوسط_حسابي`, `مجموع_العناصر`), which is valid Python 3 and rarely demonstrated. Arabic comments on every line. Lost one point for adding explanatory prose outside the code block, which the prompt forbade.
+
+`llama3.2:3b` produced a script rather than a function, ignoring the instruction, and used English identifiers with Arabic comments.
+
+### Methodology note
+
+P4's prompt originally used straight double quotes around the dialect quotation, which broke JSON encoding in the runner. The prompt file now uses Arabic quotation marks («») instead. Anyone reproducing these results should use the version in `prompts/p4.txt`.
+
+---
+
+## Contamination artifacts — six source languages
 
 Foreign-script contamination appeared on both machines, across two runtime versions and two macOS versions. This rules out hardware and runtime as the cause; it is a property of the models.
 
@@ -253,8 +305,12 @@ Foreign-script contamination appeared on both machines, across two runtime versi
 | llama3.2:1b | B | `verbessاء` | **German** stem + Arabic suffix | — |
 | llama3.2:1b | B | `accuracy` | **English**, mid-Arabic-sentence | — |
 | llama3.2:3b | B | `Confidentiality` و`Anonymity` | **English**, mid-Arabic-sentence | — |
+| llama3.2:3b | B | `функциة` | **Russian** stem + Arabic ة, ×4 in one output | U+0444 CYRILLIC EF |
+| qwen3:8b | B | `thốngٌّ` | **Vietnamese** + Arabic diacritics | U+1ED1 LATIN O WITH CIRCUMFLEX AND ACUTE |
 
-**Five source languages: Thai, Cyrillic, Vietnamese, German, English.**
+**Six source languages: Thai, Cyrillic, Vietnamese, German, English, Russian.**
+
+Two distinct types are now visible. `xйление` and `xửление` are nonsense strings — the model reaching for a token sequence and filling one slot with whatever is available. `функциة` and `verbessاء` are different: real word-stems from other languages carrying Arabic morphology. `thốngٌّ` is a Vietnamese word with Arabic diacritics attached. The model is not only substituting characters, it is inflecting foreign stems as though they were Arabic.
 
 The Cyrillic and Vietnamese artifacts are the same failure with different fillers. Both are `x_ление`-shaped, with a single character substituted in the second position — `й` in one run, `ử` in another. The model is repeatedly reaching for a similar token sequence and filling one slot with whatever is available, rather than producing random noise.
 
@@ -266,7 +322,7 @@ The Cyrillic and Vietnamese artifacts are the same failure with different filler
 
 - [ ] **Publish the 29% correction in the Sunday thread** — see the flagged section above
 - [ ] LM Studio screenshots on Machine B (requires VNC; Apple Screen Sharing rejects the host)
-- [ ] P1, P2, P3, P4, P6, P7 quality runs on both machines
+- [ ] P1–P7 quality runs on Machine A for a cross-machine quality comparison (Machine B complete)
 - [ ] Log CPU temperature / clock throttling across a long run (Machine A)
 - [ ] Investigate whether the qwen3 thinking-mode difference is version-driven or template-driven
 
