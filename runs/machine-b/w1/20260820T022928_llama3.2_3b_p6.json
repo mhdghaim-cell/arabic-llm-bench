@@ -1,0 +1,33 @@
+{
+  "id": "b-w1-20260820T022928-llama3.2_3b-p6",
+  "machine": "machine-b",
+  "week": 1,
+  "timestamp": "20260820T022928",
+  "run_type": "quality",
+  "model": {
+    "id": "llama3.2:3b",
+    "quantization": "Q4_K_M"
+  },
+  "prompt": {
+    "id": "P6",
+    "version": "0.1"
+  },
+  "config": {
+    "num_predict": 500,
+    "temperature": 0.7,
+    "seed": 42,
+    "think": null
+  },
+  "metrics": {
+    "eval_count": 233,
+    "eval_rate": 42.3,
+    "prompt_eval_count": 72,
+    "prompt_eval_rate": 509.23,
+    "total_duration_s": 5.81,
+    "done_reason": "stop"
+  },
+  "output": "# المتوسط الحسابي لقائمة أرقام\n\n```python\n# تعريف قائمة أرقام\nnumbers = [1, 2, 3, 4, 5]\n\n# استخدام функциة sum() لتحسب المجموعة\nsum_of_numbers = sum(numbers)\n\n# استخدام функциة len() لتحسب عدد الأرقام\ncount_of_numbers = len(numbers)\n\n# استخدام تعقيد في تحسب المتوسط الحسابي\naverage = sum_of_numbers / count_of_numbers\n\n# النتيجة\nprint(\"المتوسط الحسابي لقائمة أرقام:\", average)\n```\n\n# كيفية استخدام هذه الدالة\n\n1. تعريف قائمة أرقام باسم \"numbers\".\n2. استخدام функциة sum() لتحسب المجموعة من أرقام.\n3. استخدام функциة len() لتحسب عدد الأرقام.\n4. استخدام تعقيد في تحسب المتوسط الحسابي من خلال تقسيم المجموعة من أرقام من خلال عدد الأرقام.\n5. النتيجة، وهي المتوسط الحسابي لقائمة أرقام.",
+  "thinking": null,
+  "source_file": "results/raw/m4_q_p6_llama3.2_3b_20260820_022928.txt",
+  "protocol": "three-run-median"
+}

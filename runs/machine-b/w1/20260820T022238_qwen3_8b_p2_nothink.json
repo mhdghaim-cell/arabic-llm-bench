@@ -1,0 +1,33 @@
+{
+  "id": "b-w1-20260820T022238-qwen3_8b-p2-nothink",
+  "machine": "machine-b",
+  "week": 1,
+  "timestamp": "20260820T022238",
+  "run_type": "quality",
+  "model": {
+    "id": "qwen3:8b",
+    "quantization": "Q4_K_M"
+  },
+  "prompt": {
+    "id": "P2",
+    "version": "0.1"
+  },
+  "config": {
+    "num_predict": 500,
+    "temperature": 0.7,
+    "seed": 42,
+    "think": false
+  },
+  "metrics": {
+    "eval_count": 340,
+    "eval_rate": 18.3,
+    "prompt_eval_count": 99,
+    "prompt_eval_rate": 162.02,
+    "total_duration_s": 19.33,
+    "done_reason": "stop"
+  },
+  "output": "لحساب كمية الماء التي تنتجها المزرعة أسبوعيًا، نتبع الخطوات التالية:\n\n---\n\n### **1. نحسب إنتاج البئر الأول:**\n\nالبئر الأول ينتج:  \n**400 لتر يوميًا**\n\n---\n\n### **2. نحسب إنتاج البئر الثاني:**\n\nالبئر الثاني ينتج **ضعف الأول ناقص 100 لتر**:\n\n$$\n2 \\times 400 - 100 = 800 - 100 = 700 \\text{ لتر يوميًا}\n$$\n\n---\n\n### **3. نحسب إنتاج البئر الثالث:**\n\nالبئر الثالث ينتج **متوسط إنتاج الأولين**:\n\n$$\n\\text{متوسط} = \\frac{400 + 700}{2} = \\frac{1100}{2} = 550 \\text{ لتر يوميًا}\n$$\n\n---\n\n### **4. نحسب إنتاج المزرعة يوميًا:**\n\n$$\n400 + 700 + 550 = 1650 \\text{ لتر يوميًا}\n$$\n\n---\n\n### **5. نحسب إنتاج المزرعة أسبوعيًا:**\n\n$$\n1650 \\times 7 = 11550 \\text{ لتر أسبوعيًا}\n$$\n\n---\n\n### ✅ **الإجابة النهائية:**\n\n**11550 لترًا أسبوعيًا.**",
+  "thinking": null,
+  "source_file": "results/raw/m4_q_p2_qwen3_8b_nothink_20260820_022238.txt",
+  "protocol": "three-run-median"
+}

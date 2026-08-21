@@ -1,0 +1,58 @@
+{
+  "version": "0.1",
+  "updated": "2026-08-20",
+  "findings": [
+    {
+      "slug": "apple-silicon-speedup",
+      "week": 1,
+      "title_ar": "تسريع Apple Silicon: ٣٫٥–٣٫٧×",
+      "title_en": "Apple Silicon speedup: 3.5-3.7x",
+      "summary_ar": "التسريع في التوليد ثابت عند ٣٫٥–٣٫٧× عبر ثلاثة نماذج. تسريع معالجة الموجّه أكبر وأكثر تفاوتًا (٣٫٥–٩٫٦×) لأنه محكوم بالحوسبة لا بعرض النطاق."
+    },
+    {
+      "slug": "reasoning-tax",
+      "week": 1,
+      "starred": true,
+      "title_ar": "ضريبة الاستدلال على العربية",
+      "title_en": "The reasoning tax on Arabic",
+      "summary_ar": "نموذجا qwen3 أنفقا كامل سقف الرموز في الاستدلال بالإنجليزية حول كيفية كتابة رسالة عربية. تعطيل الاستدلال لم يغيّر السرعة إطلاقًا، لكنه غيّر مكان هبوط الرموز: من ١/٥ إلى ٥/٥."
+    },
+    {
+      "slug": "regional-knowledge-gap",
+      "week": 1,
+      "starred": true,
+      "title_ar": "الكفاءة اللغوية والمعرفة الإقليمية محوران منفصلان",
+      "title_en": "Language capability and regional knowledge are separate axes",
+      "summary_ar": "qwen3:8b سجّل ٥/٥ في الاستدلال و٤/٤ في الالتزام بالتعليمات و٥/٥ في الكتابة الرسمية — و١/٥ في المعرفة الإقليمية. أدرج عُمان إمارةً، واخترع إمارة اسمها الظفير، وأسقط دبي."
+    },
+    {
+      "slug": "confident-fabrication",
+      "week": 1,
+      "title_ar": "النموذج الأصغر كان أكثر صدقًا",
+      "title_en": "The smaller model was more honest",
+      "summary_ar": "على الموجّهين اللذين يختبران الأمانة المعرفية، تفوّق llama3.2:3b على qwen3:8b. النموذج الأكبر يفشل بثقة أعلى، ويولّد أكاذيب مفصّلة ومقنعة حيث يعطي الأصغر إجابة رقيقة أو يعترف بالجهل."
+    },
+    {
+      "slug": "script-contamination",
+      "week": 1,
+      "title_ar": "تلوّث الكتابة: ست لغات مصدر",
+      "title_en": "Script contamination: six source languages",
+      "summary_ar": "تايلاندية، سيريلية، فيتنامية، ألمانية، إنجليزية، روسية — على جهازين ونسختَي تشغيل ونظامَي تشغيل. نمطان متمايزان: سلاسل بلا معنى، وجذور كلمات أجنبية تحمل تصريفًا عربيًا."
+    },
+    {
+      "slug": "background-apps",
+      "week": 1,
+      "title_ar": "التطبيقات المفتوحة تكلّف ٥–٢٢٪ من الإنتاجية",
+      "title_en": "Background applications cost 5-22% of throughput",
+      "summary_ar": "على جهاز بـ٨ غيغابايت. يتضمن هذا تصحيحًا لرقم ٢٩٪ المنشور سابقًا — انظر سجل التغييرات.",
+      "has_correction": true
+    },
+    {
+      "slug": "seed-insufficient",
+      "week": 1,
+      "title_ar": "البذرة الثابتة لا تضمن إعادة الإنتاج",
+      "title_en": "A fixed seed does not guarantee reproducibility",
+      "summary_ar": "حالة ذاكرة KV المؤقتة في Ollama تؤثر على التوليد بمعزل عن البذرة. رُصد على الجهازين."
+    }
+  ]
+}

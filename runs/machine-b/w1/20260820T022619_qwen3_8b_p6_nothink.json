@@ -1,0 +1,33 @@
+{
+  "id": "b-w1-20260820T022619-qwen3_8b-p6-nothink",
+  "machine": "machine-b",
+  "week": 1,
+  "timestamp": "20260820T022619",
+  "run_type": "quality",
+  "model": {
+    "id": "qwen3:8b",
+    "quantization": "Q4_K_M"
+  },
+  "prompt": {
+    "id": "P6",
+    "version": "0.1"
+  },
+  "config": {
+    "num_predict": 500,
+    "temperature": 0.7,
+    "seed": 42,
+    "think": false
+  },
+  "metrics": {
+    "eval_count": 188,
+    "eval_rate": 18.41,
+    "prompt_eval_count": 65,
+    "prompt_eval_rate": 204.14,
+    "total_duration_s": 10.67,
+    "done_reason": "stop"
+  },
+  "output": "```python\n# دالة لحساب المتوسط الحسابي لقائمة أرقام\n\ndef متوسط_حسابي(القائمة):\n    \"\"\"\n    هذه الدالة تحسب المتوسط الحسابي لقائمة أرقام.\n    \"\"\"\n    # نحسب مجموع العناصر في القائمة\n    مجموع_العناصر = sum(القائمة)\n    \n    # نحسب عدد العناصر في القائمة\n    عدد_العناصر = len(القائمة)\n    \n    # نحسب المتوسط بالقسمة على عدد العناصر\n    المتوسط = مجموع_العناصر / عدد_العناصر\n    \n    # نقوم بإرجاع المتوسط\n    return المتوسط\n```\n\n> ملاحظة: الدالة تفترض أن القائمة تحتوي على أرقام، وليست فارغة.",
+  "thinking": null,
+  "source_file": "results/raw/m4_q_p6_qwen3_8b_nothink_20260820_022619.txt",
+  "protocol": "three-run-median"
+}

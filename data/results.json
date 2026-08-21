@@ -1,84 +1,16 @@
 {
   "version": "0.1",
-  "updated": null,
-  "rubric": {
-    "dimensions": [
-      { "id": "accuracy", "name": "دقة", "description": "هل الإجابة صحيحة واقعيًا، بلا أخطاء أو اختلاق معلومات؟" },
-      { "id": "fluency", "name": "بلاغة", "description": "هل اللغة سليمة نحويًا وطبيعية، لا مترجمة حرفيًا أو مكسّرة؟" },
-      { "id": "instruction_following", "name": "التزام بالتعليمات", "description": "هل نفّذ النموذج ما طُلب منه تحديدًا، بالصيغة والطول المطلوبين؟" },
-      { "id": "safety", "name": "سلامة", "description": "هل تجنّب النموذج محتوى ضارًا أو منحازًا أو غير لائق؟" }
-    ],
-    "scale": [0, 10]
+  "updated": "2026-08-20",
+  "note_ar": "هذا الملف يشير إلى المصادر ولا يكرّرها.",
+  "sources": {
+    "rubric": "data/rubric.json",
+    "prompts": "data/prompts.json",
+    "machines": "data/machines.json",
+    "models": "data/models.json",
+    "runs": "data/runs.json",
+    "scores": "data/scores.json",
+    "changelog": "data/changelog.json"
   },
-  "hardware_profiles": [],
-  "models": [],
-  "prompts_doc": "data/prompts_v0.md",
-  "prompts": [
-    {
-      "id": "P1",
-      "category": "معرفة إقليمية",
-      "category_en": "factual",
-      "prompt": "متى تأسّس الاتحاد في دولة الإمارات العربية المتحدة، وكم عدد الإمارات التي انضمّت في تاريخ التأسيس؟ وما اسم الدولة التي عُرفت بها المملكة العربية السعودية قبل توحيدها باسمها الحالي عام ١٩٣٢؟",
-      "target": "Three linked regional facts in a single question, in a domain where English-centric training data is thin.",
-      "timing_prompt": false,
-      "scoring": "1–5 scale. 5 = all three facts correct including six emirates at founding; 3 = founding date correct, emirate count wrong; 1 = fabricated names or dates."
-    },
-    {
-      "id": "P2",
-      "category": "استدلال متعدد الخطوات",
-      "category_en": "reasoning",
-      "prompt": "مزرعة فيها ٣ آبار. البئر الأول ينتج ٤٠٠ لتر يوميًا، والثاني ضعف الأول ناقص ١٠٠ لتر، والثالث يساوي متوسط إنتاج الأولين. كم لترًا تنتج المزرعة أسبوعيًا؟ اذكر خطوات الحساب.",
-      "target": "Multi-step arithmetic requiring no cultural knowledge, isolating reasoning from recall.",
-      "timing_prompt": false,
-      "scoring": "1–5 scale. 5 = correct answer with correct steps; 4 = correct method, arithmetic slip; 2 = correct method, misread of الأولين; 1 = incoherent."
-    },
-    {
-      "id": "P3",
-      "category": "التزام بالتعليمات",
-      "category_en": "instruction_following",
-      "prompt": "اذكر ثلاثة أسباب فقط لارتفاع تكلفة تشغيل نماذج اللغة. كل سبب في سطر واحد لا يتجاوز عشر كلمات. لا مقدمة ولا خاتمة.",
-      "target": "Four simultaneous constraints — count, line format, word limit, absence of framing text.",
-      "timing_prompt": false,
-      "scoring": "Binary per constraint (count / format / length / no-preamble), reported as a fraction out of 4, kept separate from the 1–5 scale used elsewhere."
-    },
-    {
-      "id": "P4",
-      "category": "فهم اللهجة الخليجية",
-      "category_en": "dialect",
-      "prompt": "شخص قال لصاحبه: \"الحين ما عندي شي، بس عقب الشهر إن شاء الله أسدّد اللي عليّ.\" اشرح بالفصحى ماذا يقصد، ومتى ينوي الدفع تحديدًا.",
-      "target": "Three Gulf dialect markers in one utterance, with the answer required in Modern Standard Arabic.",
-      "timing_prompt": false,
-      "scoring": "1–5 scale. 5 = accurate meaning, correct timing, clean MSA; 3 = meaning correct, timing vague; 2 = answered in dialect; 1 = dialect misread."
-    },
-    {
-      "id": "P5",
-      "category": "كتابة رسمية",
-      "category_en": "formal_writing",
-      "prompt": "اكتب رسالة رسمية من ٤ جمل إلى مدير إدارة تكنولوجيا المعلومات تطلب فيها الموافقة على تشغيل نموذج ذكاء اصطناعي على خوادم الجهة بدلًا من الخدمات السحابية. اذكر سببًا واحدًا يتعلق بسيادة البيانات.",
-      "target": "Register control, length compliance, and sustaining a specific argument across a bounded output.",
-      "timing_prompt": true,
-      "scoring": "1–5 scale. 5 = exactly four sentences, formal register, coherent data-sovereignty argument; 3 = correct content, wrong length; 1 = informal register or argument absent. All tokens-per-second figures in this project come from P5 only — it produces a predictable 80–120 tokens."
-    },
-    {
-      "id": "P6",
-      "category": "برمجة بتعليقات عربية",
-      "category_en": "code",
-      "prompt": "اكتب دالة بلغة بايثون تحسب المتوسط الحسابي لقائمة أرقام، مع تعليقات بالعربية تشرح كل سطر. لا تشرح الكود خارج التعليقات.",
-      "target": "Bidirectional text handling inside code blocks — a failure mode invisible in prose-only evaluation.",
-      "timing_prompt": false,
-      "scoring": "1–5 scale. 5 = working function, Arabic comments per line, no external prose; 3 = working function, partial comment coverage; 1 = broken code or fully English comments."
-    },
-    {
-      "id": "P7",
-      "category": "اختبار الاعتراف بعدم المعرفة",
-      "category_en": "calibration",
-      "prompt": "كم عدد سكان مدينة الرياض بالضبط في الثانية التي تقرأ فيها هذا السؤال؟",
-      "target": "Fabrication under a request for unobtainable precision.",
-      "timing_prompt": false,
-      "scoring": "Inverted 1–5 scale. 5 = uncertainty acknowledged with a dated approximation; 3 = approximation given without acknowledging impossibility; 1 = a precise figure fabricated."
-    }
-  ],
-  "runs": [],
   "leaderboard": [],
   "contributors": []
 }

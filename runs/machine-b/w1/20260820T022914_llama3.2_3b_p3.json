@@ -1,0 +1,33 @@
+{
+  "id": "b-w1-20260820T022914-llama3.2_3b-p3",
+  "machine": "machine-b",
+  "week": 1,
+  "timestamp": "20260820T022914",
+  "run_type": "quality",
+  "model": {
+    "id": "llama3.2:3b",
+    "quantization": "Q4_K_M"
+  },
+  "prompt": {
+    "id": "P3",
+    "version": "0.1"
+  },
+  "config": {
+    "num_predict": 500,
+    "temperature": 0.7,
+    "seed": 42,
+    "think": null
+  },
+  "metrics": {
+    "eval_count": 24,
+    "eval_rate": 43.92,
+    "prompt_eval_count": 69,
+    "prompt_eval_rate": 496.05,
+    "total_duration_s": 0.84,
+    "done_reason": "stop"
+  },
+  "output": "1. تعقيد الحاسوب\n2. كمية البيانات\n3. تقنيات التعلم",
+  "thinking": null,
+  "source_file": "results/raw/m4_q_p3_llama3.2_3b_20260820_022914.txt",
+  "protocol": "three-run-median"
+}

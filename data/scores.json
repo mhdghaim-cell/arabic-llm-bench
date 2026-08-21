@@ -1,0 +1,147 @@
+{
+  "version": "0.1",
+  "updated": "2026-08-20",
+  "note_en": "Scores are stored separately from runs so a run can be rescored, and so multiple scorers can score the same run without touching the measurement.",
+  "scores": [
+    {
+      "model": "qwen3:8b",
+      "config": "think:false",
+      "machine": "machine-b",
+      "prompt": "P1",
+      "scorer": "mhdghaim-cell",
+      "value": 1,
+      "max": 5,
+      "notes_en": "Federation date 18 Dec (correct: 2 Dec). Listed Oman as an emirate. Invented الظفير. Omitted Dubai. Then contradicted itself with a second list. Said Saudi Arabia was previously الإمارة الحمراء — fabricated."
+    },
+    {
+      "model": "qwen3:8b",
+      "config": "think:false",
+      "machine": "machine-b",
+      "prompt": "P2",
+      "scorer": "mhdghaim-cell",
+      "value": 5,
+      "max": 5,
+      "notes_en": "11,550 litres, all steps correct, avoided the متوسط الأولين trap."
+    },
+    {
+      "model": "qwen3:8b",
+      "config": "think:false",
+      "machine": "machine-b",
+      "prompt": "P3",
+      "scorer": "mhdghaim-cell",
+      "value": 4,
+      "max": 4,
+      "notes_en": "All four constraints passed, including no preamble."
+    },
+    {
+      "model": "qwen3:8b",
+      "config": "think:false",
+      "machine": "machine-b",
+      "prompt": "P4",
+      "scorer": "mhdghaim-cell",
+      "value": 3,
+      "max": 5,
+      "notes_en": "All three dialect markers understood. Timing wrong — read عقب الشهر as one month from today rather than after the end of this month."
+    },
+    {
+      "model": "qwen3:8b",
+      "config": "think:false",
+      "machine": "machine-b",
+      "prompt": "P5",
+      "scorer": "mhdghaim-cell",
+      "value": 5,
+      "max": 5,
+      "notes_en": "Four sentences as instructed, correct formal register, سيادة البيانات spelled correctly, no contamination. Best Arabic output recorded in Week 1."
+    },
+    {
+      "model": "qwen3:8b",
+      "config": "think:false",
+      "machine": "machine-b",
+      "prompt": "P6",
+      "scorer": "mhdghaim-cell",
+      "value": 4,
+      "max": 5,
+      "notes_en": "Working function with Arabic identifiers (متوسط_حسابي, مجموع_العناصر) — valid Python 3. Lost a point for prose outside the code block, which the prompt forbade."
+    },
+    {
+      "model": "qwen3:8b",
+      "config": "think:false",
+      "machine": "machine-b",
+      "prompt": "P7",
+      "scorer": "mhdghaim-cell",
+      "value": 2,
+      "max": 5,
+      "notes_en": "Gave 4.5 million without acknowledging the question is unanswerable (2022 census ~7 million). Cited المركز الوطني للإحصاء والمسوحات, which does not exist."
+    },
+    {
+      "model": "llama3.2:3b",
+      "config": "default",
+      "machine": "machine-b",
+      "prompt": "P1",
+      "scorer": "mhdghaim-cell",
+      "value": 2,
+      "max": 5,
+      "notes_en": "Federation date correct (2 Dec 1971). Answered seven for the founding count — the expected failure. Circular non-answer on the Saudi question rather than a fabrication."
+    },
+    {
+      "model": "llama3.2:3b",
+      "config": "default",
+      "machine": "machine-b",
+      "prompt": "P2",
+      "scorer": "mhdghaim-cell",
+      "value": 5,
+      "max": 5,
+      "notes_en": "11,550 litres, all steps correct. Register slip: used اكتشف where نحسب would be natural."
+    },
+    {
+      "model": "llama3.2:3b",
+      "config": "default",
+      "machine": "machine-b",
+      "prompt": "P3",
+      "scorer": "mhdghaim-cell",
+      "value": 3,
+      "max": 4,
+      "notes_en": "Added numbering that was not requested; third item is a noun phrase rather than a reason."
+    },
+    {
+      "model": "llama3.2:3b",
+      "config": "default",
+      "machine": "machine-b",
+      "prompt": "P4",
+      "scorer": "mhdghaim-cell",
+      "value": 1,
+      "max": 5,
+      "notes_en": "Did not understand الحين, عقب or اللي عليّ. No mention of money or debt."
+    },
+    {
+      "model": "llama3.2:3b",
+      "config": "default",
+      "machine": "machine-b",
+      "prompt": "P5",
+      "scorer": "mhdghaim-cell",
+      "value": 4,
+      "max": 5,
+      "notes_en": "Coherent formal letter, sovereignty argument present. Unrequested preamble هذه رسالة رسمية:."
+    },
+    {
+      "model": "llama3.2:3b",
+      "config": "default",
+      "machine": "machine-b",
+      "prompt": "P6",
+      "scorer": "mhdghaim-cell",
+      "value": 1,
+      "max": 5,
+      "notes_en": "Produced a script rather than a function, ignoring the instruction. English identifiers. Contamination: функциة (Russian stem + Arabic ة) four times."
+    },
+    {
+      "model": "llama3.2:3b",
+      "config": "default",
+      "machine": "machine-b",
+      "prompt": "P7",
+      "scorer": "mhdghaim-cell",
+      "value": 4,
+      "max": 5,
+      "notes_en": "Explicitly stated it could not estimate the figure precisely — the correct behaviour."
+    }
+  ]
+}

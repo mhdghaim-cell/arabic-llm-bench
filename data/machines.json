@@ -1,0 +1,41 @@
+{
+  "version": "0.1",
+  "updated": "2026-08-20",
+  "machines": [
+    {
+      "id": "machine-a",
+      "label_ar": "الجهاز أ",
+      "label_en": "Machine A",
+      "role": "baseline",
+      "model": "MacBook Air (Retina, 13-inch, 2020)",
+      "cpu": "1.2 GHz Quad-Core Intel Core i7 (Ice Lake, 4C/8T)",
+      "gpu": "Intel Iris Plus 1536 MB — unused, CPU-only inference",
+      "ram_gb": 8,
+      "ram_spec": "LPDDR4X 3733 MHz",
+      "os": "macOS Sequoia 15.7.7",
+      "runtime": "ollama 0.32.11",
+      "backend": "cpu",
+      "owned": true,
+      "cost_per_day_usd": 0,
+      "notes_en": "Fanless chassis; sustained clocks thermally limited. Real model budget ~4-4.5 GB after OS overhead. Ceiling 3B-4B at Q4."
+    },
+    {
+      "id": "machine-b",
+      "label_ar": "الجهاز ب",
+      "label_en": "Machine B",
+      "role": "capability",
+      "model": "Mac mini M4 (rented)",
+      "cpu": "Apple M4",
+      "gpu": "Apple M4 integrated — Metal backend",
+      "ram_gb": 16,
+      "ram_spec": "unified",
+      "os": "macOS 26.6.1",
+      "runtime": "ollama 0.32.14",
+      "backend": "metal",
+      "owned": false,
+      "provider": "Macly",
+      "cost_per_day_usd": 14.99,
+      "notes_en": "Rented per day. OS and runtime differ from Machine A — disclosed as uncontrolled variables in cross-machine comparisons."
+    }
+  ]
+}

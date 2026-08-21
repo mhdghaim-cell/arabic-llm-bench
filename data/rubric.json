@@ -1,0 +1,69 @@
+{
+  "version": "0.1",
+  "updated": "2026-08-20",
+  "note": "المرجع الوحيد لطريقة التقييم. أي جدول نتائج في الموقع يقرأ من هنا.",
+  "scale": {
+    "min": 1,
+    "max": 5
+  },
+  "dimensions": [
+    {
+      "id": "correctness",
+      "ar": "الصحة",
+      "en": "Correctness",
+      "desc_ar": "هل الإجابة صحيحة واقعيًا، بلا اختلاق؟",
+      "desc_en": "Is the answer factually correct, with nothing fabricated?"
+    },
+    {
+      "id": "language_quality",
+      "ar": "جودة اللغة",
+      "en": "Language quality",
+      "desc_ar": "هل اللغة سليمة نحويًا وطبيعية، لا مترجمة حرفيًا أو مكسّرة؟",
+      "desc_en": "Is the Arabic grammatical and natural rather than translated or broken?"
+    },
+    {
+      "id": "instruction_adherence",
+      "ar": "الالتزام بالتعليمات",
+      "en": "Instruction adherence",
+      "desc_ar": "هل نُفِّذ المطلوب بالصيغة والطول المحددين؟",
+      "desc_en": "Was the instruction followed in the specified format and length?"
+    },
+    {
+      "id": "language_integrity",
+      "ar": "ثبات اللغة",
+      "en": "Language integrity",
+      "desc_ar": "هل بقي النموذج بالعربية أم انزلق إلى لغة أخرى؟ يُقاس على كل موجّه، لا على موجّهات اللغة وحدها.",
+      "desc_en": "Did the model stay in Arabic or drift into another language? Scored on every prompt, not only language-focused ones."
+    }
+  ],
+  "exceptions": [
+    {
+      "prompt_id": "P3",
+      "rule_ar": "يُقيَّم P3 بشكل ثنائي على أربعة قيود (العدد، الصيغة، الطول، غياب المقدمة) ويُنشر ككسر من ٤، منفصلًا عن مقياس ١–٥.",
+      "rule_en": "P3 is scored binary across four constraints (count, format, length, no preamble) and reported as a fraction out of 4, kept separate from the 1–5 scale."
+    },
+    {
+      "prompt_id": "P7",
+      "rule_ar": "مقياس P7 معكوس: ٥ تعني الاعتراف بعدم إمكانية المعرفة، و١ تعني اختلاق رقم دقيق.",
+      "rule_en": "P7 is inverted: 5 means acknowledging the question is unanswerable, 1 means fabricating a precise figure."
+    }
+  ],
+  "known_limitations": [
+    {
+      "ar": "مقيّم بشري واحد. لا يوجد قياس لثبات التقييم بين مقيّمين في النسخة ٠٫١.",
+      "en": "Single human scorer. No inter-rater reliability measure at v0.1."
+    },
+    {
+      "ar": "سبعة موجّهات عينة صغيرة؛ النتائج إرشادية لا قاطعة.",
+      "en": "Seven prompts is a small sample; results are directional, not conclusive."
+    },
+    {
+      "ar": "اختيار الموجّهات يعكس حكم المؤلف حول أنماط الفشل المهمة، وهذا تحيّز في ذاته.",
+      "en": "Prompt selection reflects the author's judgement about which failure modes matter, which is itself a bias."
+    },
+    {
+      "ar": "اللهجة الخليجية فقط في النسخة ٠٫١. الشامية والمصرية والمغاربية مخطط لها.",
+      "en": "Gulf dialect only at v0.1. Levantine, Egyptian and Maghrebi coverage is planned."
+    }
+  ]
+}

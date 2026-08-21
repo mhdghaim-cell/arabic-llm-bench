@@ -1,0 +1,33 @@
+{
+  "id": "b-w1-20260819T053602-llama3.2_1b-p5",
+  "machine": "machine-b",
+  "week": 1,
+  "timestamp": "20260819T053602",
+  "run_type": "timing",
+  "model": {
+    "id": "llama3.2:1b",
+    "quantization": "Q4_K_M"
+  },
+  "prompt": {
+    "id": "P5",
+    "version": "0.1"
+  },
+  "config": {
+    "num_predict": 300,
+    "temperature": 0.7,
+    "seed": 42,
+    "think": null
+  },
+  "metrics": {
+    "eval_count": 149,
+    "eval_rate": 71.14,
+    "prompt_eval_count": 93,
+    "prompt_eval_rate": 5405.72,
+    "total_duration_s": 2.27,
+    "done_reason": "stop"
+  },
+  "output": "قسمت هيئة إدارة تكنولوجيا المعلومات لموافقة على تشغيل نموذج ذكاء اصطناعي على خوادم الجهة، حيث سوف يتم تشغيل نموذج ذكاء اصطناعي على خوادم الجهة بدلًا من الخدمات السحابية. هذا القرار يتضمن سببًا واحدًا: verbessاء جودة البيانات، حيث سوف يتم تشغيل نموذج ذكاء اصطناعي على خوادم الجهة لتحسين جودة البيانات والتعرف على البيانات بشكل أكبر، مما يزيد من قيمة البيانات وتوفر إمكانية إجراء تحليلات وآراء أكثر accuracy.",
+  "thinking": null,
+  "source_file": "results/raw/m4_llama3.2_1b_20260819_053602.txt",
+  "protocol": "three-run-median"
+}

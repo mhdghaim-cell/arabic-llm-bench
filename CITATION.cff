@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+title: "مقياس (miqyas) — Arabic LLM Benchmark"
+message: "If you use these measurements, please cite them."
+type: dataset
+authors:
+  - alias: mhdghaim-cell
+    website: "https://github.com/mhdghaim-cell"
+repository-code: "https://github.com/mhdghaim-cell/arabic-llm-bench"
+abstract: >-
+  Open measurements of how locally-run language models handle Arabic:
+  tokenizer efficiency, quantization effects, dialect comprehension,
+  and regional knowledge. All raw outputs published.
+keywords:
+  - arabic
+  - nlp
+  - benchmark
+  - local-inference
+  - llm
+license: MIT
+version: "0.1"
+date-released: "2026-08-20"

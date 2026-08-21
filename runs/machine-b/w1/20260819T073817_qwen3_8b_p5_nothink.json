@@ -1,0 +1,33 @@
+{
+  "id": "b-w1-20260819T073817-qwen3_8b-p5-nothink",
+  "machine": "machine-b",
+  "week": 1,
+  "timestamp": "20260819T073817",
+  "run_type": "timing",
+  "model": {
+    "id": "qwen3:8b",
+    "quantization": "Q4_K_M"
+  },
+  "prompt": {
+    "id": "P5",
+    "version": "0.1"
+  },
+  "config": {
+    "num_predict": 300,
+    "temperature": 0.7,
+    "seed": 42,
+    "think": false
+  },
+  "metrics": {
+    "eval_count": 121,
+    "eval_rate": 19.52,
+    "prompt_eval_count": 89,
+    "prompt_eval_rate": 1617.12,
+    "total_duration_s": 6.38,
+    "done_reason": "stop"
+  },
+  "output": "السيد مدير إدارة تكنولوجيا المعلومات،\n\nنأمل أن تكون بخير. نود طلب الموافقة على تشغيل نموذج الذكاء الاصطناعي على خوادم الجهة بدلًا من الخدمات السحابية، وذلك لضمان سيادة البيانات وحماية المعلومات الحساسة.  \nنرجو أن تأخذ ذلك في الاعتبار وتفتح الباب أمام تنفيذ هذا الطلب.  \nنأمل استلام ردك في أقرب وقت، وشكرًا على تفهمك ودعمك.",
+  "thinking": null,
+  "source_file": "results/raw/m4_qwen3_8b_20260819_073817.txt",
+  "protocol": "three-run-median"
+}

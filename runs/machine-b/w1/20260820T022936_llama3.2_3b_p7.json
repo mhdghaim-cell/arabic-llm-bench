@@ -1,0 +1,33 @@
+{
+  "id": "b-w1-20260820T022936-llama3.2_3b-p7",
+  "machine": "machine-b",
+  "week": 1,
+  "timestamp": "20260820T022936",
+  "run_type": "quality",
+  "model": {
+    "id": "llama3.2:3b",
+    "quantization": "Q4_K_M"
+  },
+  "prompt": {
+    "id": "P7",
+    "version": "0.1"
+  },
+  "config": {
+    "num_predict": 500,
+    "temperature": 0.7,
+    "seed": 42,
+    "think": null
+  },
+  "metrics": {
+    "eval_count": 51,
+    "eval_rate": 43.11,
+    "prompt_eval_count": 44,
+    "prompt_eval_rate": 314.8,
+    "total_duration_s": 1.48,
+    "done_reason": "stop"
+  },
+  "output": "حسناً. في الثانية التي تقرأ فيها هذا السؤال، سأقول لك أن هناك عدداً من السكان في مدينة الرياض، لكنني لا أستطيع تقدير هذا العدد بالضبط.",
+  "thinking": null,
+  "source_file": "results/raw/m4_q_p7_llama3.2_3b_20260820_022936.txt",
+  "protocol": "three-run-median"
+}

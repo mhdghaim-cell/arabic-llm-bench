@@ -1,4 +1,56 @@
 {
   "version": "0.1",
-  "entries": []
+  "updated": "2026-08-20",
+  "note_ar": "كل تصحيح يُسجَّل هنا مع تاريخه وسببه. سجل الأخطاء المصحّحة جزء من المنهجية، لا ملحق بها.",
+  "entries": [
+    {
+      "date": "2026-08-20",
+      "type": "correction",
+      "severity": "published",
+      "title_ar": "تصحيح رقم ٢٩٪ المنشور حول أثر إغلاق التطبيقات",
+      "title_en": "Correction to the published 29% figure on background applications",
+      "published_claim": "إغلاق التطبيقات المفتوحة رفع السرعة ٢٩٪ (١٠٫٠٠ ← ١٢٫٨٧ رمز/ثانية)",
+      "published_on": [
+        "X",
+        "LinkedIn"
+      ],
+      "published_date": "2026-08-18",
+      "corrected_claim": "إغلاق التطبيقات يوفّر ٥–٢٢٪ من الإنتاجية على جهاز بـ٨ غيغابايت، بحسب النموذج",
+      "reasons": [
+        "تعميم من نموذج واحد: llama3.2:3b أظهر أكبر أثر (+٢٢٪)، بينما qwen3:1.7b أظهر ربعه تقريبًا (+٥٪).",
+        "تجاهل تباين الجلسات: نفس النموذج في نفس الحالة النظيفة قاس ١٢٫٨٧ في يوم و١٢٫١٨ في اليوم التالي — فارق ٥٪ من رتبة أصغر أثر مرصود."
+      ],
+      "caught_by": "mhdghaim-cell",
+      "evidence": "results/w1_timing.md"
+    },
+    {
+      "date": "2026-08-19",
+      "type": "retraction",
+      "severity": "pre-publication",
+      "title_ar": "سحب قراءة «كلما كبر النموذج ساءت العربية» قبل النشر",
+      "title_en": "Retracted the reading that larger models produce worse Arabic, before publication",
+      "retracted_claim": "النماذج الأكبر تنتج عربية أسوأ",
+      "reason": "الانعكاس الظاهري سببه ضريبة الاستدلال وهي تستهلك سقف الرموز الثابت. عند تعطيل الاستدلال، تفوّق qwen3:8b (٥/٥) بوضوح على qwen3:1.7b (٢/٥). الحجم يساعد؛ الإعداد الافتراضي يخفي ذلك.",
+      "caught_by": "mhdghaim-cell",
+      "evidence": "results/w1_timing.md"
+    },
+    {
+      "date": "2026-08-20",
+      "type": "methodology",
+      "severity": "internal",
+      "title_ar": "توحيد دليل التقييم",
+      "title_en": "Unified the scoring rubric",
+      "reason": "كان الموقع ينشر دليل تقييم من أربعة أبعاد على مقياس ٠–١٠ يتضمن بُعد «السلامة» غير المقاس، بينما تلتزم وثيقة المنهجية بأربعة أبعاد على مقياس ١–٥ تتضمن «ثبات اللغة». المرجع الآن ملف واحد: data/rubric.json.",
+      "evidence": "data/rubric.json"
+    },
+    {
+      "date": "2026-08-20",
+      "type": "methodology",
+      "severity": "internal",
+      "title_ar": "تصحيح علامات الاقتباس في P4",
+      "title_en": "Fixed quotation marks in P4",
+      "reason": "استخدام علامات الاقتباس المستقيمة داخل الموجّه كسر ترميز JSON في السكربت. النسخة المعتمدة تستخدم «» — على أي شخص يعيد التجربة استخدام نسخة المستودع.",
+      "evidence": "prompts/p4.txt"
+    }
+  ]
 }

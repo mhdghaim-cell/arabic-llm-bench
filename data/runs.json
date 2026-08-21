@@ -1,0 +1,1297 @@
+{
+  "version": "0.1",
+  "updated": "2026-08-20",
+  "count": 43,
+  "runs": [
+    {
+      "id": "a-w1-20260817T202859-llama3.2_1b-p5",
+      "machine": "machine-a",
+      "week": 1,
+      "timestamp": "20260817T202859",
+      "run_type": "timing",
+      "model": {
+        "id": "llama3.2:1b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 120,
+        "eval_rate": 20.43,
+        "prompt_eval_count": null,
+        "prompt_eval_rate": 60.1,
+        "total_duration_s": 12.8,
+        "done_reason": null
+      },
+      "path": "runs/machine-a/w1/20260817T202859_llama3.2_1b_p5.json"
+    },
+    {
+      "id": "a-w1-20260818T125204-llama3.2_1b-p5",
+      "machine": "machine-a",
+      "week": 1,
+      "timestamp": "20260818T125204",
+      "run_type": "timing",
+      "model": {
+        "id": "llama3.2:1b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 120,
+        "eval_rate": 21.58,
+        "prompt_eval_count": null,
+        "prompt_eval_rate": 66.74,
+        "total_duration_s": 12.2,
+        "done_reason": null
+      },
+      "path": "runs/machine-a/w1/20260818T125204_llama3.2_1b_p5.json"
+    },
+    {
+      "id": "a-w1-20260818T125554-llama3.2_1b-p5",
+      "machine": "machine-a",
+      "week": 1,
+      "timestamp": "20260818T125554",
+      "run_type": "timing",
+      "model": {
+        "id": "llama3.2:1b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 291,
+        "eval_rate": 19.75,
+        "prompt_eval_count": null,
+        "prompt_eval_rate": 119.05,
+        "total_duration_s": 15.9,
+        "done_reason": null
+      },
+      "path": "runs/machine-a/w1/20260818T125554_llama3.2_1b_p5.json"
+    },
+    {
+      "id": "a-w1-20260819T190054-llama3.2_1b-p5",
+      "machine": "machine-a",
+      "week": 1,
+      "timestamp": "20260819T190054",
+      "run_type": "timing",
+      "model": {
+        "id": "llama3.2:1b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 120,
+        "eval_rate": 21.57,
+        "prompt_eval_count": null,
+        "prompt_eval_rate": 68.54,
+        "total_duration_s": 10.8,
+        "done_reason": null
+      },
+      "path": "runs/machine-a/w1/20260819T190054_llama3.2_1b_p5.json"
+    },
+    {
+      "id": "a-w1-20260819T190116-llama3.2_1b-p5",
+      "machine": "machine-a",
+      "week": 1,
+      "timestamp": "20260819T190116",
+      "run_type": "timing",
+      "model": {
+        "id": "llama3.2:1b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 291,
+        "eval_rate": 20.61,
+        "prompt_eval_count": null,
+        "prompt_eval_rate": 1562.16,
+        "total_duration_s": 14.5,
+        "done_reason": null
+      },
+      "path": "runs/machine-a/w1/20260819T190116_llama3.2_1b_p5.json"
+    },
+    {
+      "id": "a-w1-20260819T190135-llama3.2_1b-p5",
+      "machine": "machine-a",
+      "week": 1,
+      "timestamp": "20260819T190135",
+      "run_type": "timing",
+      "model": {
+        "id": "llama3.2:1b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 291,
+        "eval_rate": 18.5,
+        "prompt_eval_count": null,
+        "prompt_eval_rate": 2715.25,
+        "total_duration_s": 16.1,
+        "done_reason": null
+      },
+      "path": "runs/machine-a/w1/20260819T190135_llama3.2_1b_p5.json"
+    },
+    {
+      "id": "a-w1-20260819T190232-qwen3_1.7b-p5",
+      "machine": "machine-a",
+      "week": 1,
+      "timestamp": "20260819T190232",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:1.7b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 300,
+        "eval_rate": 19.92,
+        "prompt_eval_count": null,
+        "prompt_eval_rate": 90.89,
+        "total_duration_s": 20.8,
+        "done_reason": null
+      },
+      "path": "runs/machine-a/w1/20260819T190232_qwen3_1.7b_p5.json"
+    },
+    {
+      "id": "a-w1-20260819T190309-qwen3_1.7b-p5",
+      "machine": "machine-a",
+      "week": 1,
+      "timestamp": "20260819T190309",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:1.7b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 300,
+        "eval_rate": 19.39,
+        "prompt_eval_count": null,
+        "prompt_eval_rate": 2531.57,
+        "total_duration_s": 15.9,
+        "done_reason": null
+      },
+      "path": "runs/machine-a/w1/20260819T190309_qwen3_1.7b_p5.json"
+    },
+    {
+      "id": "a-w1-20260819T190328-qwen3_1.7b-p5",
+      "machine": "machine-a",
+      "week": 1,
+      "timestamp": "20260819T190328",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:1.7b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 300,
+        "eval_rate": 17.75,
+        "prompt_eval_count": null,
+        "prompt_eval_rate": 1707.61,
+        "total_duration_s": 17.3,
+        "done_reason": null
+      },
+      "path": "runs/machine-a/w1/20260819T190328_qwen3_1.7b_p5.json"
+    },
+    {
+      "id": "a-w1-20260819T190420-llama3.2_3b-p5",
+      "machine": "machine-a",
+      "week": 1,
+      "timestamp": "20260819T190420",
+      "run_type": "timing",
+      "model": {
+        "id": "llama3.2:3b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 116,
+        "eval_rate": 12.55,
+        "prompt_eval_count": null,
+        "prompt_eval_rate": 45.94,
+        "total_duration_s": 22.0,
+        "done_reason": null
+      },
+      "path": "runs/machine-a/w1/20260819T190420_llama3.2_3b_p5.json"
+    },
+    {
+      "id": "a-w1-20260819T190451-llama3.2_3b-p5",
+      "machine": "machine-a",
+      "week": 1,
+      "timestamp": "20260819T190451",
+      "run_type": "timing",
+      "model": {
+        "id": "llama3.2:3b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 182,
+        "eval_rate": 11.6,
+        "prompt_eval_count": null,
+        "prompt_eval_rate": 1528.73,
+        "total_duration_s": 16.1,
+        "done_reason": null
+      },
+      "path": "runs/machine-a/w1/20260819T190451_llama3.2_3b_p5.json"
+    },
+    {
+      "id": "a-w1-20260819T190524-llama3.2_3b-p5",
+      "machine": "machine-a",
+      "week": 1,
+      "timestamp": "20260819T190524",
+      "run_type": "timing",
+      "model": {
+        "id": "llama3.2:3b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 182,
+        "eval_rate": 12.18,
+        "prompt_eval_count": null,
+        "prompt_eval_rate": 1619.56,
+        "total_duration_s": 15.4,
+        "done_reason": null
+      },
+      "path": "runs/machine-a/w1/20260819T190524_llama3.2_3b_p5.json"
+    },
+    {
+      "id": "b-w1-20260819T053404-llama3.2_1b-p5",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T053404",
+      "run_type": "timing",
+      "model": {
+        "id": "llama3.2:1b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 149,
+        "eval_rate": 70.83,
+        "prompt_eval_count": 93,
+        "prompt_eval_rate": 660.23,
+        "total_duration_s": 3.99,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260819T053404_llama3.2_1b_p5.json"
+    },
+    {
+      "id": "b-w1-20260819T053545-llama3.2_1b-p5",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T053545",
+      "run_type": "timing",
+      "model": {
+        "id": "llama3.2:1b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 149,
+        "eval_rate": 71.17,
+        "prompt_eval_count": 93,
+        "prompt_eval_rate": 6009.3,
+        "total_duration_s": 2.27,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260819T053545_llama3.2_1b_p5.json"
+    },
+    {
+      "id": "b-w1-20260819T053602-llama3.2_1b-p5",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T053602",
+      "run_type": "timing",
+      "model": {
+        "id": "llama3.2:1b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 149,
+        "eval_rate": 71.14,
+        "prompt_eval_count": 93,
+        "prompt_eval_rate": 5405.72,
+        "total_duration_s": 2.27,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260819T053602_llama3.2_1b_p5.json"
+    },
+    {
+      "id": "b-w1-20260819T053723-qwen3_1.7b-p5",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T053723",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:1.7b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 300,
+        "eval_rate": 72.02,
+        "prompt_eval_count": 83,
+        "prompt_eval_rate": 322.34,
+        "total_duration_s": 12.41,
+        "done_reason": "length"
+      },
+      "path": "runs/machine-b/w1/20260819T053723_qwen3_1.7b_p5.json"
+    },
+    {
+      "id": "b-w1-20260819T053819-qwen3_1.7b-p5",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T053819",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:1.7b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 300,
+        "eval_rate": 72.84,
+        "prompt_eval_count": 83,
+        "prompt_eval_rate": 4734.47,
+        "total_duration_s": 4.28,
+        "done_reason": "length"
+      },
+      "path": "runs/machine-b/w1/20260819T053819_qwen3_1.7b_p5.json"
+    },
+    {
+      "id": "b-w1-20260819T053854-qwen3_1.7b-p5",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T053854",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:1.7b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 300,
+        "eval_rate": 72.67,
+        "prompt_eval_count": 83,
+        "prompt_eval_rate": 4590.2,
+        "total_duration_s": 4.28,
+        "done_reason": "length"
+      },
+      "path": "runs/machine-b/w1/20260819T053854_qwen3_1.7b_p5.json"
+    },
+    {
+      "id": "b-w1-20260819T053955-qwen3_1.7b-p5-nothink",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T053955",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:1.7b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": false
+      },
+      "metrics": {
+        "eval_count": 286,
+        "eval_rate": 72.76,
+        "prompt_eval_count": 89,
+        "prompt_eval_rate": 1931.47,
+        "total_duration_s": 4.11,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260819T053955_qwen3_1.7b_p5_nothink.json"
+    },
+    {
+      "id": "b-w1-20260819T054045-llama3.2_3b-p5",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T054045",
+      "run_type": "timing",
+      "model": {
+        "id": "llama3.2:3b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 204,
+        "eval_rate": 44.39,
+        "prompt_eval_count": 93,
+        "prompt_eval_rate": 306.65,
+        "total_duration_s": 13.43,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260819T054045_llama3.2_3b_p5.json"
+    },
+    {
+      "id": "b-w1-20260819T054403-llama3.2_3b-p5",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T054403",
+      "run_type": "timing",
+      "model": {
+        "id": "llama3.2:3b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 204,
+        "eval_rate": 44.71,
+        "prompt_eval_count": 93,
+        "prompt_eval_rate": 3564.31,
+        "total_duration_s": 4.75,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260819T054403_llama3.2_3b_p5.json"
+    },
+    {
+      "id": "b-w1-20260819T054412-llama3.2_3b-p5",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T054412",
+      "run_type": "timing",
+      "model": {
+        "id": "llama3.2:3b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 204,
+        "eval_rate": 44.98,
+        "prompt_eval_count": 93,
+        "prompt_eval_rate": 3600.6,
+        "total_duration_s": 4.71,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260819T054412_llama3.2_3b_p5.json"
+    },
+    {
+      "id": "b-w1-20260819T054520-qwen3_8b-p5",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T054520",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:8b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 300,
+        "eval_rate": 19.47,
+        "prompt_eval_count": 83,
+        "prompt_eval_rate": 143.94,
+        "total_duration_s": 20.26,
+        "done_reason": "length"
+      },
+      "path": "runs/machine-b/w1/20260819T054520_qwen3_8b_p5.json"
+    },
+    {
+      "id": "b-w1-20260819T054548-qwen3_8b-p5",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T054548",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:8b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 300,
+        "eval_rate": 19.49,
+        "prompt_eval_count": 83,
+        "prompt_eval_rate": 1511.89,
+        "total_duration_s": 15.59,
+        "done_reason": "length"
+      },
+      "path": "runs/machine-b/w1/20260819T054548_qwen3_8b_p5.json"
+    },
+    {
+      "id": "b-w1-20260819T054614-qwen3_8b-p5",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T054614",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:8b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 300,
+        "eval_rate": 19.52,
+        "prompt_eval_count": 83,
+        "prompt_eval_rate": 1539.72,
+        "total_duration_s": 15.56,
+        "done_reason": "length"
+      },
+      "path": "runs/machine-b/w1/20260819T054614_qwen3_8b_p5.json"
+    },
+    {
+      "id": "b-w1-20260819T061927-qwen3_8b-p5-nothink",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T061927",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:8b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": false
+      },
+      "metrics": {
+        "eval_count": 121,
+        "eval_rate": 19.55,
+        "prompt_eval_count": 89,
+        "prompt_eval_rate": 201.9,
+        "total_duration_s": 10.62,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260819T061927_qwen3_8b_p5_nothink.json"
+    },
+    {
+      "id": "b-w1-20260819T073730-qwen3_8b-p5-nothink",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T073730",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:8b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": false
+      },
+      "metrics": {
+        "eval_count": 121,
+        "eval_rate": 19.21,
+        "prompt_eval_count": 89,
+        "prompt_eval_rate": 203.21,
+        "total_duration_s": 12.29,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260819T073730_qwen3_8b_p5_nothink.json"
+    },
+    {
+      "id": "b-w1-20260819T073803-qwen3_8b-p5-nothink",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T073803",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:8b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": false
+      },
+      "metrics": {
+        "eval_count": 121,
+        "eval_rate": 19.4,
+        "prompt_eval_count": 89,
+        "prompt_eval_rate": 1678.61,
+        "total_duration_s": 6.41,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260819T073803_qwen3_8b_p5_nothink.json"
+    },
+    {
+      "id": "b-w1-20260819T073817-qwen3_8b-p5-nothink",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T073817",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:8b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": false
+      },
+      "metrics": {
+        "eval_count": 121,
+        "eval_rate": 19.52,
+        "prompt_eval_count": 89,
+        "prompt_eval_rate": 1617.12,
+        "total_duration_s": 6.38,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260819T073817_qwen3_8b_p5_nothink.json"
+    },
+    {
+      "id": "b-w1-20260819T074015-qwen3_1.7b-p5-nothink",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T074015",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:1.7b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": false
+      },
+      "metrics": {
+        "eval_count": 286,
+        "eval_rate": 71.82,
+        "prompt_eval_count": 89,
+        "prompt_eval_rate": 876.62,
+        "total_duration_s": 5.81,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260819T074015_qwen3_1.7b_p5_nothink.json"
+    },
+    {
+      "id": "b-w1-20260819T074027-qwen3_1.7b-p5-nothink",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T074027",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:1.7b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": false
+      },
+      "metrics": {
+        "eval_count": 286,
+        "eval_rate": 72.86,
+        "prompt_eval_count": 89,
+        "prompt_eval_rate": 5586.94,
+        "total_duration_s": 4.08,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260819T074027_qwen3_1.7b_p5_nothink.json"
+    },
+    {
+      "id": "b-w1-20260820T022041-qwen3_8b-p1-nothink",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260820T022041",
+      "run_type": "quality",
+      "model": {
+        "id": "qwen3:8b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P1",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": false
+      },
+      "metrics": {
+        "eval_count": 374,
+        "eval_rate": 18.24,
+        "prompt_eval_count": 77,
+        "prompt_eval_rate": 1323.09,
+        "total_duration_s": 20.71,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260820T022041_qwen3_8b_p1_nothink.json"
+    },
+    {
+      "id": "b-w1-20260820T022238-qwen3_8b-p2-nothink",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260820T022238",
+      "run_type": "quality",
+      "model": {
+        "id": "qwen3:8b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P2",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": false
+      },
+      "metrics": {
+        "eval_count": 340,
+        "eval_rate": 18.3,
+        "prompt_eval_count": 99,
+        "prompt_eval_rate": 162.02,
+        "total_duration_s": 19.33,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260820T022238_qwen3_8b_p2_nothink.json"
+    },
+    {
+      "id": "b-w1-20260820T022405-qwen3_8b-p3-nothink",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260820T022405",
+      "run_type": "quality",
+      "model": {
+        "id": "qwen3:8b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P3",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": false
+      },
+      "metrics": {
+        "eval_count": 31,
+        "eval_rate": 19.04,
+        "prompt_eval_count": 61,
+        "prompt_eval_rate": 196.66,
+        "total_duration_s": 2.08,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260820T022405_qwen3_8b_p3_nothink.json"
+    },
+    {
+      "id": "b-w1-20260820T022525-qwen3_8b-p4-nothink",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260820T022525",
+      "run_type": "quality",
+      "model": {
+        "id": "qwen3:8b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P4",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": false
+      },
+      "metrics": {
+        "eval_count": 395,
+        "eval_rate": 18.32,
+        "prompt_eval_count": 70,
+        "prompt_eval_rate": 153.65,
+        "total_duration_s": 22.15,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260820T022525_qwen3_8b_p4_nothink.json"
+    },
+    {
+      "id": "b-w1-20260820T022619-qwen3_8b-p6-nothink",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260820T022619",
+      "run_type": "quality",
+      "model": {
+        "id": "qwen3:8b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P6",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": false
+      },
+      "metrics": {
+        "eval_count": 188,
+        "eval_rate": 18.41,
+        "prompt_eval_count": 65,
+        "prompt_eval_rate": 204.14,
+        "total_duration_s": 10.67,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260820T022619_qwen3_8b_p6_nothink.json"
+    },
+    {
+      "id": "b-w1-20260820T022637-qwen3_8b-p7-nothink",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260820T022637",
+      "run_type": "quality",
+      "model": {
+        "id": "qwen3:8b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P7",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": false
+      },
+      "metrics": {
+        "eval_count": 188,
+        "eval_rate": 18.42,
+        "prompt_eval_count": 35,
+        "prompt_eval_rate": 199.32,
+        "total_duration_s": 10.52,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260820T022637_qwen3_8b_p7_nothink.json"
+    },
+    {
+      "id": "b-w1-20260820T022811-llama3.2_3b-p1",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260820T022811",
+      "run_type": "quality",
+      "model": {
+        "id": "llama3.2:3b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P1",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 81,
+        "eval_rate": 42.74,
+        "prompt_eval_count": 83,
+        "prompt_eval_rate": 429.59,
+        "total_duration_s": 4.32,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260820T022811_llama3.2_3b_p1.json"
+    },
+    {
+      "id": "b-w1-20260820T022844-llama3.2_3b-p2",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260820T022844",
+      "run_type": "quality",
+      "model": {
+        "id": "llama3.2:3b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P2",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 154,
+        "eval_rate": 42.42,
+        "prompt_eval_count": 101,
+        "prompt_eval_rate": 498.09,
+        "total_duration_s": 3.99,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260820T022844_llama3.2_3b_p2.json"
+    },
+    {
+      "id": "b-w1-20260820T022914-llama3.2_3b-p3",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260820T022914",
+      "run_type": "quality",
+      "model": {
+        "id": "llama3.2:3b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P3",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 24,
+        "eval_rate": 43.92,
+        "prompt_eval_count": 69,
+        "prompt_eval_rate": 496.05,
+        "total_duration_s": 0.84,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260820T022914_llama3.2_3b_p3.json"
+    },
+    {
+      "id": "b-w1-20260820T022922-llama3.2_3b-p4",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260820T022922",
+      "run_type": "quality",
+      "model": {
+        "id": "llama3.2:3b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P4",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 39,
+        "eval_rate": 43.49,
+        "prompt_eval_count": 81,
+        "prompt_eval_rate": 583.91,
+        "total_duration_s": 1.19,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260820T022922_llama3.2_3b_p4.json"
+    },
+    {
+      "id": "b-w1-20260820T022928-llama3.2_3b-p6",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260820T022928",
+      "run_type": "quality",
+      "model": {
+        "id": "llama3.2:3b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P6",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 233,
+        "eval_rate": 42.3,
+        "prompt_eval_count": 72,
+        "prompt_eval_rate": 509.23,
+        "total_duration_s": 5.81,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260820T022928_llama3.2_3b_p6.json"
+    },
+    {
+      "id": "b-w1-20260820T022936-llama3.2_3b-p7",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260820T022936",
+      "run_type": "quality",
+      "model": {
+        "id": "llama3.2:3b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P7",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 51,
+        "eval_rate": 43.11,
+        "prompt_eval_count": 44,
+        "prompt_eval_rate": 314.8,
+        "total_duration_s": 1.48,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260820T022936_llama3.2_3b_p7.json"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "id": "b-w1-20260820T022844-llama3.2_3b-p2",
+  "machine": "machine-b",
+  "week": 1,
+  "timestamp": "20260820T022844",
+  "run_type": "quality",
+  "model": {
+    "id": "llama3.2:3b",
+    "quantization": "Q4_K_M"
+  },
+  "prompt": {
+    "id": "P2",
+    "version": "0.1"
+  },
+  "config": {
+    "num_predict": 500,
+    "temperature": 0.7,
+    "seed": 42,
+    "think": null
+  },
+  "metrics": {
+    "eval_count": 154,
+    "eval_rate": 42.42,
+    "prompt_eval_count": 101,
+    "prompt_eval_rate": 498.09,
+    "total_duration_s": 3.99,
+    "done_reason": "stop"
+  },
+  "output": "الخطوات:\n\n1.  اكتشف إنتاج البئر الأول: 400 لتر يوميًا\n2.  اكتشف إنتاج البئر الثاني: 400 x 2 - 100 = 700 لتر يوميًا\n3.  اكتشف إنتاج البئر الثالث: (400 + 700) / 2 = 550 لتر يوميًا\n4.  اكتشف إنتاج المزرعة يوميًا: 400 + 700 + 550 = 1650 لتر يوميًا\n5.  اكتشف إنتاج المزرعة أسبوعيًا: 1650 x 7 = 11550 لتر أسبوعيًا",
+  "thinking": null,
+  "source_file": "results/raw/m4_q_p2_llama3.2_3b_20260820_022844.txt",
+  "protocol": "three-run-median"
+}

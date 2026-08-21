@@ -1,0 +1,33 @@
+{
+  "id": "b-w1-20260820T022405-qwen3_8b-p3-nothink",
+  "machine": "machine-b",
+  "week": 1,
+  "timestamp": "20260820T022405",
+  "run_type": "quality",
+  "model": {
+    "id": "qwen3:8b",
+    "quantization": "Q4_K_M"
+  },
+  "prompt": {
+    "id": "P3",
+    "version": "0.1"
+  },
+  "config": {
+    "num_predict": 500,
+    "temperature": 0.7,
+    "seed": 42,
+    "think": false
+  },
+  "metrics": {
+    "eval_count": 31,
+    "eval_rate": 19.04,
+    "prompt_eval_count": 61,
+    "prompt_eval_rate": 196.66,
+    "total_duration_s": 2.08,
+    "done_reason": "stop"
+  },
+  "output": "التحليل المعقد للبيانات.  \nالتوسع الضخم في البيانات.  \nالاستهلاك العالي للطاقة.",
+  "thinking": null,
+  "source_file": "results/raw/m4_q_p3_qwen3_8b_nothink_20260820_022405.txt",
+  "protocol": "three-run-median"
+}
