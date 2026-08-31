@@ -10,3 +10,4 @@ __pycache__/
 .vscode/
 .idea/
 migrate.py
+models/
