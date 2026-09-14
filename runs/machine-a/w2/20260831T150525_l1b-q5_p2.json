@@ -1,0 +1,38 @@
+{
+  "id": "a-w2-20260831T150525-l1b-q5-p2",
+  "machine": "machine-a",
+  "week": 2,
+  "timestamp": "20260831T150525",
+  "run_type": "quality",
+  "model": {
+    "id": "l1b-q5",
+    "quantization": "Q5_K_M"
+  },
+  "prompt": {
+    "id": "P2",
+    "version": "0.1"
+  },
+  "config": {
+    "num_predict": 500,
+    "temperature": 0.7,
+    "seed": 42,
+    "think": null
+  },
+  "environment": {
+    "os": "macOS Sequoia 15.7.7",
+    "runtime": "ollama 0.32.11",
+    "backend": "cpu"
+  },
+  "protocol": "isolated-session",
+  "metrics": {
+    "eval_count": 323,
+    "eval_rate": 19.57,
+    "prompt_eval_count": 111,
+    "prompt_eval_rate": 49.65,
+    "total_duration_s": 18.94,
+    "done_reason": "stop"
+  },
+  "output": "كلما أضاف عدد الأبار إلى البئر، توصل الإنتاج إلى مستوى معياري. \n\nالسبوع يتألف من 7 أيام، وكل يوم يتألف من 24 ساعة.\n\n1.  أولًا، قم بزيارة كل أبار البئر وحدد إنتاج كل بار.\n2.  اتبع الإنتاج للبار:\n *   البئر الأول ينتج 400 لتر يوميًا.\n *   البئر الثاني ناقص 100 لتر، وبالتالي ينتج 400 - 100 = 300 لتر يوميًا.\n *   البئر الثالث يساوي إنتاج البئر الأول، وهو 400 لتر يوميًا.\n3.  maintenant، قم بترتيب الإنتاج للبار: \n *   البئر الأول ينتج 400 لتر يوميًا.\n *   البئر الثاني ينتج 300 لتر يوميًا.\n *   البئر الثالث ينتج 400 لتر يوميًا.\n4.  now، calculate the total daily production:\n\n Daily production = Production of Bar 1 + Production of Bar 2 + Production of Bar 3\n Daily production = 400 + 300 + 400\n Daily production = 1200 لتر\n\n5.  last step is calculate total weekly production:\n\n Total weekly production = Daily production x 7\n Total weekly production = 1200 x 7\n Total weekly production = 8400 لتر",
+  "thinking": null,
+  "source_file": "results/raw/w2_p2_l1b-q5_20260831_150525.json"
+}

@@ -1,0 +1,198 @@
+{
+  "version": "0.1",
+  "updated": "2026-09-01",
+  "count": 4,
+  "note_en": "Speed benchmarks. Quality runs live in data/runs.json; these are llama-bench throughput measurements.",
+  "benchmarks": [
+    {
+      "id": "a-w2-f16-isolated",
+      "machine": "machine-a",
+      "week": 2,
+      "model": {
+        "id": "l1b-f16",
+        "quantization": "F16",
+        "size_mib": 2355
+      },
+      "tool": "llama-bench",
+      "build": "c1d0e7a00 (10621)",
+      "config": {
+        "backend": "BLAS",
+        "threads": 4,
+        "n_prompt": 512,
+        "n_gen": 128,
+        "repetitions": 5
+      },
+      "protocol": "isolated-session",
+      "protocol_note_en": "Measured alone on a cool machine with at least 15 minutes idle before the run and a discarded warmup pass. Sequential measurement on this chassis is invalid — see the thermal finding.",
+      "metrics": {
+        "pp512_tok_s": {
+          "mean": 66.96,
+          "stdev": 4.3
+        },
+        "tg128_tok_s": {
+          "mean": 10.25,
+          "stdev": 0.25
+        }
+      },
+      "source_file": "results/w2/f16_isolated.md"
+    },
+    {
+      "id": "a-w2-q4-isolated",
+      "machine": "machine-a",
+      "week": 2,
+      "model": {
+        "id": "l1b-q4",
+        "quantization": "Q4_K_M",
+        "size_mib": 763
+      },
+      "tool": "llama-bench",
+      "build": "c1d0e7a00 (10621)",
+      "config": {
+        "backend": "BLAS",
+        "threads": 4,
+        "n_prompt": 512,
+        "n_gen": 128,
+        "repetitions": 5
+      },
+      "protocol": "isolated-session",
+      "protocol_note_en": "Measured alone on a cool machine with at least 15 minutes idle before the run and a discarded warmup pass. Sequential measurement on this chassis is invalid — see the thermal finding.",
+      "metrics": {
+        "pp512_tok_s": {
+          "mean": 172.6,
+          "stdev": 12.77
+        },
+        "tg128_tok_s": {
+          "mean": 36.36,
+          "stdev": 1.67
+        }
+      },
+      "source_file": "results/w2/q4_isolated.md"
+    },
+    {
+      "id": "a-w2-q5-isolated",
+      "machine": "machine-a",
+      "week": 2,
+      "model": {
+        "id": "l1b-q5",
+        "quantization": "Q5_K_M",
+        "size_mib": 862
+      },
+      "tool": "llama-bench",
+      "build": "c1d0e7a00 (10621)",
+      "config": {
+        "backend": "BLAS",
+        "threads": 4,
+        "n_prompt": 512,
+        "n_gen": 128,
+        "repetitions": 5
+      },
+      "protocol": "isolated-session",
+      "protocol_note_en": "Measured alone on a cool machine with at least 15 minutes idle before the run and a discarded warmup pass. Sequential measurement on this chassis is invalid — see the thermal finding.",
+      "metrics": {
+        "pp512_tok_s": {
+          "mean": 80.13,
+          "stdev": 6.89
+        },
+        "tg128_tok_s": {
+          "mean": 22.98,
+          "stdev": 0.87
+        }
+      },
+      "source_file": "results/w2/q5_isolated.md"
+    },
+    {
+      "id": "a-w2-q8-isolated",
+      "machine": "machine-a",
+      "week": 2,
+      "model": {
+        "id": "l1b-q8",
+        "quantization": "Q8_0",
+        "size_mib": 1249
+      },
+      "tool": "llama-bench",
+      "build": "c1d0e7a00 (10621)",
+      "config": {
+        "backend": "BLAS",
+        "threads": 4,
+        "n_prompt": 512,
+        "n_gen": 128,
+        "repetitions": 5
+      },
+      "protocol": "isolated-session",
+      "protocol_note_en": "Measured alone on a cool machine with at least 15 minutes idle before the run and a discarded warmup pass. Sequential measurement on this chassis is invalid — see the thermal finding.",
+      "metrics": {
+        "pp512_tok_s": {
+          "mean": 88.19,
+          "stdev": 7.31
+        },
+        "tg128_tok_s": {
+          "mean": 22.4,
+          "stdev": 1.06
+        }
+      },
+      "source_file": "results/w2/q8_isolated.md"
+    }
+  ],
+  "findings": [
+    {
+      "id": "a-w2-thermal-confound",
+      "machine": "machine-a",
+      "week": 2,
+      "model": {
+        "id": "l1b-q4",
+        "quantization": "Q4_K_M"
+      },
+      "finding": "thermal-confound",
+      "note_en": "The same file measured five times under different thermal and cache conditions. Spread of 2.2x from thermal state alone, comparable in magnitude to the quantization effect being measured.",
+      "measurements": [
+        {
+          "condition_en": "isolated, cool machine",
+          "condition_ar": "معزولًا على جهاز بارد",
+          "tg128": 36.36,
+          "stdev": 1.67,
+          "valid": true
+        },
+        {
+          "condition_en": "first in sequence, after warmup",
+          "condition_ar": "أولًا في التسلسل بعد الإحماء",
+          "tg128": 30.84,
+          "stdev": 0.74,
+          "valid": false
+        },
+        {
+          "condition_en": "second session, warm file cache",
+          "condition_ar": "جلسة ثانية، ذاكرة ملفات دافئة",
+          "tg128": 27.53,
+          "stdev": 2.06,
+          "valid": false
+        },
+        {
+          "condition_en": "first run of session, cold cache",
+          "condition_ar": "أول تشغيل، ذاكرة باردة",
+          "tg128": 18.33,
+          "stdev": 2.66,
+          "valid": false
+        },
+        {
+          "condition_en": "fourth in sequence, hot chassis",
+          "condition_ar": "رابعًا في التسلسل، جهاز ساخن",
+          "tg128": 16.43,
+          "stdev": 12.32,
+          "valid": false
+        }
+      ],
+      "discarded": [
+        {
+          "measurement": "Q8_0 pp512 sequential",
+          "value": 28.34,
+          "stdev": 32.72,
+          "reason_en": "Standard deviation exceeds the mean. Measurement invalid."
+        }
+      ],
+      "evidence_files": [
+        "results/w2/ladder.md",
+        "results/w2/ladder_reversed.md"
+      ]
+    }
+  ]
+}

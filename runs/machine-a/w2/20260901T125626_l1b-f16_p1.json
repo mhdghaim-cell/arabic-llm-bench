@@ -1,0 +1,38 @@
+{
+  "id": "a-w2-20260901T125626-l1b-f16-p1",
+  "machine": "machine-a",
+  "week": 2,
+  "timestamp": "20260901T125626",
+  "run_type": "quality",
+  "model": {
+    "id": "l1b-f16",
+    "quantization": "F16"
+  },
+  "prompt": {
+    "id": "P1",
+    "version": "0.1"
+  },
+  "config": {
+    "num_predict": 500,
+    "temperature": 0.7,
+    "seed": 42,
+    "think": null
+  },
+  "environment": {
+    "os": "macOS Sequoia 15.7.7",
+    "runtime": "ollama 0.32.11",
+    "backend": "cpu"
+  },
+  "protocol": "isolated-session",
+  "metrics": {
+    "eval_count": 108,
+    "eval_rate": 12.93,
+    "prompt_eval_count": 93,
+    "prompt_eval_rate": 47.49,
+    "total_duration_s": 18.56,
+    "done_reason": "stop"
+  },
+  "output": "تأسس الاتحاد في دولة الإمارات العربية المتحدة في 2 tháng تموز / يوليو 1972\n\nتضم الإمارات حالياً 7 دولة:\n\n1. الإمارات العربية المتحدة\n2. الكويت\n3. البحرين\n4. قطر\n5. UAE، الكويت، البحرين، قطر، الإمارات العربية المتحدة\n6. السعودية\n7. Oman\n\nولكن قبل توحيدها باسمه الحالي، كانت المملكة العربية السعودية تعرف باسم \"مملكة السعودية\".",
+  "thinking": null,
+  "source_file": "results/raw/w2_p1_l1b-f16_20260901_125626.json"
+}

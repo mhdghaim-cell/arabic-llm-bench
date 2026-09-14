@@ -1,0 +1,38 @@
+{
+  "id": "a-w2-20260831T153855-l1b-q8-p1",
+  "machine": "machine-a",
+  "week": 2,
+  "timestamp": "20260831T153855",
+  "run_type": "quality",
+  "model": {
+    "id": "l1b-q8",
+    "quantization": "Q8_0"
+  },
+  "prompt": {
+    "id": "P1",
+    "version": "0.1"
+  },
+  "config": {
+    "num_predict": 500,
+    "temperature": 0.7,
+    "seed": 42,
+    "think": null
+  },
+  "environment": {
+    "os": "macOS Sequoia 15.7.7",
+    "runtime": "ollama 0.32.11",
+    "backend": "cpu"
+  },
+  "protocol": "isolated-session",
+  "metrics": {
+    "eval_count": 78,
+    "eval_rate": 21.42,
+    "prompt_eval_count": 93,
+    "prompt_eval_rate": 61.23,
+    "total_duration_s": 10.71,
+    "done_reason": "stop"
+  },
+  "output": "الإجابة الصحيحة هي:\n\n- تأسّس الاتحاد الإماراتي في دولة الإمارات العربية المتحدة عام 1961.\n- عدد الإمارات التي انضمّت في تاريخ التأسيس: 6\n- الدولة التي عُرفت بها المملكة العربية السعودية قبل توحيدها باسمها الحالي عام ١٩٣٢ هي المملكة العربية السعودية.",
+  "thinking": null,
+  "source_file": "results/raw/w2_p1_l1b-q8_20260831_153855.json"
+}

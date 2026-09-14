@@ -1,0 +1,38 @@
+{
+  "id": "a-w2-20260831T150544-l1b-q5-p3",
+  "machine": "machine-a",
+  "week": 2,
+  "timestamp": "20260831T150544",
+  "run_type": "quality",
+  "model": {
+    "id": "l1b-q5",
+    "quantization": "Q5_K_M"
+  },
+  "prompt": {
+    "id": "P3",
+    "version": "0.1"
+  },
+  "config": {
+    "num_predict": 500,
+    "temperature": 0.7,
+    "seed": 42,
+    "think": null
+  },
+  "environment": {
+    "os": "macOS Sequoia 15.7.7",
+    "runtime": "ollama 0.32.11",
+    "backend": "cpu"
+  },
+  "protocol": "isolated-session",
+  "metrics": {
+    "eval_count": 36,
+    "eval_rate": 16.04,
+    "prompt_eval_count": 79,
+    "prompt_eval_rate": 47.96,
+    "total_duration_s": 3.93,
+    "done_reason": "stop"
+  },
+  "output": "- التكلفة العالية للبرامج اللغوية\n- الجهد الإداري لتحسين الأداء\n- التبادل الكبير بين المستخدمين",
+  "thinking": null,
+  "source_file": "results/raw/w2_p3_l1b-q5_20260831_150544.json"
+}

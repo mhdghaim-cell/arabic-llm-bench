@@ -1,0 +1,38 @@
+{
+  "id": "a-w2-20260831T153941-l1b-q8-p5",
+  "machine": "machine-a",
+  "week": 2,
+  "timestamp": "20260831T153941",
+  "run_type": "quality",
+  "model": {
+    "id": "l1b-q8",
+    "quantization": "Q8_0"
+  },
+  "prompt": {
+    "id": "P5",
+    "version": "0.1"
+  },
+  "config": {
+    "num_predict": 500,
+    "temperature": 0.7,
+    "seed": 42,
+    "think": null
+  },
+  "environment": {
+    "os": "macOS Sequoia 15.7.7",
+    "runtime": "ollama 0.32.11",
+    "backend": "cpu"
+  },
+  "protocol": "isolated-session",
+  "metrics": {
+    "eval_count": 171,
+    "eval_rate": 19.55,
+    "prompt_eval_count": 103,
+    "prompt_eval_rate": 63.7,
+    "total_duration_s": 10.39,
+    "done_reason": "stop"
+  },
+  "output": "لقد حصلت على موافقة من مدير إدارة تكنولوجيا المعلومات على تشغيل نموذج ذكاء اصطناعي على خوادم الجهة بدلًا من الخدمات السحابية. هذا القرار يهدف إلى تسهيل إدارة الموارد وزيادة المرونة في إدارة البيانات، حيث يمكننا تحليل البيانات فيما يتعلق بالجذور والآثار والممارسات الإدارية، مما يساعدنا في اتخاذ القرارات بشكل أفضل. من أسباب تطبيق نموذج ذكاء اصطناعي على خوادم الجهة هو زيادة الربح من البيانات، حيث يمكننا تصنيف البيانات بشكل أكثر فاعلية وتمكننا من تحليل البيانات بشكل أسرع وأفضل.",
+  "thinking": null,
+  "source_file": "results/raw/w2_p5_l1b-q8_20260831_153941.json"
+}

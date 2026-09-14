@@ -1,0 +1,38 @@
+{
+  "id": "a-w2-20260831T150548-l1b-q5-p4",
+  "machine": "machine-a",
+  "week": 2,
+  "timestamp": "20260831T150548",
+  "run_type": "quality",
+  "model": {
+    "id": "l1b-q5",
+    "quantization": "Q5_K_M"
+  },
+  "prompt": {
+    "id": "P4",
+    "version": "0.1"
+  },
+  "config": {
+    "num_predict": 500,
+    "temperature": 0.7,
+    "seed": 42,
+    "think": null
+  },
+  "environment": {
+    "os": "macOS Sequoia 15.7.7",
+    "runtime": "ollama 0.32.11",
+    "backend": "cpu"
+  },
+  "protocol": "isolated-session",
+  "metrics": {
+    "eval_count": 87,
+    "eval_rate": 22.69,
+    "prompt_eval_count": 91,
+    "prompt_eval_rate": 51.52,
+    "total_duration_s": 5.63,
+    "done_reason": "stop"
+  },
+  "output": "الشخص يقصد أن الحين الذي لم يكن بي شيء إلا بعد أن انتهى الأشهر وإن شاء الله يسد्द اللي علي بالفصحى، يعني أن الناس يريدون الدفع في الماضي، وإن شاء الله يمنحهم فائدة بالفصحى، يعني أنهم يريدون أن يصد्दوا العقد في الماضي.",
+  "thinking": null,
+  "source_file": "results/raw/w2_p4_l1b-q5_20260831_150548.json"
+}

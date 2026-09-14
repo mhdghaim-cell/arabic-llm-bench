@@ -1,0 +1,38 @@
+{
+  "id": "a-w2-20260831T153922-l1b-q8-p3",
+  "machine": "machine-a",
+  "week": 2,
+  "timestamp": "20260831T153922",
+  "run_type": "quality",
+  "model": {
+    "id": "l1b-q8",
+    "quantization": "Q8_0"
+  },
+  "prompt": {
+    "id": "P3",
+    "version": "0.1"
+  },
+  "config": {
+    "num_predict": 500,
+    "temperature": 0.7,
+    "seed": 42,
+    "think": null
+  },
+  "environment": {
+    "os": "macOS Sequoia 15.7.7",
+    "runtime": "ollama 0.32.11",
+    "backend": "cpu"
+  },
+  "protocol": "isolated-session",
+  "metrics": {
+    "eval_count": 53,
+    "eval_rate": 22.15,
+    "prompt_eval_count": 79,
+    "prompt_eval_rate": 65.38,
+    "total_duration_s": 3.63,
+    "done_reason": "stop"
+  },
+  "output": "التكلفة العالية للعديد من التطبيقات وتحليلات اللغة.\nالتكلفة العالية للبرامج الستار ووظائف الخبرانية.\nالتكلفة العالية للتعامل مع البرامج الستار.",
+  "thinking": null,
+  "source_file": "results/raw/w2_p3_l1b-q8_20260831_153922.json"
+}

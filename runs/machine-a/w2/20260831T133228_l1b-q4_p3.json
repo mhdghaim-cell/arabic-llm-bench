@@ -1,0 +1,38 @@
+{
+  "id": "a-w2-20260831T133228-l1b-q4-p3",
+  "machine": "machine-a",
+  "week": 2,
+  "timestamp": "20260831T133228",
+  "run_type": "quality",
+  "model": {
+    "id": "l1b-q4",
+    "quantization": "Q4_K_M"
+  },
+  "prompt": {
+    "id": "P3",
+    "version": "0.1"
+  },
+  "config": {
+    "num_predict": 500,
+    "temperature": 0.7,
+    "seed": 42,
+    "think": null
+  },
+  "environment": {
+    "os": "macOS Sequoia 15.7.7",
+    "runtime": "ollama 0.32.11",
+    "backend": "cpu"
+  },
+  "protocol": "isolated-session",
+  "metrics": {
+    "eval_count": 134,
+    "eval_rate": 40.63,
+    "prompt_eval_count": 79,
+    "prompt_eval_rate": 231.46,
+    "total_duration_s": 3.67,
+    "done_reason": "stop"
+  },
+  "output": "1. استهلاك المواد الخام: تكلفة التشغيل تسهم في زيادة استهلاك المواد الخام، التي تطلب استهلاك ملايين الدولار للبنية التحتية.\n\n2. تكلفة الطاقة: زيادة تكلفة الطاقة يمكن أن يؤثر على تكلفة التشغيل، حيث يمكن أن يزيد من تكاليف التهوية والهواء النظيف.\n\n3. تعمل النماذج على الكميات الكبيرة: تشغيل نماذج اللغة يتطلب استخدام كميات كبيرة من البيانات، مما يؤثر على تكلفة التشغيل.",
+  "thinking": null,
+  "source_file": "results/raw/w2_p3_l1b-q4_20260831_133228.json"
+}

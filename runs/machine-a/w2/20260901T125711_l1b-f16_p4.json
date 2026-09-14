@@ -1,0 +1,38 @@
+{
+  "id": "a-w2-20260901T125711-l1b-f16-p4",
+  "machine": "machine-a",
+  "week": 2,
+  "timestamp": "20260901T125711",
+  "run_type": "quality",
+  "model": {
+    "id": "l1b-f16",
+    "quantization": "F16"
+  },
+  "prompt": {
+    "id": "P4",
+    "version": "0.1"
+  },
+  "config": {
+    "num_predict": 500,
+    "temperature": 0.7,
+    "seed": 42,
+    "think": null
+  },
+  "environment": {
+    "os": "macOS Sequoia 15.7.7",
+    "runtime": "ollama 0.32.11",
+    "backend": "cpu"
+  },
+  "protocol": "isolated-session",
+  "metrics": {
+    "eval_count": 65,
+    "eval_rate": 10.31,
+    "prompt_eval_count": 91,
+    "prompt_eval_rate": 49.59,
+    "total_duration_s": 8.21,
+    "done_reason": "stop"
+  },
+  "output": "بالتأكيد، هذا النص يُشير إلى أن الصحابي يقصد أن الشهر تلاقيه شيلاً أو شئاً، ولكن بعد ذلك (بقاً) يريد أن يُدفع على شئ gì، وهذا ما يقصد بالدفع.",
+  "thinking": null,
+  "source_file": "results/raw/w2_p4_l1b-f16_20260901_125711.json"
+}

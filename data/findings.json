@@ -1,6 +1,6 @@
 {
   "version": "0.1",
-  "updated": "2026-08-20",
+  "updated": "2026-09-01",
   "findings": [
     {
       "slug": "apple-silicon-speedup",
@@ -53,6 +53,29 @@
       "title_ar": "البذرة الثابتة لا تضمن إعادة الإنتاج",
       "title_en": "A fixed seed does not guarantee reproducibility",
       "summary_ar": "حالة ذاكرة KV المؤقتة في Ollama تؤثر على التوليد بمعزل عن البذرة. رُصد على الجهازين."
+    },
+    {
+      "slug": "thermal-confound",
+      "week": 2,
+      "starred": true,
+      "title_ar": "الحرارة تفسد القياس على الأجهزة بلا مروحة",
+      "title_en": "Thermal state invalidates benchmarks on fanless hardware",
+      "summary_ar": "نفس الملف، نفس الأمر، فرق ٢٫٢× بين قياس معزول على جهاز بارد وقياس رابع في تسلسل. الخطأ الحراري من رتبة أثر التكميم نفسه."
+    },
+    {
+      "slug": "quantization-ladder",
+      "week": 2,
+      "title_ar": "سلّم التكميم: Q4 هاوية لا درجة",
+      "title_en": "The quantization ladder: Q4 is a cliff, not a step",
+      "summary_ar": "التكميم يضاعف السرعة فورًا (٢٫٢× على الأقل). Q5 وQ8 متطابقان عمليًا رغم فارق الحجم ٤٠٪. Q4 أسرع بـ٥٨٪ من كليهما."
+    },
+    {
+      "slug": "quantization-arabic-inconclusive",
+      "week": 2,
+      "title_ar": "هل يضرّ التكميم العربية؟ لم أستطع القياس",
+      "title_en": "Does quantization damage Arabic? Not measurable at 1B",
+      "summary_ar": "خمسة موجّهات على أربعة مستويات: النتائج ٥ إلى ٩ من ٢٤. الكل فشل، وF16 غير المكمّم كان الأسوأ. الفشل فشل سعة لا فشل ضغط. يُعاد الاختبار في الأسبوع الثامن.",
+      "result_type": "inconclusive"
     }
   ]
 }

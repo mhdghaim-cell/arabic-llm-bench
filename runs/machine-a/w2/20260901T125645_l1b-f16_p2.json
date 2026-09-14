@@ -1,0 +1,38 @@
+{
+  "id": "a-w2-20260901T125645-l1b-f16-p2",
+  "machine": "machine-a",
+  "week": 2,
+  "timestamp": "20260901T125645",
+  "run_type": "quality",
+  "model": {
+    "id": "l1b-f16",
+    "quantization": "F16"
+  },
+  "prompt": {
+    "id": "P2",
+    "version": "0.1"
+  },
+  "config": {
+    "num_predict": 500,
+    "temperature": 0.7,
+    "seed": 42,
+    "think": null
+  },
+  "environment": {
+    "os": "macOS Sequoia 15.7.7",
+    "runtime": "ollama 0.32.11",
+    "backend": "cpu"
+  },
+  "protocol": "isolated-session",
+  "metrics": {
+    "eval_count": 231,
+    "eval_rate": 11.61,
+    "prompt_eval_count": 111,
+    "prompt_eval_rate": 63.65,
+    "total_duration_s": 21.69,
+    "done_reason": "stop"
+  },
+  "output": "التحويلات:\n\n- البئر الأول: 4,000 لتر يوميًا\n- البئر الثاني: ضعف 1,000 لتر = 1,000 لتر يوميًا\n- البئر الثالث: يساوي متوسط إنتاج البئر الأول = 2,000 لتر يوميًا\n\nالتحويلات لتحويل الإنتاج المترipple:\n\n- البئر الأول + البئر الثاني + البئر الثالث = 4,000 + 1,000 + 2,000 = 7,000 لتر يوميًا\n- لتر يوميًا = 7,000 لتر / 7 = 1,000 لتر يوميًا\n\nالتحويلات لتحويل الإنتاج الأسبوعي:\n\n- الإنتاج الأسبوعي = الإنتاج الأسبوعي لتر = 1,000 لتر × 7 = 7,000 لتر\n\nبالتالي، تنتج المزرعة 7,000 لترًا من البئر في أسبوع ممتاز.",
+  "thinking": null,
+  "source_file": "results/raw/w2_p2_l1b-f16_20260901_125645.json"
+}

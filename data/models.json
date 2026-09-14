@@ -1,6 +1,6 @@
 {
   "version": "0.1",
-  "updated": "2026-08-20",
+  "updated": "2026-09-01",
   "note_en": "Digests verified identical across machines, so weights are the same; runtime and OS are not.",
   "models": [
     {
@@ -43,6 +43,50 @@
       "source": "ollama",
       "reasoning_mode": true,
       "fits_machine_a": false
+    },
+    {
+      "id": "l1b-q4",
+      "family": "llama3.2",
+      "params_b": 1,
+      "quantization": "Q4_K_M",
+      "size_gb": 0.75,
+      "source": "bartowski/Llama-3.2-1B-Instruct-GGUF",
+      "gguf_file": "Llama-3.2-1B-Instruct-Q4_K_M.gguf",
+      "reasoning_mode": false,
+      "note_en": "Registered locally via Modelfile for the Week 2 quantization ladder. Weights not committed."
+    },
+    {
+      "id": "l1b-q5",
+      "family": "llama3.2",
+      "params_b": 1,
+      "quantization": "Q5_K_M",
+      "size_gb": 0.84,
+      "source": "bartowski/Llama-3.2-1B-Instruct-GGUF",
+      "gguf_file": "Llama-3.2-1B-Instruct-Q5_K_M.gguf",
+      "reasoning_mode": false,
+      "note_en": "Registered locally via Modelfile for the Week 2 quantization ladder. Weights not committed."
+    },
+    {
+      "id": "l1b-q8",
+      "family": "llama3.2",
+      "params_b": 1,
+      "quantization": "Q8_0",
+      "size_gb": 1.22,
+      "source": "bartowski/Llama-3.2-1B-Instruct-GGUF",
+      "gguf_file": "Llama-3.2-1B-Instruct-Q8_0.gguf",
+      "reasoning_mode": false,
+      "note_en": "Registered locally via Modelfile for the Week 2 quantization ladder. Weights not committed."
+    },
+    {
+      "id": "l1b-f16",
+      "family": "llama3.2",
+      "params_b": 1,
+      "quantization": "F16",
+      "size_gb": 2.3,
+      "source": "bartowski/Llama-3.2-1B-Instruct-GGUF",
+      "gguf_file": "Llama-3.2-1B-Instruct-f16.gguf",
+      "reasoning_mode": false,
+      "note_en": "Registered locally via Modelfile for the Week 2 quantization ladder. Weights not committed."
     }
   ]
 }

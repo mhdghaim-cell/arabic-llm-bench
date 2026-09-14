@@ -1,0 +1,38 @@
+{
+  "id": "a-w2-20260831T133239-l1b-q4-p4",
+  "machine": "machine-a",
+  "week": 2,
+  "timestamp": "20260831T133239",
+  "run_type": "quality",
+  "model": {
+    "id": "l1b-q4",
+    "quantization": "Q4_K_M"
+  },
+  "prompt": {
+    "id": "P4",
+    "version": "0.1"
+  },
+  "config": {
+    "num_predict": 500,
+    "temperature": 0.7,
+    "seed": 42,
+    "think": null
+  },
+  "environment": {
+    "os": "macOS Sequoia 15.7.7",
+    "runtime": "ollama 0.32.11",
+    "backend": "cpu"
+  },
+  "protocol": "isolated-session",
+  "metrics": {
+    "eval_count": 95,
+    "eval_rate": 40.05,
+    "prompt_eval_count": 91,
+    "prompt_eval_rate": 218.12,
+    "total_duration_s": 2.81,
+    "done_reason": "stop"
+  },
+  "output": "الشخص يقصد أنّ في الشهر (الذي يمتد من شهر January إلى شهر December في السنة الميلadera) إذا كان من الم ukif (النكيف) وإن شاء الله (وإن كان له الشفاقة) sẽ أنشأ (أي يعمل على إنشاء) اسددة (أي حقيقي) اللي (أي يأتي) علي (بالصحيح)",
+  "thinking": null,
+  "source_file": "results/raw/w2_p4_l1b-q4_20260831_133239.json"
+}

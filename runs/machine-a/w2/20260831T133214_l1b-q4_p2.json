@@ -1,0 +1,38 @@
+{
+  "id": "a-w2-20260831T133214-l1b-q4-p2",
+  "machine": "machine-a",
+  "week": 2,
+  "timestamp": "20260831T133214",
+  "run_type": "quality",
+  "model": {
+    "id": "l1b-q4",
+    "quantization": "Q4_K_M"
+  },
+  "prompt": {
+    "id": "P2",
+    "version": "0.1"
+  },
+  "config": {
+    "num_predict": 500,
+    "temperature": 0.7,
+    "seed": 42,
+    "think": null
+  },
+  "environment": {
+    "os": "macOS Sequoia 15.7.7",
+    "runtime": "ollama 0.32.11",
+    "backend": "cpu"
+  },
+  "protocol": "isolated-session",
+  "metrics": {
+    "eval_count": 255,
+    "eval_rate": 41.34,
+    "prompt_eval_count": 111,
+    "prompt_eval_rate": 106.84,
+    "total_duration_s": 7.27,
+    "done_reason": "stop"
+  },
+  "output": "بالتأكيد، الخطوات للคำputation:\n\n1.  فعل إنتاج البئر الأول ينتج 400 لتر يوميًا.\n2.  فعل إنتاج البئر الثاني ضعف البئر الأول ناقص 100 لتر، مع nghĩa أن البئر الثاني ينتج 400 لتر / 2 = 200 لتر يوميًا.\n3.  فعل إنتاج البئر الثالث يساوي إنتاج البئر الأول، مع nghĩa أن البئر الثالث ينتج 400 لتر يوميًا.\n4.  لتحديد إنتاج المزرعة، يمكننا إضافة إنتاج البئرين كالتالي:\n *   إنتاج البئر الأول: 400 لتر\n *   إنتاج البئر الثاني: 200 لتر\n *   إنتاج البئر الثالث: 400 لتر\n\nهذا يعني أن المزرعة تنتج:\n\n*   400 لتر + 200 لتر = 600 لتر يوميًا\n*   600 لتر = 600 لتر يوميًا\n\nمزرعة المزرعة تنتج 600 لتر يوميًا.",
+  "thinking": null,
+  "source_file": "results/raw/w2_p2_l1b-q4_20260831_133214.json"
+}

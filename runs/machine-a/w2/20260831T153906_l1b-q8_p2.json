@@ -1,0 +1,38 @@
+{
+  "id": "a-w2-20260831T153906-l1b-q8-p2",
+  "machine": "machine-a",
+  "week": 2,
+  "timestamp": "20260831T153906",
+  "run_type": "quality",
+  "model": {
+    "id": "l1b-q8",
+    "quantization": "Q8_0"
+  },
+  "prompt": {
+    "id": "P2",
+    "version": "0.1"
+  },
+  "config": {
+    "num_predict": 500,
+    "temperature": 0.7,
+    "seed": 42,
+    "think": null
+  },
+  "environment": {
+    "os": "macOS Sequoia 15.7.7",
+    "runtime": "ollama 0.32.11",
+    "backend": "cpu"
+  },
+  "protocol": "isolated-session",
+  "metrics": {
+    "eval_count": 318,
+    "eval_rate": 21.71,
+    "prompt_eval_count": 111,
+    "prompt_eval_rate": 72.8,
+    "total_duration_s": 16.2,
+    "done_reason": "stop"
+  },
+  "output": "إليك الخطوات لتحليل الحaso:\n\n1.  Calculate the daily production of the first well:\n\n   - Daily production of the first well = 4,000 لتر / 3 = 1,333 لتر\n\n2.  Calculate the daily production of the second well:\n\n   - Since the second well is 10% less than the first well, its daily production can be calculated as:\n\n     - Daily production of the second well = 1,333 لتر / 0.9 = 1,444 لتر\n\n3.  Calculate the daily production of the third well:\n\n   - Since the third well is equal to the average production of the first two wells, its daily production is:\n\n     - Daily production of the third well = 1,333 لتر + 1,444 لتر = 2,777 لتر\n\n4.  Calculate the total daily production of the three wells:\n\n   - Total daily production = Daily production of the first well + Daily production of the second well + Daily production of the third well\n\n   - Total daily production = 1,333 لتر + 1,444 لتر + 2,777 لتر = 5,774 لتر\n\n5.  Calculate the total weekly production:\n\n   - Since there are 7 days in a week, the total weekly production can be calculated as:\n\n     - Total weekly production = Total daily production x 7\n\n     - Total weekly production = 5,774 لتر x 7 = 40,118 لتر",
+  "thinking": null,
+  "source_file": "results/raw/w2_p2_l1b-q8_20260831_153906.json"
+}
