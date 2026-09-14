@@ -11,3 +11,4 @@ __pycache__/
 .idea/
 migrate.py
 models/
+index_w2.py
