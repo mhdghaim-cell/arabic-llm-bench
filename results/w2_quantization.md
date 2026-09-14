@@ -95,7 +95,7 @@ Prompts P1 to P5 from `data/prompts.json`, run through the Ollama HTTP API at `n
 | P3 | instruction-following | 3/4 | **4/4** | 3/4 | 1/4 |
 | P4 | Gulf dialect | 1/5 | 1/5 | 1/5 | 1/5 |
 | P5 | formal writing | 1/5 | 2/5 | 2/5 | 1/5 |
-| **Total** | | **7/24** | **8/24** | **9/24** | **5/24** |
+| **Total** | | **7/24** | **9/24** | **9/24** | **5/24** |
 
 ### The result is negative, and that is the finding
 

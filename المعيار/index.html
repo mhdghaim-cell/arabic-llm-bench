@@ -6,12 +6,71 @@
 <title>مقياس — المعيار</title>
 <meta name="description" content="نتائج قياسات على أجهزة حقيقية، كل نتيجة لها إيصال خام قابل للفحص.">
 <link rel="stylesheet" href="../assets/base.css">
+<style>
+  /* ── week tabs ────────────────────────────────────────── */
+  .week-tabs{display:flex;gap:.5rem;margin-block-start:1.5rem;border-block-end:1px solid var(--rule)}
+  .week-tab{
+    font-family:var(--mono);font-size:.8125rem;background:none;border:none;
+    color:var(--dim);padding:.65rem 0;cursor:pointer;position:relative;
+    margin-inline-end:1.25rem;
+  }
+  .week-tab[aria-selected="true"]{color:var(--ink)}
+  .week-tab[aria-selected="true"]::after{
+    content:"";position:absolute;inset-inline:0;block-size:2px;background:var(--signal);
+    inset-block-end:-1px;
+  }
+  .week-tab:hover{color:var(--ink)}
+  .week-panel[hidden]{display:none}
+
+  /* ── ± measurement formatting ────────────────────────── */
+  .pm{color:var(--dim);font-size:.85em}
+
+  /* ── thermal / validity marking ──────────────────────── */
+  .row-invalid td{color:var(--dim)}
+  .row-invalid td.num{text-decoration:line-through;text-decoration-color:var(--rule)}
+  .valid-tag{
+    display:inline-block;font-family:var(--mono);font-size:.65rem;
+    border:1px solid var(--rule);padding:.1rem .45rem;border-radius:2px;
+    white-space:nowrap;
+  }
+  .valid-tag.ok{color:var(--verify)}
+  .valid-tag.bad{color:var(--signal);border-color:var(--signal)}
+  .cond-note{font-size:.8125rem;color:var(--dim);margin-block-start:.15rem}
+
+  /* ── inconclusive banner ──────────────────────────────── */
+  .banner{
+    background:#fff;border:1px solid var(--rule);border-inline-start:3px solid var(--dim);
+    border-radius:2px;padding:1rem 1.15rem;margin-block-start:1rem;font-size:.9375rem;
+  }
+  .banner p + p{margin-block-start:.6rem}
+  .banner .caution{color:var(--dim);font-size:.8125rem;margin-block-start:.75rem}
+
+  .subhead{font-size:1.0625rem;font-weight:600;margin-block-start:2.5rem;letter-spacing:-.01em}
+  .subhead-note{font-size:.8125rem;color:var(--dim);margin-block-start:.3rem;max-width:38rem}
+
+  /* ── methodology panel ───────────────────────────────── */
+  #methodology-details{margin-block-start:1rem}
+  #methodology-details summary{
+    cursor:pointer;font-family:var(--mono);font-size:.8125rem;color:var(--verify);
+    padding:.6rem 0;list-style:none;
+  }
+  #methodology-details summary::-webkit-details-marker{display:none}
+  #methodology-details summary::before{content:"▸ ";display:inline-block}
+  #methodology-details[open] summary::before{content:"▾ "}
+  #methodology-details[open] summary{margin-block-end:.5rem}
+  .exception-block{margin-block-start:.6rem;font-size:.9375rem;max-width:44rem}
+  .exception-block b{color:var(--signal)}
+  .methodology-link{color:var(--verify);text-decoration:none;border-block-end:1px solid var(--rule)}
+  .methodology-link:hover{border-color:var(--verify)}
+</style>
 </head>
 <body>
 
 <div class="strip"><div class="wrap">
   <span>المعيار <b class="ver" id="v">v0.1</b></span>
   <span>تشغيلات <b id="n">0</b></span>
+  <span>النماذج <b id="models-count">0</b></span>
+  <span>الأجهزة <b id="hw">—</b></span>
   <span>آخر تحديث <b id="d">لم يُحدَّث بعد</b></span>
   <span>ترخيص <b>MIT</b></span>
 </div></div>
@@ -20,7 +79,7 @@
 
 <header>
   <h1>مقياس <span>· المعيار</span></h1>
-  <p class="tagline">نتائج قياسات على أجهزة حقيقية. كل نتيجة لها إيصال خام — الطلب، الناتج الكامل، والتوقيت — تقدر تفحصه بنفسك.</p>
+  <p class="tagline">نتائج قياسات على أجهزة حقيقية. كل رقم مُقاس له إيصال خام — الطلب، الناتج الكامل، والتوقيت — تقدر تفحصه بنفسك.</p>
   <div class="meta">
     <span>مفتوح ومجاني · بلا تسجيل</span>
     <a href="مساهمون/">حائط المساهمين ↗</a>
@@ -29,69 +88,2791 @@
   </div>
 </header>
 
-<section class="section-head">
-  <h2>معايير التقييم</h2>
-  <p>كل تشغيلة تُقيَّم على أربعة أبعاد، من ٠ إلى ١٠. التفاصيل الكاملة في <a href="../المنهجية/">المنهجية</a>.</p>
-  <div class="rubric-key" id="rubric-key"></div>
+<nav class="week-tabs" role="tablist" aria-label="اختيار الأسبوع">
+  <button class="week-tab" id="tab-w2" role="tab" aria-selected="true" aria-controls="week-2" data-week="2">الأسبوع ٢ — سلّم التكميم</button>
+  <button class="week-tab" id="tab-w1" role="tab" aria-selected="false" aria-controls="week-1" data-week="1">الأسبوع ١ — مقارنة الأجهزة والنماذج</button>
+</nav>
+
+<!-- ══════════════════ الأسبوع ٢ ══════════════════ -->
+<section class="week-panel" id="week-2" role="tabpanel" aria-labelledby="tab-w2">
+
+  <section class="section-head">
+    <h2>سلّم التكميم</h2>
+    <p>أربعة مستويات لنفس نموذج <span dir="ltr">llama3.2:1b</span>، مقاسة بمعزل كل واحد عن الآخر على جهاز بارد. الحجم وسرعتا معالجة الموجّه (<span dir="ltr">pp512</span>) والتوليد (<span dir="ltr">tg128</span>) — بانحرافها المعياري.</p>
+    <div id="ladder-area"></div>
+  </section>
+
+  <section class="section-head">
+    <h2>الحرارة تُفسد القياس</h2>
+    <p id="thermal-intro"></p>
+    <div id="thermal-area"></div>
+  </section>
+
+  <section class="section-head">
+    <h2>جودة العربية عبر مستويات التكميم</h2>
+    <p>خمسة موجّهات (P1–P5) على المستويات الأربعة، بمقيّم بشري واحد.</p>
+    <div id="w2-quality-banner"></div>
+    <div id="w2-quality-area"></div>
+  </section>
+
 </section>
 
-<section class="section-head">
-  <h2>النتائج</h2>
-  <div id="results-area"></div>
+<!-- ══════════════════ الأسبوع ١ ══════════════════ -->
+<section class="week-panel" id="week-1" role="tabpanel" aria-labelledby="tab-w1" hidden>
+
+  <section class="section-head">
+    <h2>جودة العربية</h2>
+    <p>سبعة موجّهات (P1–P7) على تشغيلة واحدة لكل نموذج، مقيّم بشري واحد. <span dir="ltr">P3</span> ثنائي على أربعة قيود ويُنشر من ٤ لا من ٥. <span dir="ltr">P7</span> معكوس: ٥ يعني الاعتراف بعدم إمكانية المعرفة، ١ يعني اختلاق رقم دقيق. كلا الاستثناءين موثّق في رتبة التقييم أدناه.</p>
+    <div id="w1-quality-area"></div>
+  </section>
+
+  <section class="section-head">
+    <h2>السرعة عبر الأجهزة</h2>
+    <p>الوسيط من تشغيلات <span dir="ltr">P5</span> فقط — الموجّه الوحيد المصمَّم لقياس التوقيت. الوسيط محسوب من تشغيلات بروتوكول <span dir="ltr">three-run-median</span> فقط؛ التشغيلات المساندة (<span dir="ltr">corroborating</span>) مستبعدة من الوسيط وتُعرض في صف منفصل. صفوف <span dir="ltr">machine-a</span> مقسومة بحسب حالة الجهاز — نظيف مقابل محمّل بتطبيقات خلفية نشطة — لأن الفرق بينهما قياس منشور في حد ذاته (٥–٢٢٪ من الإنتاجية). قارن عبر الأجهزة على صفوف الحالة النظيفة فقط.</p>
+    <div id="w1-speed-area"></div>
+  </section>
+
 </section>
 
-<section class="section-head">
-  <h2>لوحة الصدارة</h2>
-  <p>مساهمات مجتمعية — كل صف مُنسَب لصاحبه، وكل نتيجة لها إيصال. <a href="مساهمون/">حائط المساهمين ↗</a></p>
-  <div id="leaderboard-area"></div>
+<section class="section-head" id="methodology-panel">
+  <h2>رتبة التقييم والمنهجية</h2>
+  <details id="methodology-details">
+    <summary>عرض الأبعاد الأربعة، الاستثناءان، بروتوكول الجلسة المعزولة، والقيود المعروفة</summary>
+    <div class="rubric-key" id="methodology-rubric"></div>
+    <div id="methodology-exceptions"></div>
+    <div id="methodology-protocol"></div>
+    <div id="methodology-limitations"></div>
+  </details>
+  <p class="hint">النسخة الكاملة، بما فيها حجم العينة وسجل التغييرات، في <a href="../المنهجية/">صفحة المنهجية المستقلة ↗</a>.</p>
 </section>
 
 <footer>
-  <p>البيانات كاملة في <code>data/results.json</code>، وإيصال كل تشغيلة في <code>data/receipts/&lt;run-id&gt;.json</code> — استخدمها كما تشاء بموجب ترخيص MIT.</p>
+  <p>البيانات كاملة في <code>data/*.json</code>، وسجل كل تشغيلة في <code>runs/&lt;machine&gt;/&lt;week&gt;/&lt;run-id&gt;.json</code> — استخدمها كما تشاء بموجب ترخيص MIT.</p>
   <p>لا نتائج مفترضة هنا: أي رقم لم يُقَس بعد يظهر كـ«لم يُقَس بعد»، لا صفرًا ولا شرطة عابرة.</p>
 </footer>
 
 </div>
 
 <!-- ═══ DATA SPINE ═══════════════════════════════════
-     Fetched from /data/results.json at runtime. Fallback copy for file://;
-     `npm run build` regenerates it. Do not hand-edit below.
+     Fetched from /data/*.json at runtime. Fallback copies below for file://;
+     `npm run build` regenerates them. Do not hand-edit below.
      ═══════════════════════════════════════════════ -->
-<script type="application/json" id="results-data" data-src="/data/results.json">
+<script type="application/json" id="machines-data" data-src="/data/machines.json">
 {
   "version": "0.1",
-  "updated": null,
-  "rubric": {
-    "dimensions": [
-      {
-        "id": "accuracy",
-        "name": "دقة",
-        "description": "هل الإجابة صحيحة واقعيًا، بلا أخطاء أو اختلاق معلومات؟"
-      },
-      {
-        "id": "fluency",
-        "name": "بلاغة",
-        "description": "هل اللغة سليمة نحويًا وطبيعية، لا مترجمة حرفيًا أو مكسّرة؟"
-      },
-      {
-        "id": "instruction_following",
-        "name": "التزام بالتعليمات",
-        "description": "هل نفّذ النموذج ما طُلب منه تحديدًا، بالصيغة والطول المطلوبين؟"
-      },
-      {
-        "id": "safety",
-        "name": "سلامة",
-        "description": "هل تجنّب النموذج محتوى ضارًا أو منحازًا أو غير لائق؟"
-      }
-    ],
-    "scale": [
-      0,
-      10
-    ]
+  "updated": "2026-08-20",
+  "machines": [
+    {
+      "id": "machine-a",
+      "label_ar": "الجهاز أ",
+      "label_en": "Machine A",
+      "role": "baseline",
+      "model": "MacBook Air (Retina, 13-inch, 2020)",
+      "cpu": "1.2 GHz Quad-Core Intel Core i7 (Ice Lake, 4C/8T)",
+      "gpu": "Intel Iris Plus 1536 MB — unused, CPU-only inference",
+      "ram_gb": 8,
+      "ram_spec": "LPDDR4X 3733 MHz",
+      "os": "macOS Sequoia 15.7.7",
+      "runtime": "ollama 0.32.11",
+      "backend": "cpu",
+      "owned": true,
+      "cost_per_day_usd": 0,
+      "notes_en": "Fanless chassis; sustained clocks thermally limited. Real model budget ~4-4.5 GB after OS overhead. Ceiling 3B-4B at Q4."
+    },
+    {
+      "id": "machine-b",
+      "label_ar": "الجهاز ب",
+      "label_en": "Machine B",
+      "role": "capability",
+      "model": "Mac mini M4 (rented)",
+      "cpu": "Apple M4",
+      "gpu": "Apple M4 integrated — Metal backend",
+      "ram_gb": 16,
+      "ram_spec": "unified",
+      "os": "macOS 26.6.1",
+      "runtime": "ollama 0.32.14",
+      "backend": "metal",
+      "owned": false,
+      "provider": "Macly",
+      "cost_per_day_usd": 14.99,
+      "notes_en": "Rented per day. OS and runtime differ from Machine A — disclosed as uncontrolled variables in cross-machine comparisons."
+    }
+  ]
+}
+</script>
+<script type="application/json" id="runs-data" data-src="/data/runs.json">
+{
+  "version": "0.2",
+  "updated": "2026-09-01",
+  "count": 63,
+  "by_week": {
+    "1": 43,
+    "2": 20
   },
-  "hardware_profiles": [],
-  "models": [],
-  "prompts_doc": "data/prompts_v0.md",
+  "runs": [
+    {
+      "id": "a-w1-20260817T202859-llama3.2_1b-p5",
+      "machine": "machine-a",
+      "week": 1,
+      "timestamp": "20260817T202859",
+      "machine_state": "loaded",
+      "run_type": "timing",
+      "model": {
+        "id": "llama3.2:1b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 120,
+        "eval_rate": 20.43,
+        "prompt_eval_count": null,
+        "prompt_eval_rate": 60.1,
+        "total_duration_s": 12.8,
+        "done_reason": null
+      },
+      "path": "runs/machine-a/w1/20260817T202859_llama3.2_1b_p5.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "a-w1-20260818T125204-llama3.2_1b-p5",
+      "machine": "machine-a",
+      "week": 1,
+      "timestamp": "20260818T125204",
+      "machine_state": "loaded",
+      "run_type": "timing",
+      "model": {
+        "id": "llama3.2:1b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 120,
+        "eval_rate": 21.58,
+        "prompt_eval_count": null,
+        "prompt_eval_rate": 66.74,
+        "total_duration_s": 12.2,
+        "done_reason": null
+      },
+      "path": "runs/machine-a/w1/20260818T125204_llama3.2_1b_p5.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "a-w1-20260818T125554-llama3.2_1b-p5",
+      "machine": "machine-a",
+      "week": 1,
+      "timestamp": "20260818T125554",
+      "machine_state": "loaded",
+      "run_type": "timing",
+      "model": {
+        "id": "llama3.2:1b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 291,
+        "eval_rate": 19.75,
+        "prompt_eval_count": null,
+        "prompt_eval_rate": 119.05,
+        "total_duration_s": 15.9,
+        "done_reason": null
+      },
+      "path": "runs/machine-a/w1/20260818T125554_llama3.2_1b_p5.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "a-w1-20260819T190054-llama3.2_1b-p5",
+      "machine": "machine-a",
+      "week": 1,
+      "timestamp": "20260819T190054",
+      "machine_state": "clean",
+      "run_type": "timing",
+      "model": {
+        "id": "llama3.2:1b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 120,
+        "eval_rate": 21.57,
+        "prompt_eval_count": null,
+        "prompt_eval_rate": 68.54,
+        "total_duration_s": 10.8,
+        "done_reason": null
+      },
+      "path": "runs/machine-a/w1/20260819T190054_llama3.2_1b_p5.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "a-w1-20260819T190116-llama3.2_1b-p5",
+      "machine": "machine-a",
+      "week": 1,
+      "timestamp": "20260819T190116",
+      "machine_state": "clean",
+      "run_type": "timing",
+      "model": {
+        "id": "llama3.2:1b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 291,
+        "eval_rate": 20.61,
+        "prompt_eval_count": null,
+        "prompt_eval_rate": 1562.16,
+        "total_duration_s": 14.5,
+        "done_reason": null
+      },
+      "path": "runs/machine-a/w1/20260819T190116_llama3.2_1b_p5.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "a-w1-20260819T190135-llama3.2_1b-p5",
+      "machine": "machine-a",
+      "week": 1,
+      "timestamp": "20260819T190135",
+      "machine_state": "clean",
+      "run_type": "timing",
+      "model": {
+        "id": "llama3.2:1b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 291,
+        "eval_rate": 18.5,
+        "prompt_eval_count": null,
+        "prompt_eval_rate": 2715.25,
+        "total_duration_s": 16.1,
+        "done_reason": null
+      },
+      "path": "runs/machine-a/w1/20260819T190135_llama3.2_1b_p5.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "a-w1-20260819T190232-qwen3_1.7b-p5",
+      "machine": "machine-a",
+      "week": 1,
+      "timestamp": "20260819T190232",
+      "machine_state": "clean",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:1.7b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 300,
+        "eval_rate": 19.92,
+        "prompt_eval_count": null,
+        "prompt_eval_rate": 90.89,
+        "total_duration_s": 20.8,
+        "done_reason": null
+      },
+      "path": "runs/machine-a/w1/20260819T190232_qwen3_1.7b_p5.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "a-w1-20260819T190309-qwen3_1.7b-p5",
+      "machine": "machine-a",
+      "week": 1,
+      "timestamp": "20260819T190309",
+      "machine_state": "clean",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:1.7b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 300,
+        "eval_rate": 19.39,
+        "prompt_eval_count": null,
+        "prompt_eval_rate": 2531.57,
+        "total_duration_s": 15.9,
+        "done_reason": null
+      },
+      "path": "runs/machine-a/w1/20260819T190309_qwen3_1.7b_p5.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "a-w1-20260819T190328-qwen3_1.7b-p5",
+      "machine": "machine-a",
+      "week": 1,
+      "timestamp": "20260819T190328",
+      "machine_state": "clean",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:1.7b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 300,
+        "eval_rate": 17.75,
+        "prompt_eval_count": null,
+        "prompt_eval_rate": 1707.61,
+        "total_duration_s": 17.3,
+        "done_reason": null
+      },
+      "path": "runs/machine-a/w1/20260819T190328_qwen3_1.7b_p5.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "a-w1-20260819T190420-llama3.2_3b-p5",
+      "machine": "machine-a",
+      "week": 1,
+      "timestamp": "20260819T190420",
+      "machine_state": "clean",
+      "run_type": "timing",
+      "model": {
+        "id": "llama3.2:3b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 116,
+        "eval_rate": 12.55,
+        "prompt_eval_count": null,
+        "prompt_eval_rate": 45.94,
+        "total_duration_s": 22,
+        "done_reason": null
+      },
+      "path": "runs/machine-a/w1/20260819T190420_llama3.2_3b_p5.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "a-w1-20260819T190451-llama3.2_3b-p5",
+      "machine": "machine-a",
+      "week": 1,
+      "timestamp": "20260819T190451",
+      "machine_state": "clean",
+      "run_type": "timing",
+      "model": {
+        "id": "llama3.2:3b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 182,
+        "eval_rate": 11.6,
+        "prompt_eval_count": null,
+        "prompt_eval_rate": 1528.73,
+        "total_duration_s": 16.1,
+        "done_reason": null
+      },
+      "path": "runs/machine-a/w1/20260819T190451_llama3.2_3b_p5.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "a-w1-20260819T190524-llama3.2_3b-p5",
+      "machine": "machine-a",
+      "week": 1,
+      "timestamp": "20260819T190524",
+      "machine_state": "clean",
+      "run_type": "timing",
+      "model": {
+        "id": "llama3.2:3b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 182,
+        "eval_rate": 12.18,
+        "prompt_eval_count": null,
+        "prompt_eval_rate": 1619.56,
+        "total_duration_s": 15.4,
+        "done_reason": null
+      },
+      "path": "runs/machine-a/w1/20260819T190524_llama3.2_3b_p5.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "a-w2-20260831T130450-l1b-q4-p5",
+      "machine": "machine-a",
+      "week": 2,
+      "timestamp": "20260831T130450",
+      "run_type": "quality",
+      "model": {
+        "id": "l1b-q4",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 276,
+        "eval_rate": 32.41,
+        "prompt_eval_count": 103,
+        "prompt_eval_rate": 131.23,
+        "total_duration_s": 13.14,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-a/w2/20260831T130450_l1b-q4_p5.json",
+      "protocol": "isolated-session"
+    },
+    {
+      "id": "a-w2-20260831T132740-l1b-q4-p1",
+      "machine": "machine-a",
+      "week": 2,
+      "timestamp": "20260831T132740",
+      "run_type": "quality",
+      "model": {
+        "id": "l1b-q4",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P1",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 409,
+        "eval_rate": 42.22,
+        "prompt_eval_count": 93,
+        "prompt_eval_rate": 71.18,
+        "total_duration_s": 11.06,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-a/w2/20260831T132740_l1b-q4_p1.json",
+      "protocol": "isolated-session"
+    },
+    {
+      "id": "a-w2-20260831T133214-l1b-q4-p2",
+      "machine": "machine-a",
+      "week": 2,
+      "timestamp": "20260831T133214",
+      "run_type": "quality",
+      "model": {
+        "id": "l1b-q4",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P2",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 255,
+        "eval_rate": 41.34,
+        "prompt_eval_count": 111,
+        "prompt_eval_rate": 106.84,
+        "total_duration_s": 7.27,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-a/w2/20260831T133214_l1b-q4_p2.json",
+      "protocol": "isolated-session"
+    },
+    {
+      "id": "a-w2-20260831T133228-l1b-q4-p3",
+      "machine": "machine-a",
+      "week": 2,
+      "timestamp": "20260831T133228",
+      "run_type": "quality",
+      "model": {
+        "id": "l1b-q4",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P3",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 134,
+        "eval_rate": 40.63,
+        "prompt_eval_count": 79,
+        "prompt_eval_rate": 231.46,
+        "total_duration_s": 3.67,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-a/w2/20260831T133228_l1b-q4_p3.json",
+      "protocol": "isolated-session"
+    },
+    {
+      "id": "a-w2-20260831T133239-l1b-q4-p4",
+      "machine": "machine-a",
+      "week": 2,
+      "timestamp": "20260831T133239",
+      "run_type": "quality",
+      "model": {
+        "id": "l1b-q4",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P4",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 95,
+        "eval_rate": 40.05,
+        "prompt_eval_count": 91,
+        "prompt_eval_rate": 218.12,
+        "total_duration_s": 2.81,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-a/w2/20260831T133239_l1b-q4_p4.json",
+      "protocol": "isolated-session"
+    },
+    {
+      "id": "a-w2-20260831T150504-l1b-q5-p1",
+      "machine": "machine-a",
+      "week": 2,
+      "timestamp": "20260831T150504",
+      "run_type": "quality",
+      "model": {
+        "id": "l1b-q5",
+        "quantization": "Q5_K_M"
+      },
+      "prompt": {
+        "id": "P1",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 329,
+        "eval_rate": 25.74,
+        "prompt_eval_count": 93,
+        "prompt_eval_rate": 52.57,
+        "total_duration_s": 20.89,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-a/w2/20260831T150504_l1b-q5_p1.json",
+      "protocol": "isolated-session"
+    },
+    {
+      "id": "a-w2-20260831T150525-l1b-q5-p2",
+      "machine": "machine-a",
+      "week": 2,
+      "timestamp": "20260831T150525",
+      "run_type": "quality",
+      "model": {
+        "id": "l1b-q5",
+        "quantization": "Q5_K_M"
+      },
+      "prompt": {
+        "id": "P2",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 323,
+        "eval_rate": 19.57,
+        "prompt_eval_count": 111,
+        "prompt_eval_rate": 49.65,
+        "total_duration_s": 18.94,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-a/w2/20260831T150525_l1b-q5_p2.json",
+      "protocol": "isolated-session"
+    },
+    {
+      "id": "a-w2-20260831T150544-l1b-q5-p3",
+      "machine": "machine-a",
+      "week": 2,
+      "timestamp": "20260831T150544",
+      "run_type": "quality",
+      "model": {
+        "id": "l1b-q5",
+        "quantization": "Q5_K_M"
+      },
+      "prompt": {
+        "id": "P3",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 36,
+        "eval_rate": 16.04,
+        "prompt_eval_count": 79,
+        "prompt_eval_rate": 47.96,
+        "total_duration_s": 3.93,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-a/w2/20260831T150544_l1b-q5_p3.json",
+      "protocol": "isolated-session"
+    },
+    {
+      "id": "a-w2-20260831T150548-l1b-q5-p4",
+      "machine": "machine-a",
+      "week": 2,
+      "timestamp": "20260831T150548",
+      "run_type": "quality",
+      "model": {
+        "id": "l1b-q5",
+        "quantization": "Q5_K_M"
+      },
+      "prompt": {
+        "id": "P4",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 87,
+        "eval_rate": 22.69,
+        "prompt_eval_count": 91,
+        "prompt_eval_rate": 51.52,
+        "total_duration_s": 5.63,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-a/w2/20260831T150548_l1b-q5_p4.json",
+      "protocol": "isolated-session"
+    },
+    {
+      "id": "a-w2-20260831T150554-l1b-q5-p5",
+      "machine": "machine-a",
+      "week": 2,
+      "timestamp": "20260831T150554",
+      "run_type": "quality",
+      "model": {
+        "id": "l1b-q5",
+        "quantization": "Q5_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 218,
+        "eval_rate": 22.01,
+        "prompt_eval_count": 103,
+        "prompt_eval_rate": 55.56,
+        "total_duration_s": 11.79,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-a/w2/20260831T150554_l1b-q5_p5.json",
+      "protocol": "isolated-session"
+    },
+    {
+      "id": "a-w2-20260831T153855-l1b-q8-p1",
+      "machine": "machine-a",
+      "week": 2,
+      "timestamp": "20260831T153855",
+      "run_type": "quality",
+      "model": {
+        "id": "l1b-q8",
+        "quantization": "Q8_0"
+      },
+      "prompt": {
+        "id": "P1",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 78,
+        "eval_rate": 21.42,
+        "prompt_eval_count": 93,
+        "prompt_eval_rate": 61.23,
+        "total_duration_s": 10.71,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-a/w2/20260831T153855_l1b-q8_p1.json",
+      "protocol": "isolated-session"
+    },
+    {
+      "id": "a-w2-20260831T153906-l1b-q8-p2",
+      "machine": "machine-a",
+      "week": 2,
+      "timestamp": "20260831T153906",
+      "run_type": "quality",
+      "model": {
+        "id": "l1b-q8",
+        "quantization": "Q8_0"
+      },
+      "prompt": {
+        "id": "P2",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 318,
+        "eval_rate": 21.71,
+        "prompt_eval_count": 111,
+        "prompt_eval_rate": 72.8,
+        "total_duration_s": 16.2,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-a/w2/20260831T153906_l1b-q8_p2.json",
+      "protocol": "isolated-session"
+    },
+    {
+      "id": "a-w2-20260831T153922-l1b-q8-p3",
+      "machine": "machine-a",
+      "week": 2,
+      "timestamp": "20260831T153922",
+      "run_type": "quality",
+      "model": {
+        "id": "l1b-q8",
+        "quantization": "Q8_0"
+      },
+      "prompt": {
+        "id": "P3",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 53,
+        "eval_rate": 22.15,
+        "prompt_eval_count": 79,
+        "prompt_eval_rate": 65.38,
+        "total_duration_s": 3.63,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-a/w2/20260831T153922_l1b-q8_p3.json",
+      "protocol": "isolated-session"
+    },
+    {
+      "id": "a-w2-20260831T153926-l1b-q8-p4",
+      "machine": "machine-a",
+      "week": 2,
+      "timestamp": "20260831T153926",
+      "run_type": "quality",
+      "model": {
+        "id": "l1b-q8",
+        "quantization": "Q8_0"
+      },
+      "prompt": {
+        "id": "P4",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 272,
+        "eval_rate": 20.2,
+        "prompt_eval_count": 91,
+        "prompt_eval_rate": 67.39,
+        "total_duration_s": 14.84,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-a/w2/20260831T153926_l1b-q8_p4.json",
+      "protocol": "isolated-session"
+    },
+    {
+      "id": "a-w2-20260831T153941-l1b-q8-p5",
+      "machine": "machine-a",
+      "week": 2,
+      "timestamp": "20260831T153941",
+      "run_type": "quality",
+      "model": {
+        "id": "l1b-q8",
+        "quantization": "Q8_0"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 171,
+        "eval_rate": 19.55,
+        "prompt_eval_count": 103,
+        "prompt_eval_rate": 63.7,
+        "total_duration_s": 10.39,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-a/w2/20260831T153941_l1b-q8_p5.json",
+      "protocol": "isolated-session"
+    },
+    {
+      "id": "a-w2-20260901T125626-l1b-f16-p1",
+      "machine": "machine-a",
+      "week": 2,
+      "timestamp": "20260901T125626",
+      "run_type": "quality",
+      "model": {
+        "id": "l1b-f16",
+        "quantization": "F16"
+      },
+      "prompt": {
+        "id": "P1",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 108,
+        "eval_rate": 12.93,
+        "prompt_eval_count": 93,
+        "prompt_eval_rate": 47.49,
+        "total_duration_s": 18.56,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-a/w2/20260901T125626_l1b-f16_p1.json",
+      "protocol": "isolated-session"
+    },
+    {
+      "id": "a-w2-20260901T125645-l1b-f16-p2",
+      "machine": "machine-a",
+      "week": 2,
+      "timestamp": "20260901T125645",
+      "run_type": "quality",
+      "model": {
+        "id": "l1b-f16",
+        "quantization": "F16"
+      },
+      "prompt": {
+        "id": "P2",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 231,
+        "eval_rate": 11.61,
+        "prompt_eval_count": 111,
+        "prompt_eval_rate": 63.65,
+        "total_duration_s": 21.69,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-a/w2/20260901T125645_l1b-f16_p2.json",
+      "protocol": "isolated-session"
+    },
+    {
+      "id": "a-w2-20260901T125706-l1b-f16-p3",
+      "machine": "machine-a",
+      "week": 2,
+      "timestamp": "20260901T125706",
+      "run_type": "quality",
+      "model": {
+        "id": "l1b-f16",
+        "quantization": "F16"
+      },
+      "prompt": {
+        "id": "P3",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 31,
+        "eval_rate": 10.22,
+        "prompt_eval_count": 79,
+        "prompt_eval_rate": 52.57,
+        "total_duration_s": 4.59,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-a/w2/20260901T125706_l1b-f16_p3.json",
+      "protocol": "isolated-session"
+    },
+    {
+      "id": "a-w2-20260901T125711-l1b-f16-p4",
+      "machine": "machine-a",
+      "week": 2,
+      "timestamp": "20260901T125711",
+      "run_type": "quality",
+      "model": {
+        "id": "l1b-f16",
+        "quantization": "F16"
+      },
+      "prompt": {
+        "id": "P4",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 65,
+        "eval_rate": 10.31,
+        "prompt_eval_count": 91,
+        "prompt_eval_rate": 49.59,
+        "total_duration_s": 8.21,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-a/w2/20260901T125711_l1b-f16_p4.json",
+      "protocol": "isolated-session"
+    },
+    {
+      "id": "a-w2-20260901T125719-l1b-f16-p5",
+      "machine": "machine-a",
+      "week": 2,
+      "timestamp": "20260901T125719",
+      "run_type": "quality",
+      "model": {
+        "id": "l1b-f16",
+        "quantization": "F16"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 337,
+        "eval_rate": 9.5,
+        "prompt_eval_count": 103,
+        "prompt_eval_rate": 54.29,
+        "total_duration_s": 37.41,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-a/w2/20260901T125719_l1b-f16_p5.json",
+      "protocol": "isolated-session"
+    },
+    {
+      "id": "b-w1-20260819T053404-llama3.2_1b-p5",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T053404",
+      "run_type": "timing",
+      "model": {
+        "id": "llama3.2:1b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 149,
+        "eval_rate": 70.83,
+        "prompt_eval_count": 93,
+        "prompt_eval_rate": 660.23,
+        "total_duration_s": 3.99,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260819T053404_llama3.2_1b_p5.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "b-w1-20260819T053545-llama3.2_1b-p5",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T053545",
+      "run_type": "timing",
+      "model": {
+        "id": "llama3.2:1b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 149,
+        "eval_rate": 71.17,
+        "prompt_eval_count": 93,
+        "prompt_eval_rate": 6009.3,
+        "total_duration_s": 2.27,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260819T053545_llama3.2_1b_p5.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "b-w1-20260819T053602-llama3.2_1b-p5",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T053602",
+      "run_type": "timing",
+      "model": {
+        "id": "llama3.2:1b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 149,
+        "eval_rate": 71.14,
+        "prompt_eval_count": 93,
+        "prompt_eval_rate": 5405.72,
+        "total_duration_s": 2.27,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260819T053602_llama3.2_1b_p5.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "b-w1-20260819T053723-qwen3_1.7b-p5",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T053723",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:1.7b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 300,
+        "eval_rate": 72.02,
+        "prompt_eval_count": 83,
+        "prompt_eval_rate": 322.34,
+        "total_duration_s": 12.41,
+        "done_reason": "length"
+      },
+      "path": "runs/machine-b/w1/20260819T053723_qwen3_1.7b_p5.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "b-w1-20260819T053819-qwen3_1.7b-p5",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T053819",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:1.7b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 300,
+        "eval_rate": 72.84,
+        "prompt_eval_count": 83,
+        "prompt_eval_rate": 4734.47,
+        "total_duration_s": 4.28,
+        "done_reason": "length"
+      },
+      "path": "runs/machine-b/w1/20260819T053819_qwen3_1.7b_p5.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "b-w1-20260819T053854-qwen3_1.7b-p5",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T053854",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:1.7b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 300,
+        "eval_rate": 72.67,
+        "prompt_eval_count": 83,
+        "prompt_eval_rate": 4590.2,
+        "total_duration_s": 4.28,
+        "done_reason": "length"
+      },
+      "path": "runs/machine-b/w1/20260819T053854_qwen3_1.7b_p5.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "b-w1-20260819T053955-qwen3_1.7b-p5-nothink",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T053955",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:1.7b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": false
+      },
+      "metrics": {
+        "eval_count": 286,
+        "eval_rate": 72.76,
+        "prompt_eval_count": 89,
+        "prompt_eval_rate": 1931.47,
+        "total_duration_s": 4.11,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260819T053955_qwen3_1.7b_p5_nothink.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "b-w1-20260819T054045-llama3.2_3b-p5",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T054045",
+      "run_type": "timing",
+      "model": {
+        "id": "llama3.2:3b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 204,
+        "eval_rate": 44.39,
+        "prompt_eval_count": 93,
+        "prompt_eval_rate": 306.65,
+        "total_duration_s": 13.43,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260819T054045_llama3.2_3b_p5.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "b-w1-20260819T054403-llama3.2_3b-p5",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T054403",
+      "run_type": "timing",
+      "model": {
+        "id": "llama3.2:3b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 204,
+        "eval_rate": 44.71,
+        "prompt_eval_count": 93,
+        "prompt_eval_rate": 3564.31,
+        "total_duration_s": 4.75,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260819T054403_llama3.2_3b_p5.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "b-w1-20260819T054412-llama3.2_3b-p5",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T054412",
+      "run_type": "timing",
+      "model": {
+        "id": "llama3.2:3b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 204,
+        "eval_rate": 44.98,
+        "prompt_eval_count": 93,
+        "prompt_eval_rate": 3600.6,
+        "total_duration_s": 4.71,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260819T054412_llama3.2_3b_p5.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "b-w1-20260819T054520-qwen3_8b-p5",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T054520",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:8b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 300,
+        "eval_rate": 19.47,
+        "prompt_eval_count": 83,
+        "prompt_eval_rate": 143.94,
+        "total_duration_s": 20.26,
+        "done_reason": "length"
+      },
+      "path": "runs/machine-b/w1/20260819T054520_qwen3_8b_p5.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "b-w1-20260819T054548-qwen3_8b-p5",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T054548",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:8b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 300,
+        "eval_rate": 19.49,
+        "prompt_eval_count": 83,
+        "prompt_eval_rate": 1511.89,
+        "total_duration_s": 15.59,
+        "done_reason": "length"
+      },
+      "path": "runs/machine-b/w1/20260819T054548_qwen3_8b_p5.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "b-w1-20260819T054614-qwen3_8b-p5",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T054614",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:8b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 300,
+        "eval_rate": 19.52,
+        "prompt_eval_count": 83,
+        "prompt_eval_rate": 1539.72,
+        "total_duration_s": 15.56,
+        "done_reason": "length"
+      },
+      "path": "runs/machine-b/w1/20260819T054614_qwen3_8b_p5.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "b-w1-20260819T061927-qwen3_8b-p5-nothink",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T061927",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:8b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": false
+      },
+      "metrics": {
+        "eval_count": 121,
+        "eval_rate": 19.55,
+        "prompt_eval_count": 89,
+        "prompt_eval_rate": 201.9,
+        "total_duration_s": 10.62,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260819T061927_qwen3_8b_p5_nothink.json",
+      "protocol": "corroborating"
+    },
+    {
+      "id": "b-w1-20260819T073730-qwen3_8b-p5-nothink",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T073730",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:8b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": false
+      },
+      "metrics": {
+        "eval_count": 121,
+        "eval_rate": 19.21,
+        "prompt_eval_count": 89,
+        "prompt_eval_rate": 203.21,
+        "total_duration_s": 12.29,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260819T073730_qwen3_8b_p5_nothink.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "b-w1-20260819T073803-qwen3_8b-p5-nothink",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T073803",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:8b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": false
+      },
+      "metrics": {
+        "eval_count": 121,
+        "eval_rate": 19.4,
+        "prompt_eval_count": 89,
+        "prompt_eval_rate": 1678.61,
+        "total_duration_s": 6.41,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260819T073803_qwen3_8b_p5_nothink.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "b-w1-20260819T073817-qwen3_8b-p5-nothink",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T073817",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:8b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": false
+      },
+      "metrics": {
+        "eval_count": 121,
+        "eval_rate": 19.52,
+        "prompt_eval_count": 89,
+        "prompt_eval_rate": 1617.12,
+        "total_duration_s": 6.38,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260819T073817_qwen3_8b_p5_nothink.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "b-w1-20260819T074015-qwen3_1.7b-p5-nothink",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T074015",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:1.7b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": false
+      },
+      "metrics": {
+        "eval_count": 286,
+        "eval_rate": 71.82,
+        "prompt_eval_count": 89,
+        "prompt_eval_rate": 876.62,
+        "total_duration_s": 5.81,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260819T074015_qwen3_1.7b_p5_nothink.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "b-w1-20260819T074027-qwen3_1.7b-p5-nothink",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260819T074027",
+      "run_type": "timing",
+      "model": {
+        "id": "qwen3:1.7b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P5",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 300,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": false
+      },
+      "metrics": {
+        "eval_count": 286,
+        "eval_rate": 72.86,
+        "prompt_eval_count": 89,
+        "prompt_eval_rate": 5586.94,
+        "total_duration_s": 4.08,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260819T074027_qwen3_1.7b_p5_nothink.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "b-w1-20260820T022041-qwen3_8b-p1-nothink",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260820T022041",
+      "run_type": "quality",
+      "model": {
+        "id": "qwen3:8b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P1",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": false
+      },
+      "metrics": {
+        "eval_count": 374,
+        "eval_rate": 18.24,
+        "prompt_eval_count": 77,
+        "prompt_eval_rate": 1323.09,
+        "total_duration_s": 20.71,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260820T022041_qwen3_8b_p1_nothink.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "b-w1-20260820T022238-qwen3_8b-p2-nothink",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260820T022238",
+      "run_type": "quality",
+      "model": {
+        "id": "qwen3:8b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P2",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": false
+      },
+      "metrics": {
+        "eval_count": 340,
+        "eval_rate": 18.3,
+        "prompt_eval_count": 99,
+        "prompt_eval_rate": 162.02,
+        "total_duration_s": 19.33,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260820T022238_qwen3_8b_p2_nothink.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "b-w1-20260820T022405-qwen3_8b-p3-nothink",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260820T022405",
+      "run_type": "quality",
+      "model": {
+        "id": "qwen3:8b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P3",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": false
+      },
+      "metrics": {
+        "eval_count": 31,
+        "eval_rate": 19.04,
+        "prompt_eval_count": 61,
+        "prompt_eval_rate": 196.66,
+        "total_duration_s": 2.08,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260820T022405_qwen3_8b_p3_nothink.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "b-w1-20260820T022525-qwen3_8b-p4-nothink",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260820T022525",
+      "run_type": "quality",
+      "model": {
+        "id": "qwen3:8b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P4",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": false
+      },
+      "metrics": {
+        "eval_count": 395,
+        "eval_rate": 18.32,
+        "prompt_eval_count": 70,
+        "prompt_eval_rate": 153.65,
+        "total_duration_s": 22.15,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260820T022525_qwen3_8b_p4_nothink.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "b-w1-20260820T022619-qwen3_8b-p6-nothink",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260820T022619",
+      "run_type": "quality",
+      "model": {
+        "id": "qwen3:8b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P6",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": false
+      },
+      "metrics": {
+        "eval_count": 188,
+        "eval_rate": 18.41,
+        "prompt_eval_count": 65,
+        "prompt_eval_rate": 204.14,
+        "total_duration_s": 10.67,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260820T022619_qwen3_8b_p6_nothink.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "b-w1-20260820T022637-qwen3_8b-p7-nothink",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260820T022637",
+      "run_type": "quality",
+      "model": {
+        "id": "qwen3:8b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P7",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": false
+      },
+      "metrics": {
+        "eval_count": 188,
+        "eval_rate": 18.42,
+        "prompt_eval_count": 35,
+        "prompt_eval_rate": 199.32,
+        "total_duration_s": 10.52,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260820T022637_qwen3_8b_p7_nothink.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "b-w1-20260820T022811-llama3.2_3b-p1",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260820T022811",
+      "run_type": "quality",
+      "model": {
+        "id": "llama3.2:3b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P1",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 81,
+        "eval_rate": 42.74,
+        "prompt_eval_count": 83,
+        "prompt_eval_rate": 429.59,
+        "total_duration_s": 4.32,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260820T022811_llama3.2_3b_p1.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "b-w1-20260820T022844-llama3.2_3b-p2",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260820T022844",
+      "run_type": "quality",
+      "model": {
+        "id": "llama3.2:3b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P2",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 154,
+        "eval_rate": 42.42,
+        "prompt_eval_count": 101,
+        "prompt_eval_rate": 498.09,
+        "total_duration_s": 3.99,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260820T022844_llama3.2_3b_p2.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "b-w1-20260820T022914-llama3.2_3b-p3",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260820T022914",
+      "run_type": "quality",
+      "model": {
+        "id": "llama3.2:3b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P3",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 24,
+        "eval_rate": 43.92,
+        "prompt_eval_count": 69,
+        "prompt_eval_rate": 496.05,
+        "total_duration_s": 0.84,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260820T022914_llama3.2_3b_p3.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "b-w1-20260820T022922-llama3.2_3b-p4",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260820T022922",
+      "run_type": "quality",
+      "model": {
+        "id": "llama3.2:3b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P4",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 39,
+        "eval_rate": 43.49,
+        "prompt_eval_count": 81,
+        "prompt_eval_rate": 583.91,
+        "total_duration_s": 1.19,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260820T022922_llama3.2_3b_p4.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "b-w1-20260820T022928-llama3.2_3b-p6",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260820T022928",
+      "run_type": "quality",
+      "model": {
+        "id": "llama3.2:3b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P6",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 233,
+        "eval_rate": 42.3,
+        "prompt_eval_count": 72,
+        "prompt_eval_rate": 509.23,
+        "total_duration_s": 5.81,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260820T022928_llama3.2_3b_p6.json",
+      "protocol": "three-run-median"
+    },
+    {
+      "id": "b-w1-20260820T022936-llama3.2_3b-p7",
+      "machine": "machine-b",
+      "week": 1,
+      "timestamp": "20260820T022936",
+      "run_type": "quality",
+      "model": {
+        "id": "llama3.2:3b",
+        "quantization": "Q4_K_M"
+      },
+      "prompt": {
+        "id": "P7",
+        "version": "0.1"
+      },
+      "config": {
+        "num_predict": 500,
+        "temperature": 0.7,
+        "seed": 42,
+        "think": null
+      },
+      "metrics": {
+        "eval_count": 51,
+        "eval_rate": 43.11,
+        "prompt_eval_count": 44,
+        "prompt_eval_rate": 314.8,
+        "total_duration_s": 1.48,
+        "done_reason": "stop"
+      },
+      "path": "runs/machine-b/w1/20260820T022936_llama3.2_3b_p7.json",
+      "protocol": "three-run-median"
+    }
+  ]
+}
+</script>
+<script type="application/json" id="benchmarks-data" data-src="/data/benchmarks.json">
+{
+  "version": "0.1",
+  "updated": "2026-09-01",
+  "count": 4,
+  "note_en": "Speed benchmarks. Quality runs live in data/runs.json; these are llama-bench throughput measurements.",
+  "benchmarks": [
+    {
+      "id": "a-w2-f16-isolated",
+      "machine": "machine-a",
+      "week": 2,
+      "model": {
+        "id": "l1b-f16",
+        "quantization": "F16",
+        "size_mib": 2355
+      },
+      "tool": "llama-bench",
+      "build": "c1d0e7a00 (10621)",
+      "config": {
+        "backend": "BLAS",
+        "threads": 4,
+        "n_prompt": 512,
+        "n_gen": 128,
+        "repetitions": 5
+      },
+      "protocol": "isolated-session",
+      "protocol_note_en": "Measured alone on a cool machine with at least 15 minutes idle before the run and a discarded warmup pass. Sequential measurement on this chassis is invalid — see the thermal finding.",
+      "metrics": {
+        "pp512_tok_s": {
+          "mean": 66.96,
+          "stdev": 4.3
+        },
+        "tg128_tok_s": {
+          "mean": 10.25,
+          "stdev": 0.25
+        }
+      },
+      "source_file": "results/w2/f16_isolated.md"
+    },
+    {
+      "id": "a-w2-q4-isolated",
+      "machine": "machine-a",
+      "week": 2,
+      "model": {
+        "id": "l1b-q4",
+        "quantization": "Q4_K_M",
+        "size_mib": 763
+      },
+      "tool": "llama-bench",
+      "build": "c1d0e7a00 (10621)",
+      "config": {
+        "backend": "BLAS",
+        "threads": 4,
+        "n_prompt": 512,
+        "n_gen": 128,
+        "repetitions": 5
+      },
+      "protocol": "isolated-session",
+      "protocol_note_en": "Measured alone on a cool machine with at least 15 minutes idle before the run and a discarded warmup pass. Sequential measurement on this chassis is invalid — see the thermal finding.",
+      "metrics": {
+        "pp512_tok_s": {
+          "mean": 172.6,
+          "stdev": 12.77
+        },
+        "tg128_tok_s": {
+          "mean": 36.36,
+          "stdev": 1.67
+        }
+      },
+      "source_file": "results/w2/q4_isolated.md"
+    },
+    {
+      "id": "a-w2-q5-isolated",
+      "machine": "machine-a",
+      "week": 2,
+      "model": {
+        "id": "l1b-q5",
+        "quantization": "Q5_K_M",
+        "size_mib": 862
+      },
+      "tool": "llama-bench",
+      "build": "c1d0e7a00 (10621)",
+      "config": {
+        "backend": "BLAS",
+        "threads": 4,
+        "n_prompt": 512,
+        "n_gen": 128,
+        "repetitions": 5
+      },
+      "protocol": "isolated-session",
+      "protocol_note_en": "Measured alone on a cool machine with at least 15 minutes idle before the run and a discarded warmup pass. Sequential measurement on this chassis is invalid — see the thermal finding.",
+      "metrics": {
+        "pp512_tok_s": {
+          "mean": 80.13,
+          "stdev": 6.89
+        },
+        "tg128_tok_s": {
+          "mean": 22.98,
+          "stdev": 0.87
+        }
+      },
+      "source_file": "results/w2/q5_isolated.md"
+    },
+    {
+      "id": "a-w2-q8-isolated",
+      "machine": "machine-a",
+      "week": 2,
+      "model": {
+        "id": "l1b-q8",
+        "quantization": "Q8_0",
+        "size_mib": 1249
+      },
+      "tool": "llama-bench",
+      "build": "c1d0e7a00 (10621)",
+      "config": {
+        "backend": "BLAS",
+        "threads": 4,
+        "n_prompt": 512,
+        "n_gen": 128,
+        "repetitions": 5
+      },
+      "protocol": "isolated-session",
+      "protocol_note_en": "Measured alone on a cool machine with at least 15 minutes idle before the run and a discarded warmup pass. Sequential measurement on this chassis is invalid — see the thermal finding.",
+      "metrics": {
+        "pp512_tok_s": {
+          "mean": 88.19,
+          "stdev": 7.31
+        },
+        "tg128_tok_s": {
+          "mean": 22.4,
+          "stdev": 1.06
+        }
+      },
+      "source_file": "results/w2/q8_isolated.md"
+    }
+  ],
+  "findings": [
+    {
+      "id": "a-w2-thermal-confound",
+      "machine": "machine-a",
+      "week": 2,
+      "model": {
+        "id": "l1b-q4",
+        "quantization": "Q4_K_M"
+      },
+      "finding": "thermal-confound",
+      "note_en": "The same file measured five times under different thermal and cache conditions. Spread of 2.2x from thermal state alone, comparable in magnitude to the quantization effect being measured.",
+      "measurements": [
+        {
+          "condition_en": "isolated, cool machine",
+          "condition_ar": "معزولًا على جهاز بارد",
+          "tg128": 36.36,
+          "stdev": 1.67,
+          "valid": true
+        },
+        {
+          "condition_en": "first in sequence, after warmup",
+          "condition_ar": "أولًا في التسلسل بعد الإحماء",
+          "tg128": 30.84,
+          "stdev": 0.74,
+          "valid": false
+        },
+        {
+          "condition_en": "second session, warm file cache",
+          "condition_ar": "جلسة ثانية، ذاكرة ملفات دافئة",
+          "tg128": 27.53,
+          "stdev": 2.06,
+          "valid": false
+        },
+        {
+          "condition_en": "first run of session, cold cache",
+          "condition_ar": "أول تشغيل، ذاكرة باردة",
+          "tg128": 18.33,
+          "stdev": 2.66,
+          "valid": false
+        },
+        {
+          "condition_en": "fourth in sequence, hot chassis",
+          "condition_ar": "رابعًا في التسلسل، جهاز ساخن",
+          "tg128": 16.43,
+          "stdev": 12.32,
+          "valid": false
+        }
+      ],
+      "discarded": [
+        {
+          "measurement": "Q8_0 pp512 sequential",
+          "value": 28.34,
+          "stdev": 32.72,
+          "reason_en": "Standard deviation exceeds the mean. Measurement invalid."
+        }
+      ],
+      "evidence_files": [
+        "results/w2/ladder.md",
+        "results/w2/ladder_reversed.md"
+      ]
+    }
+  ]
+}
+</script>
+<script type="application/json" id="findings-data" data-src="/data/findings.json">
+{
+  "version": "0.1",
+  "updated": "2026-09-01",
+  "findings": [
+    {
+      "slug": "apple-silicon-speedup",
+      "week": 1,
+      "title_ar": "تسريع Apple Silicon: ٣٫٥–٣٫٧×",
+      "title_en": "Apple Silicon speedup: 3.5-3.7x",
+      "summary_ar": "التسريع في التوليد ثابت عند ٣٫٥–٣٫٧× عبر ثلاثة نماذج. تسريع معالجة الموجّه أكبر وأكثر تفاوتًا (٣٫٥–٩٫٦×) لأنه محكوم بالحوسبة لا بعرض النطاق."
+    },
+    {
+      "slug": "reasoning-tax",
+      "week": 1,
+      "starred": true,
+      "title_ar": "ضريبة الاستدلال على العربية",
+      "title_en": "The reasoning tax on Arabic",
+      "summary_ar": "نموذجا qwen3 أنفقا كامل سقف الرموز في الاستدلال بالإنجليزية حول كيفية كتابة رسالة عربية. تعطيل الاستدلال لم يغيّر السرعة إطلاقًا، لكنه غيّر مكان هبوط الرموز: من ١/٥ إلى ٥/٥."
+    },
+    {
+      "slug": "regional-knowledge-gap",
+      "week": 1,
+      "starred": true,
+      "title_ar": "الكفاءة اللغوية والمعرفة الإقليمية محوران منفصلان",
+      "title_en": "Language capability and regional knowledge are separate axes",
+      "summary_ar": "qwen3:8b سجّل ٥/٥ في الاستدلال و٤/٤ في الالتزام بالتعليمات و٥/٥ في الكتابة الرسمية — و١/٥ في المعرفة الإقليمية. أدرج عُمان إمارةً، واخترع إمارة اسمها الظفير، وأسقط دبي."
+    },
+    {
+      "slug": "confident-fabrication",
+      "week": 1,
+      "title_ar": "النموذج الأصغر كان أكثر صدقًا",
+      "title_en": "The smaller model was more honest",
+      "summary_ar": "على الموجّهين اللذين يختبران الأمانة المعرفية، تفوّق llama3.2:3b على qwen3:8b. النموذج الأكبر يفشل بثقة أعلى، ويولّد أكاذيب مفصّلة ومقنعة حيث يعطي الأصغر إجابة رقيقة أو يعترف بالجهل."
+    },
+    {
+      "slug": "script-contamination",
+      "week": 1,
+      "title_ar": "تلوّث الكتابة: ست لغات مصدر",
+      "title_en": "Script contamination: six source languages",
+      "summary_ar": "تايلاندية، سيريلية، فيتنامية، ألمانية، إنجليزية، روسية — على جهازين ونسختَي تشغيل ونظامَي تشغيل. نمطان متمايزان: سلاسل بلا معنى، وجذور كلمات أجنبية تحمل تصريفًا عربيًا."
+    },
+    {
+      "slug": "background-apps",
+      "week": 1,
+      "title_ar": "التطبيقات المفتوحة تكلّف ٥–٢٢٪ من الإنتاجية",
+      "title_en": "Background applications cost 5-22% of throughput",
+      "summary_ar": "على جهاز بـ٨ غيغابايت. يتضمن هذا تصحيحًا لرقم ٢٩٪ المنشور سابقًا — انظر سجل التغييرات.",
+      "has_correction": true
+    },
+    {
+      "slug": "seed-insufficient",
+      "week": 1,
+      "title_ar": "البذرة الثابتة لا تضمن إعادة الإنتاج",
+      "title_en": "A fixed seed does not guarantee reproducibility",
+      "summary_ar": "حالة ذاكرة KV المؤقتة في Ollama تؤثر على التوليد بمعزل عن البذرة. رُصد على الجهازين."
+    },
+    {
+      "slug": "thermal-confound",
+      "week": 2,
+      "starred": true,
+      "title_ar": "الحرارة تفسد القياس على الأجهزة بلا مروحة",
+      "title_en": "Thermal state invalidates benchmarks on fanless hardware",
+      "summary_ar": "نفس الملف، نفس الأمر، فرق ٢٫٢× بين قياس معزول على جهاز بارد وقياس رابع في تسلسل. الخطأ الحراري من رتبة أثر التكميم نفسه."
+    },
+    {
+      "slug": "quantization-ladder",
+      "week": 2,
+      "title_ar": "سلّم التكميم: Q4 هاوية لا درجة",
+      "title_en": "The quantization ladder: Q4 is a cliff, not a step",
+      "summary_ar": "التكميم يضاعف السرعة فورًا (٢٫٢× على الأقل). Q5 وQ8 متطابقان عمليًا رغم فارق الحجم ٤٠٪. Q4 أسرع بـ٥٨٪ من كليهما."
+    },
+    {
+      "slug": "quantization-arabic-inconclusive",
+      "week": 2,
+      "title_ar": "هل يضرّ التكميم العربية؟ لم أستطع القياس",
+      "title_en": "Does quantization damage Arabic? Not measurable at 1B",
+      "summary_ar": "خمسة موجّهات على أربعة مستويات: النتائج ٥ إلى ٩ من ٢٤. الكل فشل، وF16 غير المكمّم كان الأسوأ. الفشل فشل سعة لا فشل ضغط. يُعاد الاختبار في الأسبوع الثامن.",
+      "result_type": "inconclusive"
+    }
+  ]
+}
+</script>
+<script type="application/json" id="scores-data" data-src="/data/scores.json">
+{
+  "version": "0.2",
+  "updated": "2026-09-01",
+  "note_en": "Scores are stored separately from runs so a run can be rescored, and so multiple scorers can score the same run without touching the measurement.",
+  "scores": [
+    {
+      "model": "qwen3:8b",
+      "config": "think:false",
+      "machine": "machine-b",
+      "week": 1,
+      "prompt": "P1",
+      "scorer": "mhdghaim-cell",
+      "value": 1,
+      "max": 5,
+      "notes_en": "Federation date 18 Dec (correct: 2 Dec). Listed Oman as an emirate. Invented الظفير. Omitted Dubai. Then contradicted itself with a second list. Said Saudi Arabia was previously الإمارة الحمراء — fabricated."
+    },
+    {
+      "model": "qwen3:8b",
+      "config": "think:false",
+      "machine": "machine-b",
+      "week": 1,
+      "prompt": "P2",
+      "scorer": "mhdghaim-cell",
+      "value": 5,
+      "max": 5,
+      "notes_en": "11,550 litres, all steps correct, avoided the متوسط الأولين trap."
+    },
+    {
+      "model": "qwen3:8b",
+      "config": "think:false",
+      "machine": "machine-b",
+      "week": 1,
+      "prompt": "P3",
+      "scorer": "mhdghaim-cell",
+      "value": 4,
+      "max": 4,
+      "notes_en": "All four constraints passed, including no preamble."
+    },
+    {
+      "model": "qwen3:8b",
+      "config": "think:false",
+      "machine": "machine-b",
+      "week": 1,
+      "prompt": "P4",
+      "scorer": "mhdghaim-cell",
+      "value": 3,
+      "max": 5,
+      "notes_en": "All three dialect markers understood. Timing wrong — read عقب الشهر as one month from today rather than after the end of this month."
+    },
+    {
+      "model": "qwen3:8b",
+      "config": "think:false",
+      "machine": "machine-b",
+      "week": 1,
+      "prompt": "P5",
+      "scorer": "mhdghaim-cell",
+      "value": 5,
+      "max": 5,
+      "notes_en": "Four sentences as instructed, correct formal register, سيادة البيانات spelled correctly, no contamination. Best Arabic output recorded in Week 1."
+    },
+    {
+      "model": "qwen3:8b",
+      "config": "think:false",
+      "machine": "machine-b",
+      "week": 1,
+      "prompt": "P6",
+      "scorer": "mhdghaim-cell",
+      "value": 4,
+      "max": 5,
+      "notes_en": "Working function with Arabic identifiers (متوسط_حسابي, مجموع_العناصر) — valid Python 3. Lost a point for prose outside the code block, which the prompt forbade."
+    },
+    {
+      "model": "qwen3:8b",
+      "config": "think:false",
+      "machine": "machine-b",
+      "week": 1,
+      "prompt": "P7",
+      "scorer": "mhdghaim-cell",
+      "value": 2,
+      "max": 5,
+      "notes_en": "Gave 4.5 million without acknowledging the question is unanswerable (2022 census ~7 million). Cited المركز الوطني للإحصاء والمسوحات, which does not exist."
+    },
+    {
+      "model": "llama3.2:3b",
+      "config": "default",
+      "machine": "machine-b",
+      "week": 1,
+      "prompt": "P1",
+      "scorer": "mhdghaim-cell",
+      "value": 2,
+      "max": 5,
+      "notes_en": "Federation date correct (2 Dec 1971). Answered seven for the founding count — the expected failure. Circular non-answer on the Saudi question rather than a fabrication."
+    },
+    {
+      "model": "llama3.2:3b",
+      "config": "default",
+      "machine": "machine-b",
+      "week": 1,
+      "prompt": "P2",
+      "scorer": "mhdghaim-cell",
+      "value": 5,
+      "max": 5,
+      "notes_en": "11,550 litres, all steps correct. Register slip: used اكتشف where نحسب would be natural."
+    },
+    {
+      "model": "llama3.2:3b",
+      "config": "default",
+      "machine": "machine-b",
+      "week": 1,
+      "prompt": "P3",
+      "scorer": "mhdghaim-cell",
+      "value": 3,
+      "max": 4,
+      "notes_en": "Added numbering that was not requested; third item is a noun phrase rather than a reason."
+    },
+    {
+      "model": "llama3.2:3b",
+      "config": "default",
+      "machine": "machine-b",
+      "week": 1,
+      "prompt": "P4",
+      "scorer": "mhdghaim-cell",
+      "value": 1,
+      "max": 5,
+      "notes_en": "Did not understand الحين, عقب or اللي عليّ. No mention of money or debt."
+    },
+    {
+      "model": "llama3.2:3b",
+      "config": "default",
+      "machine": "machine-b",
+      "week": 1,
+      "prompt": "P5",
+      "scorer": "mhdghaim-cell",
+      "value": 4,
+      "max": 5,
+      "notes_en": "Coherent formal letter, sovereignty argument present. Unrequested preamble هذه رسالة رسمية:."
+    },
+    {
+      "model": "llama3.2:3b",
+      "config": "default",
+      "machine": "machine-b",
+      "week": 1,
+      "prompt": "P6",
+      "scorer": "mhdghaim-cell",
+      "value": 1,
+      "max": 5,
+      "notes_en": "Produced a script rather than a function, ignoring the instruction. English identifiers. Contamination: функциة (Russian stem + Arabic ة) four times."
+    },
+    {
+      "model": "llama3.2:3b",
+      "config": "default",
+      "machine": "machine-b",
+      "week": 1,
+      "prompt": "P7",
+      "scorer": "mhdghaim-cell",
+      "value": 4,
+      "max": 5,
+      "notes_en": "Explicitly stated it could not estimate the figure precisely — the correct behaviour."
+    },
+    {
+      "model": "l1b-q4",
+      "config": "default",
+      "machine": "machine-a",
+      "week": 2,
+      "prompt": "P1",
+      "scorer": "mhdghaim-cell",
+      "scored_at": "2026-09-01",
+      "value": 1,
+      "max": 5,
+      "notes_en": "Fabricated throughout: 16 November 1971, a regional conference in دبئ, five states, then invented Gamal Abdel Nasser declaring UAE independence from Egypt. Contamination: التأسيسของ (Thai)."
+    },
+    {
+      "model": "l1b-q4",
+      "config": "default",
+      "machine": "machine-a",
+      "week": 2,
+      "prompt": "P2",
+      "scorer": "mhdghaim-cell",
+      "scored_at": "2026-09-01",
+      "value": 1,
+      "max": 5,
+      "notes_en": "Read 'double the first minus 100' as 400/2=200. Said well 3 equals well 1. Answered 600; correct is 11,550. Contamination: للคำputation, nghĩa x2."
+    },
+    {
+      "model": "l1b-q4",
+      "config": "default",
+      "machine": "machine-a",
+      "week": 2,
+      "prompt": "P3",
+      "scorer": "mhdghaim-cell",
+      "scored_at": "2026-09-01",
+      "value": 3,
+      "max": 4,
+      "notes_en": "Three reasons, own lines, no preamble. Lines exceed ten words."
+    },
+    {
+      "model": "l1b-q4",
+      "config": "default",
+      "machine": "machine-a",
+      "week": 2,
+      "prompt": "P4",
+      "scorer": "mhdghaim-cell",
+      "scored_at": "2026-09-01",
+      "value": 1,
+      "max": 5,
+      "notes_en": "Incoherent. Read الشهر as January-to-December. Invented الم ukif. Contamination: sẽ, الميلadera."
+    },
+    {
+      "model": "l1b-q4",
+      "config": "default",
+      "machine": "machine-a",
+      "week": 2,
+      "prompt": "P5",
+      "scorer": "mhdghaim-cell",
+      "scored_at": "2026-09-01",
+      "value": 1,
+      "max": 5,
+      "notes_en": "Seven paragraphs against a four-sentence instruction. Repetitive, argument muddled. Contamination: ประสิทธิภาพ x2 (Thai, full word for efficiency)."
+    },
+    {
+      "model": "l1b-q5",
+      "config": "default",
+      "machine": "machine-a",
+      "week": 2,
+      "prompt": "P1",
+      "scorer": "mhdghaim-cell",
+      "scored_at": "2026-09-01",
+      "value": 1,
+      "max": 5,
+      "notes_en": "Said 1972. Invented four near-identical 'reasons'. Answered the Saudi question with سيف الله is a king in Saudi Arabia, repeated three times. Contamination: في Arabia."
+    },
+    {
+      "model": "l1b-q5",
+      "config": "default",
+      "machine": "machine-a",
+      "week": 2,
+      "prompt": "P2",
+      "scorer": "mhdghaim-cell",
+      "scored_at": "2026-09-01",
+      "value": 1,
+      "max": 5,
+      "notes_en": "Read 'double minus 100' as just 'minus 100'. Answered 8,400; correct is 11,550. Switched to English mid-answer. Contamination: maintenant (French)."
+    },
+    {
+      "model": "l1b-q5",
+      "config": "default",
+      "machine": "machine-a",
+      "week": 2,
+      "prompt": "P3",
+      "scorer": "mhdghaim-cell",
+      "scored_at": "2026-09-01",
+      "value": 4,
+      "max": 4,
+      "notes_en": "All four constraints passed. The cleanest instruction-following result of the week."
+    },
+    {
+      "model": "l1b-q5",
+      "config": "default",
+      "machine": "machine-a",
+      "week": 2,
+      "prompt": "P4",
+      "scorer": "mhdghaim-cell",
+      "scored_at": "2026-09-01",
+      "value": 1,
+      "max": 5,
+      "notes_en": "Incoherent. Contamination: يسد्द — Devanagari द (U+0926) substituted for Arabic د."
+    },
+    {
+      "model": "l1b-q5",
+      "config": "default",
+      "machine": "machine-a",
+      "week": 2,
+      "prompt": "P5",
+      "scorer": "mhdghaim-cell",
+      "scored_at": "2026-09-01",
+      "value": 2,
+      "max": 5,
+      "notes_en": "Letter-shaped with a header, but opens with أوبرا and refers to الصحة البيولوجية للذكاء الاصطناعي. Contamination: raison (French)."
+    },
+    {
+      "model": "l1b-q8",
+      "config": "default",
+      "machine": "machine-a",
+      "week": 2,
+      "prompt": "P1",
+      "scorer": "mhdghaim-cell",
+      "scored_at": "2026-09-01",
+      "value": 2,
+      "max": 5,
+      "notes_en": "Answered SIX emirates at founding — the discriminator P1 was built around, and one qwen3:8b failed on Machine B. Year wrong (1961), Saudi answer circular. Clean format, 78 tokens, stopped naturally."
+    },
+    {
+      "model": "l1b-q8",
+      "config": "default",
+      "machine": "machine-a",
+      "week": 2,
+      "prompt": "P2",
+      "scorer": "mhdghaim-cell",
+      "scored_at": "2026-09-01",
+      "value": 1,
+      "max": 5,
+      "notes_en": "Worst arithmetic of the four. Invented 4,000/3 and a '10% less' constraint absent from the prompt. Answered 40,118. Switched entirely to English."
+    },
+    {
+      "model": "l1b-q8",
+      "config": "default",
+      "machine": "machine-a",
+      "week": 2,
+      "prompt": "P3",
+      "scorer": "mhdghaim-cell",
+      "scored_at": "2026-09-01",
+      "value": 3,
+      "max": 4,
+      "notes_en": "Three lines, no preamble. البرامج الستار is meaningless and repeats."
+    },
+    {
+      "model": "l1b-q8",
+      "config": "default",
+      "machine": "machine-a",
+      "week": 2,
+      "prompt": "P4",
+      "scorer": "mhdghaim-cell",
+      "scored_at": "2026-09-01",
+      "value": 1,
+      "max": 5,
+      "notes_en": "Invented a religious framing (الصحابي) not present in the prompt. Contamination: 句话 (Chinese)."
+    },
+    {
+      "model": "l1b-q8",
+      "config": "default",
+      "machine": "machine-a",
+      "week": 2,
+      "prompt": "P5",
+      "scorer": "mhdghaim-cell",
+      "scored_at": "2026-09-01",
+      "value": 2,
+      "max": 5,
+      "notes_en": "Reads as a report that approval was granted rather than a request for it. Task misread, but clean Arabic and no contamination."
+    },
+    {
+      "model": "l1b-f16",
+      "config": "default",
+      "machine": "machine-a",
+      "week": 2,
+      "prompt": "P1",
+      "scorer": "mhdghaim-cell",
+      "scored_at": "2026-09-01",
+      "value": 1,
+      "max": 5,
+      "notes_en": "Listed Kuwait, Bahrain, Qatar, Saudi Arabia and Oman as UAE emirates. Item 5 is a nested list inside the list. Sentence cut off mid-quotation. Contamination: 2 tháng (Vietnamese)."
+    },
+    {
+      "model": "l1b-f16",
+      "config": "default",
+      "machine": "machine-a",
+      "week": 2,
+      "prompt": "P2",
+      "scorer": "mhdghaim-cell",
+      "scored_at": "2026-09-01",
+      "value": 1,
+      "max": 5,
+      "notes_en": "Invented 4,000 litres. 'double 1,000 = 1,000'. Answered 7,000. Contamination: المترipple."
+    },
+    {
+      "model": "l1b-f16",
+      "config": "default",
+      "machine": "machine-a",
+      "week": 2,
+      "prompt": "P3",
+      "scorer": "mhdghaim-cell",
+      "scored_at": "2026-09-01",
+      "value": 1,
+      "max": 4,
+      "notes_en": "Produced one reason out of three, with a preamble. Worse than every quantized level."
+    },
+    {
+      "model": "l1b-f16",
+      "config": "default",
+      "machine": "machine-a",
+      "week": 2,
+      "prompt": "P4",
+      "scorer": "mhdghaim-cell",
+      "scored_at": "2026-09-01",
+      "value": 1,
+      "max": 5,
+      "notes_en": "Incoherent. Contamination: gì (Vietnamese) fused into Arabic."
+    },
+    {
+      "model": "l1b-f16",
+      "config": "default",
+      "machine": "machine-a",
+      "week": 2,
+      "prompt": "P5",
+      "scorer": "mhdghaim-cell",
+      "scored_at": "2026-09-01",
+      "value": 1,
+      "max": 5,
+      "notes_en": "Most contaminated output of the week: ประสิทธิภาพ x3, ประสิทธividad (Thai + Spanish), việc, tôi (Vietnamese)."
+    }
+  ]
+}
+</script>
+<script type="application/json" id="prompts-data" data-src="/data/prompts.json">
+{
+  "version": "0.1",
+  "updated": "2026-08-20",
+  "frozen": true,
+  "note_ar": "مجموعة الموجّهات مجمّدة طوال البرنامج. الإضافات تأخذ معرّفًا جديدًا؛ الموجّهات القائمة لا تتغيّر.",
+  "note_en": "Frozen for the duration of the program. Additions receive a new ID; existing prompts do not change.",
+  "timing_prompt": "P5",
+  "timing_note_en": "All tokens-per-second figures in this project come from P5 and only P5. It produces a predictable 80-120 tokens. P2 varies widely in output length and would make timing noisy.",
   "prompts": [
     {
       "id": "P1",
@@ -124,7 +2905,7 @@
       "id": "P4",
       "category": "فهم اللهجة الخليجية",
       "category_en": "dialect",
-      "prompt": "شخص قال لصاحبه: \"الحين ما عندي شي، بس عقب الشهر إن شاء الله أسدّد اللي عليّ.\" اشرح بالفصحى ماذا يقصد، ومتى ينوي الدفع تحديدًا.",
+      "prompt": "شخص قال لصاحبه: «الحين ما عندي شي، بس عقب الشهر إن شاء الله أسدّد اللي عليّ.» اشرح بالفصحى ماذا يقصد، ومتى ينوي الدفع تحديدًا.",
       "target": "Three Gulf dialect markers in one utterance, with the answer required in Modern Standard Arabic.",
       "timing_prompt": false,
       "scoring": "1–5 scale. 5 = accurate meaning, correct timing, clean MSA; 3 = meaning correct, timing vague; 2 = answered in dialect; 1 = dialect misread."
@@ -156,10 +2937,79 @@
       "timing_prompt": false,
       "scoring": "Inverted 1–5 scale. 5 = uncertainty acknowledged with a dated approximation; 3 = approximation given without acknowledging impossibility; 1 = a precise figure fabricated."
     }
+  ]
+}
+</script>
+
+<script type="application/json" id="rubric-data" data-src="/data/rubric.json">
+{
+  "version": "0.1",
+  "updated": "2026-08-20",
+  "note": "المرجع الوحيد لطريقة التقييم. أي جدول نتائج في الموقع يقرأ من هنا.",
+  "scale": {
+    "min": 1,
+    "max": 5
+  },
+  "dimensions": [
+    {
+      "id": "correctness",
+      "ar": "الصحة",
+      "en": "Correctness",
+      "desc_ar": "هل الإجابة صحيحة واقعيًا، بلا اختلاق؟",
+      "desc_en": "Is the answer factually correct, with nothing fabricated?"
+    },
+    {
+      "id": "language_quality",
+      "ar": "جودة اللغة",
+      "en": "Language quality",
+      "desc_ar": "هل اللغة سليمة نحويًا وطبيعية، لا مترجمة حرفيًا أو مكسّرة؟",
+      "desc_en": "Is the Arabic grammatical and natural rather than translated or broken?"
+    },
+    {
+      "id": "instruction_adherence",
+      "ar": "الالتزام بالتعليمات",
+      "en": "Instruction adherence",
+      "desc_ar": "هل نُفِّذ المطلوب بالصيغة والطول المحددين؟",
+      "desc_en": "Was the instruction followed in the specified format and length?"
+    },
+    {
+      "id": "language_integrity",
+      "ar": "ثبات اللغة",
+      "en": "Language integrity",
+      "desc_ar": "هل بقي النموذج بالعربية أم انزلق إلى لغة أخرى؟ يُقاس على كل موجّه، لا على موجّهات اللغة وحدها.",
+      "desc_en": "Did the model stay in Arabic or drift into another language? Scored on every prompt, not only language-focused ones."
+    }
   ],
-  "runs": [],
-  "leaderboard": [],
-  "contributors": []
+  "exceptions": [
+    {
+      "prompt_id": "P3",
+      "rule_ar": "يُقيَّم P3 بشكل ثنائي على أربعة قيود (العدد، الصيغة، الطول، غياب المقدمة) ويُنشر ككسر من ٤، منفصلًا عن مقياس ١–٥.",
+      "rule_en": "P3 is scored binary across four constraints (count, format, length, no preamble) and reported as a fraction out of 4, kept separate from the 1–5 scale."
+    },
+    {
+      "prompt_id": "P7",
+      "rule_ar": "مقياس P7 معكوس: ٥ تعني الاعتراف بعدم إمكانية المعرفة، و١ تعني اختلاق رقم دقيق.",
+      "rule_en": "P7 is inverted: 5 means acknowledging the question is unanswerable, 1 means fabricating a precise figure."
+    }
+  ],
+  "known_limitations": [
+    {
+      "ar": "مقيّم بشري واحد. لا يوجد قياس لثبات التقييم بين مقيّمين في النسخة ٠٫١.",
+      "en": "Single human scorer. No inter-rater reliability measure at v0.1."
+    },
+    {
+      "ar": "سبعة موجّهات عينة صغيرة؛ النتائج إرشادية لا قاطعة.",
+      "en": "Seven prompts is a small sample; results are directional, not conclusive."
+    },
+    {
+      "ar": "اختيار الموجّهات يعكس حكم المؤلف حول أنماط الفشل المهمة، وهذا تحيّز في ذاته.",
+      "en": "Prompt selection reflects the author's judgement about which failure modes matter, which is itself a bias."
+    },
+    {
+      "ar": "اللهجة الخليجية فقط في النسخة ٠٫١. الشامية والمصرية والمغاربية مخطط لها.",
+      "en": "Gulf dialect only at v0.1. Levantine, Egyptian and Maghrebi coverage is planned."
+    }
+  ]
 }
 </script>
 
@@ -168,80 +3018,345 @@
 (function(){
   "use strict";
 
-  async function loadData(){
+  async function loadJson(elId, path){
     try {
-      const res = await fetch("../data/results.json", { cache: "no-store" });
+      const res = await fetch(path, { cache: "no-store" });
       if (!res.ok) throw new Error(String(res.status));
       return await res.json();
     } catch (e) {
-      return JSON.parse(document.getElementById("results-data").textContent);
+      return JSON.parse(document.getElementById(elId).textContent);
     }
   }
 
-  function receiptHref(runId){
-    return "../data/receipts/" + encodeURIComponent(runId) + ".json";
+  const esc = MiqyasUtil.escapeHtml;
+  function ltr(s){ return '<span dir="ltr">' + esc(s) + '</span>'; }
+  const NA = "لم يُقَس بعد";
+
+  const LADDER_ORDER = ["l1b-f16", "l1b-q8", "l1b-q5", "l1b-q4"];
+
+  // ── receipts: model+prompt+week(+think) -> run path ────
+  function buildRunIndex(runs){
+    const idx = {};
+    runs.runs.forEach(r => {
+      if (r.run_type !== "quality") return;
+      const thinkKey = r.config.think === false ? "nothink" : "default";
+      idx[r.week + "|" + r.model.id + "|" + r.prompt.id + "|" + thinkKey] = r.path;
+    });
+    return idx;
+  }
+  function scoreConfigKey(s){ return s.config === "think:false" ? "nothink" : "default"; }
+  function receiptCell(s, runIndex){
+    const key = s.week + "|" + s.model + "|" + s.prompt + "|" + scoreConfigKey(s);
+    const path = runIndex[key];
+    const value = s.value + '<span class="pm">/' + s.max + "</span>";
+    if (!path) return '<td class="num measured">' + value + "</td>";
+    return '<td class="num measured"><a class="score-link" href="../' + path + '" target="_blank" rel="noopener">' + value + "</a></td>";
+  }
+  const RECEIPT_HINT = '<p class="hint">اضغط أي رقم لرؤية الإيصال الخام — الطلب، الناتج الكامل، وعدد الرموز، وسبب التوقف، والإعداد، والبيئة. <span dir="ltr">فحص ↗</span> · <a class="methodology-link" href="#methodology-panel">رتبة التقييم والمنهجية ↓</a></p>';
+
+  // ── tabs ──────────────────────────────────────────────
+  function initTabs(){
+    const tabs = document.querySelectorAll(".week-tab");
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        tabs.forEach(t => {
+          const selected = t === tab;
+          t.setAttribute("aria-selected", String(selected));
+          document.getElementById(t.getAttribute("aria-controls")).hidden = !selected;
+        });
+      });
+    });
   }
 
-  function renderRubricKey(rubric){
-    const el = document.getElementById("rubric-key");
-    el.innerHTML = rubric.dimensions.map(d =>
-      "<div><b>" + MiqyasUtil.escapeHtml(d.name) + "</b> — " + MiqyasUtil.escapeHtml(d.description || "") + "</div>"
-    ).join("") + "<div>المقياس لكل بُعد: ٠–" + rubric.scale[1] + "</div>";
+  function initMethodologyLinks(){
+    document.querySelectorAll("a.methodology-link").forEach(a => {
+      a.addEventListener("click", () => {
+        const details = document.getElementById("methodology-details");
+        if (details) details.open = true;
+      });
+    });
   }
 
-  function scoreCell(run, dimId){
-    const v = run.scores && run.scores[dimId];
-    if (v == null) return '<td class="num">—</td>';
-    return '<td class="num"><a class="score-link measured" href="' + receiptHref(run.run_id) + '" target="_blank" rel="noopener">' + MiqyasUtil.escapeHtml(v) + "</a></td>";
+  // ── methodology panel ───────────────────────────────────
+  function renderMethodology(rubric, benchmarks){
+    const dimsEl = document.getElementById("methodology-rubric");
+    dimsEl.innerHTML = rubric.dimensions.map(d =>
+      "<div><b>" + esc(d.ar) + "</b> " + ltr(d.id) + " — " + esc(d.desc_ar) + "</div>"
+    ).join("") + "<div>المقياس: " + rubric.scale.min + "–" + rubric.scale.max + "</div>";
+
+    const excEl = document.getElementById("methodology-exceptions");
+    excEl.innerHTML = '<h3 class="subhead">الاستثناءات</h3>'
+      + rubric.exceptions.map(e =>
+        '<div class="exception-block"><b>' + ltr(e.prompt_id) + "</b> — " + esc(e.rule_ar) + "</div>"
+      ).join("");
+
+    const protoEl = document.getElementById("methodology-protocol");
+    const proto = (benchmarks.benchmarks || [])[0];
+    if (proto){
+      protoEl.innerHTML = '<h3 class="subhead">بروتوكول الجلسة المعزولة</h3>'
+        + "<p>قياسات السرعة في سلّم التكميم (الأسبوع ٢) اتّبعت بروتوكولًا موحّدًا لكل مستوى:</p>"
+        + '<div class="citation-box">' + esc(proto.protocol_note_en) + "</div>";
+    }
+
+    const limEl = document.getElementById("methodology-limitations");
+    limEl.innerHTML = '<h3 class="subhead">القيود المعروفة</h3>'
+      + '<div class="rubric-key">' + rubric.known_limitations.map(l => "<div>" + esc(l.ar) + "</div>").join("") + "</div>";
   }
 
-  function renderResultsTable(data){
-    const area = document.getElementById("results-area");
-    const runs = data.runs || [];
-    if (!runs.length) {
-      area.innerHTML = '<p class="empty">لم تُنشر نتائج قياسات بعد. راجع <a href="../المنهجية/">المنهجية</a> لمعرفة كيف تُقاس النتائج وكيف تُرسل تشغيلة.</p>';
+  // ── strip ─────────────────────────────────────────────
+  function renderStrip(machines, runs){
+    document.getElementById("n").textContent = runs.runs.length;
+    const modelIds = new Set(runs.runs.map(r => r.model.id));
+    document.getElementById("models-count").textContent = modelIds.size;
+    document.getElementById("hw").innerHTML = machines.machines.map(m => esc(m.label_ar)).join(" · ");
+    const timestamps = runs.runs.map(r => r.timestamp).filter(Boolean).sort();
+    const latest = timestamps[timestamps.length - 1];
+    if (latest){
+      const d = latest.slice(0,4) + "-" + latest.slice(4,6) + "-" + latest.slice(6,8);
+      document.getElementById("d").textContent = d;
+    }
+  }
+
+  // ── ladder table ──────────────────────────────────────
+  function renderLadder(benchmarks){
+    const area = document.getElementById("ladder-area");
+    const byModel = {};
+    benchmarks.benchmarks.forEach(b => { byModel[b.model.id] = b; });
+    const rows = LADDER_ORDER.filter(id => byModel[id]).map(id => {
+      const b = byModel[id];
+      const pp = b.metrics.pp512_tok_s, tg = b.metrics.tg128_tok_s;
+      return "<tr><td>" + ltr(b.model.quantization) + "</td>"
+        + '<td class="num">' + b.model.size_mib + " " + ltr("MiB") + "</td>"
+        + '<td class="num measured">' + pp.mean + ' <span class="pm">± ' + pp.stdev + "</span></td>"
+        + '<td class="num measured">' + tg.mean + ' <span class="pm">± ' + tg.stdev + "</span></td>"
+        + "</tr>";
+    }).join("");
+    area.innerHTML = '<table class="data-table"><thead><tr>'
+      + "<th>المستوى</th><th>الحجم</th><th>" + ltr("pp512") + " (رمز/ث)</th><th>" + ltr("tg128") + " (رمز/ث)</th>"
+      + "</tr></thead><tbody>" + rows + "</tbody></table>"
+      + '<p class="hint">' + ltr("llama-bench") + "، خمس تكرارات لكل مستوى، جلسة معزولة على جهاز بارد. المصدر: " + esc(benchmarks.benchmarks[0] ? benchmarks.benchmarks[0].build : "")
+      + ' · <a class="methodology-link" href="#methodology-panel">بروتوكول الجلسة المعزولة ↓</a></p>';
+  }
+
+  // ── thermal finding ───────────────────────────────────
+  function renderThermal(benchmarks){
+    const finding = (benchmarks.findings || [])[0];
+    const area = document.getElementById("thermal-area");
+    const intro = document.getElementById("thermal-intro");
+    if (!finding){
+      intro.textContent = "";
+      area.innerHTML = '<p class="empty">' + NA + "</p>";
       return;
     }
-    const dims = data.rubric.dimensions;
-    let head = "<tr><th>النموذج</th><th>الجهاز</th><th>التكميم</th>"
-      + dims.map(d => "<th>" + MiqyasUtil.escapeHtml(d.name) + "</th>").join("")
-      + "<th>الإجمالي</th></tr>";
-    let rows = runs.map(run => {
-      const overall = run.overall != null
-        ? '<a class="score-link measured" href="' + receiptHref(run.run_id) + '" target="_blank" rel="noopener">' + MiqyasUtil.escapeHtml(run.overall) + "</a>"
-        : "—";
-      return "<tr><td>" + MiqyasUtil.escapeHtml(run.model) + "</td><td>" + MiqyasUtil.escapeHtml(run.hardware) + "</td><td>" + MiqyasUtil.escapeHtml(run.quantization || "—") + "</td>"
-        + dims.map(d => scoreCell(run, d.id)).join("")
-        + '<td class="num">' + overall + "</td></tr>";
+    intro.innerHTML = "نفس الملف (" + ltr(finding.model.id + " · " + finding.model.quantization)
+      + ")، خمس قياسات تحت ظروف حرارية وذاكرة تخزين مؤقت مختلفة. " + esc(finding.note_en);
+
+    const rows = finding.measurements.map(m => {
+      const cls = m.valid ? "" : " row-invalid";
+      const tag = m.valid
+        ? '<span class="valid-tag ok">صالح</span>'
+        : '<span class="valid-tag bad">غير صالح</span>';
+      return '<tr class="' + cls.trim() + '">'
+        + "<td>" + esc(m.condition_ar) + "<div class=\"cond-note\">" + esc(m.condition_en) + "</div></td>"
+        + '<td class="num' + (m.valid ? " measured" : "") + '">' + m.tg128 + " " + ltr("tg128") + "</td>"
+        + '<td class="num">' + '<span class="pm">± ' + m.stdev + "</span></td>"
+        + "<td>" + tag + "</td>"
+        + "</tr>";
     }).join("");
-    area.innerHTML = '<table class="data-table"><thead>' + head + "</thead><tbody>" + rows + "</tbody></table>"
-      + '<p class="hint">اضغط أي رقم لرؤية الإيصال الخام — الطلب، الناتج الكامل، والتوقيت. <span dir="ltr">فحص ↗</span></p>';
+
+    let discardedRows = "";
+    (finding.discarded || []).forEach(d => {
+      discardedRows += '<tr class="row-invalid">'
+        + "<td>" + esc(d.measurement) + "<div class=\"cond-note\">" + esc(d.reason_en) + "</div></td>"
+        + '<td class="num">' + d.value + " " + ltr("pp512") + "</td>"
+        + '<td class="num"><span class="pm">± ' + d.stdev + "</span></td>"
+        + '<td><span class="valid-tag bad">مستبعد</span></td>'
+        + "</tr>";
+    });
+
+    area.innerHTML = '<table class="data-table"><thead><tr>'
+      + "<th>الظرف</th><th>القياس</th><th>الانحراف</th><th>الصلاحية</th>"
+      + "</tr></thead><tbody>" + rows + discardedRows + "</tbody></table>"
+      + '<p class="hint">الفارق بين أعلى قيمة وأدنى قيمة لنفس الملف: ٢٫٢×، من رتبة أثر التكميم نفسه الذي يقيسه سلّم التكميم أعلاه.'
+      + ' · <a class="methodology-link" href="#methodology-panel">بروتوكول الجلسة المعزولة ↓</a></p>';
   }
 
-  function renderLeaderboard(data){
-    const area = document.getElementById("leaderboard-area");
-    const entries = data.leaderboard || [];
-    if (!entries.length) {
-      area.innerHTML = '<p class="empty">لا مساهمات مجتمعية بعد. راجع <a href="../المنهجية/">المنهجية</a> لمعرفة كيف تُرسل تشغيلة.</p>';
-      return;
+  // ── week 2 quality table ──────────────────────────────
+  function renderW2Quality(scores, findings, prompts, runIndex){
+    const promptOrder = ["P1","P2","P3","P4","P5"];
+    const promptById = {};
+    (prompts.prompts || []).forEach(p => { promptById[p.id] = p; });
+
+    const w2scores = scores.scores.filter(s => s.week === 2);
+    const byPromptModel = {};
+    w2scores.forEach(s => {
+      byPromptModel[s.prompt + "|" + s.model] = s;
+    });
+
+    const totals = {};
+    LADDER_ORDER.forEach(id => { totals[id] = { sum: 0, max: 0 }; });
+
+    const bodyRows = promptOrder.map(pid => {
+      const p = promptById[pid];
+      const label = p ? esc(p.category) + " <span class=\"en\">" + esc(pid) + "</span>" : esc(pid);
+      const cells = LADDER_ORDER.map(modelId => {
+        const s = byPromptModel[pid + "|" + modelId];
+        if (!s) return '<td class="num">' + NA + "</td>";
+        totals[modelId].sum += s.value;
+        totals[modelId].max += s.max;
+        return receiptCell(s, runIndex);
+      }).join("");
+      return "<tr><td>" + label + "</td>" + cells + "</tr>";
+    }).join("");
+
+    const totalRow = "<tr><td><b>الإجمالي</b></td>" + LADDER_ORDER.map(modelId => {
+      const t = totals[modelId];
+      return '<td class="num measured"><b>' + t.sum + '<span class="pm">/' + t.max + "</span></b></td>";
+    }).join("") + "</tr>";
+
+    const headModels = LADDER_ORDER.map(id => "<th>" + ltr(id) + "</th>").join("");
+
+    const area = document.getElementById("w2-quality-area");
+    area.innerHTML = '<table class="data-table"><thead><tr><th>الموجّه</th>' + headModels + "</tr></thead><tbody>"
+      + bodyRows + totalRow + "</tbody></table>" + RECEIPT_HINT;
+
+    const f = (findings.findings || []).find(x => x.slug === "quantization-arabic-inconclusive");
+    const banner = document.getElementById("w2-quality-banner");
+    if (f){
+      banner.innerHTML = '<div class="banner">'
+        + "<p><b>" + esc(f.title_ar) + "</b></p>"
+        + "<p>" + esc(f.summary_ar) + "</p>"
+        + '<p class="caution">هذا نتيجة غير حاسمة، لا دليل على أن التكميم غير ضار بالعربية — العيّنة صغيرة (خمسة موجّهات) والنموذج غير المكمّم (' + ltr("F16") + ') نفسه سجّل أدنى إجمالي، ما يشير إلى فشل في سعة النموذج الأساسي (١B) قبل أي أثر للتكميم، لا إلى أن التكميم بريء. يُعاد الاختبار على نموذج أكبر في الأسبوع الثامن.</p>'
+        + "</div>";
     }
-    let rows = entries.map(e => {
-      const overall = e.overall != null
-        ? '<a class="score-link measured" href="' + receiptHref(e.run_id) + '" target="_blank" rel="noopener">' + MiqyasUtil.escapeHtml(e.overall) + "</a>"
-        : "—";
-      return "<tr><td>" + MiqyasUtil.escapeHtml(e.model) + " <span class=\"tag\">مساهمة مجتمعية</span></td><td>" + MiqyasUtil.escapeHtml(e.hardware) + "</td><td>" + MiqyasUtil.escapeHtml(e.contributor || "—") + '</td><td class="num">' + overall + "</td></tr>";
-    }).join("");
-    area.innerHTML = '<table class="data-table"><thead><tr><th>النموذج</th><th>الجهاز</th><th>المساهم</th><th>الإجمالي</th></tr></thead><tbody>' + rows + "</tbody></table>"
-      + '<p class="hint">اضغط أي رقم لرؤية الإيصال الخام. <span dir="ltr">فحص ↗</span></p>';
   }
 
-  loadData().then(data => {
-    document.getElementById("v").textContent = "v" + data.version;
-    document.getElementById("n").textContent = (data.runs || []).length;
-    document.getElementById("d").textContent = data.updated || "لم يُحدَّث بعد";
-    renderRubricKey(data.rubric);
-    renderResultsTable(data);
-    renderLeaderboard(data);
+  // ── week 1 quality table ──────────────────────────────
+  function renderW1Quality(scores, prompts, runIndex){
+    const promptOrder = ["P1","P2","P3","P4","P5","P6","P7"];
+    const promptById = {};
+    (prompts.prompts || []).forEach(p => { promptById[p.id] = p; });
+
+    const columns = [
+      { model: "qwen3:8b", config: "think:false", label: "qwen3:8b", sub: "think:false" },
+      { model: "llama3.2:3b", config: "default", label: "llama3.2:3b", sub: "افتراضي" },
+    ];
+
+    const byKey = {};
+    scores.scores.filter(s => s.week === 1).forEach(s => {
+      byKey[s.prompt + "|" + s.model + "|" + s.config] = s;
+    });
+
+    const bodyRows = promptOrder.map(pid => {
+      const p = promptById[pid];
+      const label = p ? esc(p.category) + ' <span class="en">' + esc(pid) + "</span>" : esc(pid);
+      const cells = columns.map(col => {
+        const s = byKey[pid + "|" + col.model + "|" + col.config];
+        if (!s) return '<td class="num">' + NA + "</td>";
+        return receiptCell(s, runIndex);
+      }).join("");
+      return "<tr><td>" + label + "</td>" + cells + "</tr>";
+    }).join("");
+
+    const headModels = columns.map(col =>
+      "<th>" + ltr(col.label) + '<div class="cond-note">' + ltr(col.sub) + "</div></th>"
+    ).join("");
+
+    const area = document.getElementById("w1-quality-area");
+    area.innerHTML = '<table class="data-table"><thead><tr><th>الموجّه</th>' + headModels + "</tr></thead><tbody>"
+      + bodyRows + "</tbody></table>" + RECEIPT_HINT;
+  }
+
+  // ── week 1 speed table ─────────────────────────────────
+  function median(arr){
+    if (!arr.length) return null;
+    const sorted = arr.slice().sort((a, b) => a - b);
+    const mid = Math.floor(sorted.length / 2);
+    return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+  }
+
+  const MODEL_ORDER = ["llama3.2:1b", "qwen3:1.7b", "llama3.2:3b", "qwen3:8b"];
+  const MACHINE_ORDER = ["machine-a", "machine-b"];
+
+  const STATE_LABEL = { clean: "نظيف", loaded: "محمّل" };
+  const STATE_ORDER = ["clean", "loaded", "na"];
+
+  function renderW1Speed(runs, machines){
+    const machineLabel = {};
+    machines.machines.forEach(m => { machineLabel[m.id] = m.label_ar; });
+
+    const timing = runs.runs.filter(r => r.week === 1 && r.run_type === "timing");
+    const groups = {};
+    timing.forEach(r => {
+      const thinkKey = r.config.think === false ? "nothink" : "default";
+      const stateKey = r.machine_state || "na";
+      const key = r.model.id + "|" + r.machine + "|" + thinkKey + "|" + stateKey;
+      if (!groups[key]) groups[key] = { model: r.model.id, machine: r.machine, think: r.config.think, state: stateKey, main: [], corroborating: [] };
+      (r.protocol === "corroborating" ? groups[key].corroborating : groups[key].main).push(r);
+    });
+
+    const keys = Object.keys(groups).sort((ka, kb) => {
+      const a = groups[ka], b = groups[kb];
+      const mi = MODEL_ORDER.indexOf(a.model) - MODEL_ORDER.indexOf(b.model);
+      if (mi) return mi;
+      const mai = MACHINE_ORDER.indexOf(a.machine) - MACHINE_ORDER.indexOf(b.machine);
+      if (mai) return mai;
+      const si = STATE_ORDER.indexOf(a.state) - STATE_ORDER.indexOf(b.state);
+      if (si) return si;
+      return (a.think === false ? 1 : 0) - (b.think === false ? 1 : 0);
+    });
+
+    const rows = keys.map(key => {
+      const g = groups[key];
+      const rates = g.main.map(r => r.metrics.eval_rate);
+      const med = median(rates);
+      const medDisplay = med == null ? NA : Math.round(med * 100) / 100;
+      const thinkTag = g.think === false ? '<div class="cond-note">' + ltr("think:false") + "</div>" : "";
+      const stateCell = g.state === "na" ? "—" : STATE_LABEL[g.state];
+      let html = "<tr><td>" + ltr(g.model) + thinkTag + "</td>"
+        + "<td>" + esc(machineLabel[g.machine] || g.machine) + "</td>"
+        + "<td>" + stateCell + "</td>"
+        + '<td class="num measured">' + medDisplay + "</td>"
+        + '<td class="num">' + g.main.length + "</td></tr>";
+      g.corroborating.forEach(r => {
+        html += '<tr class="row-invalid"><td>' + ltr(g.model) + ' <span class="valid-tag bad">مساندة</span></td>'
+          + "<td>" + esc(machineLabel[g.machine] || g.machine) + "</td>"
+          + "<td>" + stateCell + "</td>"
+          + '<td class="num measured">' + r.metrics.eval_rate + '<div class="cond-note">خارج نافذة الوسيط الثلاثي (' + esc(r.timestamp) + ")؛ لا تُحتسب فيه</div></td>"
+          + '<td class="num">—</td></tr>';
+      });
+      return html;
+    }).join("");
+
+    const area = document.getElementById("w1-speed-area");
+    area.innerHTML = '<table class="data-table"><thead><tr>'
+      + "<th>النموذج</th><th>الجهاز</th><th>حالة الجهاز</th><th>الوسيط (" + ltr("eval_rate") + "، رمز/ث)</th><th>عدد التشغيلات</th>"
+      + "</tr></thead><tbody>" + rows + "</tbody></table>"
+      + '<p class="hint">مبني على تشغيلات ' + ltr("P5") + " فقط — الموجّه الوحيد المصمَّم لقياس التوقيت. صفوف "
+      + esc(STATE_LABEL.loaded) + " على " + ltr("machine-a") + " (تطبيقات خلفية نشطة) مقاسة بمعزل عن صفوف "
+      + esc(STATE_LABEL.clean) + "، ولا تُقارَن بالجهاز الآخر — انظر أثر التطبيقات الخلفية على السرعة."
+      + ' <a class="methodology-link" href="#methodology-panel">المنهجية ↓</a></p>';
+  }
+
+  Promise.all([
+    loadJson("machines-data", "../data/machines.json"),
+    loadJson("runs-data", "../data/runs.json"),
+    loadJson("benchmarks-data", "../data/benchmarks.json"),
+    loadJson("findings-data", "../data/findings.json"),
+    loadJson("scores-data", "../data/scores.json"),
+    loadJson("prompts-data", "../data/prompts.json"),
+    loadJson("rubric-data", "../data/rubric.json"),
+  ]).then(([machines, runs, benchmarks, findings, scores, prompts, rubric]) => {
+    const runIndex = buildRunIndex(runs);
+    renderStrip(machines, runs);
+    renderLadder(benchmarks);
+    renderThermal(benchmarks);
+    renderW2Quality(scores, findings, prompts, runIndex);
+    renderW1Quality(scores, prompts, runIndex);
+    renderW1Speed(runs, machines);
+    renderMethodology(rubric, benchmarks);
+    initTabs();
+    initMethodologyLinks();
   });
 })();
 </script>

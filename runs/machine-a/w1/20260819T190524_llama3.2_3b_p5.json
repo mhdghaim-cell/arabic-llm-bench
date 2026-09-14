@@ -3,6 +3,7 @@
   "machine": "machine-a",
   "week": 1,
   "timestamp": "20260819T190524",
+  "machine_state": "clean",
   "run_type": "timing",
   "model": {
     "id": "llama3.2:3b",

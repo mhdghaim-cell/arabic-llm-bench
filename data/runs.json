@@ -12,6 +12,7 @@
       "machine": "machine-a",
       "week": 1,
       "timestamp": "20260817T202859",
+      "machine_state": "loaded",
       "run_type": "timing",
       "model": {
         "id": "llama3.2:1b",
@@ -43,6 +44,7 @@
       "machine": "machine-a",
       "week": 1,
       "timestamp": "20260818T125204",
+      "machine_state": "loaded",
       "run_type": "timing",
       "model": {
         "id": "llama3.2:1b",
@@ -74,6 +76,7 @@
       "machine": "machine-a",
       "week": 1,
       "timestamp": "20260818T125554",
+      "machine_state": "loaded",
       "run_type": "timing",
       "model": {
         "id": "llama3.2:1b",
@@ -105,6 +108,7 @@
       "machine": "machine-a",
       "week": 1,
       "timestamp": "20260819T190054",
+      "machine_state": "clean",
       "run_type": "timing",
       "model": {
         "id": "llama3.2:1b",
@@ -136,6 +140,7 @@
       "machine": "machine-a",
       "week": 1,
       "timestamp": "20260819T190116",
+      "machine_state": "clean",
       "run_type": "timing",
       "model": {
         "id": "llama3.2:1b",
@@ -167,6 +172,7 @@
       "machine": "machine-a",
       "week": 1,
       "timestamp": "20260819T190135",
+      "machine_state": "clean",
       "run_type": "timing",
       "model": {
         "id": "llama3.2:1b",
@@ -198,6 +204,7 @@
       "machine": "machine-a",
       "week": 1,
       "timestamp": "20260819T190232",
+      "machine_state": "clean",
       "run_type": "timing",
       "model": {
         "id": "qwen3:1.7b",
@@ -229,6 +236,7 @@
       "machine": "machine-a",
       "week": 1,
       "timestamp": "20260819T190309",
+      "machine_state": "clean",
       "run_type": "timing",
       "model": {
         "id": "qwen3:1.7b",
@@ -260,6 +268,7 @@
       "machine": "machine-a",
       "week": 1,
       "timestamp": "20260819T190328",
+      "machine_state": "clean",
       "run_type": "timing",
       "model": {
         "id": "qwen3:1.7b",
@@ -291,6 +300,7 @@
       "machine": "machine-a",
       "week": 1,
       "timestamp": "20260819T190420",
+      "machine_state": "clean",
       "run_type": "timing",
       "model": {
         "id": "llama3.2:3b",
@@ -322,6 +332,7 @@
       "machine": "machine-a",
       "week": 1,
       "timestamp": "20260819T190451",
+      "machine_state": "clean",
       "run_type": "timing",
       "model": {
         "id": "llama3.2:3b",
@@ -353,6 +364,7 @@
       "machine": "machine-a",
       "week": 1,
       "timestamp": "20260819T190524",
+      "machine_state": "clean",
       "run_type": "timing",
       "model": {
         "id": "llama3.2:3b",
