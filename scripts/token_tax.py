@@ -27,6 +27,7 @@ ROOT = Path(__file__).resolve().parent.parent
 CORPUS = ROOT / "corpus_raw" / "flores_plus"
 OUT = ROOT / "results" / "w4"
 SPINE = ROOT / "data" / "tokenizers.json"
+GULF = ROOT / "corpus" / "gulf_v0.txt"   # optional, author-written
 SPLITS = ["dev", "devtest"]
 BOOTSTRAP = 2000
 SEED = 42
@@ -80,6 +81,39 @@ def load_corpus():
     dropped = before - len(wide)
     wide = wide.reset_index().sort_values(["split", "id"]).reset_index(drop=True)
     return wide, dropped
+
+
+def load_gulf():
+    """Parse corpus/gulf_v0.txt. Blocks of:  # id / gulf: / msa: / en:"""
+    if not GULF.exists():
+        return None
+    items, cur = [], None
+    for ln, raw in enumerate(GULF.read_text(encoding="utf-8").splitlines(), 1):
+        line = raw.strip()
+        if not line:
+            continue
+        if line.startswith("#"):
+            if cur:
+                items.append(cur)
+            cur = {"id": line.lstrip("#").strip(), "_line": ln}
+            continue
+        key, sep, val = line.partition(":")
+        key = key.strip().lower()
+        if not sep or key not in ("gulf", "msa", "en") or cur is None:
+            sys.exit(f"{GULF.name} line {ln}: expected '# id' or 'gulf: / msa: / en:' — got: {raw[:60]}")
+        cur[key] = val.strip()
+    if cur:
+        items.append(cur)
+    # blocks left completely blank (unfilled template slots) are ignored
+    items = [it for it in items if any(it.get(k) for k in ("gulf", "msa", "en"))]
+    for it in items:
+        missing = [k for k in ("gulf", "msa", "en") if not it.get(k)]
+        if missing:
+            sys.exit(f"{GULF.name} item '{it['id']}' (line {it['_line']}) is missing: {', '.join(missing)}")
+    ids = [it["id"] for it in items]
+    if len(ids) != len(set(ids)):
+        sys.exit(f"{GULF.name}: duplicate ids")
+    return items
 
 
 # ------------------------------------------------------------ tokenizers
@@ -143,6 +177,7 @@ def main():
         per_sentence[f"{code}__chars"] = corpus[code].str.len()
 
     measured, skipped = [], []
+    counters = {}
     for tid, kind, source, kwargs in TOKENIZERS:
         try:
             count, meta = load_tokenizer(kind, source, kwargs)
@@ -151,6 +186,7 @@ def main():
             print(f"  SKIP  {tid:15} {reason}")
             skipped.append({"id": tid, "source": source, "status": "not_measured", "reason": reason})
             continue
+        counters[tid] = count
         for code, _, _, _ in VARIETIES:
             per_sentence[f"{code}__{tid}"] = count(corpus[code].tolist())
         measured.append({"id": tid, "kind": kind, "source": source, "loader_kwargs": kwargs, **meta})
@@ -197,6 +233,36 @@ def main():
     per_sentence.to_csv(OUT / "per_sentence.csv", index=False)
     summary.to_csv(OUT / "summary.csv", index=False)
 
+    # ------------------------------------------------ custom Gulf set
+    gulf = load_gulf()
+    gulf_rows = []
+    if gulf:
+        g = len(gulf)
+        print(f"\nGulf set: {g} items (gulf / msa / en)")
+        if g < 20:
+            print(f"  note: only {g} items — confidence intervals will be wide")
+        g_idx = np.random.default_rng(SEED).integers(0, g, size=(BOOTSTRAP, g))
+        g_sent = pd.DataFrame({"id": [it["id"] for it in gulf]})
+        for k in ("gulf", "msa", "en"):
+            g_sent[f"{k}__words"] = [len(it[k].split()) for it in gulf]
+        for t in measured:
+            tid = t["id"]
+            c = {k: np.array(counters[tid]([it[k] for it in gulf])) for k in ("gulf", "msa", "en")}
+            for k in c:
+                g_sent[f"{k}__{tid}"] = c[k]
+            row = {"tokenizer": tid, "items": g}
+            for num, den in (("gulf", "en"), ("msa", "en"), ("gulf", "msa")):
+                boot = c[num][g_idx].sum(axis=1) / c[den][g_idx].sum(axis=1)
+                key = f"{num}_vs_{den}"
+                row[key] = round(c[num].sum() / c[den].sum(), 3)
+                row[f"{key}_ci95"] = f"{np.percentile(boot, 2.5):.3f}–{np.percentile(boot, 97.5):.3f}"
+            gulf_rows.append(row)
+        gulf_df = pd.DataFrame(gulf_rows).set_index("tokenizer")
+        g_sent.to_csv(OUT / "gulf_per_item.csv", index=False)
+        gulf_df.to_csv(OUT / "gulf_summary.csv")
+        print("\nGulf set — gulf vs MSA is the dialect effect on identical content:\n")
+        print(gulf_df[["gulf_vs_en", "msa_vs_en", "gulf_vs_msa", "gulf_vs_msa_ci95"]].to_string())
+
     # ---------------------------------------------------------- readable
     order = [t["id"] for t in measured]
     ratio = summary.pivot(index="tokenizer", columns="variety", values="ratio_vs_eng").loc[order, ["eng"] + ARABIC]
@@ -233,6 +299,10 @@ def main():
         "",
     ]
     md += [f"- {s['id']} ({s['source']}): {s['reason']}" for s in skipped] or ["- none"]
+    if gulf_rows:
+        md += ["", f"## Author-written Gulf set ({len(gulf)} items, same meaning in Gulf, MSA, English)", "",
+               "AI-drafted (Claude), reviewed and edited by a native Gulf speaker; not independently sourced. gulf_vs_msa isolates the dialect effect.", "",
+               md_table(gulf_df)]
     md += ["", "## Environment", "", "```", json.dumps(env, indent=2), "```"]
     (OUT / "summary.md").write_text("\n".join(md), encoding="utf-8")
 
@@ -265,6 +335,12 @@ def main():
                 for v in ["eng"] + ARABIC
             },
         })
+    if gulf_rows:
+        spine["custom_sets"] = {"gulf_v0": {
+            "source": "drafted with AI assistance (Claude), reviewed and edited by a native Gulf speaker; corpus/gulf_v0.txt, MIT",
+            "items": len(gulf),
+            "results": {r["tokenizer"]: {k: v for k, v in r.items() if k not in ("tokenizer", "items")} for r in gulf_rows},
+        }}
     spine["tokenizers"] += skipped  # rendered as «لم يُقَس بعد»
     SPINE.write_text(json.dumps(spine, ensure_ascii=False, indent=2), encoding="utf-8")
 

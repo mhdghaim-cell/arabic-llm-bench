@@ -1,0 +1,13 @@
+Gulf set v0 — 20 items, AI-drafted, native-speaker reviewed (0 edits)
+words: gulf 190  msa 213  en 297
+diacritics: gulf 0  msa 15
+
+o200k           gulf/msa raw 0.947  no-diacritics 0.964   msa tokens 398 -> 391
+qwen3           gulf/msa raw 0.951  no-diacritics 0.961   msa tokens 446 -> 441
+llama3.2        gulf/msa raw 0.892  no-diacritics 0.908   msa tokens 474 -> 466
+gemma3          gulf/msa raw 0.874  no-diacritics 0.891   msa tokens 420 -> 412
+mistral-tekken  gulf/msa raw 0.981  no-diacritics 0.978   msa tokens 369 -> 370
+allam           gulf/msa raw 0.947  no-diacritics 0.964   msa tokens 284 -> 279
+jais            gulf/msa raw 0.907  no-diacritics 1.004   msa tokens 311 -> 281
+jais2           gulf/msa raw 0.904  no-diacritics 1.004   msa tokens 311 -> 280
+fanar           gulf/msa raw 0.896  no-diacritics 0.911   msa tokens 434 -> 427

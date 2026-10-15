@@ -1,99 +1,99 @@
 # g01
-gulf:
-msa:
-en:
+gulf: آسف تأخرت، الزحمة وايد. عشر دقايق وأكون عندك
+msa: عذرًا على التأخير، فالازدحام شديد. سأكون عندك خلال عشر دقائق
+en: Sorry I'm late, the traffic is heavy. I'll be with you in ten minutes
 
 # g02
-gulf:
-msa:
-en:
+gulf: لو سمحت دز لي الملف قبل الميتنق، أبا أراجعه
+msa: من فضلك أرسل لي الملف قبل الاجتماع، أريد أن أراجعه
+en: Please send me the file before the meeting, I want to review it
 
 # g03
-gulf:
-msa:
-en:
+gulf: الميتنق اليوم ما بيمدي، خلنا نأجله باجر الصبح
+msa: لن يتسع الوقت لاجتماع اليوم، فلنؤجله إلى صباح الغد
+en: There won't be time for today's meeting, let's push it to tomorrow morning
 
 # g04
-gulf:
-msa:
-en:
+gulf: يمه شو تبون أييب معاي حق العشا؟
+msa: يا أمي، ماذا تريدون أن أحضر معي للعشاء؟
+en: Mum, what do you want me to bring for dinner?
 
 # g05
-gulf:
-msa:
-en:
+gulf: الشارع واقف من الصبح، شكلي بوصل الدوام متأخر
+msa: الطريق متوقف منذ الصباح، ويبدو أنني سأصل إلى العمل متأخرًا
+en: The road has been at a standstill since morning, looks like I'll be late for work
 
 # g06
-gulf:
-msa:
-en:
+gulf: مرحبا، عندكم هالشنطة بالأسود؟ ولا خلصت؟
+msa: مرحبًا، هل لديكم هذه الحقيبة باللون الأسود؟ أم أنها نفدت؟
+en: Hi, do you have this bag in black? Or has it sold out?
 
 # g07
-gulf:
-msa:
-en:
+gulf: والله ما بقدر أيي هالويكند، عندي عزيمة عند الأهل
+msa: للأسف لن أتمكن من الحضور في عطلة نهاية الأسبوع، فلدي دعوة عند العائلة
+en: Honestly I can't make it this weekend, I have a family gathering
 
 # g08
-gulf:
-msa:
-en:
+gulf: كلمني يوم تفضى، الموضوع مب مستعجل
+msa: اتصل بي عندما تتفرغ، فالأمر ليس عاجلًا
+en: Call me when you're free, it's not urgent
 
 # g09
-gulf:
-msa:
-en:
+gulf: المكيف خربان من أمس والبيت حر موت، تعرف حد فني زين؟
+msa: المكيف معطل منذ أمس والبيت شديد الحرارة، هل تعرف فنيًا جيدًا؟
+en: The AC has been broken since yesterday and the house is boiling, do you know a good technician?
 
 # g10
-gulf:
-msa:
-en:
+gulf: هلا، بس أذكرك بالمبلغ اللي عندك، لو تقدر تحوله هالأسبوع
+msa: مرحبًا، أردت فقط أن أذكرك بالمبلغ المستحق عليك، إن استطعت تحويله هذا الأسبوع
+en: Hi, just reminding you about the money you owe me, if you can transfer it this week
 
 # g11
-gulf:
-msa:
-en:
+gulf: رحت الصبح حق المعاملة وقالوا لي ناقصني ورقة، لازم أرد باجر
+msa: ذهبت صباحًا لإنجاز المعاملة فأخبروني أن ورقة تنقصني، وعليّ أن أعود غدًا
+en: I went this morning for the paperwork and they told me I'm missing a document, I have to go back tomorrow
 
 # g12
-gulf:
-msa:
-en:
+gulf: أبا أحجز طاولة حق ستة أشخاص الساعة تسع الليلة
+msa: أريد أن أحجز طاولة لستة أشخاص في الساعة التاسعة الليلة
+en: I'd like to book a table for six at nine tonight
 
 # g13
-gulf:
-msa:
-en:
+gulf: مبروك ما ياكم، الله يخليه لكم ويتربى في عزكم
+msa: مبارك المولود الجديد، حفظه الله لكم ونشأ في كنفكم
+en: Congratulations on the new baby, may God keep him for you and may he grow up in your care
 
 # g14
-gulf:
-msa:
-en:
+gulf: طال عمرك، ممكن آخذ إجازة يوم الخميس؟ عندي شغلة ضرورية
+msa: حفظك الله، هل يمكنني أخذ إجازة يوم الخميس؟ لدي أمر ضروري
+en: With respect, may I take Thursday off? I have something urgent to take care of
 
 # g15
-gulf:
-msa:
-en:
+gulf: البناية اللي جنب المسجد، البوابة الثانية، اتصل يوم توصل وبنزل لك
+msa: المبنى المجاور للمسجد، البوابة الثانية، اتصل عندما تصل وسأنزل إليك
+en: The building next to the mosque, second gate, call when you arrive and I'll come down
 
 # g16
-gulf:
-msa:
-en:
+gulf: الرسوم حق التسجيل كم؟ وآخر موعد متى؟
+msa: كم رسوم التسجيل؟ ومتى آخر موعد؟
+en: How much are the registration fees? And when is the deadline?
 
 # g17
-gulf:
-msa:
-en:
+gulf: المطعم حلو بس الأسعار وايد غالية حق اللي يقدمونه
+msa: المطعم جميل لكن الأسعار مرتفعة جدًا مقارنة بما يقدمونه
+en: The restaurant is nice but the prices are very high for what they serve
 
 # g18
-gulf:
-msa:
-en:
+gulf: اسمع، كنت أبا أقولك من أمس بس نسيت، الوالد يبانا نيتمع كلنا عنده في البيت يوم الجمعة عقب الصلاة، فلو تقدر تبلغ الشباب وتشوف منو بيقدر ييي يكون أحسن
+msa: اسمع، كنت أريد أن أخبرك منذ أمس لكنني نسيت، فوالدي يريد أن نجتمع جميعًا عنده في البيت يوم الجمعة بعد الصلاة، فمن الأفضل أن تبلغ الشباب وترى من يستطيع الحضور
+en: Listen, I meant to tell you yesterday but forgot, Dad wants us all to gather at his house on Friday after prayers, so it'd be best if you let the guys know and see who can come
 
 # g19
-gulf:
-msa:
-en:
+gulf: زين، ياي
+msa: حسنًا، أنا قادم
+en: Okay, coming
 
 # g20
-gulf:
-msa:
-en:
+gulf: تعرف دكتور أسنان زين في أبوظبي؟ أبا واحد ما يطول بالمواعيد
+msa: هل تعرف طبيب أسنان جيدًا في أبوظبي؟ أريد طبيبًا لا تطول مواعيده
+en: Do you know a good dentist in Abu Dhabi? I want one without long waits for appointments

@@ -723,5 +723,85 @@
         }
       }
     }
-  ]
+  ],
+  "custom_sets": {
+    "gulf_v0": {
+      "source": "drafted with AI assistance (Claude), reviewed and edited by a native Gulf speaker; corpus/gulf_v0.txt, MIT",
+      "items": 20,
+      "results": {
+        "o200k": {
+          "gulf_vs_en": 1.149,
+          "gulf_vs_en_ci95": "1.071–1.222",
+          "msa_vs_en": 1.213,
+          "msa_vs_en_ci95": "1.120–1.313",
+          "gulf_vs_msa": 0.947,
+          "gulf_vs_msa_ci95": "0.889–1.002"
+        },
+        "qwen3": {
+          "gulf_vs_en": 1.243,
+          "gulf_vs_en_ci95": "1.176–1.310",
+          "msa_vs_en": 1.308,
+          "msa_vs_en_ci95": "1.215–1.405",
+          "gulf_vs_msa": 0.951,
+          "gulf_vs_msa_ci95": "0.893–1.011"
+        },
+        "llama3.2": {
+          "gulf_vs_en": 1.24,
+          "gulf_vs_en_ci95": "1.165–1.307",
+          "msa_vs_en": 1.39,
+          "msa_vs_en_ci95": "1.296–1.489",
+          "gulf_vs_msa": 0.892,
+          "gulf_vs_msa_ci95": "0.837–0.943"
+        },
+        "gemma3": {
+          "gulf_vs_en": 1.043,
+          "gulf_vs_en_ci95": "0.982–1.102",
+          "msa_vs_en": 1.193,
+          "msa_vs_en_ci95": "1.107–1.282",
+          "gulf_vs_msa": 0.874,
+          "gulf_vs_msa_ci95": "0.810–0.934"
+        },
+        "mistral-tekken": {
+          "gulf_vs_en": 1.049,
+          "gulf_vs_en_ci95": "0.978–1.109",
+          "msa_vs_en": 1.07,
+          "msa_vs_en_ci95": "1.005–1.139",
+          "gulf_vs_msa": 0.981,
+          "gulf_vs_msa_ci95": "0.916–1.040"
+        },
+        "allam": {
+          "gulf_vs_en": 0.729,
+          "gulf_vs_en_ci95": "0.663–0.789",
+          "msa_vs_en": 0.77,
+          "msa_vs_en_ci95": "0.710–0.827",
+          "gulf_vs_msa": 0.947,
+          "gulf_vs_msa_ci95": "0.891–1.000"
+        },
+        "jais": {
+          "gulf_vs_en": 0.81,
+          "gulf_vs_en_ci95": "0.752–0.864",
+          "msa_vs_en": 0.894,
+          "msa_vs_en_ci95": "0.824–0.952",
+          "gulf_vs_msa": 0.907,
+          "gulf_vs_msa_ci95": "0.842–0.981"
+        },
+        "jais2": {
+          "gulf_vs_en": 0.819,
+          "gulf_vs_en_ci95": "0.764–0.870",
+          "msa_vs_en": 0.907,
+          "msa_vs_en_ci95": "0.835–0.969",
+          "gulf_vs_msa": 0.904,
+          "gulf_vs_msa_ci95": "0.840–0.978"
+        },
+        "fanar": {
+          "gulf_vs_en": 1.099,
+          "gulf_vs_en_ci95": "1.022–1.167",
+          "msa_vs_en": 1.226,
+          "msa_vs_en_ci95": "1.147–1.307",
+          "gulf_vs_msa": 0.896,
+          "gulf_vs_msa_ci95": "0.847–0.947"
+        }
+      }
+    }
+  }
 }
