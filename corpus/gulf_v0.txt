@@ -1,0 +1,99 @@
+# g01
+gulf:
+msa:
+en:
+
+# g02
+gulf:
+msa:
+en:
+
+# g03
+gulf:
+msa:
+en:
+
+# g04
+gulf:
+msa:
+en:
+
+# g05
+gulf:
+msa:
+en:
+
+# g06
+gulf:
+msa:
+en:
+
+# g07
+gulf:
+msa:
+en:
+
+# g08
+gulf:
+msa:
+en:
+
+# g09
+gulf:
+msa:
+en:
+
+# g10
+gulf:
+msa:
+en:
+
+# g11
+gulf:
+msa:
+en:
+
+# g12
+gulf:
+msa:
+en:
+
+# g13
+gulf:
+msa:
+en:
+
+# g14
+gulf:
+msa:
+en:
+
+# g15
+gulf:
+msa:
+en:
+
+# g16
+gulf:
+msa:
+en:
+
+# g17
+gulf:
+msa:
+en:
+
+# g18
+gulf:
+msa:
+en:
+
+# g19
+gulf:
+msa:
+en:
+
+# g20
+gulf:
+msa:
+en:

@@ -1,6 +1,6 @@
 # Week 4 — Arabic token tax
 
-FLORES+ dev + devtest · 2009 parallel sentences · 7 tokenizers · no special tokens
+FLORES+ dev + devtest · 2009 parallel sentences · 9 tokenizers · no special tokens
 
 ## Token ratio vs English (same sentences, same tokenizer)
 
@@ -12,6 +12,8 @@ FLORES+ dev + devtest · 2009 parallel sentences · 7 tokenizers · no special t
 | gemma3 | 1.0 | 1.47 | 1.474 | 1.461 | 1.436 | 1.415 | 1.389 | 1.519 |
 | mistral-tekken | 1.0 | 1.245 | 1.25 | 1.262 | 1.288 | 1.236 | 1.229 | 1.37 |
 | allam | 1.0 | 0.966 | 0.969 | 0.958 | 0.973 | 0.942 | 0.936 | 1.075 |
+| jais | 1.0 | 1.013 | 1.016 | 0.982 | 1.004 | 0.972 | 0.957 | 1.103 |
+| jais2 | 1.0 | 1.047 | 1.05 | 1.001 | 1.018 | 1.0 | 0.995 | 1.128 |
 | fanar | 1.0 | 1.453 | 1.459 | 1.458 | 1.458 | 1.412 | 1.391 | 1.522 |
 
 ## MSA ratio with 95% bootstrap CI and split stability
@@ -24,6 +26,8 @@ FLORES+ dev + devtest · 2009 parallel sentences · 7 tokenizers · no special t
 | gemma3 | 1.47 | 1.459 | 1.481 | 1.468 | 1.471 | 1.462 |
 | mistral-tekken | 1.245 | 1.236 | 1.254 | 1.249 | 1.242 | 1.235 |
 | allam | 0.966 | 0.959 | 0.973 | 0.969 | 0.964 | 0.957 |
+| jais | 1.013 | 1.005 | 1.021 | 1.015 | 1.011 | 1.0 |
+| jais2 | 1.047 | 1.038 | 1.057 | 1.048 | 1.046 | 1.022 |
 | fanar | 1.453 | 1.442 | 1.465 | 1.455 | 1.452 | 1.45 |
 
 ## Tokens per whitespace word (reference only — Arabic words carry clitics)
@@ -36,11 +40,13 @@ FLORES+ dev + devtest · 2009 parallel sentences · 7 tokenizers · no special t
 | gemma3 | 1.237 | 2.028 | 2.031 | 2.112 | 1.992 | 2.135 | 1.994 | 2.151 |
 | mistral-tekken | 1.267 | 1.761 | 1.765 | 1.869 | 1.831 | 1.911 | 1.808 | 1.988 |
 | allam | 1.339 | 1.444 | 1.446 | 1.499 | 1.462 | 1.54 | 1.456 | 1.648 |
+| jais | 1.268 | 1.433 | 1.436 | 1.455 | 1.428 | 1.503 | 1.408 | 1.6 |
+| jais2 | 1.249 | 1.46 | 1.461 | 1.461 | 1.427 | 1.524 | 1.442 | 1.613 |
 | fanar | 1.269 | 2.058 | 2.062 | 2.163 | 2.076 | 2.187 | 2.05 | 2.212 |
 
 ## Not measured
 
-- jais (inceptionai/jais-family-6p7b-chat): gated — access not yet granted
+- none
 
 ## Environment
 

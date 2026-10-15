@@ -505,6 +505,152 @@
       }
     },
     {
+      "id": "jais",
+      "source": "inceptionai/jais-family-6p7b-chat",
+      "vocab": 84992,
+      "revision": "683805efe6126c6536feb4aa23317e70222ac94c",
+      "status": "measured",
+      "ratios": {
+        "eng": {
+          "ratio": 1.0,
+          "ci95": [
+            1.0,
+            1.0
+          ],
+          "tokens_per_word": 1.268
+        },
+        "msa": {
+          "ratio": 1.013,
+          "ci95": [
+            1.005,
+            1.021
+          ],
+          "tokens_per_word": 1.433
+        },
+        "najdi": {
+          "ratio": 1.016,
+          "ci95": [
+            1.008,
+            1.025
+          ],
+          "tokens_per_word": 1.436
+        },
+        "mesopotamian": {
+          "ratio": 0.982,
+          "ci95": [
+            0.975,
+            0.99
+          ],
+          "tokens_per_word": 1.455
+        },
+        "egyptian": {
+          "ratio": 1.004,
+          "ci95": [
+            0.996,
+            1.012
+          ],
+          "tokens_per_word": 1.428
+        },
+        "levantine_n": {
+          "ratio": 0.972,
+          "ci95": [
+            0.965,
+            0.979
+          ],
+          "tokens_per_word": 1.503
+        },
+        "levantine_s": {
+          "ratio": 0.957,
+          "ci95": [
+            0.951,
+            0.963
+          ],
+          "tokens_per_word": 1.408
+        },
+        "moroccan": {
+          "ratio": 1.103,
+          "ci95": [
+            1.092,
+            1.113
+          ],
+          "tokens_per_word": 1.6
+        }
+      }
+    },
+    {
+      "id": "jais2",
+      "source": "inception42/Jais-2-8B-Chat",
+      "vocab": 150222,
+      "revision": "da0e1639cd92b508b24120f7f77f5270a8465dc4",
+      "status": "measured",
+      "ratios": {
+        "eng": {
+          "ratio": 1.0,
+          "ci95": [
+            1.0,
+            1.0
+          ],
+          "tokens_per_word": 1.249
+        },
+        "msa": {
+          "ratio": 1.047,
+          "ci95": [
+            1.038,
+            1.057
+          ],
+          "tokens_per_word": 1.46
+        },
+        "najdi": {
+          "ratio": 1.05,
+          "ci95": [
+            1.041,
+            1.059
+          ],
+          "tokens_per_word": 1.461
+        },
+        "mesopotamian": {
+          "ratio": 1.001,
+          "ci95": [
+            0.993,
+            1.008
+          ],
+          "tokens_per_word": 1.461
+        },
+        "egyptian": {
+          "ratio": 1.018,
+          "ci95": [
+            1.01,
+            1.026
+          ],
+          "tokens_per_word": 1.427
+        },
+        "levantine_n": {
+          "ratio": 1.0,
+          "ci95": [
+            0.993,
+            1.008
+          ],
+          "tokens_per_word": 1.524
+        },
+        "levantine_s": {
+          "ratio": 0.995,
+          "ci95": [
+            0.988,
+            1.001
+          ],
+          "tokens_per_word": 1.442
+        },
+        "moroccan": {
+          "ratio": 1.128,
+          "ci95": [
+            1.117,
+            1.139
+          ],
+          "tokens_per_word": 1.613
+        }
+      }
+    },
+    {
       "id": "fanar",
       "source": "QCRI/Fanar-1-9B-Instruct",
       "vocab": 128256,
@@ -576,12 +722,6 @@
           "tokens_per_word": 2.212
         }
       }
-    },
-    {
-      "id": "jais",
-      "source": "inceptionai/jais-family-6p7b-chat",
-      "status": "not_measured",
-      "reason": "gated — access not yet granted"
     }
   ]
 }

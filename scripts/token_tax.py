@@ -54,6 +54,7 @@ TOKENIZERS = [
     ("mistral-tekken", "hf", "mistralai/Mistral-Nemo-Instruct-2407", {"fix_mistral_regex": True}),
     ("allam", "hf", "humain-ai/ALLaM-7B-Instruct-preview", {}),
     ("jais", "hf", "inceptionai/jais-family-6p7b-chat", {}),
+    ("jais2", "hf", "inception42/Jais-2-8B-Chat", {}),
     ("fanar", "hf", "QCRI/Fanar-1-9B-Instruct", {}),
 ]
 
