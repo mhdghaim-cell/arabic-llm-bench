@@ -1,75 +1,587 @@
 {
   "version": "0.1",
-  "updated": null,
-  "note": "لم يُقَس بعد. تُملأ القيم الرقمية من قياسات فعلية على نصوص عربية وإنجليزية متوازية — لا قيم مفترضة.",
-  "default_tokenizer": "gpt-4o",
+  "generated": "2026-10-15",
+  "method": {
+    "corpus": "FLORES+ (openlanguagedata/flores_plus), dev + devtest, CC BY-SA 4.0",
+    "sentences": 2009,
+    "metric": "sum(Arabic tokens) / sum(English tokens) over identical parallel sentences",
+    "ci": "95% percentile bootstrap over sentences, 2000 resamples, seed 42",
+    "special_tokens": "excluded",
+    "environment": {
+      "date": "2026-10-15",
+      "python": "3.9.7",
+      "platform": "macOS-10.16-x86_64-i386-64bit",
+      "transformers": "4.57.6",
+      "tiktoken": "0.14.0"
+    }
+  },
+  "varieties": [
+    {
+      "id": "eng",
+      "flores": "eng_Latn",
+      "label_ar": "الإنجليزية",
+      "label_en": "English"
+    },
+    {
+      "id": "msa",
+      "flores": "arb_Arab",
+      "label_ar": "الفصحى",
+      "label_en": "Modern Standard Arabic"
+    },
+    {
+      "id": "najdi",
+      "flores": "ars_Arab",
+      "label_ar": "النجدية",
+      "label_en": "Najdi"
+    },
+    {
+      "id": "mesopotamian",
+      "flores": "acm_Arab",
+      "label_ar": "العراقية",
+      "label_en": "Mesopotamian"
+    },
+    {
+      "id": "egyptian",
+      "flores": "arz_Arab",
+      "label_ar": "المصرية",
+      "label_en": "Egyptian"
+    },
+    {
+      "id": "levantine_n",
+      "flores": "apc_Arab_nort3139",
+      "label_ar": "الشامية الشمالية",
+      "label_en": "North Levantine"
+    },
+    {
+      "id": "levantine_s",
+      "flores": "apc_Arab_sout3123",
+      "label_ar": "الشامية الجنوبية",
+      "label_en": "South Levantine"
+    },
+    {
+      "id": "moroccan",
+      "flores": "ary_Arab",
+      "label_ar": "المغربية",
+      "label_en": "Moroccan"
+    }
+  ],
   "tokenizers": [
     {
-      "id": "gpt-4o",
-      "name": "GPT-4o",
-      "encoding": "o200k_base",
-      "provider": "OpenAI",
-      "hf_model": "Xenova/gpt-4o",
-      "english_tokens_per_word": null,
-      "arabic_tokens_per_word": null,
-      "ratio": null,
-      "sample_size": null
+      "id": "o200k",
+      "source": "o200k_base",
+      "vocab": 200019,
+      "revision": "tiktoken 0.14.0",
+      "status": "measured",
+      "ratios": {
+        "eng": {
+          "ratio": 1.0,
+          "ci95": [
+            1.0,
+            1.0
+          ],
+          "tokens_per_word": 1.223
+        },
+        "msa": {
+          "ratio": 1.382,
+          "ci95": [
+            1.372,
+            1.392
+          ],
+          "tokens_per_word": 1.886
+        },
+        "najdi": {
+          "ratio": 1.387,
+          "ci95": [
+            1.377,
+            1.397
+          ],
+          "tokens_per_word": 1.889
+        },
+        "mesopotamian": {
+          "ratio": 1.386,
+          "ci95": [
+            1.376,
+            1.397
+          ],
+          "tokens_per_word": 1.982
+        },
+        "egyptian": {
+          "ratio": 1.408,
+          "ci95": [
+            1.397,
+            1.419
+          ],
+          "tokens_per_word": 1.932
+        },
+        "levantine_n": {
+          "ratio": 1.351,
+          "ci95": [
+            1.342,
+            1.361
+          ],
+          "tokens_per_word": 2.016
+        },
+        "levantine_s": {
+          "ratio": 1.341,
+          "ci95": [
+            1.332,
+            1.35
+          ],
+          "tokens_per_word": 1.904
+        },
+        "moroccan": {
+          "ratio": 1.484,
+          "ci95": [
+            1.472,
+            1.496
+          ],
+          "tokens_per_word": 2.078
+        }
+      }
     },
     {
-      "id": "gpt-3.5-4",
-      "name": "GPT-3.5 / GPT-4",
-      "encoding": "cl100k_base",
-      "provider": "OpenAI",
-      "hf_model": "Xenova/gpt-3.5-turbo",
-      "english_tokens_per_word": null,
-      "arabic_tokens_per_word": null,
-      "ratio": null,
-      "sample_size": null
+      "id": "qwen3",
+      "source": "Qwen/Qwen3-4B",
+      "vocab": 151669,
+      "revision": "1cfa9a7208912126459214e8b04321603b3df60c",
+      "status": "measured",
+      "ratios": {
+        "eng": {
+          "ratio": 1.0,
+          "ci95": [
+            1.0,
+            1.0
+          ],
+          "tokens_per_word": 1.257
+        },
+        "msa": {
+          "ratio": 1.629,
+          "ci95": [
+            1.617,
+            1.642
+          ],
+          "tokens_per_word": 2.286
+        },
+        "najdi": {
+          "ratio": 1.633,
+          "ci95": [
+            1.621,
+            1.647
+          ],
+          "tokens_per_word": 2.288
+        },
+        "mesopotamian": {
+          "ratio": 1.622,
+          "ci95": [
+            1.61,
+            1.635
+          ],
+          "tokens_per_word": 2.384
+        },
+        "egyptian": {
+          "ratio": 1.636,
+          "ci95": [
+            1.622,
+            1.649
+          ],
+          "tokens_per_word": 2.307
+        },
+        "levantine_n": {
+          "ratio": 1.581,
+          "ci95": [
+            1.569,
+            1.592
+          ],
+          "tokens_per_word": 2.424
+        },
+        "levantine_s": {
+          "ratio": 1.55,
+          "ci95": [
+            1.539,
+            1.561
+          ],
+          "tokens_per_word": 2.263
+        },
+        "moroccan": {
+          "ratio": 1.695,
+          "ci95": [
+            1.68,
+            1.709
+          ],
+          "tokens_per_word": 2.44
+        }
+      }
     },
     {
-      "id": "llama-3",
-      "name": "Llama 3",
-      "encoding": null,
-      "provider": "Meta",
-      "hf_model": "Xenova/llama-3-tokenizer",
-      "english_tokens_per_word": null,
-      "arabic_tokens_per_word": null,
-      "ratio": null,
-      "sample_size": null
+      "id": "llama3.2",
+      "source": "meta-llama/Llama-3.2-1B-Instruct",
+      "vocab": 128256,
+      "revision": "9213176726f574b556790deb65791e0c5aa438b6",
+      "status": "measured",
+      "ratios": {
+        "eng": {
+          "ratio": 1.0,
+          "ci95": [
+            1.0,
+            1.0
+          ],
+          "tokens_per_word": 1.236
+        },
+        "msa": {
+          "ratio": 1.656,
+          "ci95": [
+            1.644,
+            1.668
+          ],
+          "tokens_per_word": 2.284
+        },
+        "najdi": {
+          "ratio": 1.663,
+          "ci95": [
+            1.651,
+            1.675
+          ],
+          "tokens_per_word": 2.29
+        },
+        "mesopotamian": {
+          "ratio": 1.649,
+          "ci95": [
+            1.637,
+            1.661
+          ],
+          "tokens_per_word": 2.382
+        },
+        "egyptian": {
+          "ratio": 1.649,
+          "ci95": [
+            1.636,
+            1.662
+          ],
+          "tokens_per_word": 2.287
+        },
+        "levantine_n": {
+          "ratio": 1.593,
+          "ci95": [
+            1.582,
+            1.605
+          ],
+          "tokens_per_word": 2.402
+        },
+        "levantine_s": {
+          "ratio": 1.576,
+          "ci95": [
+            1.565,
+            1.587
+          ],
+          "tokens_per_word": 2.261
+        },
+        "moroccan": {
+          "ratio": 1.706,
+          "ci95": [
+            1.692,
+            1.72
+          ],
+          "tokens_per_word": 2.415
+        }
+      }
     },
     {
-      "id": "mistral",
-      "name": "Mistral",
-      "encoding": null,
-      "provider": "Mistral AI",
-      "hf_model": "Xenova/mistral-tokenizer-v3",
-      "english_tokens_per_word": null,
-      "arabic_tokens_per_word": null,
-      "ratio": null,
-      "sample_size": null
+      "id": "gemma3",
+      "source": "google/gemma-3-1b-it",
+      "vocab": 262145,
+      "revision": "dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+      "status": "measured",
+      "ratios": {
+        "eng": {
+          "ratio": 1.0,
+          "ci95": [
+            1.0,
+            1.0
+          ],
+          "tokens_per_word": 1.237
+        },
+        "msa": {
+          "ratio": 1.47,
+          "ci95": [
+            1.459,
+            1.481
+          ],
+          "tokens_per_word": 2.028
+        },
+        "najdi": {
+          "ratio": 1.474,
+          "ci95": [
+            1.463,
+            1.486
+          ],
+          "tokens_per_word": 2.031
+        },
+        "mesopotamian": {
+          "ratio": 1.461,
+          "ci95": [
+            1.45,
+            1.472
+          ],
+          "tokens_per_word": 2.112
+        },
+        "egyptian": {
+          "ratio": 1.436,
+          "ci95": [
+            1.424,
+            1.447
+          ],
+          "tokens_per_word": 1.992
+        },
+        "levantine_n": {
+          "ratio": 1.415,
+          "ci95": [
+            1.404,
+            1.425
+          ],
+          "tokens_per_word": 2.135
+        },
+        "levantine_s": {
+          "ratio": 1.389,
+          "ci95": [
+            1.379,
+            1.399
+          ],
+          "tokens_per_word": 1.994
+        },
+        "moroccan": {
+          "ratio": 1.519,
+          "ci95": [
+            1.507,
+            1.531
+          ],
+          "tokens_per_word": 2.151
+        }
+      }
+    },
+    {
+      "id": "mistral-tekken",
+      "source": "mistralai/Mistral-Nemo-Instruct-2407",
+      "vocab": 131072,
+      "revision": "04d8a90549d23fc6bd7f642064003592df51e9b3",
+      "status": "measured",
+      "ratios": {
+        "eng": {
+          "ratio": 1.0,
+          "ci95": [
+            1.0,
+            1.0
+          ],
+          "tokens_per_word": 1.267
+        },
+        "msa": {
+          "ratio": 1.245,
+          "ci95": [
+            1.236,
+            1.254
+          ],
+          "tokens_per_word": 1.761
+        },
+        "najdi": {
+          "ratio": 1.25,
+          "ci95": [
+            1.241,
+            1.26
+          ],
+          "tokens_per_word": 1.765
+        },
+        "mesopotamian": {
+          "ratio": 1.262,
+          "ci95": [
+            1.253,
+            1.271
+          ],
+          "tokens_per_word": 1.869
+        },
+        "egyptian": {
+          "ratio": 1.288,
+          "ci95": [
+            1.278,
+            1.297
+          ],
+          "tokens_per_word": 1.831
+        },
+        "levantine_n": {
+          "ratio": 1.236,
+          "ci95": [
+            1.227,
+            1.244
+          ],
+          "tokens_per_word": 1.911
+        },
+        "levantine_s": {
+          "ratio": 1.229,
+          "ci95": [
+            1.221,
+            1.237
+          ],
+          "tokens_per_word": 1.808
+        },
+        "moroccan": {
+          "ratio": 1.37,
+          "ci95": [
+            1.359,
+            1.382
+          ],
+          "tokens_per_word": 1.988
+        }
+      }
+    },
+    {
+      "id": "allam",
+      "source": "humain-ai/ALLaM-7B-Instruct-preview",
+      "vocab": 64000,
+      "revision": "a28dd1e67420cde72d3629c8633a974cf7d9c366",
+      "status": "measured",
+      "ratios": {
+        "eng": {
+          "ratio": 1.0,
+          "ci95": [
+            1.0,
+            1.0
+          ],
+          "tokens_per_word": 1.339
+        },
+        "msa": {
+          "ratio": 0.966,
+          "ci95": [
+            0.959,
+            0.973
+          ],
+          "tokens_per_word": 1.444
+        },
+        "najdi": {
+          "ratio": 0.969,
+          "ci95": [
+            0.962,
+            0.976
+          ],
+          "tokens_per_word": 1.446
+        },
+        "mesopotamian": {
+          "ratio": 0.958,
+          "ci95": [
+            0.951,
+            0.964
+          ],
+          "tokens_per_word": 1.499
+        },
+        "egyptian": {
+          "ratio": 0.973,
+          "ci95": [
+            0.965,
+            0.98
+          ],
+          "tokens_per_word": 1.462
+        },
+        "levantine_n": {
+          "ratio": 0.942,
+          "ci95": [
+            0.936,
+            0.949
+          ],
+          "tokens_per_word": 1.54
+        },
+        "levantine_s": {
+          "ratio": 0.936,
+          "ci95": [
+            0.93,
+            0.942
+          ],
+          "tokens_per_word": 1.456
+        },
+        "moroccan": {
+          "ratio": 1.075,
+          "ci95": [
+            1.066,
+            1.084
+          ],
+          "tokens_per_word": 1.648
+        }
+      }
+    },
+    {
+      "id": "fanar",
+      "source": "QCRI/Fanar-1-9B-Instruct",
+      "vocab": 128256,
+      "revision": "d30938d0efb1fd251727ee96df6987802ff84662",
+      "status": "measured",
+      "ratios": {
+        "eng": {
+          "ratio": 1.0,
+          "ci95": [
+            1.0,
+            1.0
+          ],
+          "tokens_per_word": 1.269
+        },
+        "msa": {
+          "ratio": 1.453,
+          "ci95": [
+            1.442,
+            1.465
+          ],
+          "tokens_per_word": 2.058
+        },
+        "najdi": {
+          "ratio": 1.459,
+          "ci95": [
+            1.448,
+            1.47
+          ],
+          "tokens_per_word": 2.062
+        },
+        "mesopotamian": {
+          "ratio": 1.458,
+          "ci95": [
+            1.447,
+            1.469
+          ],
+          "tokens_per_word": 2.163
+        },
+        "egyptian": {
+          "ratio": 1.458,
+          "ci95": [
+            1.446,
+            1.469
+          ],
+          "tokens_per_word": 2.076
+        },
+        "levantine_n": {
+          "ratio": 1.412,
+          "ci95": [
+            1.402,
+            1.423
+          ],
+          "tokens_per_word": 2.187
+        },
+        "levantine_s": {
+          "ratio": 1.391,
+          "ci95": [
+            1.381,
+            1.401
+          ],
+          "tokens_per_word": 2.05
+        },
+        "moroccan": {
+          "ratio": 1.522,
+          "ci95": [
+            1.509,
+            1.535
+          ],
+          "tokens_per_word": 2.212
+        }
+      }
     },
     {
       "id": "jais",
-      "name": "Jais",
-      "encoding": null,
-      "provider": "G42 / Inception",
-      "hf_model": "derek-thomas/jais-13b-chat-hf",
-      "hf_model_note": "مرآة مجتمعية غير رسمية — مستودع Inception الرسمي مقيّد ويتطلب مصادقة، وهذا الموقع لا يخزّن مفاتيح وصول.",
-      "english_tokens_per_word": null,
-      "arabic_tokens_per_word": null,
-      "ratio": null,
-      "sample_size": null
-    },
-    {
-      "id": "command-r",
-      "name": "Command R",
-      "encoding": null,
-      "provider": "Cohere",
-      "hf_model": "Xenova/c4ai-command-r-v01-tokenizer",
-      "english_tokens_per_word": null,
-      "arabic_tokens_per_word": null,
-      "ratio": null,
-      "sample_size": null
+      "source": "inceptionai/jais-family-6p7b-chat",
+      "status": "not_measured",
+      "reason": "gated — access not yet granted"
     }
   ]
 }

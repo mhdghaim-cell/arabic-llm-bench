@@ -1,0 +1,55 @@
+# Week 4 — Arabic token tax
+
+FLORES+ dev + devtest · 2009 parallel sentences · 7 tokenizers · no special tokens
+
+## Token ratio vs English (same sentences, same tokenizer)
+
+| tokenizer | eng | msa | najdi | mesopotamian | egyptian | levantine_n | levantine_s | moroccan |
+|---|---|---|---|---|---|---|---|---|
+| o200k | 1.0 | 1.382 | 1.387 | 1.386 | 1.408 | 1.351 | 1.341 | 1.484 |
+| qwen3 | 1.0 | 1.629 | 1.633 | 1.622 | 1.636 | 1.581 | 1.55 | 1.695 |
+| llama3.2 | 1.0 | 1.656 | 1.663 | 1.649 | 1.649 | 1.593 | 1.576 | 1.706 |
+| gemma3 | 1.0 | 1.47 | 1.474 | 1.461 | 1.436 | 1.415 | 1.389 | 1.519 |
+| mistral-tekken | 1.0 | 1.245 | 1.25 | 1.262 | 1.288 | 1.236 | 1.229 | 1.37 |
+| allam | 1.0 | 0.966 | 0.969 | 0.958 | 0.973 | 0.942 | 0.936 | 1.075 |
+| fanar | 1.0 | 1.453 | 1.459 | 1.458 | 1.458 | 1.412 | 1.391 | 1.522 |
+
+## MSA ratio with 95% bootstrap CI and split stability
+
+| tokenizer | ratio_vs_eng | ci95_low | ci95_high | ratio_dev | ratio_devtest | median_sentence_ratio |
+|---|---|---|---|---|---|---|
+| o200k | 1.382 | 1.372 | 1.392 | 1.382 | 1.381 | 1.37 |
+| qwen3 | 1.629 | 1.617 | 1.642 | 1.629 | 1.628 | 1.625 |
+| llama3.2 | 1.656 | 1.644 | 1.668 | 1.659 | 1.653 | 1.645 |
+| gemma3 | 1.47 | 1.459 | 1.481 | 1.468 | 1.471 | 1.462 |
+| mistral-tekken | 1.245 | 1.236 | 1.254 | 1.249 | 1.242 | 1.235 |
+| allam | 0.966 | 0.959 | 0.973 | 0.969 | 0.964 | 0.957 |
+| fanar | 1.453 | 1.442 | 1.465 | 1.455 | 1.452 | 1.45 |
+
+## Tokens per whitespace word (reference only — Arabic words carry clitics)
+
+| tokenizer | eng | msa | najdi | mesopotamian | egyptian | levantine_n | levantine_s | moroccan |
+|---|---|---|---|---|---|---|---|---|
+| o200k | 1.223 | 1.886 | 1.889 | 1.982 | 1.932 | 2.016 | 1.904 | 2.078 |
+| qwen3 | 1.257 | 2.286 | 2.288 | 2.384 | 2.307 | 2.424 | 2.263 | 2.44 |
+| llama3.2 | 1.236 | 2.284 | 2.29 | 2.382 | 2.287 | 2.402 | 2.261 | 2.415 |
+| gemma3 | 1.237 | 2.028 | 2.031 | 2.112 | 1.992 | 2.135 | 1.994 | 2.151 |
+| mistral-tekken | 1.267 | 1.761 | 1.765 | 1.869 | 1.831 | 1.911 | 1.808 | 1.988 |
+| allam | 1.339 | 1.444 | 1.446 | 1.499 | 1.462 | 1.54 | 1.456 | 1.648 |
+| fanar | 1.269 | 2.058 | 2.062 | 2.163 | 2.076 | 2.187 | 2.05 | 2.212 |
+
+## Not measured
+
+- jais (inceptionai/jais-family-6p7b-chat): gated — access not yet granted
+
+## Environment
+
+```
+{
+  "date": "2026-10-15",
+  "python": "3.9.7",
+  "platform": "macOS-10.16-x86_64-i386-64bit",
+  "transformers": "4.57.6",
+  "tiktoken": "0.14.0"
+}
+```

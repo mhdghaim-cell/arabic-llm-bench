@@ -12,3 +12,4 @@ __pycache__/
 migrate.py
 models/
 index_w2.py
+corpus_raw/
