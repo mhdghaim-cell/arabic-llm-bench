@@ -56,7 +56,8 @@ TOKENIZERS = [
     ("allam", "hf", "humain-ai/ALLaM-7B-Instruct-preview", {}),
     ("jais", "hf", "inceptionai/jais-family-6p7b-chat", {}),
     ("jais2", "hf", "inception42/Jais-2-8B-Chat", {}),
-    ("jais3", "tokjson", "IFM/Jais-3-7B-FP8", {}),
+    ("jais3", "tokjson", "IFM/Jais-3-7B-FP8", {}),          # same tokenizer: 3.7B, 7B, 32B, MoVA-36B, 375B
+    ("jais3-0.9b", "tokjson", "IFM/Jais-3-0.9B-MLX-bf16", {}),  # edge model ships its own 64k tokenizer
     ("fanar", "hf", "QCRI/Fanar-1-9B-Instruct", {}),
 ]
 

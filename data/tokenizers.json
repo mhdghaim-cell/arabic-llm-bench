@@ -724,6 +724,79 @@
       }
     },
     {
+      "id": "jais3-0.9b",
+      "source": "IFM/Jais-3-0.9B-MLX-bf16",
+      "vocab": 64256,
+      "revision": "1d5cf547ae5292eaf066408bcf763b4aa21c03e9",
+      "status": "measured",
+      "ratios": {
+        "eng": {
+          "ratio": 1.0,
+          "ci95": [
+            1.0,
+            1.0
+          ],
+          "tokens_per_word": 1.31
+        },
+        "msa": {
+          "ratio": 1.165,
+          "ci95": [
+            1.156,
+            1.174
+          ],
+          "tokens_per_word": 1.703
+        },
+        "najdi": {
+          "ratio": 1.168,
+          "ci95": [
+            1.16,
+            1.177
+          ],
+          "tokens_per_word": 1.705
+        },
+        "mesopotamian": {
+          "ratio": 1.163,
+          "ci95": [
+            1.154,
+            1.171
+          ],
+          "tokens_per_word": 1.78
+        },
+        "egyptian": {
+          "ratio": 1.176,
+          "ci95": [
+            1.167,
+            1.185
+          ],
+          "tokens_per_word": 1.728
+        },
+        "levantine_n": {
+          "ratio": 1.143,
+          "ci95": [
+            1.135,
+            1.151
+          ],
+          "tokens_per_word": 1.826
+        },
+        "levantine_s": {
+          "ratio": 1.127,
+          "ci95": [
+            1.12,
+            1.134
+          ],
+          "tokens_per_word": 1.713
+        },
+        "moroccan": {
+          "ratio": 1.264,
+          "ci95": [
+            1.253,
+            1.275
+          ],
+          "tokens_per_word": 1.896
+        }
+      }
+    },
+    {
       "id": "fanar",
       "source": "QCRI/Fanar-1-9B-Instruct",
       "vocab": 128256,
@@ -873,6 +946,14 @@
           "msa_vs_en_ci95": "0.807–0.937",
           "gulf_vs_msa": 0.96,
           "gulf_vs_msa_ci95": "0.904–1.026"
+        },
+        "jais3-0.9b": {
+          "gulf_vs_en": 0.932,
+          "gulf_vs_en_ci95": "0.876–0.990",
+          "msa_vs_en": 0.994,
+          "msa_vs_en_ci95": "0.939–1.052",
+          "gulf_vs_msa": 0.937,
+          "gulf_vs_msa_ci95": "0.880–0.991"
         },
         "fanar": {
           "gulf_vs_en": 1.099,

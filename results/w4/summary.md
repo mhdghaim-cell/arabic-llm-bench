@@ -1,6 +1,6 @@
 # Week 4 — Arabic token tax
 
-FLORES+ dev + devtest · 2009 parallel sentences · 10 tokenizers · no special tokens
+FLORES+ dev + devtest · 2009 parallel sentences · 11 tokenizers · no special tokens
 
 ## Token ratio vs English (same sentences, same tokenizer)
 
@@ -15,6 +15,7 @@ FLORES+ dev + devtest · 2009 parallel sentences · 10 tokenizers · no special 
 | jais | 1.0 | 1.013 | 1.016 | 0.982 | 1.004 | 0.972 | 0.957 | 1.103 |
 | jais2 | 1.0 | 1.047 | 1.05 | 1.001 | 1.018 | 1.0 | 0.995 | 1.128 |
 | jais3 | 1.0 | 1.05 | 1.054 | 1.033 | 1.048 | 1.012 | 1.006 | 1.14 |
+| jais3-0.9b | 1.0 | 1.165 | 1.168 | 1.163 | 1.176 | 1.143 | 1.127 | 1.264 |
 | fanar | 1.0 | 1.453 | 1.459 | 1.458 | 1.458 | 1.412 | 1.391 | 1.522 |
 
 ## MSA ratio with 95% bootstrap CI and split stability
@@ -30,6 +31,7 @@ FLORES+ dev + devtest · 2009 parallel sentences · 10 tokenizers · no special 
 | jais | 1.013 | 1.005 | 1.021 | 1.015 | 1.011 | 1.0 |
 | jais2 | 1.047 | 1.038 | 1.057 | 1.048 | 1.046 | 1.022 |
 | jais3 | 1.05 | 1.042 | 1.058 | 1.052 | 1.048 | 1.038 |
+| jais3-0.9b | 1.165 | 1.156 | 1.174 | 1.17 | 1.16 | 1.152 |
 | fanar | 1.453 | 1.442 | 1.465 | 1.455 | 1.452 | 1.45 |
 
 ## Tokens per whitespace word (reference only — Arabic words carry clitics)
@@ -45,6 +47,7 @@ FLORES+ dev + devtest · 2009 parallel sentences · 10 tokenizers · no special 
 | jais | 1.268 | 1.433 | 1.436 | 1.455 | 1.428 | 1.503 | 1.408 | 1.6 |
 | jais2 | 1.249 | 1.46 | 1.461 | 1.461 | 1.427 | 1.524 | 1.442 | 1.613 |
 | jais3 | 1.21 | 1.418 | 1.421 | 1.461 | 1.424 | 1.494 | 1.413 | 1.58 |
+| jais3-0.9b | 1.31 | 1.703 | 1.705 | 1.78 | 1.728 | 1.826 | 1.713 | 1.896 |
 | fanar | 1.269 | 2.058 | 2.062 | 2.163 | 2.076 | 2.187 | 2.05 | 2.212 |
 
 ## Not measured
@@ -66,6 +69,7 @@ AI-drafted (Claude), reviewed and edited by a native Gulf speaker; not independe
 | jais | 20 | 0.81 | 0.752–0.864 | 0.894 | 0.824–0.952 | 0.907 | 0.842–0.981 |
 | jais2 | 20 | 0.819 | 0.764–0.870 | 0.907 | 0.835–0.969 | 0.904 | 0.840–0.978 |
 | jais3 | 20 | 0.838 | 0.782–0.890 | 0.874 | 0.807–0.937 | 0.96 | 0.904–1.026 |
+| jais3-0.9b | 20 | 0.932 | 0.876–0.990 | 0.994 | 0.939–1.052 | 0.937 | 0.880–0.991 |
 | fanar | 20 | 1.099 | 1.022–1.167 | 1.226 | 1.147–1.307 | 0.896 | 0.847–0.947 |
 
 ## Environment
