@@ -56,6 +56,7 @@ TOKENIZERS = [
     ("allam", "hf", "humain-ai/ALLaM-7B-Instruct-preview", {}),
     ("jais", "hf", "inceptionai/jais-family-6p7b-chat", {}),
     ("jais2", "hf", "inception42/Jais-2-8B-Chat", {}),
+    ("jais3", "tokjson", "IFM/Jais-3-7B-FP8", {}),
     ("fanar", "hf", "QCRI/Fanar-1-9B-Instruct", {}),
 ]
 
@@ -128,8 +129,14 @@ def load_tokenizer(kind, source, kwargs):
 
         return count, {"vocab": enc.n_vocab, "revision": f"tiktoken {tiktoken.__version__}"}
 
-    from transformers import AutoTokenizer
-    tok = AutoTokenizer.from_pretrained(source, **kwargs)
+    if kind == "tokjson":
+        # Loads tokenizer.json directly — for repos whose tokenizer class needs a newer transformers.
+        from huggingface_hub import hf_hub_download
+        from transformers import PreTrainedTokenizerFast
+        tok = PreTrainedTokenizerFast(tokenizer_file=hf_hub_download(source, "tokenizer.json"))
+    else:
+        from transformers import AutoTokenizer
+        tok = AutoTokenizer.from_pretrained(source, **kwargs)
     revision = None
     try:
         from huggingface_hub import HfApi

@@ -1,6 +1,6 @@
 {
   "version": "0.1",
-  "generated": "2026-10-15",
+  "generated": "2026-10-17",
   "method": {
     "corpus": "FLORES+ (openlanguagedata/flores_plus), dev + devtest, CC BY-SA 4.0",
     "sentences": 2009,
@@ -8,7 +8,7 @@
     "ci": "95% percentile bootstrap over sentences, 2000 resamples, seed 42",
     "special_tokens": "excluded",
     "environment": {
-      "date": "2026-10-15",
+      "date": "2026-10-17",
       "python": "3.9.7",
       "platform": "macOS-10.16-x86_64-i386-64bit",
       "transformers": "4.57.6",
@@ -651,6 +651,79 @@
       }
     },
     {
+      "id": "jais3",
+      "source": "IFM/Jais-3-7B-FP8",
+      "vocab": 250624,
+      "revision": "10d6507ddb2f43e34f9c4d3ae37c89f61f2685de",
+      "status": "measured",
+      "ratios": {
+        "eng": {
+          "ratio": 1.0,
+          "ci95": [
+            1.0,
+            1.0
+          ],
+          "tokens_per_word": 1.21
+        },
+        "msa": {
+          "ratio": 1.05,
+          "ci95": [
+            1.042,
+            1.058
+          ],
+          "tokens_per_word": 1.418
+        },
+        "najdi": {
+          "ratio": 1.054,
+          "ci95": [
+            1.046,
+            1.062
+          ],
+          "tokens_per_word": 1.421
+        },
+        "mesopotamian": {
+          "ratio": 1.033,
+          "ci95": [
+            1.025,
+            1.04
+          ],
+          "tokens_per_word": 1.461
+        },
+        "egyptian": {
+          "ratio": 1.048,
+          "ci95": [
+            1.041,
+            1.056
+          ],
+          "tokens_per_word": 1.424
+        },
+        "levantine_n": {
+          "ratio": 1.012,
+          "ci95": [
+            1.005,
+            1.019
+          ],
+          "tokens_per_word": 1.494
+        },
+        "levantine_s": {
+          "ratio": 1.006,
+          "ci95": [
+            0.999,
+            1.012
+          ],
+          "tokens_per_word": 1.413
+        },
+        "moroccan": {
+          "ratio": 1.14,
+          "ci95": [
+            1.131,
+            1.15
+          ],
+          "tokens_per_word": 1.58
+        }
+      }
+    },
+    {
       "id": "fanar",
       "source": "QCRI/Fanar-1-9B-Instruct",
       "vocab": 128256,
@@ -792,6 +865,14 @@
           "msa_vs_en_ci95": "0.835–0.969",
           "gulf_vs_msa": 0.904,
           "gulf_vs_msa_ci95": "0.840–0.978"
+        },
+        "jais3": {
+          "gulf_vs_en": 0.838,
+          "gulf_vs_en_ci95": "0.782–0.890",
+          "msa_vs_en": 0.874,
+          "msa_vs_en_ci95": "0.807–0.937",
+          "gulf_vs_msa": 0.96,
+          "gulf_vs_msa_ci95": "0.904–1.026"
         },
         "fanar": {
           "gulf_vs_en": 1.099,
