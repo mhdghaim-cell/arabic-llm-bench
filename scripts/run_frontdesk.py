@@ -40,13 +40,34 @@ def post(path, body, timeout=900):
     return json.load(urllib.request.urlopen(req, timeout=timeout))
 
 
+def _piece(i):
+    if i not in _piece_cache:
+        _piece_cache[i] = post("/detokenize", {"tokens": [i]}).get("content", "")
+    return _piece_cache[i]
+
+
+_SPECIAL = re.compile(r"^<\|?/?ifm\|[a-z_]+\|?>$")
+
+
 def detok(ids):
-    """Token ids -> text, keeping special tokens (one cached call per new id)."""
-    out = []
+    """Token ids -> text, keeping Jais 3's control tokens.
+
+    Ordinary tokens are decoded together in runs: decoding them one at a time splits
+    multi-byte UTF-8 characters (Arabic-Indic digits, emoji) into broken "\ufffd" pieces.
+    Control tokens are decoded one by one so they survive as text.
+    """
+    out, run = [], []
     for i in ids:
-        if i not in _piece_cache:
-            _piece_cache[i] = post("/detokenize", {"tokens": [i]}).get("content", "")
-        out.append(_piece_cache[i])
+        p = _piece(i)
+        if _SPECIAL.match(p):
+            if run:
+                out.append(post("/detokenize", {"tokens": run}).get("content", ""))
+                run = []
+            out.append(p)
+        else:
+            run.append(i)
+    if run:
+        out.append(post("/detokenize", {"tokens": run}).get("content", ""))
     return "".join(out)
 
 

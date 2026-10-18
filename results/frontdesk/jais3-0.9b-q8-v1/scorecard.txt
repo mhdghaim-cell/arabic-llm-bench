@@ -1,0 +1,27 @@
+
+######## results/frontdesk/jais3-0.9b-q8-v1   (288 runs, 0 errors)   prompt v1   model models/jais3/Jais-3-0.9B-Q8_0.gguf
+
+== effort high  (n=144)
+  correct action            63%   bar ≥90%  FAIL   (95% CI 55%–71%, n=144)
+  emergencies handed over   93%   bar  100%  FAIL   (95% CI 79%–98%, n=30)
+  premature bookings          0    bar   0    PASS
+  median wait             112.7s  bar ≤10s  FAIL
+  p90 wait                456.8s  bar ≤20s  FAIL
+  hit the length cap (counted as failures) 29   runs with no tool call at all 59/144
+  said 'handing over' but didn't  0   empty replies 27   unclosed reasoning 27   tag mismatch 0
+  reasoning language      arabic 137  english 0  mixed 7
+  Arabic words / second   0.2 (median over 32 replies with text)   replies with Gulf markers 10%   foreign-script chars 0
+  by category: booking 29%  clarify 89%  info 92%  emergency 87%  complaint 67%  medical 73%  out_of_scope 89%  adversarial 50%
+
+== effort low  (n=144)
+  correct action            33%   bar ≥90%  FAIL   (95% CI 26%–41%, n=144)
+  emergencies handed over    0%   bar  100%  FAIL   (95% CI 0%–11%, n=30)
+  premature bookings          0    bar   0    PASS
+  median wait               4.5s  bar ≤10s  PASS
+  p90 wait                  7.0s  bar ≤20s  PASS
+  hit the length cap (counted as failures) 0   runs with no tool call at all 144/144
+  said 'handing over' but didn't  7   empty replies 0   unclosed reasoning 0   tag mismatch 0
+  Arabic words / second   6.8 (median over 144 replies with text)   replies with Gulf markers 32%   foreign-script chars 0
+  by category: booking 38%  clarify 100%  info 75%  emergency 0%  complaint 0%  medical 0%  out_of_scope 100%  adversarial 50%
+
+  per-run detail -> results/frontdesk/jais3-0.9b-q8-v1/scored.csv

@@ -121,6 +121,7 @@ def main():
             acc = sum(r["correct"] for r in R) / len(R)
             em_rate = sum(r["handoff"] for r in em) / len(em) if em else float("nan")
             prem = sum(r["premature_booking"] for r in R)
+            no_call = sum(1 for r in R if not r["first_call"])
             print(f"\n== effort {e}  (n={len(R)})")
             lo, hi = wilson(sum(r["correct"] for r in R), len(R))
             print(f"  correct action          {acc:5.0%}   bar ≥{BAR['action']:.0%}  {'PASS' if acc >= BAR['action'] else 'FAIL'}   (95% CI {lo:.0%}–{hi:.0%}, n={len(R)})")
@@ -129,13 +130,14 @@ def main():
             print(f"  premature bookings      {prem:5d}    bar   0    {'PASS' if prem == 0 else 'FAIL'}")
             print(f"  median wait             {med:5.1f}s  bar ≤{BAR['median_wait']:.0f}s  {'PASS' if med <= BAR['median_wait'] else 'FAIL'}")
             print(f"  p90 wait                {p90:5.1f}s  bar ≤{BAR['p90_wait']:.0f}s  {'PASS' if p90 <= BAR['p90_wait'] else 'FAIL'}")
-            print(f"  hit the length cap (counted as failures) {sum(r['truncated'] for r in R)}")
+            print(f"  hit the length cap (counted as failures) {sum(r['truncated'] for r in R)}   runs with no tool call at all {no_call}/{len(R)}")
             print(f"  said 'handing over' but didn't  {sum(r['said_but_no_call'] for r in R)}   empty replies {sum(r['empty'] for r in R)}"
                   f"   unclosed reasoning {sum(r['unclosed_reasoning'] for r in R)}   tag mismatch {sum(r['tag_mismatch'] for r in R)}")
             langs = [r["reasoning_lang"] for r in R if r["reasoning_lang"] != "none"]
             if langs:
                 print("  reasoning language      " + "  ".join(f"{l} {langs.count(l)}" for l in ("arabic", "english", "mixed")))
-            print(f"  Arabic words / second   {st.median([r['ar_words_per_s'] for r in R]):.1f} (median)"
+            wps = [r["ar_words_per_s"] for r in R if r["ar_words_per_s"] > 0]   # only runs that wrote a reply
+            print(f"  Arabic words / second   {st.median(wps) if wps else 0:.1f} (median over {len(wps)} replies with text)"
                   f"   replies with Gulf markers {pct([r['answer_gulf_markers'] > 0 for r in R if r['first_call'] == ''])}"
                   f"   foreign-script chars {sum(r['answer_foreign_script'] for r in R)}")
             print("  by category: " + "  ".join(
