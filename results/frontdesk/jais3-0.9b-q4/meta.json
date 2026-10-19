@@ -1,0 +1,12 @@
+{
+ "label": "jais3-0.9b-q4",
+ "mode": "jais",
+ "machine": "macOS-10.16-x86_64-i386-64bit",
+ "sampling": {
+  "temperature": 0.7,
+  "top_p": 0.95,
+  "top_k": 20
+ },
+ "n_predict": 4096,
+ "cases_file": "corpus/frontdesk_v0.jsonl"
+}
