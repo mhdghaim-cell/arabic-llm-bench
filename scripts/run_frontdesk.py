@@ -141,6 +141,13 @@ def run_chat(msg, effort, seed, n_predict, system):
             "completion_tokens": r["usage"]["completion_tokens"], "timings": r.get("timings", {})}
 
 
+def current_model():
+    try:
+        return json.load(urllib.request.urlopen(BASE + "/props", timeout=10)).get("model_path")
+    except Exception:
+        return None
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--label", required=True, help="e.g. jais3-0.9b-q4 (folder name for results)")
@@ -193,6 +200,9 @@ def main():
     runner = run_jais if a.mode == "jais" else run_chat
     t_start = time.time()
     for k, (c, e, r) in enumerate(todo, 1):
+        if current_model() != meta["model_path"]:
+            sys.exit(f"STOP: the server's model changed to {current_model()} (expected {meta['model_path']}). "
+                     "Another run is probably using the same server. Nothing from this point was logged.")
         try:
             res = runner(c["message"], e, seed=1000 + r, n_predict=a.n_predict, system=PROMPTS[a.prompt])
             fails = 0
@@ -203,6 +213,7 @@ def main():
             if fails >= 3:
                 sys.exit("3 errors in a row — stopping. Check the server, then rerun the same command to resume.")
         rec = {"case": c["id"], "category": c["category"], "effort": e, "rep": r, "prompt": a.prompt,
+               "model": meta["model_path"],
                "ts": time.strftime("%Y-%m-%dT%H:%M:%S"), **res}
         with open(out, "a", encoding="utf-8") as f:
             f.write(json.dumps(rec, ensure_ascii=False) + "\n")

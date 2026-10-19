@@ -4,12 +4,15 @@
 # One command does everything: builds llama.cpp with CUDA, downloads the models,
 # runs each configuration, scores it. Resumable — just run it again.
 #
-#   cd ~/miqyas && nohup bash scripts/run_gpu.sh > gpu_run.log 2>&1 &
+#   cd ~/miqyas && setsid nohup bash scripts/run_gpu.sh > gpu_run.log 2>&1 < /dev/null &
 #   tail -f gpu_run.log            (Control-C stops watching, not the run)
 #
 # Optional: bash scripts/run_gpu.sh 7b    -> only one configuration (7b | 3.7b | qwen | 0.9b)
 set -u
 cd "$(dirname "$0")/.."
+# Only one copy may run at a time: two copies share one server and corrupt each other's results.
+exec 9> /tmp/run_gpu.lock
+if ! flock -n 9; then echo "Another run_gpu.sh is already running — not starting a second one."; exit 1; fi
 ROOT=$(pwd)
 LLAMA="$HOME/llama.cpp/build/bin/llama-server"
 
@@ -22,7 +25,7 @@ if [ ! -x "$LLAMA" ]; then
   cd "$HOME/llama.cpp"
   cmake -B build -DGGML_CUDA=ON -DLLAMA_CURL=OFF -DCMAKE_BUILD_TYPE=Release -DCMAKE_CUDA_ARCHITECTURES=native \
     || { echo "cmake configure failed"; exit 1; }
-  cmake --build build -j "$(nproc)" --target llama-server || { echo "build failed"; exit 1; }
+  cmake --build build -j 16 --target llama-server || { echo "build failed"; exit 1; }
   cd "$ROOT"
 fi
 command -v hf >/dev/null || pip install -q -U huggingface_hub
