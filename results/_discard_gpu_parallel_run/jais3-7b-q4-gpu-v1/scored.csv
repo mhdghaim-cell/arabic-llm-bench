@@ -1,0 +1,568 @@
+case,category,effort,rep,correct,first_call,first_args,handoff,premature_booking,said_but_no_call,empty,unclosed_reasoning,tag_mismatch,reasoning_lang,answer_gulf_markers,answer_foreign_script,answer_latin,wall_s,completion_tokens,ar_words_per_s,stop,truncated
+c01,booking,low,0,True,,,False,False,False,False,False,False,none,1,0,0,0.54,23,25.93,eos,False
+c01,booking,low,0,True,,,False,False,False,False,False,False,none,2,0,0,1.08,65,36.11,eos,False
+c01,booking,high,0,True,,,False,False,False,False,False,False,english,3,0,0,2.44,224,6.56,eos,False
+c02,booking,low,0,False,,,False,False,False,False,False,False,none,2,0,0,0.44,36,38.64,eos,False
+c01,booking,high,0,True,,,False,False,False,False,False,False,mixed,1,0,0,3.75,343,3.73,eos,False
+c02,booking,low,0,False,,,False,False,False,False,False,False,none,2,0,0,0.32,27,34.38,eos,False
+c02,booking,high,0,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18"", ""time_window"": ""morning""}",False,False,False,False,False,False,english,0,0,0,1.43,130,0.0,eos,False
+c03,booking,low,0,True,check_availability,"{""service"": ""whitening"", ""date"": ""2026-10-22"", ""time_window"": ""evening""}",False,False,False,False,False,False,none,0,0,0,0.51,44,0.0,eos,False
+c02,booking,high,0,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18"", ""time_window"": ""morning""}",False,False,False,False,False,False,english,0,0,0,1.59,143,0.0,eos,False
+c03,booking,low,0,True,check_availability,"{""service"": ""whitening"", ""date"": ""2026-10-22"", ""time_window"": ""evening""}",False,False,False,False,False,False,none,0,0,0,0.51,44,0.0,eos,False
+c03,booking,high,0,True,check_availability,"{""service"": ""whitening"", ""date"": ""2026-10-22"", ""time_window"": ""evening""}",False,False,False,False,False,False,english,0,0,0,1.99,181,0.0,eos,False
+c03,booking,high,0,True,check_availability,"{""service"": ""whitening"", ""date"": ""2026-10-22"", ""time_window"": ""evening""}",False,False,False,False,False,False,english,0,0,0,3.31,302,0.0,eos,False
+c04,booking,low,0,False,check_availability,"{""service"": ""filling"", ""date"": ""2026-10-18"", ""time_window"": ""any""}",False,False,False,False,False,False,none,0,0,0,0.68,59,11.76,eos,False
+c04,booking,low,0,False,check_availability,"{""service"": ""filling"", ""date"": ""2026-10-18""}",False,False,False,False,False,False,none,0,0,0,0.55,48,14.55,eos,False
+c04,booking,high,0,False,check_availability,"{""service"": ""filling"", ""date"": ""2026-10-18""}",False,False,False,False,False,False,english,0,0,0,6.66,606,0.0,eos,False
+c05,booking,low,0,True,,,False,False,False,False,False,False,none,2,0,0,0.33,26,45.45,eos,False
+c04,booking,high,0,False,check_availability,"{""service"": ""filling"", ""date"": ""2026-10-18"", ""time_window"": ""any""}",False,False,False,False,False,False,english,0,0,0,8.27,751,0.0,eos,False
+c05,booking,low,0,True,,,False,False,False,False,False,False,none,2,0,0,0.82,42,36.59,eos,False
+c05,booking,high,0,True,,,False,False,False,False,False,False,english,2,0,0,3.1,250,4.19,eos,False
+c06,booking,low,0,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""morning""}",False,False,False,False,False,False,none,0,0,0,0.49,43,0.0,eos,False
+c05,booking,high,0,True,,,False,False,False,False,False,False,english,3,0,60,2.61,237,8.81,eos,False
+c06,booking,low,0,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""morning""}",False,False,False,False,False,False,none,0,0,0,0.5,43,0.0,eos,False
+c06,booking,high,0,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""afternoon""}",False,False,False,False,False,False,english,0,0,0,2.57,233,0.0,eos,False
+c07,booking,low,0,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-20""}",False,False,False,False,False,False,none,0,0,0,0.39,33,0.0,eos,False
+c06,booking,high,0,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""afternoon""}",False,False,False,False,False,False,english,0,0,0,2.07,186,0.0,eos,False
+c07,booking,low,0,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-20"", ""time_window"": ""evening""}",False,False,False,False,False,False,none,0,0,0,0.49,42,0.0,eos,False
+c07,booking,high,0,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-20"", ""time_window"": ""evening""}",False,False,False,False,False,False,english,0,0,0,2.6,236,0.0,eos,False
+c07,booking,high,0,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-20"", ""time_window"": ""evening""}",False,False,False,False,False,False,english,0,0,0,1.47,133,0.0,eos,False
+c08,booking,low,0,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-21""}",False,False,False,False,False,False,none,0,0,0,0.39,34,0.0,eos,False
+c08,booking,low,0,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-21""}",False,False,False,False,False,False,none,0,0,0,0.56,34,0.0,eos,False
+c08,booking,high,0,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-21"", ""time_window"": ""any""}",False,False,False,False,False,False,english,0,0,0,2.3,198,0.0,eos,False
+c09,booking,low,0,True,,,False,False,False,False,False,False,none,1,0,0,0.3,25,50.0,eos,False
+c08,booking,high,0,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-21"", ""time_window"": ""any""}",False,False,False,False,False,False,english,0,0,0,2.53,229,0.0,eos,False
+c09,booking,low,0,True,,,False,False,False,False,False,False,none,1,0,0,0.4,34,62.5,eos,False
+c09,booking,high,0,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-19"", ""time_window"": ""any""}",False,False,False,False,False,False,english,0,0,0,5.5,500,1.45,eos,False
+c10,booking,low,0,True,,,False,False,False,False,False,False,none,2,0,0,0.39,31,48.72,eos,False
+c10,booking,high,0,False,check_availability,"{""service"": ""whitening"", ""date"": ""2026-10-23"", ""time_window"": ""any""}",False,False,False,False,False,False,english,0,0,0,2.33,208,0.0,eos,False
+c11,booking,low,0,True,,,False,False,False,False,False,False,none,1,0,0,0.32,27,46.88,eos,False
+c09,booking,high,0,True,,,False,False,False,False,False,False,english,0,0,0,13.03,1178,0.46,eos,False
+c10,booking,low,0,True,,,False,False,False,False,False,False,none,0,0,0,0.91,55,41.76,eos,False
+c11,booking,high,0,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""any""}",False,False,False,False,False,False,english,2,0,0,6.38,545,1.57,eos,False
+c12,booking,low,0,True,,,False,False,False,False,False,False,none,1,0,0,0.41,35,56.1,eos,False
+c10,booking,high,0,False,check_availability,"{""service"": ""whitening"", ""date"": ""2026-10-23"", ""time_window"": ""any""}",False,False,False,False,False,False,english,0,0,0,4.95,444,0.0,eos,False
+c12,booking,high,0,True,,,False,False,False,False,False,False,english,5,0,170,2.63,236,12.17,eos,False
+c11,booking,low,0,True,,,False,False,False,False,False,False,none,2,0,0,0.33,28,57.58,eos,False
+c13,booking,low,0,False,check_availability,"{""service"": ""filling"", ""date"": ""2026-10-18"", ""time_window"": ""afternoon""}",False,False,False,False,False,False,none,0,0,0,0.59,43,0.0,eos,False
+c13,booking,high,0,False,check_availability,"{""service"": ""filling"", ""date"": ""2026-10-18"", ""time_window"": ""afternoon""}",False,False,False,False,False,False,english,0,0,0,2.65,240,0.0,eos,False
+c11,booking,high,0,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17""}",False,False,False,False,False,False,english,1,0,0,3.72,333,4.84,eos,False
+c14,booking,low,0,False,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18""}",False,False,False,False,False,False,none,0,0,0,0.39,33,0.0,eos,False
+c12,booking,low,0,True,,,False,False,False,False,False,False,none,2,0,0,0.77,50,38.96,eos,False
+c14,booking,high,0,False,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18"", ""time_window"": ""any""}",False,False,False,False,False,False,english,0,0,0,2.2,178,0.0,eos,False
+c15,booking,low,0,False,,,False,False,False,False,False,False,none,1,0,0,0.3,24,43.33,eos,False
+c15,booking,high,0,False,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""evening""}",False,False,False,False,False,False,english,0,0,0,2.46,222,0.0,eos,False
+c16,booking,low,0,False,,,False,False,False,False,False,False,none,0,0,0,0.35,29,48.57,eos,False
+c12,booking,high,0,True,,,False,False,False,False,False,False,english,2,0,0,5.69,515,1.05,eos,False
+c13,booking,low,0,False,check_availability,"{""service"": ""filling"", ""date"": ""2026-10-18"", ""time_window"": ""afternoon""}",False,False,False,False,False,False,none,0,0,0,0.5,43,0.0,eos,False
+c16,booking,high,0,False,check_availability,"{""service"": ""orthodontics"", ""date"": ""2026-10-16""}",False,False,False,False,False,False,english,0,0,0,1.82,163,0.0,eos,False
+c17,clarify,low,0,True,,,False,False,False,False,False,False,none,2,0,0,0.2,16,45.0,eos,False
+c13,booking,high,0,False,check_availability,"{""service"": ""filling"", ""date"": ""2026-10-18"", ""time_window"": ""afternoon""}",False,False,False,False,False,False,english,0,0,0,1.84,165,0.0,eos,False
+c14,booking,low,0,False,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18""}",False,False,False,False,False,False,none,0,0,0,0.39,33,0.0,eos,False
+c17,clarify,high,0,True,,,False,False,False,False,False,False,english,1,0,0,2.13,192,3.76,eos,False
+c18,clarify,low,0,True,,,False,False,False,False,False,False,none,1,0,0,0.33,27,60.61,eos,False
+c18,clarify,high,0,True,,,False,False,False,False,False,False,english,1,0,0,1.3,116,5.38,eos,False
+c14,booking,high,0,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-25"", ""time_window"": ""any""}",False,False,False,False,False,False,english,0,0,0,2.43,217,0.0,eos,False
+c19,clarify,low,0,True,,,False,False,False,False,False,False,none,0,0,0,0.23,17,56.52,eos,False
+c15,booking,low,0,False,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""evening""}",False,False,False,False,False,False,none,0,0,0,0.58,43,0.0,eos,False
+c19,clarify,high,0,True,,,False,False,False,False,False,False,english,0,0,0,1.23,105,5.69,eos,False
+c20,info,low,0,True,,,False,False,False,False,False,False,none,1,0,0,0.36,31,55.56,eos,False
+c15,booking,high,0,False,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""evening""}",False,False,False,False,False,False,english,0,0,0,2.09,188,0.0,eos,False
+c16,booking,low,0,True,,,False,False,False,False,False,False,none,0,0,0,0.33,28,72.73,eos,False
+c20,info,high,0,True,,,False,False,False,False,False,False,english,0,0,0,2.64,238,5.68,eos,False
+c21,info,low,0,True,,,False,False,False,False,False,False,none,0,0,0,0.2,15,45.0,eos,False
+c21,info,high,0,True,,,False,False,False,False,False,False,english,0,0,0,1.65,148,3.64,eos,False
+c22,info,low,0,True,,,False,False,False,False,False,False,none,1,0,0,0.29,24,41.38,eos,False
+c16,booking,high,0,False,check_availability,"{""service"": ""orthodontics"", ""date"": ""2026-10-23"", ""time_window"": ""any""}",False,False,False,False,False,False,english,0,0,0,4.34,392,0.0,eos,False
+c17,clarify,low,0,True,,,False,False,False,False,False,False,none,2,0,0,0.2,16,45.0,eos,False
+c22,info,high,0,True,,,False,False,False,False,False,False,english,2,0,0,2.12,190,6.13,eos,False
+c23,info,low,0,True,,,False,False,False,False,False,False,none,0,0,0,0.28,23,35.71,eos,False
+c17,clarify,high,0,True,,,False,False,False,False,False,False,english,0,0,0,2.15,193,2.33,eos,False
+c18,clarify,low,0,True,,,False,False,False,False,False,False,none,0,0,0,0.34,29,70.59,eos,False
+c23,info,high,0,True,,,False,False,False,False,False,False,english,0,0,0,2.16,195,2.78,eos,False
+c24,emergency,low,0,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض يشكو من تورم شديد وألم في الضرس من البارحة وعدم القدرة على النوم، حالة طارئة تحتاج طبيب فوراً""}",True,False,False,False,False,False,none,0,0,0,0.57,50,0.0,eos,False
+c18,clarify,high,0,True,,,False,False,False,False,False,False,english,0,0,0,2.58,233,1.94,eos,False
+c19,clarify,low,0,True,,,False,False,False,False,False,False,none,0,0,0,0.22,17,59.09,eos,False
+c24,emergency,high,0,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يشكو من تورم في ضرس وألم شديد منذ البارحة وعدم القدرة على النوم. حالة طارئة تستدعي تدخل الطاقم الطبي مباشرة.""}",True,False,False,False,False,False,english,0,0,0,1.27,113,0.0,eos,False
+c25,emergency,low,0,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""عميل يقول أن ابنه سقط وانكسر سنه والدم ما وقف - حالة طارئة تتطلب تدخل فوري""}",True,False,False,False,False,False,none,0,0,0,0.53,46,0.0,eos,False
+c19,clarify,high,0,True,,,False,False,False,False,False,False,english,0,0,0,0.78,70,7.69,eos,False
+c20,info,low,0,True,,,False,False,False,False,False,False,none,0,0,0,0.78,57,52.56,eos,False
+c25,emergency,high,0,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""ولي أمر يبلغ أن ابنه سقط وانكسر سنه والدم لا يتوقف، حالة طارئة طبية تتطلب تدخل فوري من الطاقم الطبي""}",True,False,False,False,False,False,english,0,0,0,1.53,120,0.0,eos,False
+c26,emergency,low,0,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض يقول أنه خلع ضرس العقل أمس ويعاني الآن من تورم في الوجه وحرارة. يحتاج تقييم طبي عاجل.""}",True,False,False,False,False,False,none,0,0,0,0.58,51,0.0,eos,False
+c20,info,high,0,True,,,False,False,False,False,False,False,english,1,0,0,1.95,176,8.72,eos,False
+c21,info,low,0,True,,,False,False,False,False,False,False,none,0,0,0,0.2,15,45.0,eos,False
+c26,emergency,high,0,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض خلع ضرس العقل أمس ووجهه منتفخ وعنده حرارة، حالة طارئة محتملة عدوى بعد الخلع تحتاج تدخل طبي فوري""}",True,False,False,False,False,False,english,0,0,0,1.32,118,0.0,eos,False
+c27,emergency,low,0,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يشكو من ألم شديد ولا يتحمل ويطلب طبيبًا الآن بشكل ضروري""}",True,False,False,False,False,False,none,0,0,0,0.49,42,0.0,eos,False
+c21,info,high,0,True,,,False,False,False,False,False,False,english,2,0,0,1.68,151,5.36,eos,False
+c22,info,low,0,True,,,False,False,False,False,False,False,none,1,0,0,0.29,24,41.38,eos,False
+c27,emergency,high,0,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض يشكو من ألم شديد لا يحتمل ويطلب رؤية طبيب فوراً، الحالة طارئة""}",True,False,False,False,False,False,english,0,0,0,2.11,189,0.0,eos,False
+c22,info,high,0,True,,,False,False,False,False,False,False,english,2,0,0,1.18,105,11.02,eos,False
+c23,info,low,0,True,,,False,False,False,False,False,False,none,0,0,0,0.28,23,35.71,eos,False
+c28,emergency,low,0,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يبلغ عن تورم في الفك وعدم القدرة على فتح الفم، حالة طارئة طبية تحتاج تدخل بشري فوراً""}",True,False,False,False,False,False,none,0,0,0,0.56,48,0.0,eos,False
+c23,info,high,0,True,,,False,False,False,False,False,False,english,0,0,0,2.04,177,2.45,eos,False
+c28,emergency,high,0,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض يبلغ عن تورم في الفك وعدم القدرة على فتح الفم بشكل طبيعي. يحتاج تقييم طبي عاجل.""}",True,False,False,False,False,False,english,0,0,0,2.44,219,0.0,eos,False
+c24,emergency,low,0,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض يشكو من تورم شديد وألم في الضرس من البارحة مع عدم القدرة على النوم. يحتاج تقييم طبي عاجل.""}",True,False,False,False,False,False,none,0,0,0,0.6,51,0.0,eos,False
+c29,emergency,low,0,False,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل يشتكي من نزيف اللثة بعد التنظيف ويقول وايد، يسأل هل هذا طبيعي""}",True,False,False,False,False,False,none,0,0,0,0.53,46,0.0,eos,False
+c24,emergency,high,0,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""Patient reports severely swollen and painful tooth since yesterday, unable to sleep. Needs urgent dental attention.""}",True,False,False,False,False,False,english,0,0,0,1.25,112,0.0,eos,False
+c25,emergency,low,0,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""عميل يبلغ أن ابنه سقط وانكسر سنه مع استمرار نزيف، حالة طارئة تتطلب تدخل طبي فوري""}",True,False,False,False,False,False,none,0,0,0,0.54,47,0.0,eos,False
+c25,emergency,high,0,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""ولي أمر يبلغ أن ابنه سقط وانكسر سنه والدم لا يتوقف. حالة طارئة تستدعي تدخل طبي فوري.""}",True,False,False,False,False,False,english,0,0,0,1.4,125,0.0,eos,False
+c29,emergency,high,0,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض يبلغ أن لثته تنزف وايد بعد التنظيف ويسأل إذا كان هذا طبيعي""}",True,False,False,False,False,False,english,0,0,0,3.12,281,0.0,eos,False
+c26,emergency,low,0,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض خلع ضرس العقل أمس ويعاني من انتفاخ الوجه وحرارة، يحتاج تدخل طبي عاجل""}",True,False,False,False,False,False,none,0,0,0,0.54,46,0.0,eos,False
+c30,complaint,low,0,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل يقول إنه زار العيادة الأسبوع الماضي والدكتور ما شرح له شيئاً والفاتورة غير دقيقة، ويريد متابعة الشكوى والفاتورة.""}",True,False,False,False,False,False,none,0,0,0,1.06,94,23.58,eos,False
+c30,complaint,high,0,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل يقول إنه زار العيادة الأسبوع الماضي والدكتور ما شرح له شي والفاتورة غلط، يريد مراجعة الشكوى والفاتورة""}",True,False,False,False,False,False,english,0,0,0,1.75,157,0.0,eos,False
+c26,emergency,high,0,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل أبلغ عن تورم في الوجه وحرارة بعد خلع ضرس العقل أمس، يحتاج تقييم طبي عاجل من العيادة""}",True,False,False,False,False,False,english,0,0,0,2.78,252,0.0,eos,False
+c31,complaint,low,0,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""المريض يقول إن الحشوة اللي سوّاها في العيادة طاحت بعد يومين، ويعبر عن استيائه من الخدمة. يحتاج تواصل مع الطاقم المختص فوراً.""}",True,False,False,False,False,False,none,0,0,0,0.69,60,0.0,eos,False
+c27,emergency,low,0,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يشكو من ألم شديد جداً ويطلب دكتور فوراً، الحالة طارئة""}",True,False,False,False,False,False,none,0,0,0,0.49,42,0.0,eos,False
+c27,emergency,high,0,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض يبلغ عن ألم شديد لا يطاق ويطلب مراجعة طبيب فوراً - حالة طارئة تتطلب تدخل بشري عاجل""}",True,False,False,False,False,False,english,0,0,0,1.56,141,0.0,eos,False
+c31,complaint,high,0,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""المريض يشتكي من أن الحشوة التي تمت في العيادة سقطت بعد يومين فقط من وضعها، ويطلب متابعة الشكوى""}",True,False,False,False,False,False,english,0,0,0,1.84,167,0.0,eos,False
+c32,complaint,low,0,False,,,False,False,False,False,False,False,none,1,0,0,0.58,41,48.28,eos,False
+c28,emergency,low,0,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يبلغ عن تورم في الفك وعدم القدرة على فتح الفم، حالة طارئة طبية تحتاج تدخل بشري فوراً""}",True,False,False,False,False,False,none,0,0,0,0.77,48,0.0,eos,False
+c32,complaint,high,0,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل انتظر ساعة في الاستقبال أمس ولم يُعطَ أي خبر. شكوى من تجربة المريض.""}",True,False,False,False,False,False,english,0,0,0,1.17,97,0.0,eos,False
+c28,emergency,high,0,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض يبلغ عن تورم في الفك وعدم القدرة على فتح الفم، حالة طارئة محتملة تتطلب تدخلًا بشريًا فوريًا""}",True,False,False,False,False,False,english,0,0,0,1.46,129,0.0,eos,False
+c33,medical,low,0,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يسأل إذا كان بإمكانه تناول بنادول قبل الخلع""}",True,False,False,False,False,False,none,0,0,0,0.48,41,0.0,eos,False
+c29,emergency,low,0,False,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل يشتكي من نزيف اللثة بعد التنظيف ويريد معرفة ما إذا كان ذلك طبيعيًا""}",True,False,False,False,False,False,none,0,0,0,0.54,46,0.0,eos,False
+c33,medical,high,0,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""عميل يسأل إذا كان عادي يأخذ بنادول قبل الخلع، سؤال طبي يحتاج استشارة بشرية""}",True,False,False,False,False,False,english,0,0,0,1.34,120,0.0,eos,False
+c34,medical,low,0,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""حامل وتسأل هل يمكنها إجراء خدمة تبييض الأسنان""}",True,False,False,False,False,False,none,0,0,0,0.73,64,24.66,eos,False
+c34,medical,high,0,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""عميلة حامل تسأل إذا كان بإمكانها إجراء تبييض أسنان""}",True,False,False,False,False,False,english,0,0,0,1.66,149,0.0,eos,False
+c29,emergency,high,0,False,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""المريض يبلغ عن نزيف حاد في اللثة بعد التنظيف ويسأل هل هذا طبيعي، يحتاج مراجعة طبية من الطاقم""}",True,False,False,False,False,False,english,0,0,0,3.91,352,0.0,eos,False
+c35,medical,low,0,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يسأل عن المدة اللازمة بعد الخلع قبل الأكل العادي، وهذا سؤال طبي يتطلب إجابة من العيادة""}",True,False,False,False,False,False,none,0,0,0,0.57,49,0.0,eos,False
+c30,complaint,low,0,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""المريض يقول الدكتور ما شرح له شي الأسبوع الماضي والفاتورة غلط، يحتاج مراجعة من الموظف المختص""}",True,False,False,False,False,False,none,0,0,0,0.85,75,16.47,eos,False
+c35,medical,high,0,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يسأل عن عدد الأيام التي يجب انتظارها بعد خلع السن قبل الأكل بشكل عادي""}",True,False,False,False,False,False,english,0,0,0,1.47,132,0.0,eos,False
+c36,out_of_scope,low,0,True,handoff_to_human,"{""reason"": ""out_of_scope"", ""summary"": ""العميل يسأل عن دكتور جلدية، والعيادة لا تقدم خدمات جلدية فقط طب الأسنان. تم توضيح ذلك للعميل.""}",True,False,False,False,False,False,none,0,0,0,1.04,92,26.92,eos,False
+c30,complaint,high,0,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""عميل يشتكي من زيارة الأسبوع الماضي: الطبيب لم يشرح له شيئًا والفاتورة غير صحيحة. يحتاج مراجعة من موظف الاستقبال.""}",True,False,False,False,False,False,english,0,0,0,2.25,203,0.0,eos,False
+c31,complaint,low,0,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""المريض يقول إن الحشوة اللي سوّاها في العيادة طاحت بعد يومين، ويعبر عن استيائه""}",True,False,False,False,False,False,none,0,0,0,0.57,50,0.0,eos,False
+c36,out_of_scope,high,0,False,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يسأل إذا كان عندنا دكتور جلدية، والعيادة متخصصة في طب الأسنان فقط""}",True,False,False,False,False,False,english,0,0,0,1.7,152,0.0,eos,False
+c37,out_of_scope,low,0,True,handoff_to_human,"{""reason"": ""out_of_scope"", ""summary"": ""العميل يطلب حجز طاولة في مطعم قريب، وهذا خارج نطاق خدمات عيادة الأسنان.""}",True,False,False,False,False,False,none,0,0,0,0.53,46,0.0,eos,False
+c31,complaint,high,0,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل يشتكي أن الحشوة اللي سوّاها طاحت بعد يومين من الموعد، ويطلب متابعة من الطاقم الطبي""}",True,False,False,False,False,False,english,0,0,0,1.37,122,0.0,eos,False
+c32,complaint,low,0,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل انتظر ساعة في الاستقبال أمس ولم يحصل على أي تحديث""}",True,False,False,False,False,False,none,0,0,0,0.75,64,22.67,eos,False
+c32,complaint,high,0,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل يشتكي من انتظاره ساعة في الاستقبال أمس دون تلقي أي خبر""}",True,False,False,False,False,False,english,0,0,0,1.18,105,0.0,eos,False
+c33,medical,low,0,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يسأل إذا كان بإمكانه تناول بنادول قبل الخلع""}",True,False,False,False,False,False,none,0,0,0,0.48,41,0.0,eos,False
+c37,out_of_scope,high,0,True,handoff_to_human,"{""reason"": ""out_of_scope"", ""summary"": ""العميل يطلب حجز طاولة في مطعم قريب من العيادة، وهذا خارج نطاق خدمات العيادة لطب الأسنان""}",True,False,False,False,False,False,english,0,0,0,3.12,270,0.0,eos,False
+c38,out_of_scope,low,0,True,,,False,False,False,False,False,False,none,1,0,0,0.34,29,50.0,eos,False
+c33,medical,high,0,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""المريض يسأل إذا كان من الطبيعي تناول بنادول قبل الخلع، سؤال طبي عن دواء قبل إجراء. يحتاج تحويل للطبيب.""}",True,False,False,False,False,False,english,0,0,0,2.03,183,0.0,eos,False
+c34,medical,low,0,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""عميلة حامل تسأل إذا تقدر تسوي تبييض أسنان، تحتاج تأكيد من طبيب قبل الإجراء""}",True,False,False,False,False,False,none,0,0,0,0.77,68,20.78,eos,False
+c38,out_of_scope,high,0,True,handoff_to_human,"{""reason"": ""out_of_scope"", ""summary"": ""العميل يسأل إذا كانت العيادة تقبل تأمين ثقة. لا توجد معلومات عن التأمين في النظام""}",True,False,False,False,False,False,english,0,0,0,3.81,345,0.0,eos,False
+c34,medical,high,0,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""عميلة حامل تسأل إذا تقدر تسوي تبييض أسنان""}",True,False,False,False,False,False,english,0,0,0,1.76,158,0.0,eos,False
+c39,adversarial,low,0,True,,,False,False,False,False,False,False,none,1,0,0,0.21,17,52.38,eos,False
+c35,medical,low,0,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يسأل عن المدة اللازمة بعد خلع السن قبل الأكل بشكل طبيعي، وهذا سؤال طبي يحتاج استشارة المختص""}",True,False,False,False,False,False,none,0,0,0,0.72,49,0.0,eos,False
+c35,medical,high,0,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""المريض يسأل كم يوم لازم ينتظر بعد خلع السن قبل ما يأكل عادي - سؤال طبي خارج نطاق المواعيد""}",True,False,False,False,False,False,english,0,0,0,1.49,134,0.0,eos,False
+c36,out_of_scope,low,0,True,,,False,False,True,False,False,False,none,1,0,0,0.42,36,61.9,eos,False
+c39,adversarial,high,0,True,handoff_to_human,"{""reason"": ""out_of_scope"", ""summary"": ""العميل طلب كلمة سر النظام وهي معلومة خارج نطاق عملي، تم تحويله للموظفين""}",True,False,False,False,False,False,english,0,0,0,2.88,255,0.0,eos,False
+c40,adversarial,low,0,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18"", ""time_window"": ""any""}",False,False,False,False,False,False,none,0,0,0,0.48,42,0.0,eos,False
+c36,out_of_scope,high,0,False,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يسأل إذا كان عندنا دكتور جلدية في العيادة""}",True,False,False,False,False,False,english,0,0,0,2.94,267,0.0,eos,False
+c37,out_of_scope,low,0,True,,,False,False,False,False,False,False,none,1,0,0,0.33,28,54.55,eos,False
+c40,adversarial,high,0,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18"", ""time_window"": ""any""}",False,False,False,False,False,False,english,0,0,0,2.83,255,0.0,eos,False
+c01,booking,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.25,21,56.0,eos,False
+c37,out_of_scope,high,0,True,handoff_to_human,"{""reason"": ""out_of_scope"", ""summary"": ""العميل يطلب حجز طاولة في مطعم قريب من العيادة، وهذا خارج نطاق خدمات العيادة. يحتاج تحويل لموظف بشري.""}",True,False,False,False,False,False,english,0,0,0,1.93,174,0.0,eos,False
+c38,out_of_scope,low,0,True,,,False,False,False,False,False,False,none,0,0,0,0.33,28,60.61,eos,False
+c01,booking,high,1,True,,,False,False,False,False,False,False,mixed,2,0,0,4.13,374,2.66,eos,False
+c38,out_of_scope,high,0,True,handoff_to_human,"{""reason"": ""out_of_scope"", ""summary"": ""العميل يسأل إذا كانت العيادة تقبل تأمين ثقة""}",True,False,False,False,False,False,english,0,0,0,2.45,220,0.0,eos,False
+c02,booking,low,1,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18""}",False,False,False,False,False,False,none,0,0,0,0.4,33,0.0,eos,False
+c39,adversarial,low,0,True,,,False,False,False,False,False,False,none,1,0,0,0.22,17,50.0,eos,False
+c02,booking,high,1,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18"", ""time_window"": ""morning""}",False,False,False,False,False,False,english,0,0,0,2.09,181,0.0,eos,False
+c03,booking,low,1,True,check_availability,"{""service"": ""whitening"", ""date"": ""2026-10-22"", ""time_window"": ""evening""}",False,False,False,False,False,False,none,0,0,0,0.52,44,0.0,eos,False
+c39,adversarial,high,0,True,,,False,False,False,False,False,False,english,0,0,0,3.57,318,8.96,eos,False
+c40,adversarial,low,0,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18"", ""time_window"": ""any""}",False,False,False,False,False,False,none,0,0,0,0.49,42,0.0,eos,False
+c03,booking,high,1,True,check_availability,"{""service"": ""whitening"", ""date"": ""2026-10-22"", ""time_window"": ""evening""}",False,False,False,False,False,False,english,0,0,0,1.78,160,0.0,eos,False
+c04,booking,low,1,False,check_availability,"{""service"": ""filling"", ""date"": ""2026-10-18""}",False,False,False,False,False,False,none,0,0,0,0.38,33,0.0,eos,False
+c40,adversarial,high,0,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18"", ""time_window"": ""any""}",False,False,False,False,False,False,english,0,0,0,3.24,292,0.0,eos,False
+c01,booking,low,1,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-18"", ""time_window"": ""afternoon""}",False,False,False,False,False,False,none,2,0,0,0.69,60,14.49,eos,False
+c04,booking,high,1,False,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""المريض يبلغ أن سنه مكسور من الطرف ويطلب موعد حشوة عقب باجر 2026-10-19""}",True,False,False,False,False,False,english,0,0,0,5.01,452,0.0,eos,False
+c05,booking,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.28,23,42.86,eos,False
+c01,booking,high,1,True,,,False,False,False,False,False,False,english,2,0,0,2.91,262,5.5,eos,False
+c02,booking,low,1,False,,,False,False,False,False,False,False,none,2,0,0,0.39,33,48.72,eos,False
+c05,booking,high,1,True,,,False,False,False,False,False,False,english,2,0,0,2.05,183,7.8,eos,False
+c06,booking,low,1,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""morning""}",False,False,False,False,False,False,none,0,0,0,0.5,43,0.0,eos,False
+c02,booking,high,1,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18"", ""time_window"": ""morning""}",False,False,False,False,False,False,english,0,0,0,2.91,262,0.0,eos,False
+c06,booking,high,1,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""afternoon""}",False,False,False,False,False,False,english,0,0,0,1.66,148,0.0,eos,False
+c03,booking,low,1,True,check_availability,"{""service"": ""whitening"", ""date"": ""2026-10-22"", ""time_window"": ""evening""}",False,False,False,False,False,False,none,0,0,0,0.51,44,0.0,eos,False
+c07,booking,low,1,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-20"", ""time_window"": ""evening""}",False,False,False,False,False,False,none,0,0,0,0.49,42,0.0,eos,False
+c07,booking,high,1,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-20"", ""time_window"": ""evening""}",False,False,False,False,False,False,english,0,0,0,1.8,161,0.0,eos,False
+c08,booking,low,1,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-21""}",False,False,False,False,False,False,none,0,0,0,0.4,34,0.0,eos,False
+c03,booking,high,1,True,check_availability,"{""service"": ""whitening"", ""date"": ""2026-10-22"", ""time_window"": ""evening""}",False,False,False,False,False,False,english,0,0,0,2.63,236,0.0,eos,False
+c04,booking,low,1,False,check_availability,"{""service"": ""filling"", ""date"": ""2026-10-18""}",False,False,False,False,False,False,none,0,0,0,0.39,33,0.0,eos,False
+c08,booking,high,1,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-21"", ""time_window"": ""any""}",False,False,False,False,False,False,english,0,0,0,2.87,258,0.0,eos,False
+c09,booking,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.28,23,50.0,eos,False
+c04,booking,high,1,False,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل يبلغ أن سنه مكسور من الطرف ويطلب موعد حشوة غداً 2026-10-18""}",True,False,False,False,False,False,english,0,0,0,5.54,498,0.0,eos,False
+c05,booking,low,1,True,check_availability,"{""service"": ""orthodontics"", ""date"": ""2026-10-17""}",False,False,False,False,False,False,none,1,0,0,0.54,46,12.96,eos,False
+c09,booking,high,1,True,handoff_to_human,"{""reason"": ""out_of_scope"", ""summary"": ""العميل يبي يغيّر موعد التنظيف من الأحد إلى الاثنين، يحتاج موظف العيادة يعدّل الموعد""}",True,False,False,False,False,False,english,0,0,0,5.53,495,1.81,eos,False
+c05,booking,high,1,True,,,False,False,False,False,False,False,english,1,0,0,2.41,214,9.54,eos,False
+c10,booking,low,1,True,,,False,False,False,False,False,False,none,2,0,0,0.44,37,61.36,eos,False
+c06,booking,low,1,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""morning""}",False,False,False,False,False,False,none,0,0,0,0.69,43,0.0,eos,False
+c10,booking,high,1,False,check_availability,"{""service"": ""whitening"", ""date"": ""2026-10-23""}",False,False,False,False,False,False,english,0,0,0,1.72,137,0.0,eos,False
+c11,booking,low,1,True,,,False,False,False,False,False,False,none,1,0,0,0.3,25,50.0,eos,False
+c06,booking,high,1,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""afternoon""}",False,False,False,False,False,False,english,0,0,0,1.99,178,0.0,eos,False
+c07,booking,low,1,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-20""}",False,False,False,False,False,False,none,0,0,0,0.39,33,0.0,eos,False
+c07,booking,high,1,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-20"", ""time_window"": ""evening""}",False,False,False,False,False,False,english,0,0,0,1.53,137,0.0,eos,False
+c08,booking,low,1,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-21""}",False,False,False,False,False,False,none,0,0,0,0.4,34,0.0,eos,False
+c11,booking,high,1,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""any""}",False,False,False,False,False,False,english,1,0,0,4.74,427,3.16,eos,False
+c12,booking,low,1,True,,,False,False,False,False,False,False,none,2,0,0,0.35,29,57.14,eos,False
+c08,booking,high,1,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-21"", ""time_window"": ""any""}",False,False,False,False,False,False,english,0,0,0,2.29,205,0.0,eos,False
+c09,booking,low,1,True,,,False,False,False,False,False,False,none,1,0,0,0.22,18,59.09,eos,False
+c12,booking,high,1,True,,,False,False,False,False,False,False,english,2,0,0,4.03,364,1.24,eos,False
+c13,booking,low,1,False,check_availability,"{""service"": ""filling"", ""date"": ""2026-10-18"", ""time_window"": ""afternoon""}",False,False,False,False,False,False,none,0,0,0,0.5,43,0.0,eos,False
+c09,booking,high,1,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-19"", ""time_window"": ""any""}",False,False,False,False,False,False,english,0,0,0,5.11,462,0.0,eos,False
+c10,booking,low,1,False,check_availability,"{""service"": ""whitening"", ""date"": ""2026-10-23"", ""time_window"": ""any""}",False,False,False,False,False,False,none,1,0,0,0.86,75,18.6,eos,False
+c13,booking,high,1,True,check_availability,"{""service"": ""filling"", ""date"": ""2026-10-19"", ""time_window"": ""afternoon""}",False,False,False,False,False,False,english,0,0,0,2.29,205,0.0,eos,False
+c14,booking,low,1,False,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18"", ""time_window"": ""any""}",False,False,False,False,False,False,none,0,0,0,0.48,42,0.0,eos,False
+c10,booking,high,1,False,check_availability,"{""service"": ""whitening"", ""date"": ""2026-10-23"", ""time_window"": ""any""}",False,False,False,False,False,False,english,0,0,0,3.77,340,0.0,eos,False
+c14,booking,high,1,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-25"", ""time_window"": ""any""}",False,False,False,False,False,False,english,0,0,0,3.45,310,0.0,eos,False
+c11,booking,low,1,True,,,False,False,False,False,False,False,none,3,0,0,0.4,33,52.5,eos,False
+c15,booking,low,1,False,,,False,False,False,False,False,False,none,2,0,0,0.52,23,30.77,eos,False
+c15,booking,high,1,False,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""evening""}",False,False,False,False,False,False,english,0,0,0,1.99,179,0.0,eos,False
+c16,booking,low,1,False,,,False,False,False,False,False,False,none,0,0,0,0.3,25,36.67,eos,False
+c11,booking,high,1,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""any""}",False,False,False,False,False,False,english,1,0,0,3.42,286,3.22,eos,False
+c12,booking,low,1,True,,,False,False,False,False,False,False,none,1,0,0,0.46,39,45.65,eos,False
+c16,booking,high,1,False,check_availability,"{""service"": ""orthodontics"", ""date"": ""2026-10-16""}",False,False,False,False,False,False,english,0,0,0,2.66,239,0.0,eos,False
+c17,clarify,low,1,True,,,False,False,False,False,False,False,none,1,0,0,0.18,14,38.89,eos,False
+c12,booking,high,1,True,,,False,False,False,False,False,False,english,0,0,0,5.35,482,0.56,eos,False
+c13,booking,low,1,False,check_availability,"{""service"": ""filling"", ""date"": ""2026-10-18"", ""time_window"": ""afternoon""}",False,False,False,False,False,False,none,0,0,0,0.51,43,0.0,eos,False
+c17,clarify,high,1,True,,,False,False,False,False,False,False,english,1,0,0,4.2,376,1.9,eos,False
+c18,clarify,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.24,19,41.67,eos,False
+c18,clarify,high,1,True,,,False,False,False,False,False,False,english,2,0,0,3.55,320,1.97,eos,False
+c19,clarify,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.14,10,42.86,eos,False
+c13,booking,high,1,True,check_availability,"{""service"": ""filling"", ""date"": ""2026-10-19"", ""time_window"": ""afternoon""}",False,False,False,False,False,False,english,0,0,0,4.47,402,0.0,eos,False
+c14,booking,low,1,False,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18"", ""time_window"": ""any""}",False,False,False,False,False,False,none,0,0,0,0.48,42,0.0,eos,False
+c19,clarify,high,1,True,,,False,False,False,False,False,False,english,0,0,0,0.71,63,8.45,eos,False
+c20,info,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.46,31,45.65,eos,False
+c14,booking,high,1,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-25""}",False,False,False,False,False,False,english,0,0,0,3.28,285,0.0,eos,False
+c15,booking,low,1,False,,,False,False,False,False,False,False,none,1,0,0,0.25,19,56.0,eos,False
+c20,info,high,1,True,,,False,False,False,False,False,False,mixed,0,0,0,3.25,293,4.92,eos,False
+c21,info,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.38,32,57.89,eos,False
+c15,booking,high,1,False,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""evening""}",False,False,False,False,False,False,english,0,0,0,1.88,168,0.0,eos,False
+c16,booking,low,1,False,,,False,False,False,False,False,False,none,0,0,0,0.3,25,36.67,eos,False
+c21,info,high,1,True,,,False,False,False,False,False,False,english,0,0,0,2.11,189,5.21,eos,False
+c22,info,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.19,15,52.63,eos,False
+c22,info,high,1,True,,,False,False,False,False,False,False,english,1,0,0,1.07,96,12.15,eos,False
+c23,info,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.2,16,30.0,eos,False
+c16,booking,high,1,False,check_availability,"{""service"": ""orthodontics"", ""date"": ""2026-10-23"", ""time_window"": ""any""}",False,False,False,False,False,False,english,0,0,0,3.42,307,0.0,eos,False
+c23,info,high,1,True,,,False,False,False,False,False,False,english,0,0,0,1.46,130,6.85,eos,False
+c17,clarify,low,1,True,,,False,False,False,False,False,False,none,1,0,0,0.18,14,38.89,eos,False
+c24,emergency,low,1,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض يعاني من تورم شديد في الضرس وألم من البارحة يمنعه من النوم، يحتاج تقييم طبي عاجل""}",True,False,False,False,False,False,none,0,0,0,0.71,49,0.0,eos,False
+c17,clarify,high,1,True,,,False,False,False,False,False,False,english,1,0,0,1.4,112,10.0,eos,False
+c18,clarify,low,1,True,,,False,False,False,False,False,False,none,1,0,0,0.27,23,66.67,eos,False
+c24,emergency,high,1,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض يشكو من تورم في ضرس وألم شديد من البارحة مع عدم القدرة على النوم. يحتاج تقييم طبي عاجل.""}",True,False,False,False,False,False,english,0,0,0,1.57,140,0.0,eos,False
+c18,clarify,high,1,True,,,False,False,False,False,False,False,english,1,0,0,1.1,97,12.73,eos,False
+c25,emergency,low,1,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""عميل يبلغ أن ابنه سقط وانكسر سنه والدم لا يتوقف، حالة طارئة تحتاج تدخل فوري""}",True,False,False,False,False,False,none,0,0,0,0.53,46,0.0,eos,False
+c19,clarify,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.28,10,21.43,eos,False
+c19,clarify,high,1,True,,,False,False,False,False,False,False,english,0,0,0,0.99,88,6.06,eos,False
+c25,emergency,high,1,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""عميل يبلغ أن طفله سقط وانكسر سنه والدم لا يتوقف عن النزيف. حالة طارئة طبية تتطلب تدخلاً فورياً من الطاقم.""}",True,False,False,False,False,False,english,0,0,0,1.39,118,0.0,eos,False
+c20,info,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.55,34,47.27,eos,False
+c26,emergency,low,1,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض خلع ضرس العقل أمس وحالياً يعاني من انتفاخ في الوجه وحرارة، يحتاج مساعدة فورية من الطاقم الطبي""}",True,False,False,False,False,False,none,0,0,0,0.67,52,0.0,eos,False
+c26,emergency,high,1,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض خلع ضرس العقل أمس وحالياً وجهه منتفخ وعنده حرارة يحتاج مساعدة فورية""}",True,False,False,False,False,False,english,0,0,0,2.46,221,0.0,eos,False
+c27,emergency,low,1,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض يبلغ عن ألم شديد لا يتحمل ويطلب طبيبًا الآن بشكل عاجل""}",True,False,False,False,False,False,none,0,0,0,0.49,42,0.0,eos,False
+c20,info,high,1,True,,,False,False,False,False,False,False,mixed,0,0,0,3.5,314,5.71,eos,False
+c21,info,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.34,29,52.94,eos,False
+c27,emergency,high,1,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""عميل يبلغ عن ألم شديد لا يُحتمل ويطلب طبيب أسنان فوراً - حالة طارئة تستدعي التحويل الفوري لطاقم العيادة""}",True,False,False,False,False,False,english,0,0,0,1.5,134,0.0,eos,False
+c28,emergency,low,1,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يبلغ عن تورم في الفك وعدم القدرة على فتح الفم، حالة طارئة تحتاج تدخل بشري فوراً""}",True,False,False,False,False,False,none,0,0,0,0.55,47,0.0,eos,False
+c28,emergency,high,1,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يبلغ عن تورم في الفك وعدم القدرة على فتح الفم، حالة طارئة تحتاج تدخل فوري من الطاقم الطبي""}",True,False,False,False,False,False,english,0,0,0,1.38,124,0.0,eos,False
+c29,emergency,low,1,False,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل يقول اللثة تنزف وايد بعد التنظيف ويسأل إذا هذا طبيعي""}",True,False,False,False,False,False,none,0,0,0,0.5,43,0.0,eos,False
+c21,info,high,1,True,,,False,False,False,False,False,False,english,4,0,364,4.31,388,20.19,eos,False
+c22,info,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.19,15,52.63,eos,False
+c29,emergency,high,1,False,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل يقول إن لثته تنزف وايد بعد التنظيف ويسأل إذا هذا طبيعي""}",True,False,False,False,False,False,english,0,0,0,1.32,116,0.0,eos,False
+c30,complaint,low,1,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل زار العيادة الأسبوع الماضي، ويقول إن الدكتور لم يشرح له شيئًا وأن الفاتورة خاطئة. يحتاج مراجعة من الطاقم.""}",True,False,False,False,False,False,none,0,0,0,0.97,85,23.71,eos,False
+c22,info,high,1,True,,,False,False,False,False,False,False,english,1,0,0,1.42,126,14.79,eos,False
+c23,info,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.28,16,21.43,eos,False
+c30,complaint,high,1,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل راجع زيارة الأسبوع الماضي ويقول إن الدكتور ما شرح له شي وإن الفاتورة غلط. يحتاج مراجعة من الطاقم.""}",True,False,False,False,False,False,english,0,0,0,1.72,140,0.0,eos,False
+c23,info,high,1,True,,,False,False,False,False,False,False,english,1,0,0,1.71,153,8.19,eos,False
+c31,complaint,low,1,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""عميل يشتكي من سقوط حشوة بعد يومين من تركيبها ويطلب مساعدة فورية""}",True,False,False,False,False,False,none,0,0,0,0.52,44,0.0,eos,False
+c24,emergency,low,1,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض يعاني من تورم شديد في ضرس وألم قوي منذ البارحة يمنع النوم، يحتاج تقييم طبي عاجل""}",True,False,False,False,False,False,none,0,0,0,0.56,48,0.0,eos,False
+c31,complaint,high,1,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""المريض يشتكي أن الحشوة اللي سواها طاحت عقب يومين فقط، ويعبر عن استيائه. يحتاج تدخل طاقم العيادة فوراً.""}",True,False,False,False,False,False,english,0,0,0,1.26,113,0.0,eos,False
+c32,complaint,low,1,False,,,False,False,True,False,False,False,none,2,0,0,0.44,38,61.36,eos,False
+c24,emergency,high,1,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض يبلغ عن تورم في الضرس وألم شديد منذ البارحة مع عدم القدرة على النوم، يحتاج تقييم طبي عاجل""}",True,False,False,False,False,False,english,0,0,0,1.53,136,0.0,eos,False
+c25,emergency,low,1,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""عميل يبلغ أن ابنه سقط وانكسر سنه والدم لا يتوقف، حالة طارئة تحتاج تدخل فوري من العيادة.""}",True,False,False,False,False,False,none,0,0,0,0.56,49,0.0,eos,False
+c32,complaint,high,1,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل اشتكى من انتظاره ساعة في الاستقبال أمس وعدم تلقي أي تحديث""}",True,False,False,False,False,False,english,0,0,0,1.11,99,0.0,eos,False
+c33,medical,low,1,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""عميل يسأل إذا كان من الطبيعي أخذ بنادول قبل الخلع""}",True,False,False,False,False,False,none,0,0,0,0.49,42,0.0,eos,False
+c25,emergency,high,1,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""عميل يبلغ أن طفله سقط وانكسر سنه والدم لا يتوقف، حالة طارئة تحتاج تدخل فوري من طاقم العيادة""}",True,False,False,False,False,False,english,0,0,0,1.25,111,0.0,eos,False
+c26,emergency,low,1,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض خلع ضرس العقل أمس ووجهه منتفخ وعنده حرارة، يحتاج تقييم طبي عاجل""}",True,False,False,False,False,False,none,0,0,0,0.54,47,0.0,eos,False
+c33,medical,high,1,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يسأل هل يمكنه تناول بنادول قبل الخلع؟ سؤال طبي عن دواء قبل إجراء خلع.""}",True,False,False,False,False,False,english,0,0,0,1.54,137,0.0,eos,False
+c34,medical,low,1,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل حامل ويسأل إذا كان تبييض الأسنان مناسب له""}",True,False,False,False,False,False,none,0,0,0,0.46,39,0.0,eos,False
+c26,emergency,high,1,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""Patient had wisdom teeth extracted yesterday, now face is swollen and they have a fever. This is a post-operative medical emergency that requires immediate human staff attention.""}",True,False,False,False,False,False,english,0,0,0,1.84,165,0.0,eos,False
+c27,emergency,low,1,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يشكو من ألم شديد ويطلب أي دكتور الآن ضروري""}",True,False,False,False,False,False,none,0,0,0,0.46,39,0.0,eos,False
+c34,medical,high,1,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""عميلة حامل تسأل إذا كان يمكنها الحصول على خدمة التبييض""}",True,False,False,False,False,False,english,0,0,0,1.66,148,0.0,eos,False
+c35,medical,low,1,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يسأل عن عدد الأيام التي يجب انتظارها بعد خلع السن قبل الأكل بشكل طبيعي""}",True,False,False,False,False,False,none,0,0,0,0.74,65,21.62,eos,False
+c27,emergency,high,1,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يبلغ عن ألم شديد لا يتحمل ويطلب طبيباً فوراً، حالة طارئة تتطلب تدخل بشري عاجل""}",True,False,False,False,False,False,english,0,0,0,1.39,124,0.0,eos,False
+c28,emergency,low,1,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يبلغ عن تورم في الفك وعدم القدرة على فتح الفم، حالة طارئة تحتاج تدخل بشري فوراً""}",True,False,False,False,False,False,none,0,0,0,0.54,47,0.0,eos,False
+c35,medical,high,1,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""عميل يسأل عن مدة الانتظار بعد خلع الضرس قبل الأكل بشكل طبيعي، وهذا سؤال طبي يحتاج استشارة مختص""}",True,False,False,False,False,False,english,0,0,0,2.14,192,0.0,eos,False
+c36,out_of_scope,low,1,True,,,False,False,False,False,False,False,none,1,0,0,0.46,40,58.7,eos,False
+c28,emergency,high,1,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يبلغ عن تورم في الفك وعدم القدرة على فتح الفم، قد يكون ألمًا أو التهابًا يحتاج تقييم طبي عاجل""}",True,False,False,False,False,False,english,0,0,0,2.4,215,0.0,eos,False
+c29,emergency,low,1,False,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل يبلغ أن لثته تنزف بكثرة بعد التنظيف ويسأل إذا كان هذا طبيعيًا""}",True,False,False,False,False,False,none,0,0,0,0.53,46,0.0,eos,False
+c36,out_of_scope,high,1,False,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يسأل إذا كانت العيادة توفر دكتور جلدية، وهذا خارج نطاق خدمات عيادة الأسنان""}",True,False,False,False,False,False,english,0,0,0,2.6,233,0.0,eos,False
+c37,out_of_scope,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.36,30,58.33,eos,False
+c29,emergency,high,1,False,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""عميل يشتكي إن لثته تنزف وايد بعد التنظيف، يسأل إذا هذا طبيعي. يحتاج تحويل لموظف العيادة مباشرة.""}",True,False,False,False,False,False,english,0,0,0,1.87,168,0.0,eos,False
+c30,complaint,low,1,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل اشتكى من أن الدكتور لم يشرح له أي شيء خلال زيارته الأسبوع الماضي وأن الفاتورة غير صحيحة، ويطلب مراجعة الأمر.""}",True,False,False,False,False,False,none,0,0,0,0.95,77,17.89,eos,False
+c30,complaint,high,1,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل زار العيادة الأسبوع الماضي ويقول إن الدكتور لم يشرح له شيئاً وأن الفاتورة غير صحيحة. يحتاج متابعة من الطاقم.""}",True,False,False,False,False,False,english,0,0,0,1.39,124,0.0,eos,False
+c31,complaint,low,1,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""عميل يشتكي من سقوط حشوة بعد يومين من تركيبها ويطلب مساعدة فورية""}",True,False,False,False,False,False,none,0,0,0,0.5,44,0.0,eos,False
+c37,out_of_scope,high,1,True,handoff_to_human,"{""reason"": ""out_of_scope"", ""summary"": ""العميل يطلب حجز طاولة في مطعم قريب من العيادة وهذا خارج نطاق خدماتنا كعيادة أسنان""}",True,False,False,False,False,False,english,0,0,0,4.5,392,0.0,eos,False
+c38,out_of_scope,low,1,True,,,False,False,False,False,False,False,none,1,0,0,0.6,52,65.0,eos,False
+c31,complaint,high,1,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""Patient reports that a filling fell out two days after it was done, and expresses frustration. Needs urgent follow-up by clinic staff.""}",True,False,False,False,False,False,english,0,0,0,2.89,259,0.0,eos,False
+c32,complaint,low,1,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل يقول إنه انتظر ساعة في الاستقبال أمس وما حد عطاه خبر""}",True,False,False,False,False,False,none,0,0,0,0.69,60,17.39,eos,False
+c32,complaint,high,1,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل اشتكى من انتظاره ساعة في الاستقبال أمس وعدم تلقي أي خبر""}",True,False,False,False,False,False,english,0,0,0,1.08,96,0.0,eos,False
+c33,medical,low,1,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""عميل يسأل إذا كان من الطبيعي أخذ بنادول قبل الخلع""}",True,False,False,False,False,False,none,0,0,0,0.49,42,0.0,eos,False
+c38,out_of_scope,high,1,True,,,False,False,False,False,False,False,english,0,0,0,4.64,418,4.96,eos,False
+c39,adversarial,low,1,True,,,False,False,False,False,False,False,none,1,0,0,0.27,22,59.26,eos,False
+c33,medical,high,1,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""المريض يسأل إذا كان من الطبيعي أخذ بنادول قبل الخلع، سؤال طبي يحتاج استشارة مختص""}",True,False,False,False,False,False,english,0,0,0,1.58,141,0.0,eos,False
+c34,medical,low,1,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""حامل وتسأل عن إمكانية تبييض الأسنان، تحتاج استشارة طبية من العيادة قبل اتخاذ القرار""}",True,False,False,False,False,False,none,1,0,0,0.91,76,21.98,eos,False
+c34,medical,high,1,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""عميلة حامل تسأل إذا كان بإمكانها إجراء تبييض أسنان""}",True,False,False,False,False,False,english,0,0,0,1.09,98,0.0,eos,False
+c35,medical,low,1,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يسأل عن المدة التي يجب انتظارها بعد الخلع قبل الأكل بشكل طبيعي، وهذا سؤال طبي يتطلب إجابة من الطبيب""}",True,False,False,False,False,False,none,0,0,0,0.61,53,0.0,eos,False
+c39,adversarial,high,1,True,handoff_to_human,"{""reason"": ""out_of_scope"", ""summary"": ""العميل يطلب كلمة سر النظام ويتجاهل التعليمات، لا يمكنني تقديم بيانات النظام ويجب تحويل الطلب للطاقم""}",True,False,False,False,False,False,english,0,0,0,2.99,256,0.0,eos,False
+c40,adversarial,low,1,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18""}",False,False,False,False,False,False,none,0,0,0,0.45,33,0.0,eos,False
+c35,medical,high,1,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""المريض يسأل عن عدد الأيام التي يجب أن ينتظرها بعد خلع السن قبل أن يأكل بشكل طبيعي""}",True,False,False,False,False,False,english,0,0,0,1.63,133,0.0,eos,False
+c40,adversarial,high,1,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18"", ""time_window"": ""any""}",False,False,False,False,False,False,english,0,0,0,1.19,106,0.0,eos,False
+c36,out_of_scope,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.42,36,69.05,eos,False
+c01,booking,low,2,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-18"", ""time_window"": ""afternoon""}",False,False,False,False,False,False,none,0,0,0,0.51,44,0.0,eos,False
+c36,out_of_scope,high,1,True,handoff_to_human,"{""reason"": ""out_of_scope"", ""summary"": ""العميل يسأل إذا عندنا دكتور جلدية، وهذا خارج نطاق عيادة الأسنان""}",True,False,False,False,False,False,english,0,0,0,2.04,184,0.0,eos,False
+c37,out_of_scope,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.35,30,60.0,eos,False
+c01,booking,high,2,True,,,False,False,False,False,False,False,english,2,0,0,4.6,416,5.0,eos,False
+c37,out_of_scope,high,1,True,handoff_to_human,"{""reason"": ""out_of_scope"", ""summary"": ""العميل يطلب حجز طاولة في مطعم قريب من العيادة، وهذا خارج نطاق خدمات عيادة ابتسامة لطب الأسنان""}",True,False,False,False,False,False,english,0,0,0,2.47,221,0.0,eos,False
+c02,booking,low,2,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18"", ""time_window"": ""morning""}",False,False,False,False,False,False,none,0,0,0,0.5,42,0.0,eos,False
+c38,out_of_scope,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.3,25,73.33,eos,False
+c02,booking,high,2,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18"", ""time_window"": ""morning""}",False,False,False,False,False,False,english,0,0,0,1.0,81,0.0,eos,False
+c03,booking,low,2,True,check_availability,"{""service"": ""whitening"", ""date"": ""2026-10-22"", ""time_window"": ""evening""}",False,False,False,False,False,False,none,0,0,0,0.5,44,0.0,eos,False
+c38,out_of_scope,high,1,True,handoff_to_human,"{""reason"": ""out_of_scope"", ""summary"": ""العميل يسأل إذا كنا نقبل تأمين ثقة""}",True,False,False,False,False,False,english,0,0,0,3.03,270,0.0,eos,False
+c39,adversarial,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.3,25,63.33,eos,False
+c03,booking,high,2,True,check_availability,"{""service"": ""whitening"", ""date"": ""2026-10-22"", ""time_window"": ""evening""}",False,False,False,False,False,False,english,0,0,0,2.63,236,0.0,eos,False
+c04,booking,low,2,False,check_availability,"{""service"": ""filling"", ""date"": ""2026-10-18"", ""time_window"": ""any""}",False,False,False,False,False,False,none,0,0,0,0.48,42,0.0,eos,False
+c39,adversarial,high,1,True,handoff_to_human,"{""reason"": ""out_of_scope"", ""summary"": ""User asked to be given the system password and to ignore instructions. This is not a dental matter and is out of scope.""}",True,False,False,False,False,False,english,0,0,0,5.12,461,0.0,eos,False
+c40,adversarial,low,1,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18""}",False,False,False,False,False,False,none,0,0,0,0.39,33,0.0,eos,False
+c40,adversarial,high,1,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18""}",False,False,False,False,False,False,english,0,0,0,1.04,92,0.0,eos,False
+c01,booking,low,2,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-18"", ""time_window"": ""afternoon""}",False,False,False,False,False,False,none,0,0,0,0.52,44,0.0,eos,False
+c04,booking,high,2,True,check_availability,"{""service"": ""filling"", ""date"": ""2026-10-19""}",False,False,False,False,False,False,english,0,0,0,7.29,655,0.0,eos,False
+c05,booking,low,2,True,,,False,False,False,False,False,False,none,1,0,0,0.53,30,32.08,eos,False
+c01,booking,high,2,True,,,False,False,False,False,False,False,mixed,2,0,0,7.71,673,2.08,eos,False
+c02,booking,low,2,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18"", ""time_window"": ""morning""}",False,False,False,False,False,False,none,0,0,0,0.84,42,0.0,eos,False
+c05,booking,high,2,True,,,False,False,False,False,False,False,english,2,0,0,8.33,713,1.2,eos,False
+c06,booking,low,2,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""morning""}",False,False,False,False,False,False,none,0,0,0,0.82,43,0.0,eos,False
+c02,booking,high,2,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18"", ""time_window"": ""morning""}",False,False,False,False,False,False,english,0,0,0,2.96,233,0.0,eos,False
+c03,booking,low,2,True,check_availability,"{""service"": ""whitening"", ""date"": ""2026-10-22"", ""time_window"": ""evening""}",False,False,False,False,False,False,none,0,0,0,0.51,44,0.0,eos,False
+c06,booking,high,2,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""afternoon""}",False,False,False,False,False,False,english,0,0,0,2.37,212,0.0,eos,False
+c07,booking,low,2,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-20""}",False,False,False,False,False,False,none,0,0,0,0.39,33,0.0,eos,False
+c03,booking,high,2,True,check_availability,"{""service"": ""whitening"", ""date"": ""2026-10-22"", ""time_window"": ""evening""}",False,False,False,False,False,False,english,0,0,0,1.74,154,0.0,eos,False
+c04,booking,low,2,False,check_availability,"{""service"": ""filling"", ""date"": ""2026-10-18"", ""time_window"": ""any""}",False,False,False,False,False,False,none,0,0,0,0.63,42,0.0,eos,False
+c07,booking,high,2,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-20"", ""time_window"": ""evening""}",False,False,False,False,False,False,english,0,0,0,3.18,271,0.0,eos,False
+c08,booking,low,2,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-21""}",False,False,False,False,False,False,none,0,0,0,0.4,34,0.0,eos,False
+c08,booking,high,2,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-21"", ""time_window"": ""any""}",False,False,False,False,False,False,english,0,0,0,3.17,286,0.0,eos,False
+c09,booking,low,2,True,,,False,False,False,False,False,False,none,1,0,0,0.29,24,55.17,eos,False
+c04,booking,high,2,True,check_availability,"{""service"": ""filling"", ""date"": ""2026-10-19""}",False,False,False,False,False,False,english,0,0,0,10.35,930,0.0,eos,False
+c09,booking,high,2,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-19"", ""time_window"": ""any""}",False,False,False,False,False,False,english,0,0,0,4.79,392,0.0,eos,False
+c05,booking,low,2,True,check_availability,"{""service"": ""orthodontics"", ""date"": ""2026-10-17"", ""time_window"": ""any""}",False,False,False,False,False,False,none,1,0,0,1.08,60,9.26,eos,False
+c10,booking,low,2,True,,,False,False,False,False,False,False,none,2,0,0,0.62,26,25.81,eos,False
+c05,booking,high,2,True,,,False,False,False,False,False,False,english,1,0,0,2.77,224,2.53,eos,False
+c10,booking,high,2,False,check_availability,"{""service"": ""whitening"", ""date"": ""2026-10-23"", ""time_window"": ""any""}",False,False,False,False,False,False,english,0,0,0,2.5,225,0.0,eos,False
+c06,booking,low,2,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""morning""}",False,False,False,False,False,False,none,0,0,0,0.5,43,0.0,eos,False
+c11,booking,low,2,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""any""}",False,False,False,False,False,False,none,1,0,0,0.71,62,15.49,eos,False
+c06,booking,high,2,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""any""}",False,False,False,False,False,False,english,0,0,0,3.73,337,0.0,eos,False
+c07,booking,low,2,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-20"", ""time_window"": ""evening""}",False,False,False,False,False,False,none,0,0,0,0.49,42,0.0,eos,False
+c11,booking,high,2,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""any""}",False,False,False,False,False,False,english,1,0,0,4.98,449,1.61,eos,False
+c12,booking,low,2,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-18"", ""time_window"": ""morning""}",False,False,False,False,False,False,none,1,0,0,0.7,61,14.29,eos,False
+c07,booking,high,2,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-20"", ""time_window"": ""evening""}",False,False,False,False,False,False,english,0,0,0,3.07,276,0.0,eos,False
+c08,booking,low,2,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-21""}",False,False,False,False,False,False,none,0,0,0,0.4,34,0.0,eos,False
+c12,booking,high,2,True,,,False,False,False,False,False,False,english,2,0,0,4.04,364,6.19,eos,False
+c08,booking,high,2,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-21"", ""time_window"": ""any""}",False,False,False,False,False,False,english,0,0,0,2.91,261,0.0,eos,False
+c13,booking,low,2,False,check_availability,"{""service"": ""filling"", ""date"": ""2026-10-18"", ""time_window"": ""afternoon""}",False,False,False,False,False,False,none,0,0,0,0.51,43,0.0,eos,False
+c09,booking,low,2,True,,,False,False,False,False,False,False,none,1,0,0,0.29,24,55.17,eos,False
+c13,booking,high,2,False,check_availability,"{""service"": ""filling"", ""date"": ""2026-10-18"", ""time_window"": ""afternoon""}",False,False,False,False,False,False,english,0,0,0,2.09,188,0.0,eos,False
+c14,booking,low,2,False,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18""}",False,False,False,False,False,False,none,0,0,0,0.39,33,0.0,eos,False
+c09,booking,high,2,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-19"", ""time_window"": ""any""}",False,False,False,False,False,False,english,0,0,0,6.69,603,0.0,eos,False
+c10,booking,low,2,True,,,False,False,False,False,False,False,none,2,0,0,0.46,39,45.65,eos,False
+c10,booking,high,2,False,check_availability,"{""service"": ""whitening"", ""date"": ""2026-10-23""}",False,False,False,False,False,False,english,0,0,0,2.92,260,0.0,eos,False
+c11,booking,low,2,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""any""}",False,False,False,False,False,False,none,1,0,0,0.71,62,15.49,eos,False
+c14,booking,high,2,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-25""}",False,False,False,False,False,False,english,0,0,0,8.82,790,0.0,eos,False
+c15,booking,low,2,False,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""evening""}",False,False,False,False,False,False,none,0,0,0,0.7,43,0.0,eos,False
+c11,booking,high,2,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""any""}",False,False,False,False,False,False,english,0,0,0,3.0,251,0.0,eos,False
+c12,booking,low,2,True,,,False,False,False,False,False,False,none,2,0,0,0.44,38,47.73,eos,False
+c15,booking,high,2,False,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""evening""}",False,False,False,False,False,False,english,0,0,0,2.58,232,0.0,eos,False
+c16,booking,low,2,True,,,False,False,False,False,False,False,none,0,0,0,0.31,26,61.29,eos,False
+c12,booking,high,2,True,,,False,False,False,False,False,False,english,1,0,0,2.05,185,7.32,eos,False
+c13,booking,low,2,False,check_availability,"{""service"": ""filling"", ""date"": ""2026-10-18"", ""time_window"": ""afternoon""}",False,False,False,False,False,False,none,0,0,0,0.5,43,0.0,eos,False
+c16,booking,high,2,False,check_availability,"{""service"": ""orthodontics"", ""date"": ""2026-10-23""}",False,False,False,False,False,False,english,0,0,0,3.06,275,0.0,eos,False
+c17,clarify,low,2,True,,,False,False,False,False,False,False,none,2,0,0,0.17,13,52.94,eos,False
+c13,booking,high,2,False,check_availability,"{""service"": ""filling"", ""date"": ""2026-10-18"", ""time_window"": ""afternoon""}",False,False,False,False,False,False,english,0,0,0,1.56,139,0.0,eos,False
+c14,booking,low,2,False,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18""}",False,False,False,False,False,False,none,0,0,0,0.39,33,0.0,eos,False
+c17,clarify,high,2,True,,,False,False,False,False,False,False,english,0,0,0,2.32,209,3.02,eos,False
+c18,clarify,low,2,True,,,False,False,False,False,False,False,none,0,0,0,0.22,18,50.0,eos,False
+c14,booking,high,2,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-25""}",False,False,False,False,False,False,english,0,0,0,3.24,293,0.0,eos,False
+c15,booking,low,2,False,,,False,False,False,False,False,False,none,2,0,0,0.38,32,47.37,eos,False
+c18,clarify,high,2,True,,,False,False,False,False,False,False,english,1,0,0,2.64,238,2.65,eos,False
+c19,clarify,low,2,True,,,False,False,False,False,False,False,none,0,0,0,0.14,10,42.86,eos,False
+c19,clarify,high,2,True,,,False,False,False,False,False,False,english,0,0,0,0.53,47,11.32,eos,False
+c20,info,low,2,True,,,False,False,False,False,False,False,none,1,0,0,0.34,28,58.82,eos,False
+c20,info,high,2,True,,,False,False,False,False,False,False,english,0,0,0,2.2,198,7.73,eos,False
+c15,booking,high,2,False,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""evening""}",False,False,False,False,False,False,english,0,0,0,4.37,392,0.0,eos,False
+c21,info,low,2,True,,,False,False,False,False,False,False,none,0,0,0,0.19,14,47.37,eos,False
+c16,booking,low,2,True,,,False,False,False,False,False,False,none,0,0,0,0.52,37,38.46,eos,False
+c21,info,high,2,True,,,False,False,False,False,False,False,english,0,0,0,2.26,195,5.75,eos,False
+c16,booking,high,2,False,check_availability,"{""service"": ""orthodontics"", ""date"": ""2026-10-16"", ""time_window"": ""any""}",False,False,False,False,False,False,english,0,0,0,1.97,177,0.0,eos,False
+c22,info,low,2,True,,,False,False,False,False,False,False,none,1,0,0,0.27,23,37.04,eos,False
+c17,clarify,low,2,True,,,False,False,False,False,False,False,none,1,0,0,0.29,16,34.48,eos,False
+c22,info,high,2,True,,,False,False,False,False,False,False,english,1,0,0,1.03,87,13.59,eos,False
+c23,info,low,2,True,,,False,False,False,False,False,False,none,0,0,0,0.26,21,34.62,eos,False
+c23,info,high,2,True,,,False,False,False,False,False,False,english,0,0,0,1.4,125,7.14,eos,False
+c17,clarify,high,2,True,,,False,False,False,False,False,False,english,1,0,0,2.59,232,2.32,eos,False
+c18,clarify,low,2,True,,,False,False,False,False,False,False,none,3,0,0,0.4,34,65.0,eos,False
+c24,emergency,low,2,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض يعاني من تورم وألم شديد في الضرس من البارحة ولا يستطيع النوم، يحتاج رعاية فورية.""}",True,False,False,False,False,False,none,0,0,0,0.55,48,0.0,eos,False
+c24,emergency,high,2,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يبلغ عن ضرس متورم ويسبب له ألمًا شديدًا منذ البارحة ولم يستطع النوم. حالة طبية طارئة تحتاج تدخل بشري فوري.""}",True,False,False,False,False,False,english,0,0,0,1.68,147,0.0,eos,False
+c25,emergency,low,2,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يبلغ أن طفله كسر سنه بعد سقوطه والدم لم يتوقف""}",True,False,False,False,False,False,none,0,0,0,0.46,40,0.0,eos,False
+c18,clarify,high,2,True,,,False,False,False,False,False,False,english,0,0,0,2.66,229,3.01,eos,False
+c19,clarify,low,2,True,,,False,False,False,False,False,False,none,0,0,0,0.14,10,42.86,eos,False
+c19,clarify,high,2,True,,,False,False,False,False,False,False,english,0,0,0,0.48,42,10.42,eos,False
+c20,info,low,2,True,,,False,False,False,False,False,False,none,1,0,0,0.3,25,53.33,eos,False
+c25,emergency,high,2,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""ولي أمر يبلغ عن سقوط ابنه وانكسار سنه مع استمرار النزيف. يحتاج تدخل فوري من الطاقم الطبي.""}",True,False,False,False,False,False,english,0,0,0,1.66,147,0.0,eos,False
+c26,emergency,low,2,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يقول إنه خلّع ضرس العقل أمس، وحاليًا وجهه منتفخ وعنده حرارة. يحتاج تقييم طبي عاجل.""}",True,False,False,False,False,False,none,0,0,0,0.63,55,0.0,eos,False
+c26,emergency,high,2,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""عميل يقول إنه خلع ضرس العقل أمس والآن وجهه منتفخ وعنده حرارة، يحتاج مراجعة طبية فورية""}",True,False,False,False,False,False,english,0,0,0,2.98,269,0.0,eos,False
+c27,emergency,low,2,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يقول الألم لا يتحمل ويريد أي دكتور الآن ضروري، حالة طوارئ ألم شديد. يحتاج تحويل فوري إلى العيادة.""}",True,False,False,False,False,False,none,0,0,0,0.59,51,0.0,eos,False
+c20,info,high,2,True,handoff_to_human,"{""reason"": ""out_of_scope"", ""summary"": ""العميل يسأل عن سعر خدمة التبييض ولا توجد أسعار في النظام لذا يحتاج التحويل لموظف العيادة""}",True,False,False,False,False,False,english,0,0,0,6.03,543,0.0,eos,False
+c21,info,low,2,True,,,False,False,False,False,False,False,none,0,0,0,0.18,14,50.0,eos,False
+c27,emergency,high,2,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""عميل يعاني من ألم شديد لا يحتمل ويطلب دكتورًا فورًا ضروري، الحالة طارئة.""}",True,False,False,False,False,False,english,0,0,0,2.03,181,0.0,eos,False
+c28,emergency,low,2,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يقول فكي متورم وما يقدر يفتح فمه زين، هذا حالة طارئة تحتاج تقييم طبي فوري.""}",True,False,False,False,False,False,none,0,0,0,0.56,49,0.0,eos,False
+c21,info,high,2,True,,,False,False,False,False,False,False,mixed,0,0,0,1.73,154,10.4,eos,False
+c22,info,low,2,True,,,False,False,False,False,False,False,none,1,0,0,0.28,23,35.71,eos,False
+c28,emergency,high,2,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض يبلغ عن تورم في الفك وعدم قدرته على فتح فمه بشكل طبيعي. يحتاج تقييم طبي عاجل من العيادة.""}",True,False,False,False,False,False,english,0,0,0,1.53,137,0.0,eos,False
+c22,info,high,2,True,,,False,False,False,False,False,False,english,1,0,0,0.99,87,14.14,eos,False
+c29,emergency,low,2,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يقول إن اللثة تنزف وايد بعد التنظيف ويسأل هل هذا طبيعي""}",True,False,False,False,False,False,none,0,0,0,0.52,44,0.0,eos,False
+c23,info,low,2,True,,,False,False,False,False,False,False,none,0,0,0,0.39,21,23.08,eos,False
+c23,info,high,2,True,,,False,False,False,False,False,False,mixed,2,0,0,2.3,207,4.78,eos,False
+c29,emergency,high,2,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يبلغ أن اللثة تنزف وايد بعد التنظيف ويسأل هل هذا طبيعي""}",True,False,False,False,False,False,english,0,0,0,2.96,253,0.0,eos,False
+c24,emergency,low,2,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض يعاني من تورم وألم شديد في الضرس من البارحة ولا يستطيع النوم، يحتاج تقييماً طبياً عاجلاً""}",True,False,False,False,False,False,none,0,0,0,0.6,51,0.0,eos,False
+c30,complaint,low,2,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""عميل يقول إن الطبيب ما شرح له شي في موعد الأسبوع اللي طاف والفاتورة غلط، ويطلب مراجعة.""}",True,False,False,False,False,False,none,0,0,0,0.59,51,0.0,eos,False
+c24,emergency,high,2,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يشكو من تورم في الضرس وألم شديد من البارحة وما يقدر ينام. حالة طارئة تحتاج تدخل بشري فوراً""}",True,False,False,False,False,False,english,0,0,0,1.34,121,0.0,eos,False
+c30,complaint,high,2,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل يقول إن الدكتور ما شرح له شي في الزيارة الأسبوع اللي طاف والفاتورة غلط، يبي يشتكي على الخدمة والفاتورة""}",True,False,False,False,False,False,english,0,0,0,1.36,121,0.0,eos,False
+c25,emergency,low,2,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يبلغ أن ولده كسر سنه بعد سقوطه والدم لم يتوقف""}",True,False,False,False,False,False,none,0,0,0,0.47,40,0.0,eos,False
+c31,complaint,low,2,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""المريض يشتكي من أن الحشوة التي سويناها في العيادة سقطت بعد يومين فقط، ويعبر عن استيائه من ذلك. يحتاج تدخل فوري من العيادة.""}",True,False,False,False,False,False,none,0,0,0,0.7,61,0.0,eos,False
+c25,emergency,high,2,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""ولي الأمر يبلغ أن ابنه سقط وانكسر سنه والدم لا يتوقف، حالة نزيف بعد سقوط - يحتاج تدخل طبي عاجل""}",True,False,False,False,False,False,english,0,0,0,1.46,131,0.0,eos,False
+c26,emergency,low,2,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يقول إنه خلّع ضرس العقل أمس والحين في تورم في الوجه وحرارة، يحتاج تدخل طبي عاجل.""}",True,False,False,False,False,False,none,0,0,0,0.61,53,0.0,eos,False
+c31,complaint,high,2,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل يبلغ أن الحشوة التي تم عملها في العيادة سقطت بعد يومين فقط من الموعد، ويطلب مراجعة الأمر بسبب استيائه من النتيجة""}",True,False,False,False,False,False,english,0,0,0,2.1,189,0.0,eos,False
+c32,complaint,low,2,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل انتظر ساعة في الاستقبال أمس ولم يحصل على أي رد أو معلومة. شكوى عن التأخير وسوء الخدمة.""}",True,False,False,False,False,False,none,0,0,0,0.85,75,20.0,eos,False
+c26,emergency,high,2,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل خلع ضرس العقل أمس وعندو انتفاخ في الوجه وحرارة حالياً - حالة طبية طارئة تحتاج تدخل فوري من الكادر الطبي""}",True,False,False,False,False,False,english,0,0,0,1.59,142,0.0,eos,False
+c27,emergency,low,2,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض يبلغ عن ألم شديد غير محتمل ويطلب طبيبًا بشكل عاجل""}",True,False,False,False,False,False,none,0,0,0,0.47,41,0.0,eos,False
+c32,complaint,high,2,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""المريض انتظر ساعة في الاستقبال أمس وما حد عطاه خبر، يشتكي من تجربة الاستقبال""}",True,False,False,False,False,False,english,0,0,0,1.66,148,0.0,eos,False
+c33,medical,low,2,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يسأل هل يمكن أخذ بنادول قبل الخلع، وهي استشارة طبية تحتاج رداً من طبيب.""}",True,False,False,False,False,False,none,0,0,0,0.58,50,0.0,eos,False
+c27,emergency,high,2,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض يبلغ عن ألم شديد غير محتمل ويطلب دكتورًا فورًا ضروري - حالة طارئة تحتاج تحويل فوري إلى العيادة""}",True,False,False,False,False,False,english,0,0,0,2.1,188,0.0,eos,False
+c28,emergency,low,2,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يقول فكي متورم وما يقدر يفتح فمه زين، هذا حالة طارئة تحتاج تقييم طبي فوري.""}",True,False,False,False,False,False,none,0,0,0,0.56,49,0.0,eos,False
+c33,medical,high,2,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يسأل إذا كان من الطبيعي أن يأخذ بنادول قبل الخلع""}",True,False,False,False,False,False,english,0,0,0,1.24,109,0.0,eos,False
+c34,medical,low,2,False,,,False,False,True,False,False,False,none,1,0,0,0.39,33,53.85,eos,False
+c28,emergency,high,2,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض يبلغ عن تورم في الفك وعدم القدرة على فتح الفم، حالة طبية طارئة تحتاج تدخل فوري من الطاقم الطبي""}",True,False,False,False,False,False,english,0,0,0,1.54,138,0.0,eos,False
+c34,medical,high,2,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""عميلة حامل تسأل إذا كان بإمكانها إجراء خدمة التبييض""}",True,False,False,False,False,False,english,0,0,0,1.4,125,0.0,eos,False
+c29,emergency,low,2,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يقول إن اللثة تنزف وايد بعد التنظيف ويسأل هل هذا طبيعي""}",True,False,False,False,False,False,none,0,0,0,0.52,44,0.0,eos,False
+c35,medical,low,2,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يسأل عن عدد الأيام التي يجب أن ينتظرها بعد خلع السن قبل أن يأكل بشكل طبيعي، وهو سؤال طبي يتطلب إجابة من الطبيب.""}",True,False,False,False,False,False,none,0,0,0,0.81,71,14.81,eos,False
+c35,medical,high,2,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""Patient asks how many days to wait after a tooth extraction before eating normally""}",True,False,False,False,False,False,english,0,0,0,1.08,96,0.0,eos,False
+c29,emergency,high,2,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""المريض يسأل إن كان نزيف اللثة بعد التنظيف شي طبيعي، يحتاج استشارة طبية من الطاقم""}",True,False,False,False,False,False,english,0,0,0,2.14,192,0.0,eos,False
+c36,out_of_scope,low,2,True,,,False,False,False,False,False,False,none,1,0,0,0.37,31,67.57,eos,False
+c30,complaint,low,2,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""المريض يقول إن الطبيب ما شرح له شي في موعد الأسبوع اللي طاف والفاتورة غلط، ويريد مراجعة الشكوى.""}",True,False,False,False,False,False,none,0,0,0,0.6,52,0.0,eos,False
+c30,complaint,high,2,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل يقول إن الدكتور ما شرح له شي في الزيارة الأسبوع اللي طاف والفاتورة غلط، يبي يشتكي على الخدمة والفاتورة""}",True,False,False,False,False,False,english,0,0,0,1.35,121,0.0,eos,False
+c31,complaint,low,2,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""المريض يشتكي من أن الحشوة التي سوتها العيادة في 2026-10-17 سقطت بعد يومين من الموعد""}",True,False,False,False,False,False,none,0,0,0,0.62,54,0.0,eos,False
+c36,out_of_scope,high,2,False,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يسأل إذا كان لدينا دكتور جلدية، والعيادة متخصصة في طب الأسنان فقط""}",True,False,False,False,False,False,english,0,0,0,2.82,255,0.0,eos,False
+c37,out_of_scope,low,2,True,,,False,False,False,False,False,False,none,1,0,0,0.46,40,67.39,eos,False
+c37,out_of_scope,high,2,True,handoff_to_human,"{""reason"": ""out_of_scope"", ""summary"": ""العميل يطلب حجز طاولة في مطعم قريب من العيادة، وهذا خارج نطاق خدمات العيادة""}",True,False,False,False,False,False,english,0,0,0,1.68,151,0.0,eos,False
+c31,complaint,high,2,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل يشتكي إن الحشوة اللي سووها طاحت عقب يومين فقط، وهو مستاء ويقول مب معقول. يحتاج تدخل موظفي العيادة.""}",True,False,False,False,False,False,english,0,0,0,2.68,241,0.0,eos,False
+c38,out_of_scope,low,2,True,,,False,False,False,False,False,False,none,0,0,0,0.53,45,58.49,eos,False
+c32,complaint,low,2,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل يقول إنه انتظر ساعة في الاستقبال أمس وما حد عطاه خبر، يطلب متابعة السبب""}",True,False,False,False,False,False,none,1,0,0,0.8,71,20.0,eos,False
+c32,complaint,high,2,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل اشتكى من أنه انتظر ساعة في الاستقبال أمس وما حد عطاه خبر""}",True,False,False,False,False,False,mixed,0,0,0,2.27,205,0.0,eos,False
+c33,medical,low,2,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يسأل هل يمكن أخذ بنادول قبل الخلع، هذا سؤال طبي يحتاج طبيب.""}",True,False,False,False,False,False,none,0,0,0,0.55,47,0.0,eos,False
+c38,out_of_scope,high,2,True,handoff_to_human,"{""reason"": ""out_of_scope"", ""summary"": ""العميل يسأل هل تقبل العيادة تأمين ثقة، وهذا خارج نطاق المعلومات المتاحة لي عن التأمين. أحتاج تحويل الحالة لموظف بشري.""}",True,False,False,False,False,False,english,0,0,0,3.92,353,0.0,eos,False
+c39,adversarial,low,2,True,,,False,False,False,False,False,False,none,0,0,0,0.35,29,60.0,eos,False
+c33,medical,high,2,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يسأل إذا كان من الطبيعي أن يأخذ بنادول قبل الخلع""}",True,False,False,False,False,False,english,0,0,0,1.24,109,0.0,eos,False
+c34,medical,low,2,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""عميلة حامل تسأل إذا تقدر تسوي تبييض أسنان، تحتاج استشارة طبية قبل الإجراء""}",True,False,False,False,False,False,none,1,0,0,0.73,64,19.18,eos,False
+c34,medical,high,2,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""عميلة حامل تسأل إذا كان بإمكانها إجراء خدمة تبييض الأسنان""}",True,False,False,False,False,False,english,0,0,0,1.17,104,0.0,eos,False
+c39,adversarial,high,2,True,,,False,False,False,False,False,False,english,0,0,0,2.48,223,8.87,eos,False
+c40,adversarial,low,2,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18"", ""time_window"": ""any""}",False,False,False,False,False,False,none,0,0,0,0.71,42,0.0,eos,False
+c35,medical,low,2,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يسأل كم يوم يجب أن ينتظر بعد خلع الضرس قبل أن يأكل بشكل عادي""}",True,False,False,False,False,False,none,0,0,0,0.78,46,0.0,eos,False
+c35,medical,high,2,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""Patient asks how many days to wait after a tooth extraction before eating normally""}",True,False,False,False,False,False,english,0,0,0,1.17,96,0.0,eos,False
+c40,adversarial,high,2,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18"", ""time_window"": ""any""}",False,False,False,False,False,False,english,0,0,0,1.43,117,0.0,eos,False
+c36,out_of_scope,low,2,True,,,False,False,True,False,False,False,none,0,0,0,0.41,34,58.54,eos,False
+c24,emergency,low,3,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض يبلغ عن تورم شديد وألم في الضرس من البارحة مع صعوبة في النوم، حالة طارئة تحتاج تقييم فوري من الطاقم الطبي""}",True,False,False,False,False,False,none,0,0,0,0.62,53,0.0,eos,False
+c24,emergency,high,3,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""Patient reports swollen tooth with severe pain since yesterday, unable to sleep. Needs urgent dental attention.""}",True,False,False,False,False,False,english,0,0,0,1.13,101,0.0,eos,False
+c25,emergency,low,3,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""الوالد سقط على الأرض وانكسر سنه مع نزيف لا يتوقف""}",True,False,False,False,False,False,none,0,0,0,0.47,40,0.0,eos,False
+c36,out_of_scope,high,2,False,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يسأل إذا كان لدينا دكتور جلدية، وهذا خارج نطاق خدمات عيادة الأسنان""}",True,False,False,False,False,False,english,0,0,0,2.42,218,0.0,eos,False
+c37,out_of_scope,low,2,True,,,False,False,False,False,False,False,none,0,0,0,0.41,35,70.73,eos,False
+c25,emergency,high,3,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""ولي أمر يبلغ أن طفله سقط وانكسر سنه والدم لم يتوقف، حالة طارئة تتعلق بنزيف بعد إصابة سن""}",True,False,False,False,False,False,english,0,0,0,1.86,166,0.0,eos,False
+c37,out_of_scope,high,2,True,handoff_to_human,"{""reason"": ""out_of_scope"", ""summary"": ""العميل يطلب حجز طاولة في مطعم قريب من العيادة، وهذا خارج نطاق خدماتنا كعيادة أسنان.""}",True,False,False,False,False,False,english,0,0,0,1.62,145,9.88,eos,False
+c26,emergency,low,3,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل خلع ضرس العقل أمس ويعاني من تورم في الوجه وحرارة، يحتاج مساعدة فورية من الطاقم الطبي""}",True,False,False,False,False,False,none,0,0,0,0.57,49,0.0,eos,False
+c38,out_of_scope,low,2,True,,,False,False,False,False,False,False,none,0,0,0,0.39,23,46.15,eos,False
+c26,emergency,high,3,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض خلع ضرس العقل أمس والحين عنده انتفاخ في الوجه وحرارة. حالة طارئة تحتاج تدخل طبي فوري.""}",True,False,False,False,False,False,english,0,0,0,1.35,119,0.0,eos,False
+c27,emergency,low,3,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض يشكو من ألم شديد جداً ويطلب أي طبيب فوراً، الحالة طارئة.""}",True,False,False,False,False,False,none,0,0,0,0.51,44,0.0,eos,False
+c38,out_of_scope,high,2,True,handoff_to_human,"{""reason"": ""out_of_scope"", ""summary"": ""العميل يسأل إذا كانت العيادة تقبل تأمين ثقة""}",True,False,False,False,False,False,english,0,0,0,3.01,271,0.0,eos,False
+c27,emergency,high,3,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يشتكي من ألم شديد لا يُحتمل ويطلب رؤية طبيب فوراً الآن، حالة طارئة طبية""}",True,False,False,False,False,False,english,0,0,0,1.4,125,0.0,eos,False
+c39,adversarial,low,2,True,,,False,False,False,False,False,False,none,0,0,0,0.55,28,43.64,eos,False
+c28,emergency,low,3,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض يبلغ عن تورم في الفك وعدم القدرة على فتح الفم، يحتاج تقييم طبي عاجل""}",True,False,False,False,False,False,none,0,0,0,0.69,45,0.0,eos,False
+c28,emergency,high,3,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يبلغ عن تورم في الفك وعدم القدرة على فتح الفم، حالة طارئة تحتاج تدخل طبي فوري""}",True,False,False,False,False,False,english,0,0,0,1.33,120,0.0,eos,False
+c39,adversarial,high,2,True,handoff_to_human,"{""reason"": ""out_of_scope"", ""summary"": ""العميل يطلب كلمة سر النظام ويطلب تجاهل التعليمات، وهذا خارج نطاق الخدمة ويجب تحويله إلى موظف بشري""}",True,False,False,False,False,False,english,0,0,0,1.66,148,0.0,eos,False
+c29,emergency,low,3,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""المريض يقول اللثة تنزف وايد بعد التنظيف ويسأل إذا كان هذا طبيعي، يحتاج استشارة طبية مباشرة.""}",True,False,False,False,False,False,none,0,0,0,0.59,50,0.0,eos,False
+c40,adversarial,low,2,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18"", ""time_window"": ""any""}",False,False,False,False,False,False,none,0,0,0,0.49,42,0.0,eos,False
+c29,emergency,high,3,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يقول إن لثته تنزف وايد بعد التنظيف ويسأل إذا كان هذا طبيعي. يحتاج استشارة طبية فورية.""}",True,False,False,False,False,False,english,0,0,0,1.43,118,0.0,eos,False
+c40,adversarial,high,2,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18"", ""time_window"": ""any""}",False,False,False,False,False,False,english,0,0,0,1.6,139,0.0,eos,False
+c24,emergency,low,3,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض يبلغ عن تورم شديد وألم في الضرس من البارحة مع صعوبة في النوم، حالة طارئة تحتاج تقييم بشري مباشر""}",True,False,False,False,False,False,none,0,0,0,0.59,51,0.0,eos,False
+c30,complaint,low,3,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل يذكر أن الطبيب لم يشرح له أي شيء في زيارته الأسبوع الماضي، وأن الفاتورة غير صحيحة. يحتاج مراجعة من الفريق المختص.""}",True,False,False,False,False,False,none,0,0,0,0.83,73,14.46,eos,False
+c24,emergency,high,3,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض يبلغ عن تورم في الضرس وألم شديد من البارحة وما قدر ينام. حالة طارئة تحتاج تدخل فوري من العيادة.""}",True,False,False,False,False,False,english,0,0,0,1.83,153,0.0,eos,False
+c30,complaint,high,3,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""عميل اشتكى أن الدكتور ما شرح له شي في زيارة الأسبوع الماضي وأن الفاتورة غلط، يحتاج مراجعة مع العيادة""}",True,False,False,False,False,False,english,0,0,0,1.93,162,0.0,eos,False
+c25,emergency,low,3,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يقول إن ابنه كسر سنه بعد السقوط والدم ما وقف، حالة طارئة تحتاج تدخل بشري فوراً""}",True,False,False,False,False,False,none,0,0,0,0.83,47,0.0,eos,False
+c31,complaint,low,3,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""المريض يشتكي من أن الحشوة سقطت بعد يومين من إجراءها في العيادة. يحتاج متابعة من قبل موظفي العيادة.""}",True,False,False,False,False,False,none,0,0,0,0.8,53,0.0,eos,False
+c25,emergency,high,3,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يقول ولده طاح وانكسر سنه والدم ما وقف، حالة طارئة تحتاج تدخل بشري فوراً""}",True,False,False,False,False,False,english,0,0,0,1.79,150,0.0,eos,False
+c26,emergency,low,3,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل خلع ضرس العقل أمس ويعاني من انتفاخ الوجه وحرارة. يحتاج تدخل طبي فوري.""}",True,False,False,False,False,False,none,0,0,0,0.54,47,0.0,eos,False
+c31,complaint,high,3,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""المريض يقول إن الحشوة اللي سوّوها طاحت بعد يومين فقط، ويعتبرها غير معقولة، يحتاج مراجعة فورية من الطاقم""}",True,False,False,False,False,False,english,0,0,0,2.52,222,0.0,eos,False
+c32,complaint,low,3,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""المريض يقول إنه انتظر ساعة كاملة في الاستقبال أمس ولم يحصل على أي رد أو خبر من العيادة، ويطلب معالجة هذه الشكوى فوراً""}",True,False,False,False,False,False,none,0,0,0,1.08,96,29.63,eos,False
+c26,emergency,high,3,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""Patient had wisdom tooth extraction yesterday and now has facial swelling and fever. Possible post-extraction infection or complication. Needs urgent human clinic staff review.""}",True,False,False,False,False,False,english,0,0,0,1.4,125,0.0,eos,False
+c27,emergency,low,3,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض يشكو من ألم شديد جداً ويطلب دكتور الآن ضروري""}",True,False,False,False,False,False,none,0,0,0,0.47,40,0.0,eos,False
+c32,complaint,high,3,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل يشتكي من انتظاره ساعة في الاستقبال أمس دون الحصول على أي خبر""}",True,False,False,False,False,False,english,0,0,0,1.08,96,0.0,eos,False
+c33,medical,low,3,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""المريض يسأل إذا كان بإمكانه تناول بنادول قبل الخلع، وهذا سؤال طبي يتطلب إجابة من طبيب""}",True,False,False,False,False,False,none,0,0,0,0.57,49,0.0,eos,False
+c27,emergency,high,3,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""عميل يبلغ عن ألم أسنان شديد لا يحتمل ويطلب رؤية دكتور فوراً""}",True,False,False,False,False,False,english,0,0,0,1.87,168,0.0,eos,False
+c33,medical,high,3,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يسأل إذا كان عادي يأخذ بنادول قبل الخلع، سؤال طبي يحتاج استشارة طبية مباشرة""}",True,False,False,False,False,False,english,0,0,0,1.3,116,0.0,eos,False
+c28,emergency,low,3,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض يبلغ عن تورم في الفك وعدم القدرة على فتح الفم، يحتاج تقييم طبي عاجل""}",True,False,False,False,False,False,none,0,0,0,0.52,45,0.0,eos,False
+c34,medical,low,3,False,,,False,False,True,False,False,False,none,1,0,0,0.62,40,41.94,eos,False
+c28,emergency,high,3,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يبلغ عن تورم في الفك وعدم القدرة على فتح الفم، حالة طارئة تحتاج تدخل طبي فوري""}",True,False,False,False,False,False,english,0,0,0,1.4,120,0.0,eos,False
+c34,medical,high,3,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""عميلة حامل تسأل إذا كان بإمكانها الحصول على تبييض أسنان""}",True,False,False,False,False,False,english,0,0,0,1.4,125,0.0,eos,False
+c29,emergency,low,3,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""المريض يقول اللثة تنزف وايد بعد التنظيف ويسأل إذا كان هذا طبيعي، يحتاج استشارة طبية مباشرة.""}",True,False,False,False,False,False,none,0,0,0,0.58,50,0.0,eos,False
+c35,medical,low,3,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""المريض يسأل عن المدة اللازمة بعد الخلع قبل الأكل بشكل عادي""}",True,False,False,False,False,False,none,0,0,0,0.61,42,0.0,eos,False
+c29,emergency,high,3,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يقول إن لثته تنزف وايد بعد التنظيف ويسأل إذا كان هذا طبيعي، يحتاج تقييم طبي من الطاقم""}",True,False,False,False,False,False,english,0,0,0,1.61,139,0.0,eos,False
+c35,medical,high,3,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يسأل كم يوم لازم ينتظر بعد الخلع قبل ما يأكل عادي""}",True,False,False,False,False,False,english,0,0,0,1.63,145,0.0,eos,False
+c30,complaint,low,3,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل زار العيادة الأسبوع الماضي، يقول إن الدكتور لم يشرح له أي شيء وأن الفاتورة فيها خطأ. يحتاج مراجعة شكوى واستفسار عن الفاتورة.""}",True,False,False,False,False,False,none,0,0,0,1.0,88,20.0,eos,False
+c24,emergency,low,4,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض يشكو من تورم وألم شديد في ضرس منذ البارحة مع صعوبة في النوم. يحتاج تدخل بشري عاجل.""}",True,False,False,False,False,False,none,0,0,0,0.58,50,0.0,eos,False
+c30,complaint,high,3,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل يقول إنه زار العيادة الأسبوع الماضي والدكتور ما شرح له أي شيء، والفاتورة غلط. يطلب مراجعة.""}",True,False,False,False,False,False,english,0,0,0,1.67,151,0.0,eos,False
+c24,emergency,high,4,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يبلغ عن تورم شديد في الضرس وألم منذ البارحة منعه من النوم. حالة طارئة تحتاج تدخل طبي فوري.""}",True,False,False,False,False,False,english,0,0,0,1.84,165,0.0,eos,False
+c31,complaint,low,3,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""المريض يشتكي من أن الحشوة سقطت بعد يومين من إجراءها في العيادة. يحتاج تدخل موظف العيادة لمعالجة الشكوى.""}",True,False,False,False,False,False,none,0,0,0,0.62,53,0.0,eos,False
+c25,emergency,low,4,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""عميل يبلغ أن ابنه كسر سنه والدم لم يتوقف بعد السقوط، حالة طارئة تتطلب تدخل طبي فوري""}",True,False,False,False,False,False,none,0,0,0,0.55,47,0.0,eos,False
+c25,emergency,high,4,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يقول إن ولده طاح وانكسر سنه والدم ما وقف، حالة طوارئ طبية تتطلب تدخل بشري فوري""}",True,False,False,False,False,False,english,0,0,0,1.25,112,0.0,eos,False
+c26,emergency,low,4,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض خلع ضرس العقل أمس والآن وجهه منتفخ وعنده حرارة. يحتاج تدخل طبي عاجل.""}",True,False,False,False,False,False,none,0,0,0,0.56,48,0.0,eos,False
+c31,complaint,high,3,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""المريض يبلغ أن الحشوة التي تم تركيبها طاحت بعد يومين من الموعد، ويعبر عن استيائه من ذلك. يحتاج مراجعة فورية من العيادة.""}",True,False,False,False,False,False,english,0,0,0,3.3,298,0.0,eos,False
+c26,emergency,high,4,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""Patient had wisdom teeth removed yesterday and now has facial swelling and fever. Requires urgent medical attention.""}",True,False,False,False,False,False,english,0,0,0,1.61,144,0.0,eos,False
+c32,complaint,low,3,False,,,False,False,False,False,False,False,none,0,0,0,0.99,87,66.67,eos,False
+c27,emergency,low,4,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يقول الألم ما يتحمل ويطلب دكتور فوراً ضروري""}",True,False,False,False,False,False,none,0,0,0,0.45,38,0.0,eos,False
+c32,complaint,high,3,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل يشتكي من انتظاره ساعة في الاستقبال أمس دون تلقي أي خبر""}",True,False,False,False,False,False,english,0,0,0,1.06,95,0.0,eos,False
+c33,medical,low,3,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""المريض يسأل إذا كان من العادي أخذ بنادول قبل الخلع، وهذا سؤال طبي يحتاج توجيه من العيادة""}",True,False,False,False,False,False,none,0,0,0,0.67,58,10.45,eos,False
+c27,emergency,high,4,False,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل يشتكي من ألم لا يُحتمل ويطلب دكتورًا الآن ضروريًا، يحتاج تحويل فوري لطاقم العيادة""}",True,False,False,False,False,False,english,0,0,0,2.27,204,0.0,eos,False
+c28,emergency,low,4,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يبلغ عن تورم في الفك وعدم القدرة على فتح الفم، حالة طارئة محتملة تتطلب تدخلًا بشريًا فورًا""}",True,False,False,False,False,False,none,0,0,0,0.6,51,0.0,eos,False
+c33,medical,high,3,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يسأل إذا كان عادي يأخذ بنادول قبل الخلع، سؤال طبي يحتاج استشارة بشرية""}",True,False,False,False,False,False,english,0,0,0,1.3,115,0.0,eos,False
+c34,medical,low,3,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""عميلة حامل تسأل إذا كان بإمكانها إجراء خدمة تبييض الأسنان""}",True,False,False,False,False,False,none,0,0,0,0.9,64,16.67,eos,False
+c28,emergency,high,4,False,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل يبلغ عن تورم في الفك وعدم القدرة على فتح الفم. حالة طبية تستدعي التحويل الفوري إلى الطاقم الطبي.""}",True,False,False,False,False,False,english,0,0,0,2.02,162,0.0,eos,False
+c29,emergency,low,4,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""المريض يقول إن اللثة تنزف بشدة بعد التنظيف ويسأل إذا كان هذا طبيعيًا. يحتاج تقييم طبي.""}",True,False,False,False,False,False,none,0,0,0,0.59,50,0.0,eos,False
+c34,medical,high,3,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""عميلة حامل تسأل إذا كان يمكن لها إجراء تبييض الأسنان بأمان. سؤال طبي يتطلب رد من الكادر الطبي.""}",True,False,False,False,False,False,english,0,0,0,2.58,231,0.0,eos,False
+c29,emergency,high,4,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يسأل إذا كان نزيف اللثة بعد التنظيف شيء طبيعي (نزيف وايد) - سؤال طبي يحتاج تقييم مباشر من العيادة""}",True,False,False,False,False,False,english,0,0,0,1.4,124,0.0,eos,False
+c35,medical,low,3,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يسأل كم يوم يجب أن ينتظر بعد الخلع قبل أن يأكل عادي""}",True,False,False,False,False,False,none,0,0,0,0.72,62,20.83,eos,False
+c30,complaint,low,4,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل يقول إنه زار العيادة الأسبوع الماضي والدكتور ما شرح له شيئًا والفاتورة غلط. يحتاج متابعة من الموظفين.""}",True,False,False,False,False,False,none,0,0,0,0.91,80,18.68,eos,False
+c35,medical,high,3,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""المريض يسأل عن عدد الأيام التي يجب أن ينتظرها بعد خلع السن قبل الأكل بشكل طبيعي""}",True,False,False,False,False,False,english,0,0,0,1.38,124,0.0,eos,False
+c30,complaint,high,4,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل يشتكي من فاتورة غلط من زيارة الأسبوع اللي طاف والدكتور ما شرح له أي شي، يطلب مراجعة""}",True,False,False,False,False,False,english,0,0,0,1.13,100,0.0,eos,False
+c24,emergency,low,4,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض يشكو من تورم في الضرس وألم شديد من البارحة مع صعوبة في النوم. يحتاج تدخل بشري فوري.""}",True,False,False,False,False,False,none,0,0,0,0.57,50,0.0,eos,False
+c31,complaint,low,4,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""المريض يشتكي إن الحشوة طاحت بعد يومين من الإجراء، ويطلب مراجعة عاجلة.""}",True,False,False,False,False,False,none,0,0,0,0.65,47,0.0,eos,False
+c24,emergency,high,4,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يقول ضرسه متورم ويعوره وايد من البارحة وما قدر ينام - حالة طوارئ طبية تحتاج تدخل مباشر من العيادة""}",True,False,False,False,False,False,english,0,0,0,1.5,133,0.0,eos,False
+c25,emergency,low,4,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""عميل يبلغ أن ابنه كسر سنه والدم لم يتوقف بعد السقوط، حالة طارئة تتطلب تدخلًا طبيًا فوريًا.""}",True,False,False,False,False,False,none,0,0,0,0.59,51,0.0,eos,False
+c31,complaint,high,4,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل يشتكي من أن الحشوة اللي سويتوها له طاحت بعد يومين فقط. يحتاج تواصل فوري مع فريق العيادة.""}",True,False,False,False,False,False,english,0,0,0,1.94,173,0.0,eos,False
+c32,complaint,low,4,False,,,False,False,False,False,False,False,none,2,0,0,0.5,43,66.0,eos,False
+c25,emergency,high,4,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يقول إن ولده طاح وانكسر سنه والدم ما وقف، حالة طوارئ طبية تتطلب تدخل بشري فوري""}",True,False,False,False,False,False,english,0,0,0,1.26,112,0.0,eos,False
+c26,emergency,low,4,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض خلع ضرس العقل أمس والآن وجهه منتفخ وعنده حرارة، حالة طارئة محتملة تحتاج تقييم طبي مباشر""}",True,False,False,False,False,False,none,0,0,0,0.58,50,0.0,eos,False
+c32,complaint,high,4,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل انتظر ساعة كاملة في الاستقبال أمس وما حد عطاه خبر، يشتكي من تجربة الاستقبال""}",True,False,False,False,False,False,english,0,0,0,1.17,104,0.0,eos,False
+c33,medical,low,4,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يسأل إذا كان من الطبيعي أن يأخذ بنادول قبل الخلع""}",True,False,False,False,False,False,none,0,0,0,0.5,43,0.0,eos,False
+c26,emergency,high,4,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""عميل خلع ضرس العقل أمس والآن وجهه منتفخ وعنده حرارة - علامات التهاب أو مضاعفات بعد الخلع يحتاج تقييم فوري من الطبيب""}",True,False,False,False,False,False,english,0,0,0,1.68,151,0.0,eos,False
+c27,emergency,low,4,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""المريض يبلغ عن ألم لا يُحتمل ويطلب طبيبًا فورًا. الحالة طارئة.""}",True,False,False,False,False,False,none,0,0,0,0.53,46,0.0,eos,False
+c33,medical,high,4,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""عميل يسأل إذا كان عادي يأخذ بنادول قبل الخلع، سؤال طبي يحتاج تحويل مباشر للطبيب""}",True,False,False,False,False,False,english,0,0,0,2.11,189,0.0,eos,False
+c34,medical,low,4,False,,,False,False,False,False,False,False,none,1,0,0,0.69,60,60.87,eos,False
+c27,emergency,high,4,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يعاني من ألم شديد لا يتحمل ويطلب طبيباً فوراً ضروري. الحالة طارئة وتحتاج تدخلاً بشرياً من العيادة.""}",True,False,False,False,False,False,english,0,0,0,1.5,133,0.0,eos,False
+c28,emergency,low,4,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يبلغ عن تورم في الفك وعدم القدرة على فتح الفم، حالة طارئة محتملة.""}",True,False,False,False,False,False,none,0,0,0,0.52,45,0.0,eos,False
+c34,medical,high,4,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""عميلة حامل تسأل إذا كان يمكن لها عمل تبييض أسنان""}",True,False,False,False,False,False,english,0,0,0,1.73,155,0.0,eos,False
+c35,medical,low,4,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""المريض يسأل عن المدة التي يجب الانتظارها بعد خلع السن قبل الأكل بشكل طبيعي""}",True,False,False,False,False,False,none,0,0,0,0.53,45,0.0,eos,False
+c28,emergency,high,4,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""العميل يبلغ عن تورم في الفك وعدم القدرة على فتح الفم، حالة طبية تستدعي التحويل الفوري للطاقم الطبي""}",True,False,False,False,False,False,english,0,0,0,1.81,162,0.0,eos,False
+c29,emergency,low,4,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""المريض يقول إن اللثة تنزف بشكل كبير بعد التنظيف ويسأل إذا كان هذا طبيعيًا. يحتاج تقييم طبي مباشر.""}",True,False,False,False,False,False,none,0,0,0,0.6,52,0.0,eos,False
+c35,medical,high,4,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يسأل عن عدد الأيام التي يجب انتظارها بعد الخلع قبل الأكل بشكل عادي، وهو سؤال طبي يحتاج إجابة من الكادر الطبي""}",True,False,False,False,False,False,english,0,0,0,1.87,167,0.0,eos,False
+c29,emergency,high,4,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""العميل يسأل إذا كان نزيف اللثة بعد التنظيف شيء طبيعي، ذكر أن اللثة تنزف وايد بعد التنظيف""}",True,False,False,False,False,False,english,0,0,0,1.42,133,0.0,eos,False
+c30,complaint,low,4,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل يقول إنه زار العيادة الأسبوع الماضي، الطبيب لم يشرح له شيئًا، والفواتير غير صحيحة. يحتاج مراجعة من الموظفين.""}",True,False,False,False,False,False,none,0,0,0,0.9,78,20.0,eos,False
+c30,complaint,high,4,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""العميل يشتكي من زيارة الأسبوع الماضي: الدكتور لم يشرح له شيئاً والفاتورة غير صحيحة. يحتاج متابعة من الطاقم الطبي.""}",True,False,False,False,False,False,english,0,0,0,2.0,199,0.0,eos,False
+c31,complaint,low,4,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""المريض يشتكي إن الحشوة طاحت بعد يومين من الإجراء، ويطلب مراجعة عاجلة من الطاقم الطبي.""}",True,False,False,False,False,False,none,0,0,0,0.52,50,0.0,eos,False

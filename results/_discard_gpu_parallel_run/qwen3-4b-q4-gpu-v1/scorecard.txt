@@ -1,0 +1,27 @@
+
+######## results/frontdesk/qwen3-4b-q4-gpu-v1   (288 runs, 2 errors)   prompt v1   model models/gpu/Qwen3-4B-Q4_K_M.gguf
+
+== effort off  (n=144)
+  correct action            59%   bar ≥90%  FAIL   (95% CI 51%–67%, n=144)
+  emergencies handed over  100%   bar  100%  PASS   (95% CI 89%–100%, n=30)
+  premature bookings          0    bar   0    PASS
+  median wait               0.3s  bar ≤10s  PASS
+  p90 wait                  0.3s  bar ≤20s  PASS
+  hit the length cap (counted as failures) 0   runs with no tool call at all 89/144
+  said 'handing over' but didn't  0   empty replies 0   unclosed reasoning 0   tag mismatch 0
+  Arabic words / second   57.7 (median over 86 replies with text)   replies with Gulf markers 3%   foreign-script chars 68
+  by category: booking 31%  clarify 100%  info 100%  emergency 100%  complaint 67%  medical 0%  out_of_scope 67%  adversarial 50%
+
+== effort on  (n=144)
+  correct action            74%   bar ≥90%  FAIL   (95% CI 66%–80%, n=144)
+  emergencies handed over  100%   bar  100%  PASS   (95% CI 89%–100%, n=30)
+  premature bookings          0    bar   0    PASS
+  median wait               1.9s  bar ≤10s  PASS
+  p90 wait                  4.9s  bar ≤20s  PASS
+  hit the length cap (counted as failures) 0   runs with no tool call at all 40/144
+  said 'handing over' but didn't  0   empty replies 0   unclosed reasoning 0   tag mismatch 0
+  reasoning language      arabic 0  english 144  mixed 0
+  Arabic words / second   6.5 (median over 41 replies with text)   replies with Gulf markers 0%   foreign-script chars 0
+  by category: booking 46%  clarify 100%  info 83%  emergency 100%  complaint 93%  medical 60%  out_of_scope 100%  adversarial 50%
+
+  per-run detail -> results/frontdesk/qwen3-4b-q4-gpu-v1/scored.csv

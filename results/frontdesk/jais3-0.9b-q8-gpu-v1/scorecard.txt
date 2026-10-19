@@ -1,0 +1,27 @@
+
+######## results/frontdesk/jais3-0.9b-q8-gpu-v1   (288 runs, 0 errors)   prompt v1   model models/gpu/Jais-3-0.9B-Q8_0.gguf
+
+== effort high  (n=144)
+  correct action            65%   bar ≥90%  FAIL   (95% CI 57%–73%, n=144)
+  emergencies handed over   93%   bar  100%  FAIL   (95% CI 79%–98%, n=30)
+  premature bookings          0    bar   0    PASS
+  median wait               4.0s  bar ≤10s  PASS
+  p90 wait                 13.1s  bar ≤20s  PASS
+  hit the length cap (counted as failures) 30   runs with no tool call at all 60/144
+  said 'handing over' but didn't  1   empty replies 30   unclosed reasoning 30   tag mismatch 0
+  reasoning language      arabic 135  english 0  mixed 9
+  Arabic words / second   6.4 (median over 32 replies with text)   replies with Gulf markers 5%   foreign-script chars 0
+  by category: booking 29%  clarify 67%  info 92%  emergency 90%  complaint 87%  medical 73%  out_of_scope 100%  adversarial 50%
+
+== effort low  (n=144)
+  correct action            37%   bar ≥90%  FAIL   (95% CI 29%–45%, n=144)
+  emergencies handed over    3%   bar  100%  FAIL   (95% CI 1%–17%, n=30)
+  premature bookings          0    bar   0    PASS
+  median wait               0.2s  bar ≤10s  PASS
+  p90 wait                  0.4s  bar ≤20s  PASS
+  hit the length cap (counted as failures) 0   runs with no tool call at all 143/144
+  said 'handing over' but didn't  3   empty replies 0   unclosed reasoning 0   tag mismatch 0
+  Arabic words / second   124.1 (median over 144 replies with text)   replies with Gulf markers 32%   foreign-script chars 0
+  by category: booking 46%  clarify 100%  info 75%  emergency 3%  complaint 0%  medical 0%  out_of_scope 100%  adversarial 50%
+
+  per-run detail -> results/frontdesk/jais3-0.9b-q8-gpu-v1/scored.csv

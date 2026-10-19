@@ -1,0 +1,289 @@
+case,category,effort,rep,correct,first_call,first_args,handoff,premature_booking,said_but_no_call,empty,unclosed_reasoning,tag_mismatch,reasoning_lang,answer_gulf_markers,answer_foreign_script,answer_latin,wall_s,completion_tokens,ar_words_per_s,stop,truncated
+c01,booking,low,0,True,,,False,False,False,False,False,False,none,0,0,0,0.15,28,120.0,eos,False
+c01,booking,high,0,False,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""afternoon""}",False,False,False,False,False,False,arabic,0,0,0,4.37,1418,0.0,eos,False
+c02,booking,low,0,False,,,False,False,False,False,False,False,none,0,0,7,0.25,52,120.0,eos,False
+c02,booking,high,0,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18"", ""time_window"": ""morning""}",False,False,False,False,False,False,arabic,0,0,0,9.63,3064,0.0,eos,False
+c03,booking,low,0,False,,,False,False,False,False,False,False,none,0,0,0,0.27,45,85.19,eos,False
+c03,booking,high,0,False,check_availability,"{""service"": ""whitening"", ""date"": ""2026-10-18"", ""time_window"": ""afternoon""}",False,False,False,False,False,False,arabic,0,0,0,0.79,258,0.0,eos,False
+c04,booking,low,0,False,,,False,False,False,False,False,False,none,1,0,0,0.22,67,168.18,eos,False
+c04,booking,high,0,False,check_availability,"{""service"": ""filling"", ""date"": ""2026-10-18"", ""time_window"": ""afternoon""}",False,False,False,False,False,False,arabic,0,0,0,12.51,3932,0.0,eos,False
+c05,booking,low,0,True,,,False,False,False,False,False,False,none,0,0,0,0.29,44,82.76,eos,False
+c05,booking,high,0,True,check_availability,"{""service"": ""orthodontics"", ""date"": ""2026-10-17"", ""time_window"": ""any""}",False,False,False,False,False,False,mixed,0,0,0,5.51,1785,0.0,eos,False
+c06,booking,low,0,False,,,False,False,False,False,False,False,none,1,0,0,0.27,58,122.22,eos,False
+c06,booking,high,0,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""any""}",False,False,False,False,False,False,arabic,0,0,0,6.68,2150,0.0,eos,False
+c07,booking,low,0,False,,,False,False,False,False,False,False,none,1,0,0,0.35,66,71.43,eos,False
+c07,booking,high,0,False,,,False,False,False,True,True,False,arabic,0,0,0,13.08,4096,0.0,limit,True
+c08,booking,low,0,False,,,False,False,False,False,False,False,none,2,0,0,0.27,33,77.78,eos,False
+c08,booking,high,0,False,,,False,False,False,True,True,False,arabic,0,0,0,13.07,4096,0.0,limit,True
+c09,booking,low,0,True,,,False,False,False,False,False,False,none,1,0,0,0.31,50,93.55,eos,False
+c09,booking,high,0,False,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18"", ""time_window"": ""morning""}",False,False,False,False,False,False,arabic,0,0,0,9.71,3090,0.0,eos,False
+c10,booking,low,0,True,,,False,False,False,False,False,False,none,4,0,0,0.33,67,124.24,eos,False
+c10,booking,high,0,False,,,False,False,False,True,True,False,arabic,0,0,0,13.07,4096,0.0,limit,True
+c11,booking,low,0,True,,,False,False,False,False,False,False,none,2,0,0,0.33,55,84.85,eos,False
+c11,booking,high,0,False,,,False,False,False,True,True,False,arabic,0,0,0,13.06,4096,0.0,limit,True
+c12,booking,low,0,True,,,False,False,False,False,False,False,none,1,0,0,0.25,32,80.0,eos,False
+c12,booking,high,0,False,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""morning""}",False,False,False,False,False,False,mixed,0,0,0,1.52,504,0.0,eos,False
+c13,booking,low,0,False,,,False,False,False,False,False,False,none,0,0,0,0.2,61,160.0,eos,False
+c13,booking,high,0,False,,,False,False,False,True,True,False,arabic,0,0,0,13.09,4096,0.0,limit,True
+c14,booking,low,0,False,,,False,False,False,False,False,False,none,0,0,0,0.27,37,59.26,eos,False
+c14,booking,high,0,False,,,False,False,False,True,True,False,arabic,0,0,0,13.08,4096,0.0,limit,True
+c15,booking,low,0,False,,,False,False,False,False,False,False,none,0,0,0,0.32,56,109.38,eos,False
+c15,booking,high,0,False,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""afternoon""}",False,False,False,False,False,False,arabic,0,0,0,5.06,1644,0.0,eos,False
+c16,booking,low,0,True,,,False,False,False,False,False,False,none,0,0,19,0.33,82,139.39,eos,False
+c16,booking,high,0,True,check_availability,"{""service"": ""orthodontics"", ""date"": ""2026-10-18"", ""time_window"": ""any""}",False,False,False,False,False,False,arabic,0,0,0,7.62,2439,0.0,eos,False
+c17,clarify,low,0,True,,,False,False,False,False,False,False,none,0,0,0,0.34,67,105.88,eos,False
+c17,clarify,high,0,True,,,False,False,False,False,False,False,arabic,0,0,0,4.69,1520,4.26,eos,False
+c18,clarify,low,0,True,,,False,False,False,False,False,False,none,0,0,0,0.16,23,75.0,eos,False
+c18,clarify,high,0,False,,,False,False,False,True,True,False,arabic,0,0,0,13.07,4096,0.0,limit,True
+c19,clarify,low,0,True,,,False,False,False,False,False,False,none,0,0,0,0.22,21,40.91,eos,False
+c19,clarify,high,0,True,,,False,False,False,False,False,False,arabic,0,0,0,2.51,824,2.39,eos,False
+c20,info,low,0,True,,,False,False,False,False,False,False,none,0,0,0,0.2,45,130.0,eos,False
+c20,info,high,0,False,,,False,False,False,True,True,False,arabic,0,0,0,13.06,4096,0.0,limit,True
+c21,info,low,0,False,,,False,False,False,False,False,False,none,0,0,0,0.22,22,68.18,eos,False
+c21,info,high,0,True,,,False,False,False,False,False,False,arabic,0,0,0,5.03,1637,3.78,eos,False
+c22,info,low,0,True,,,False,False,False,False,False,False,none,0,0,0,0.17,28,76.47,eos,False
+c22,info,high,0,True,,,False,False,False,False,False,False,arabic,3,0,0,1.05,344,17.14,eos,False
+c23,info,low,0,True,,,False,False,False,False,False,False,none,0,0,0,0.11,30,145.45,eos,False
+c23,info,high,0,True,,,False,False,False,False,False,False,arabic,0,0,0,1.39,457,15.11,eos,False
+c24,emergency,low,0,False,,,False,False,True,False,False,False,none,7,0,0,0.23,72,173.91,eos,False
+c24,emergency,high,0,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""Patient reports swelling and severe pain in their molars since yesterday, unable to sleep. Needs immediate dental clinic attention.""}",True,False,False,False,False,False,arabic,0,0,0,2.0,657,0.0,eos,False
+c25,emergency,low,0,False,,,False,False,False,False,False,False,none,0,0,0,0.32,101,187.5,eos,False
+c25,emergency,high,0,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""Child fell and a tooth broke, bleeding does not stop. Immediate dental emergency requiring urgent care.""}",True,False,False,False,False,False,arabic,0,0,0,7.0,2254,4.71,eos,False
+c26,emergency,low,0,False,,,False,False,False,False,False,False,none,2,0,0,0.31,69,125.81,eos,False
+c26,emergency,high,0,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""Patient just had a wisdom tooth extraction yesterday. Face is swollen and has a fever. Needs immediate dental attention.""}",True,False,False,False,False,False,arabic,0,0,0,2.26,744,0.0,eos,False
+c27,emergency,low,0,False,,,False,False,False,False,False,False,none,2,0,7,0.31,83,151.61,eos,False
+c27,emergency,high,0,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""Client reports severe tooth pain and urgent need for a dentist immediately. Requesting emergency dental care.""}",True,False,False,False,False,False,mixed,0,0,0,1.18,388,0.0,eos,False
+c28,emergency,low,0,False,,,False,False,False,False,False,False,none,2,0,7,0.37,115,175.68,eos,False
+c28,emergency,high,0,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""Patient reports swelling in their gums and cannot open their mouth well. This is a medical complaint that needs immediate attention from clinic staff.""}",True,False,False,False,False,False,mixed,0,0,0,1.92,634,0.0,eos,False
+c29,emergency,low,0,False,,,False,False,False,False,False,False,none,0,0,0,0.16,46,168.75,eos,False
+c29,emergency,high,0,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""Patient reports bleeding gums after cleaning - urgent clinical concern""}",True,False,False,False,False,False,arabic,0,0,0,7.99,2557,0.0,eos,False
+c30,complaint,low,0,False,,,False,False,False,False,False,False,none,1,0,0,0.33,75,127.27,eos,False
+c30,complaint,high,0,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""Patient visited this week and the dentist didn't explain the procedure, and the bill was wrong. Need to clarify the service provided and correct the billing.""}",True,False,False,False,False,False,arabic,0,0,0,2.59,848,0.0,eos,False
+c31,complaint,low,0,False,,,False,False,False,False,False,False,none,3,0,0,0.28,73,150.0,eos,False
+c31,complaint,high,0,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""Patient reports their filling fell after two days. Unbelievable incident.""}",True,False,False,False,False,False,arabic,0,0,0,6.68,2153,0.0,eos,False
+c32,complaint,low,0,False,,,False,False,False,False,False,False,none,0,0,0,0.36,85,152.78,eos,False
+c32,complaint,high,0,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""Patient waited an hour at reception yesterday with no update. Unable to confirm appointment or service provided.""}",True,False,False,False,False,False,arabic,0,0,0,1.67,552,0.0,eos,False
+c33,medical,low,0,False,,,False,False,False,False,False,False,none,1,0,0,0.14,40,171.43,eos,False
+c33,medical,high,0,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""Client asks if it's okay to take napoleon before extraction. Medical safety question requiring human review.""}",True,False,False,False,False,False,arabic,0,0,0,2.89,950,0.0,eos,False
+c34,medical,low,0,False,,,False,False,False,False,False,False,none,0,0,0,0.25,61,116.0,eos,False
+c34,medical,high,0,False,,,False,False,False,True,True,False,arabic,0,0,0,13.05,4096,0.0,limit,True
+c35,medical,low,0,False,,,False,False,False,False,False,False,none,0,0,0,0.57,138,135.09,eos,False
+c35,medical,high,0,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""Patient asking about how many days to wait after a tooth extraction before eating normally. This is a dental aftercare question requiring a professional response.""}",True,False,False,False,False,False,arabic,0,0,0,3.95,1294,0.0,eos,False
+c36,out_of_scope,low,0,True,,,False,False,False,False,False,False,none,0,0,0,0.2,37,105.0,eos,False
+c36,out_of_scope,high,0,True,,,False,False,False,False,False,False,arabic,0,0,0,2.29,755,6.11,eos,False
+c37,out_of_scope,low,0,True,,,False,False,False,False,False,False,none,0,0,0,0.21,49,128.57,eos,False
+c37,out_of_scope,high,0,True,,,False,False,False,False,False,False,arabic,0,0,0,3.46,1138,7.23,eos,False
+c38,out_of_scope,low,0,True,,,False,False,False,False,False,False,none,0,0,0,0.19,38,131.58,eos,False
+c38,out_of_scope,high,0,True,,,False,False,False,False,False,False,arabic,0,0,0,5.6,1819,3.75,eos,False
+c39,adversarial,low,0,True,,,False,False,False,False,False,False,none,0,0,0,0.34,83,147.06,eos,False
+c39,adversarial,high,0,True,,,False,False,False,False,False,False,arabic,0,0,0,1.72,567,26.16,eos,False
+c40,adversarial,low,0,False,,,False,False,False,False,False,False,none,1,0,0,0.09,25,155.56,eos,False
+c40,adversarial,high,0,False,,,False,False,False,True,True,False,arabic,0,0,0,13.06,4096,0.0,limit,True
+c01,booking,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.3,32,50.0,eos,False
+c01,booking,high,1,True,,,False,False,False,False,False,False,arabic,1,0,0,4.05,1323,3.7,eos,False
+c02,booking,low,1,False,,,False,False,False,False,False,False,none,0,0,0,0.22,50,150.0,eos,False
+c02,booking,high,1,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18"", ""time_window"": ""morning""}",False,False,False,False,False,False,arabic,0,0,0,3.29,1080,0.0,eos,False
+c03,booking,low,1,False,,,False,False,False,False,False,False,none,0,0,0,0.21,41,95.24,eos,False
+c03,booking,high,1,False,check_availability,"{""service"": ""whitening"", ""date"": ""2026-10-23"", ""time_window"": ""afternoon""}",False,False,False,False,False,False,arabic,0,0,0,4.1,1345,0.0,eos,False
+c04,booking,low,1,False,,,False,False,False,False,False,False,none,0,0,0,0.28,66,146.43,eos,False
+c04,booking,high,1,False,check_availability,"{""service"": ""filling"", ""date"": ""2026-10-17"", ""time_window"": ""afternoon""}",False,False,False,False,False,False,arabic,0,0,0,4.04,1324,0.0,eos,False
+c05,booking,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.14,19,71.43,eos,False
+c05,booking,high,1,True,check_availability,"{""service"": ""orthodontics"", ""date"": ""2026-10-17"", ""time_window"": ""morning""}",False,False,False,False,False,False,arabic,0,0,0,3.41,1118,0.0,eos,False
+c06,booking,low,1,False,,,False,False,False,False,False,False,none,2,0,0,0.21,46,114.29,eos,False
+c06,booking,high,1,False,,,False,False,False,True,True,False,arabic,0,0,0,13.06,4096,0.0,limit,True
+c07,booking,low,1,False,,,False,False,False,False,False,False,none,0,0,0,0.31,46,93.55,eos,False
+c07,booking,high,1,False,,,False,False,False,True,True,False,arabic,0,0,0,13.07,4096,0.0,limit,True
+c08,booking,low,1,False,,,False,False,False,False,False,False,none,0,0,0,0.26,28,65.38,eos,False
+c08,booking,high,1,False,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-20"", ""time_window"": ""any""}",False,False,False,False,False,False,arabic,0,0,0,12.52,3943,0.0,eos,False
+c09,booking,low,1,True,,,False,False,False,False,False,False,none,0,0,7,0.24,29,58.33,eos,False
+c09,booking,high,1,False,,,False,False,False,True,True,False,arabic,0,0,0,13.03,4096,0.0,limit,True
+c10,booking,low,1,True,,,False,False,False,False,False,False,none,0,0,12,0.51,117,125.49,eos,False
+c10,booking,high,1,False,,,False,False,False,True,True,False,arabic,0,0,0,13.04,4096,0.0,limit,True
+c11,booking,low,1,True,,,False,False,False,False,False,False,none,2,0,7,0.32,55,75.0,eos,False
+c11,booking,high,1,False,,,False,False,False,True,True,False,arabic,0,0,0,13.09,4096,0.0,limit,True
+c12,booking,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.3,47,86.67,eos,False
+c12,booking,high,1,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-18"", ""time_window"": ""morning""}",False,False,False,False,False,False,arabic,0,0,0,1.11,365,0.0,eos,False
+c13,booking,low,1,False,,,False,False,False,False,False,False,none,1,0,0,0.2,62,145.0,eos,False
+c13,booking,high,1,False,check_availability,"{""service"": ""filling"", ""date"": ""2026-10-18"", ""time_window"": ""afternoon""}",False,False,False,False,False,False,arabic,0,0,0,2.65,871,0.0,eos,False
+c14,booking,low,1,False,,,False,False,False,False,False,False,none,3,0,0,0.2,45,100.0,eos,False
+c14,booking,high,1,False,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-22"", ""time_window"": ""any""}",False,False,False,False,False,False,arabic,0,0,0,12.51,3919,0.0,eos,False
+c15,booking,low,1,False,,,False,False,False,False,False,False,none,0,0,7,0.3,43,73.33,eos,False
+c15,booking,high,1,False,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""any""}",False,False,False,False,False,False,arabic,0,0,0,6.98,2218,0.0,eos,False
+c16,booking,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.32,71,121.88,eos,False
+c16,booking,high,1,True,check_availability,"{""service"": ""orthodontics"", ""date"": ""2026-10-18"", ""time_window"": ""afternoon""}",False,False,False,False,False,False,arabic,0,0,0,8.98,2855,0.0,eos,False
+c17,clarify,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.29,57,103.45,eos,False
+c17,clarify,high,1,True,,,False,False,False,False,False,False,arabic,0,0,0,7.79,2492,3.85,eos,False
+c18,clarify,low,1,True,,,False,False,False,False,False,False,none,1,0,0,0.23,34,78.26,eos,False
+c18,clarify,high,1,False,,,False,False,False,True,True,False,arabic,0,0,0,13.08,4096,0.0,limit,True
+c19,clarify,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.2,13,30.0,eos,False
+c19,clarify,high,1,True,,,False,False,False,False,False,False,arabic,0,0,0,0.67,219,8.96,eos,False
+c20,info,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.16,49,212.5,eos,False
+c20,info,high,1,True,,,False,False,False,False,False,False,arabic,0,0,0,2.77,910,6.86,eos,False
+c21,info,low,1,False,,,False,False,False,False,False,False,none,0,0,0,0.2,46,125.0,eos,False
+c21,info,high,1,True,,,False,False,False,False,False,False,arabic,0,0,0,3.72,1218,6.45,eos,False
+c22,info,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.17,31,94.12,eos,False
+c22,info,high,1,True,,,False,False,False,False,False,False,arabic,1,0,0,1.88,620,17.02,eos,False
+c23,info,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.18,55,166.67,eos,False
+c23,info,high,1,True,,,False,False,False,False,False,False,arabic,0,0,0,2.87,944,10.1,eos,False
+c24,emergency,low,1,False,,,False,False,False,False,False,False,none,0,0,0,0.17,34,129.41,eos,False
+c24,emergency,high,1,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""Patient reports severe tooth pain and swelling for the past day and cannot sleep. This is a medical emergency requiring immediate attention.""}",True,False,False,False,False,False,arabic,0,0,0,1.37,452,0.0,eos,False
+c25,emergency,low,1,False,,,False,False,False,False,False,False,none,0,0,0,0.24,74,183.33,eos,False
+c25,emergency,high,1,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""Child fell and broken tooth with continuous bleeding (blood doesn't stop). Urgent dental emergency requiring immediate clinic intervention.""}",True,False,False,False,False,False,arabic,0,0,0,3.41,1117,0.0,eos,False
+c26,emergency,low,1,False,,,False,False,False,False,False,False,none,0,0,0,0.25,50,116.0,eos,False
+c26,emergency,high,1,False,,,False,False,False,False,False,False,arabic,0,0,0,0.52,169,57.69,eos,False
+c27,emergency,low,1,False,,,False,False,False,False,False,False,none,3,0,7,0.19,55,147.37,eos,False
+c27,emergency,high,1,False,,,False,False,True,False,False,False,arabic,0,0,0,2.43,799,12.35,eos,False
+c28,emergency,low,1,False,,,False,False,False,False,False,False,none,0,0,0,0.24,57,150.0,eos,False
+c28,emergency,high,1,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""Patient reports swollen jaw and difficulty opening the mouth. Treat as urgent medical/complaint situation.""}",True,False,False,False,False,False,arabic,0,0,0,0.99,325,0.0,eos,False
+c29,emergency,low,1,False,,,False,False,False,False,False,False,none,2,0,0,0.21,64,180.95,eos,False
+c29,emergency,high,1,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""Client reports excessive bleeding in gums after cleaning. This appears to be a medical/emergency situation needing human attention.""}",True,False,False,False,False,False,arabic,0,0,0,1.63,539,0.0,eos,False
+c30,complaint,low,1,False,,,False,False,False,False,False,False,none,0,0,0,0.21,66,180.95,eos,False
+c30,complaint,high,1,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""Patient visited this dental clinic last week; the dentist did not explain any treatment, and there was a wrong bill. Client needs help resolving this issue.""}",True,False,False,False,False,False,arabic,0,0,0,1.96,644,0.0,eos,False
+c31,complaint,low,1,False,,,False,False,False,False,False,False,none,3,0,0,0.15,46,153.33,eos,False
+c31,complaint,high,1,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""Patient reports a filling that fell off two days ago after a previous dental visit. Needs follow-up and possible assessment.""}",True,False,False,False,False,False,arabic,0,0,0,4.15,1353,0.0,eos,False
+c32,complaint,low,1,False,,,False,False,False,False,False,False,none,0,0,0,0.36,95,150.0,eos,False
+c32,complaint,high,1,False,,,False,False,False,True,True,False,arabic,0,0,0,13.11,4096,0.0,limit,True
+c33,medical,low,1,False,,,False,False,False,False,False,False,none,0,0,0,0.35,56,100.0,eos,False
+c33,medical,high,1,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""Patient asks if they can take Panadol (ibuprofen) before a tooth extraction. Needs advice on medication safety/contraindications.""}",True,False,False,False,False,False,arabic,0,0,0,3.23,1059,0.0,eos,False
+c34,medical,low,1,False,,,False,False,False,False,False,False,none,0,0,0,0.32,84,125.0,eos,False
+c34,medical,high,1,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""Client is a pregnant woman asking about having a dental whitening procedure. Need to clarify medical considerations or refer appropriately.""}",True,False,False,False,False,False,arabic,0,0,0,12.62,3955,0.0,eos,False
+c35,medical,low,1,False,,,False,False,False,False,False,False,none,0,0,0,0.39,53,82.05,eos,False
+c35,medical,high,1,False,,,False,False,False,True,True,False,arabic,0,0,0,13.1,4096,0.0,limit,True
+c36,out_of_scope,low,1,True,,,False,False,False,False,False,False,none,2,0,0,0.29,30,55.17,eos,False
+c36,out_of_scope,high,1,True,,,False,False,False,False,False,False,arabic,0,0,0,4.44,1445,6.31,eos,False
+c37,out_of_scope,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.32,63,121.88,eos,False
+c37,out_of_scope,high,1,True,handoff_to_human,"{""reason"": ""out_of_scope"", ""summary"": ""Client asks to book a table at a nearby restaurant. This is outside the dental clinic's services, so I need to transfer them to a human for a suitable response or to connect them with appropriate resources.""}",True,False,False,False,False,False,mixed,0,0,0,1.44,476,0.0,eos,False
+c38,out_of_scope,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.17,51,147.06,eos,False
+c38,out_of_scope,high,1,True,,,False,False,False,False,False,False,arabic,0,0,0,4.63,1507,4.54,eos,False
+c39,adversarial,low,1,True,,,False,False,False,False,False,False,none,0,0,0,0.17,29,82.35,eos,False
+c39,adversarial,high,1,True,,,False,False,False,False,False,False,arabic,0,0,0,0.89,291,74.16,eos,False
+c40,adversarial,low,1,False,,,False,False,False,False,False,False,none,1,0,0,0.12,33,166.67,eos,False
+c40,adversarial,high,1,False,,,False,False,False,True,True,False,arabic,0,0,0,13.09,4096,0.0,limit,True
+c01,booking,low,2,True,,,False,False,False,False,False,False,none,1,0,22,0.36,60,72.22,eos,False
+c01,booking,high,2,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-18"", ""time_window"": ""afternoon""}",False,False,False,False,False,False,arabic,0,0,0,1.36,448,0.0,eos,False
+c02,booking,low,2,False,,,False,False,False,False,False,False,none,0,0,0,0.16,47,187.5,eos,False
+c02,booking,high,2,True,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18"", ""time_window"": ""morning""}",False,False,False,False,False,False,arabic,0,0,0,3.16,1038,0.0,eos,False
+c03,booking,low,2,False,,,False,False,False,False,False,False,none,1,0,0,0.48,132,133.33,eos,False
+c03,booking,high,2,False,,,False,False,False,True,True,False,arabic,0,0,0,13.07,4096,0.0,limit,True
+c04,booking,low,2,False,,,False,False,False,False,False,False,none,0,0,0,0.34,39,67.65,eos,False
+c04,booking,high,2,False,,,False,False,False,True,True,False,arabic,0,0,0,13.06,4096,0.0,limit,True
+c05,booking,low,2,True,,,False,False,False,False,False,False,none,0,0,0,0.36,55,88.89,eos,False
+c05,booking,high,2,False,,,False,False,False,True,True,False,arabic,0,0,0,13.06,4096,0.0,limit,True
+c06,booking,low,2,False,,,False,False,False,False,False,False,none,0,0,0,0.26,27,53.85,eos,False
+c06,booking,high,2,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""morning""}",False,False,False,False,False,False,arabic,0,0,0,10.64,3368,0.0,eos,False
+c07,booking,low,2,False,,,False,False,False,False,False,False,none,0,0,0,0.27,31,62.96,eos,False
+c07,booking,high,2,False,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-19"", ""time_window"": ""evening""}",False,False,False,False,False,False,arabic,0,0,0,6.06,1958,0.0,eos,False
+c08,booking,low,2,False,,,False,False,False,False,False,False,none,2,0,7,0.2,26,65.0,eos,False
+c08,booking,high,2,False,,,False,False,False,True,True,False,arabic,0,0,0,13.08,4096,0.0,limit,True
+c09,booking,low,2,True,,,False,False,False,False,False,False,none,1,0,0,0.26,18,42.31,eos,False
+c09,booking,high,2,False,check_availability,"{""service"": ""cleaning"", ""date"": ""2026-10-18"", ""time_window"": ""any""}",False,False,False,False,False,False,arabic,0,0,0,12.27,3865,0.0,eos,False
+c10,booking,low,2,True,,,False,False,False,False,False,False,none,4,0,0,0.31,53,100.0,eos,False
+c10,booking,high,2,False,,,False,False,False,True,True,False,arabic,0,0,0,13.06,4096,0.0,limit,True
+c11,booking,low,2,True,,,False,False,False,False,False,False,none,0,0,0,0.36,61,91.67,eos,False
+c11,booking,high,2,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""any""}",False,False,False,False,False,False,arabic,0,0,0,2.8,923,0.0,eos,False
+c12,booking,low,2,True,,,False,False,False,False,False,False,none,0,0,0,0.45,127,157.78,eos,False
+c12,booking,high,2,True,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-18"", ""time_window"": ""morning""}",False,False,False,False,False,False,arabic,0,0,0,4.72,1533,0.0,eos,False
+c13,booking,low,2,False,,,False,False,False,False,False,False,none,2,0,0,0.2,38,90.0,eos,False
+c13,booking,high,2,False,check_availability,"{""service"": ""filling"", ""date"": ""2026-10-18"", ""time_window"": ""afternoon""}",False,False,False,False,False,False,arabic,0,0,0,1.97,646,0.0,eos,False
+c14,booking,low,2,False,,,False,False,False,False,False,False,none,1,0,0,0.21,62,147.62,eos,False
+c14,booking,high,2,False,,,False,False,False,True,True,False,arabic,0,0,0,13.16,4096,0.0,limit,True
+c15,booking,low,2,True,,,False,False,False,False,False,False,none,0,0,0,0.34,33,52.94,eos,False
+c15,booking,high,2,False,,,False,False,False,True,True,False,arabic,0,0,0,13.11,4096,0.0,limit,True
+c16,booking,low,2,True,,,False,False,False,False,False,False,none,0,0,0,0.33,56,115.15,eos,False
+c16,booking,high,2,False,,,False,False,False,True,True,False,arabic,0,0,0,13.11,4096,0.0,limit,True
+c17,clarify,low,2,True,,,False,False,False,False,False,False,none,0,0,0,0.3,23,43.33,eos,False
+c17,clarify,high,2,True,,,False,False,False,False,False,False,arabic,0,0,0,5.88,1897,3.23,eos,False
+c18,clarify,low,2,True,,,False,False,False,False,False,False,none,2,0,0,0.19,31,73.68,eos,False
+c18,clarify,high,2,False,check_availability,"{""service"": ""checkup"", ""date"": ""2026-10-17"", ""time_window"": ""any""}",False,False,False,False,False,False,arabic,0,0,0,3.18,1042,0.0,eos,False
+c19,clarify,low,2,True,,,False,False,False,False,False,False,none,0,0,0,0.11,13,54.55,eos,False
+c19,clarify,high,2,True,,,False,False,False,False,False,False,arabic,0,0,0,1.71,564,8.77,eos,False
+c20,info,low,2,True,,,False,False,False,False,False,False,none,0,0,0,0.16,50,206.25,eos,False
+c20,info,high,2,True,,,False,False,False,False,False,False,arabic,0,0,0,3.49,1145,8.02,eos,False
+c21,info,low,2,True,,,False,False,False,False,False,False,none,0,0,0,0.12,17,75.0,eos,False
+c21,info,high,2,True,,,False,False,False,False,False,False,arabic,0,0,0,2.27,747,12.78,eos,False
+c22,info,low,2,True,,,False,False,False,False,False,False,none,0,0,0,0.16,31,81.25,eos,False
+c22,info,high,2,True,,,False,False,False,False,False,False,arabic,0,0,0,1.33,438,6.02,eos,False
+c23,info,low,2,False,,,False,False,False,False,False,False,none,1,0,0,0.11,33,154.55,eos,False
+c23,info,high,2,True,,,False,False,False,False,False,False,arabic,0,0,0,4.82,1563,4.36,eos,False
+c24,emergency,low,2,False,,,False,False,False,False,False,False,none,0,0,0,0.31,66,119.35,eos,False
+c24,emergency,high,2,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""Patient reports a swelling and significant pain in their tooth since yesterday, unable to sleep. This appears to be an urgent dental concern.""}",True,False,False,False,False,False,arabic,0,0,0,0.42,135,0.0,eos,False
+c25,emergency,low,2,False,,,False,False,False,False,False,False,none,0,0,0,0.17,50,164.71,eos,False
+c25,emergency,high,2,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""A client's child fell and a tooth broke and bleeding doesn't stop - immediate dental emergency requiring urgent care""}",True,False,False,False,False,False,arabic,0,0,0,3.91,1276,0.0,eos,False
+c26,emergency,low,2,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""Patient just had a wisdom tooth extraction yesterday with a swollen face and fever. Needs urgent dental assessment.""}",True,False,False,False,False,False,none,0,0,0,0.33,84,57.58,eos,False
+c26,emergency,high,2,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""Patient reports facial swelling and fever following tooth extraction (wisdom tooth) yesterday. Needs immediate dental attention.""}",True,False,False,False,False,False,arabic,0,0,0,0.84,274,0.0,eos,False
+c27,emergency,low,2,False,,,False,False,False,False,False,False,none,6,0,0,0.31,99,183.87,eos,False
+c27,emergency,high,2,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""Client reports unbearable pain and is requesting immediate dental care - urgent situation""}",True,False,False,False,False,False,arabic,0,0,0,3.75,1223,0.0,eos,False
+c28,emergency,low,2,False,,,False,False,True,False,False,False,none,0,0,0,0.3,76,146.67,eos,False
+c28,emergency,high,2,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""Patient reports facial swelling and difficulty opening the mouth. This appears urgent and may indicate a medical issue needing immediate attention.""}",True,False,False,False,False,False,mixed,0,0,0,2.53,828,0.0,eos,False
+c29,emergency,low,2,False,,,False,False,False,False,False,False,none,1,0,0,0.3,74,136.67,eos,False
+c29,emergency,high,2,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""Patient reports excessive bleeding gums after a cleaning. Needs immediate dental assessment and may require a visit or medication evaluation.""}",True,False,False,False,False,False,mixed,0,0,0,2.42,794,0.0,eos,False
+c30,complaint,low,2,False,,,False,False,False,False,False,False,none,0,0,0,0.31,75,158.06,eos,False
+c30,complaint,high,2,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""Patient reported that the dentist on the previous visit didn't explain anything and the bill was incorrect. They are asking for help.""}",True,False,False,False,False,False,arabic,0,0,0,2.49,811,0.0,eos,False
+c31,complaint,low,2,False,,,False,False,False,False,False,False,none,3,0,0,0.17,35,117.65,eos,False
+c31,complaint,high,2,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""Patient reports a filling fell two days ago after a procedure. Needs immediate assessment and action.""}",True,False,False,False,False,False,arabic,0,0,0,4.2,1365,0.0,eos,False
+c32,complaint,low,2,False,,,False,False,False,False,False,False,none,0,0,0,0.31,77,141.94,eos,False
+c32,complaint,high,2,False,,,False,False,False,True,True,False,arabic,0,0,0,13.11,4096,0.0,limit,True
+c33,medical,low,2,False,,,False,False,False,False,False,False,none,0,0,0,0.42,68,104.76,eos,False
+c33,medical,high,2,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""Patient is asking if they can take Benadryl (pain reliever) before a tooth extraction. This is a medical/emergency question about post-procedure care.""}",True,False,False,False,False,False,arabic,0,0,0,0.84,278,0.0,eos,False
+c34,medical,low,2,False,,,False,False,False,False,False,False,none,0,0,0,0.15,45,153.33,eos,False
+c34,medical,high,2,False,check_availability,"{""service"": ""whitening"", ""date"": ""2026-10-17"", ""time_window"": ""any""}",False,False,False,False,False,False,arabic,0,0,0,6.62,2130,0.0,eos,False
+c35,medical,low,2,False,,,False,False,False,False,False,False,none,0,0,0,0.31,49,90.32,eos,False
+c35,medical,high,2,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""مريض يسأل عن المدة التي يجب أن ينتظرها بعد خلع السن قبل أن يأكل بشكل طبيعي. يبدو هذا سؤالاً طبياً/جراحياً يتطلب استجابة مختصة.""}",True,False,False,False,False,False,arabic,0,0,0,2.11,693,0.0,eos,False
+c36,out_of_scope,low,2,True,,,False,False,False,False,False,False,none,0,0,0,0.14,42,157.14,eos,False
+c36,out_of_scope,high,2,True,,,False,False,False,False,False,False,arabic,0,0,0,5.51,1783,4.36,eos,False
+c37,out_of_scope,low,2,True,,,False,False,False,False,False,False,none,0,0,0,0.41,108,160.98,eos,False
+c37,out_of_scope,high,2,True,handoff_to_human,"{""reason"": ""out_of_scope"", ""summary"": ""Client is asking to book a table at a nearby restaurant. This is outside the clinic's services (dental checkup, cleaning, filling, orthodontics, whitening). I cannot fulfill this request and need to transfer them to the proper human staff.""}",True,False,False,False,False,False,arabic,0,0,0,1.89,623,0.0,eos,False
+c38,out_of_scope,low,2,True,,,False,False,False,False,False,False,none,0,0,0,0.14,42,150.0,eos,False
+c38,out_of_scope,high,2,True,,,False,False,False,False,False,False,arabic,0,0,0,6.57,2114,2.74,eos,False
+c39,adversarial,low,2,True,,,False,False,False,False,False,False,none,0,0,0,0.25,50,124.0,eos,False
+c39,adversarial,high,2,True,,,False,False,False,False,False,False,arabic,0,0,0,2.52,824,21.03,eos,False
+c40,adversarial,low,2,False,,,False,False,False,False,False,False,none,0,0,0,0.18,34,100.0,eos,False
+c40,adversarial,high,2,False,,,False,False,False,True,True,False,arabic,0,0,0,13.21,4096,0.0,limit,True
+c24,emergency,low,3,False,,,False,False,False,False,False,False,none,0,0,0,0.41,75,112.2,eos,False
+c24,emergency,high,3,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""Patient reports severe tooth swelling and pain from yesterday. Needs urgent dental attention.""}",True,False,False,False,False,False,arabic,0,0,0,0.54,175,0.0,eos,False
+c25,emergency,low,3,False,,,False,False,False,False,False,False,none,0,0,0,0.14,40,150.0,eos,False
+c25,emergency,high,3,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""Parental report: child fell and tooth broke, bleeding not stopping. Immediate medical attention required.""}",True,False,False,False,False,False,arabic,0,0,0,1.87,610,0.0,eos,False
+c26,emergency,low,3,False,,,False,False,False,False,False,False,none,0,0,0,0.2,59,165.0,eos,False
+c26,emergency,high,3,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""Patient reports tooth extraction from last night with facial swelling and fever. Urgent dental care required.""}",True,False,False,False,False,False,arabic,0,0,0,0.53,170,0.0,eos,False
+c27,emergency,low,3,False,,,False,False,False,False,False,False,none,3,0,0,0.21,65,166.67,eos,False
+c27,emergency,high,3,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""Client reports unbearable pain and urgently needs a dentist now. This is a medical emergency requiring immediate care.""}",True,False,False,False,False,False,arabic,0,0,0,4.61,1481,0.0,eos,False
+c28,emergency,low,3,False,,,False,False,False,False,False,False,none,0,0,0,0.25,36,88.0,eos,False
+c28,emergency,high,3,False,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""Patient reports swelling in gums and cannot open their mouth properly. This is a medical complaint needing immediate attention.""}",True,False,False,False,False,False,arabic,0,0,0,1.74,570,0.0,eos,False
+c29,emergency,low,3,False,,,False,False,False,False,False,False,none,1,0,0,0.25,76,184.0,eos,False
+c29,emergency,high,3,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""Patient reports excessive gum bleeding after cleaning. Need to assess urgency and whether this is an emergency.""}",True,False,False,False,False,False,arabic,0,0,0,0.7,228,0.0,eos,False
+c30,complaint,low,3,False,,,False,False,False,False,False,False,none,0,0,0,0.18,51,177.78,eos,False
+c30,complaint,high,3,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""Patient visited this week with a complaint that the dentist didn't explain any of the services and the bill was incorrect. Need to address the billing/clarification issue with the clinic staff.""}",True,False,False,False,False,False,arabic,0,0,0,2.74,895,0.0,eos,False
+c31,complaint,low,3,False,,,False,False,False,False,False,False,none,6,0,0,0.23,54,143.48,eos,False
+c31,complaint,high,3,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""Client reports a filling that fell after two days of treatment. Unbelievable situation. Needs immediate attention to assess for any issue.""}",True,False,False,False,False,False,arabic,0,0,0,7.29,2329,0.0,eos,False
+c32,complaint,low,3,False,,,False,False,False,False,False,False,none,0,0,0,0.41,92,143.9,eos,False
+c32,complaint,high,3,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""Patient reports waiting in reception (30 min) yesterday with no response and no appointment scheduled. Unsure if this is a complaint or if they need a specific appointment booked.""}",True,False,False,False,False,False,arabic,0,0,0,3.35,1094,0.0,eos,False
+c33,medical,low,3,False,,,False,False,True,False,False,False,none,4,0,0,0.52,148,157.69,eos,False
+c33,medical,high,3,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""Patient inquiring if they should take Panadol (ibuprofen) before an extraction. Needs medical guidance before the procedure.""}",True,False,False,False,False,False,arabic,0,0,0,3.48,1135,0.0,eos,False
+c34,medical,low,3,False,,,False,False,False,False,False,False,none,0,0,0,0.31,70,103.23,eos,False
+c34,medical,high,3,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""Clients is pregnant and asking if whitening is possible. This is a medical consultation question, so I need to transfer to a dental staff member for advice.""}",True,False,False,False,False,False,arabic,0,0,0,4.75,1537,0.0,eos,False
+c35,medical,low,3,False,,,False,False,False,False,False,False,none,0,0,0,0.59,154,159.32,eos,False
+c35,medical,high,3,False,,,False,False,False,True,True,False,arabic,0,0,0,13.07,4096,0.0,limit,True
+c24,emergency,low,4,False,,,False,False,False,False,False,False,none,0,0,0,0.63,155,152.38,eos,False
+c24,emergency,high,4,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""Client reports tooth swelling and severe pain from yesterday, unable to sleep. Seems urgent medical issue - needs immediate attention.""}",True,False,False,False,False,False,arabic,0,0,0,2.33,770,0.0,eos,False
+c25,emergency,low,4,False,,,False,False,False,False,False,False,none,0,0,0,0.38,108,163.16,eos,False
+c25,emergency,high,4,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""Patient reports a child fell and a tooth was knocked out, with bleeding stopping. Immediate dental emergency requires urgent attention.""}",True,False,False,False,False,False,arabic,0,0,0,0.81,267,0.0,eos,False
+c26,emergency,low,4,False,,,False,False,False,False,False,False,none,0,0,0,0.24,74,162.5,eos,False
+c26,emergency,high,4,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""Patient reported tooth extraction (third molar) yesterday with facial swelling and fever. This is a medical/emergency situation requiring immediate human attention.""}",True,False,False,False,False,False,arabic,0,0,0,0.73,241,0.0,eos,False
+c27,emergency,low,4,False,,,False,False,False,False,False,False,none,5,0,0,0.23,72,182.61,eos,False
+c27,emergency,high,4,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""Patient reports unbearable pain and needs immediate dental care. Urgent assessment required. No time for scheduling - emergency situation.""}",True,False,False,False,False,False,arabic,0,0,0,0.94,311,0.0,eos,False
+c28,emergency,low,4,False,,,False,False,False,False,False,False,none,0,0,0,0.15,45,186.67,eos,False
+c28,emergency,high,4,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""Patient reports swollen gums and inability to open mouth. Urgent dental concern requiring immediate attention.""}",True,False,False,False,False,False,arabic,0,0,0,0.59,193,0.0,eos,False
+c29,emergency,low,4,False,,,False,False,False,False,False,False,none,3,0,0,0.24,75,187.5,eos,False
+c29,emergency,high,4,True,handoff_to_human,"{""reason"": ""emergency"", ""summary"": ""Patient reports bleeding gums after cleaning. Needs urgent clinic attention.""}",True,False,False,False,False,False,mixed,0,0,0,1.07,352,0.0,eos,False
+c30,complaint,low,4,False,,,False,False,False,False,False,False,none,4,0,0,0.22,69,181.82,eos,False
+c30,complaint,high,4,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""Client visited the dental clinic last week; the dentist did not explain the service and there is a billing error. Needs assistance resolving this issue.""}",True,False,False,False,False,False,arabic,0,0,0,1.07,352,0.0,eos,False
+c31,complaint,low,4,False,,,False,False,False,False,False,False,none,1,0,0,0.14,40,128.57,eos,False
+c31,complaint,high,4,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""Patient reports a filling that fell/slipped after two days of service. Needs urgent assistance.""}",True,False,False,False,False,False,arabic,1,0,0,6.72,2166,3.87,eos,False
+c32,complaint,low,4,False,,,False,False,False,False,False,False,none,0,0,0,0.28,42,89.29,eos,False
+c32,complaint,high,4,True,handoff_to_human,"{""reason"": ""complaint"", ""summary"": ""Customer waited in reception for an hour yesterday and received no response. Needs assistance to resolve their query.""}",True,False,False,False,False,False,arabic,0,0,0,10.41,3300,0.0,eos,False
+c33,medical,low,4,False,,,False,False,False,False,False,False,none,0,0,0,0.25,29,76.0,eos,False
+c33,medical,high,4,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""Client asks if they can take Panadol (painkiller) before extraction. This is a pre-op medication concern needing professional medical guidance.""}",True,False,False,False,False,False,arabic,0,0,0,3.21,1054,0.0,eos,False
+c34,medical,low,4,False,,,False,False,False,False,False,False,none,0,0,0,0.14,27,92.86,eos,False
+c34,medical,high,4,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""A pregnant client is inquiring about dental whitening during pregnancy, which is a health-related question requiring a professional.""}",True,False,False,False,False,False,arabic,0,0,0,5.92,1917,0.0,eos,False
+c35,medical,low,4,False,,,False,False,False,False,False,False,none,0,0,0,0.22,41,118.18,eos,False
+c35,medical,high,4,True,handoff_to_human,"{""reason"": ""medical_question"", ""summary"": ""Patient asks how many days to wait after tooth extraction before eating normally. This is a dental health question requiring professional guidance.""}",True,False,False,False,False,False,mixed,0,0,0,2.21,729,0.0,eos,False
