@@ -4,23 +4,35 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>مقياس — ضريبة الرموز</title>
-<meta name="description" content="هل تحتاج العربية رموزًا أكثر من الإنجليزية للمعنى نفسه؟ استكشاف قيد القياس، برابط دائم.">
+<meta name="description" content="كم رمزًا تحتاج العربية مقارنة بالإنجليزية للمعنى نفسه؟ ٢٬٠٠٩ جملة متوازية، ١١ مقسّم رموز، ٧ لهجات، مع فترات ثقة. نتيجة منشورة برابط دائم.">
 <link rel="stylesheet" href="../../assets/base.css">
+<style>
+  .ci{font-family:var(--mono);font-size:.75rem;color:var(--dim);font-variant-numeric:tabular-nums;direction:ltr;unicode-bidi:isolate}
+  .data-table td.num{direction:ltr;unicode-bidi:isolate;text-align:end}
+  .data-table td.best{color:var(--signal);font-weight:600}
+  .key{font-size:.875rem;line-height:1.7}
+  .key b{font-weight:600}
+  .note{font-size:.875rem;color:var(--dim)}
+  dl.facts{display:grid;grid-template-columns:max-content 1fr;gap:.35rem 1rem;font-size:.9375rem;margin:0}
+  dl.facts dt{color:var(--dim)}
+  dl.facts dd{margin:0}
+  .en{direction:ltr;text-align:left;unicode-bidi:isolate;font-size:.9375rem;border-inline-start:3px solid var(--rule);padding-inline-start:1rem;color:var(--dim)}
+</style>
 </head>
 <body>
 
 <div class="strip"><div class="wrap">
   <span>مكتشفة <b class="ver">token-tax</b></span>
-  <span>الحالة <b id="status">قيد القياس</b></span>
-  <span>آخر تحديث <b id="d">لم يُحدَّث بعد</b></span>
-  <span>ترخيص <b>MIT</b></span>
+  <span>الحالة <b id="status">منشورة</b></span>
+  <span>القياس <b id="d">—</b></span>
+  <span>البيانات <b>CC BY-SA 4.0</b> · الكود <b>MIT</b></span>
 </div></div>
 
 <div class="wrap">
 
 <header>
   <h1>مقياس <span>· ضريبة الرموز</span></h1>
-  <p class="tagline">هل تحتاج النصوص العربية رموزًا أكثر من الإنجليزية للمعنى نفسه؟ وإن كان كذلك، بكم؟</p>
+  <p class="tagline">كم رمزًا تحتاج العربية مقارنة بالإنجليزية للمعنى نفسه؟ الجواب: يعتمد على المقسّم، من «لا ضريبة» إلى ٦٦٪ زيادة.</p>
   <div class="meta">
     <span>رابط دائم: <span dir="ltr">/findings/token-tax/</span></span>
     <a href="../../المنهجية/">المنهجية ↗</a>
@@ -29,28 +41,54 @@
 </header>
 
 <section class="section-head">
-  <h2>الملخص</h2>
-  <p>هذا استكشاف <b>قيد القياس</b>، لا نتيجة منشورة بعد. الفرضية التي نختبرها: عبر معظم مقسّمات الرموز الشائعة، يحتاج النص العربي عددًا أكبر من الرموز مقارنة بالنص الإنجليزي الذي يحمل المعنى نفسه — وهو ما يرفع تكلفة استخدام واجهات الذكاء الاصطناعي البرمجية على المستخدم العربي بشكل غير متناسب. الأرقام أدناه تُملأ تلقائيًا من <code>data/tokenizers.json</code> فور اكتمال القياس؛ لا رقم مفترض هنا حتى ذلك الحين.</p>
+  <h2>الخلاصة</h2>
+  <p class="key">لا توجد «ضريبة رموز» واحدة للعربية. على ٢٬٠٠٩ جملة متوازية من FLORES+، تحتاج الجملة العربية الفصحى من <b>٠٫٩٧×</b> (ALLaM) إلى <b>١٫٦٦×</b> (Llama 3.2) عدد الرموز التي تحتاجها الجملة الإنجليزية نفسها. المقسّمات المصمّمة للعربية (ALLaM، Jais، Jais 2، Jais 3) تكاد تلغي الفرق. المقسّمات العامة (o200k، Gemma 3، Qwen3، Llama 3.2) تضيف ٣٨–٦٦٪، وMistral Tekken بينهما (+٢٥٪). <b>Fanar</b> نموذج عربي بمقسّم عامّ الطابع (+٤٥٪)، وJais 3 0.9B يستخدم مقسّمًا أصغر خاصًا به (+١٧٪). واللهجات لا تدفع ضريبة إضافية: الخليجية والعراقية والمصرية مثل الفصحى (±٣٪)، والشامية أرخص قليلًا (حتى −٦٪)، والمغربية وحدها أغلى باطّراد (+٣ إلى +١١٪ بحسب المقسّم).</p>
+  <dl class="facts">
+    <dt>النص</dt><dd>FLORES+ (openlanguagedata/flores_plus)، dev + devtest، ٢٬٠٠٩ جملة بكل لغة، ترخيص CC BY-SA 4.0</dd>
+    <dt>اللغات</dt><dd>الإنجليزية (المرجع)، الفصحى، النجدية، العراقية، المصرية، الشامية الشمالية والجنوبية، المغربية</dd>
+    <dt>المقسّمات</dt><dd><span id="n">١١</span> مقسّمًا، بالإصدار (revision) المسجّل في ملف البيانات</dd>
+    <dt>المقياس</dt><dd>مجموع رموز النص العربي ÷ مجموع رموز النص الإنجليزي على الجمل نفسها، من غير الرموز الخاصة</dd>
+    <dt>عدم اليقين</dt><dd>فترة ثقة ٩٥٪ بإعادة المعاينة (bootstrap) على الجمل، ٢٬٠٠٠ إعادة، بذرة ٤٢</dd>
+  </dl>
 </section>
 
 <section class="section-head">
-  <h2>الرسم</h2>
-  <p>نسبة الرموز (عربي ÷ إنجليزي) لكل مقسّم — كلما زاد الرقم، زادت «الضريبة» على النص العربي.</p>
+  <h2>الرسم: الفصحى مقابل الإنجليزية</h2>
+  <p>نسبة الرموز (عربي ÷ إنجليزي) لكل مقسّم، مرتّبة من الأكفأ. ١٫٠٠ يعني أن العربية لا تكلّف أكثر من الإنجليزية. الشريط الرمادي الصغير هو فترة الثقة ٩٥٪ (ضيّقة جدًا لأن العيّنة كبيرة).</p>
   <div id="chart-area"></div>
 </section>
 
 <section class="section-head">
-  <h2>الطريقة</h2>
-  <p>لكل مقسّم من المقسّمات الستة في <a href="../../الأداة/">الأداة</a>: نأخذ مجموعة جمل متوازية بالعربية والإنجليزية — نفس المعنى، مصادر مختلفة تغطي نطاقات استخدام متعددة (محادثة، توثيق تقني، أخبار) — نحسب عدد الرموز لكل جملة بكل لغة، ثم نأخذ متوسط رموز/كلمة لكل لغة عبر المجموعة كاملة. النسبة = متوسط رموز/كلمة عربي ÷ متوسط رموز/كلمة إنجليزي. المنهجية الكاملة وحجم العينة في <a href="../../المنهجية/">صفحة المنهجية</a>.</p>
+  <h2>اللهجات</h2>
+  <p>النسبة نفسها لكل لهجة في FLORES+. النجدية والعراقية والمصرية ضمن ±٣٪ من الفصحى عند كل المقسّمات، والشامية أرخص بـ١ إلى ٦٪، والمغربية أغلى بـ٣ إلى ١١٪. الرقم الأحمر في كل صف هو أرخص لهجة لذلك المقسّم.</p>
+  <div id="dialect-area"></div>
+</section>
+
+<section class="section-head">
+  <h2>ماذا يعني هذا عمليًا</h2>
+  <p>الرقم يقيس <b>تكلفة الإدخال والإخراج</b> فقط: كم رمزًا تدفع ثمنه وكم رمزًا ينتظره المستخدم، لا جودة الفهم ولا دقة الإجابة. لنموذج بمقسّم عامّ الطابع، المحادثة العربية تكلّف نحو ١٫٤ إلى ١٫٧ ضعف المحادثة الإنجليزية في نافذة السياق والزمن والسعر لكل رمز. لنموذج بمقسّم عربي، لا فرق يُذكر. راجع <a href="../../الحاسبة/">الحاسبة</a> لتحويل ذلك إلى أرقام لحجم عملك.</p>
+</section>
+
+<section class="section-head">
+  <h2>ملحق استكشافي: ٢٠ رسالة خليجية</h2>
+  <p class="note">مجموعة من ٢٠ رسالة واتساب بالخليجي مع نسخة فصحى ونسخة إنجليزية لكل منها، صيغت بمساعدة الذكاء الاصطناعي وراجعها متحدث خليجي. على كل المقسّمات، الخليجي كلّف <b>مثل الفصحى أو أقل</b> (النسبة خليجي ÷ فصحى بين ٠٫٨٧ و٠٫٩٨). عيّنة صغيرة وغير مستقلّة المصدر؛ تُنشر كإشارة لا كنتيجة. التفاصيل والفترات في <a href="../../results/w4/summary.md">results/w4/summary.md</a>.</p>
 </section>
 
 <section class="section-head">
   <h2>التحفظات</h2>
-  <p>ضريبة الرموز رقم إجمالي يعتمد بشدة على اختيار النصوص: الفصحى والعامية تختلفان، والنص التقني يختلف عن المحادثة اليومية. الرقم يقيس تكلفة الإدخال فقط — لا يقيس جودة فهم النموذج أو دقة إجابته. مقسّم «Jais» في هذا الموقع مصدره مرآة مجتمعية غير رسمية لأن مستودع الشركة الأصلي يتطلب مصادقة؛ التفاصيل في <a href="../../data/tokenizers.json">data/tokenizers.json</a>.</p>
+  <p>FLORES+ نص إخباري وموسوعي مترجم؛ المحادثة اليومية والنص التقني قد يعطيان نسبًا مختلفة. النسبة لا تقارن أسعار الخدمات السحابية مباشرة لأن السعر لكل رمز يختلف بين المزوّدين. «رموز لكل كلمة» في ملف البيانات مرجعية فقط: الكلمة العربية تحمل سوابق ولواحق فلا تُقارن بالكلمة الإنجليزية واحدة بواحدة. المقسّمات المقيّدة (Gemma 3، ALLaM، Jais 2، Fanar) قيست محليًا بعد قبول شروطها ولا يمكن تحميلها في المتصفح، لذلك لا تظهر في <a href="../../الأداة/">الأداة</a>.</p>
+</section>
+
+<section class="section-head">
+  <h2>إعادة الإنتاج</h2>
+  <p>السكربت <code>scripts/token_tax.py</code>، النتائج لكل جملة في <code>results/w4/per_sentence.csv</code>، والملخص في <code>results/w4/summary.md</code>. يحتاج التشغيل إلى تنزيل FLORES+ من Hugging Face وقبول شروط المقسّمات المقيّدة. البيئة المسجّلة: Python 3.9، transformers 4.57.6، tiktoken 0.14.0.</p>
+  <div class="en">
+    <p><b>English summary.</b> On 2,009 parallel FLORES+ sentences, an MSA sentence costs between 0.97× (ALLaM) and 1.66× (Llama 3.2) the tokens of its English counterpart. Arabic-first tokenizers (ALLaM, Jais, Jais 2, Jais 3) nearly erase the gap; general-purpose tokenizers (Qwen3, Llama 3.2, Gemma 3, OpenAI o200k) add 38–66%; Fanar is an Arabic model with a general-purpose-level cost (+45%). Mistral Tekken sits between (+25%); Jais 3 0.9B ships its own smaller tokenizer (+17%). Gulf, Iraqi and Egyptian cost the same as MSA (±3%), Levantine slightly less (up to −6%), Moroccan consistently more (+3% to +11% depending on the tokenizer). Metric: total Arabic tokens ÷ total English tokens on identical sentences, special tokens excluded, 95% bootstrap CI over sentences (2,000 resamples). Raw data: <span dir="ltr">data/tokenizers.json</span>, <span dir="ltr">results/w4/</span>. Corpus license CC BY-SA 4.0; code MIT.</p>
+  </div>
 </section>
 
 <footer>
-  <p>البيانات الخام: <a href="../../data/tokenizers.json">data/tokenizers.json</a>. جرّب القياس بنصّك أنت في <a href="../../الأداة/">الأداة</a>.</p>
+  <p>البيانات الخام: <a href="../../data/tokenizers.json">data/tokenizers.json</a>. جرّب نصّك أنت في <a href="../../الأداة/">الأداة</a>.</p>
   <p>للاستشهاد بهذه الصفحة، راجع <a href="../../المنهجية/">المنهجية</a>.</p>
 </footer>
 
@@ -63,78 +101,1102 @@
 <script type="application/json" id="tokenizers-data" data-src="/data/tokenizers.json">
 {
   "version": "0.1",
-  "updated": null,
-  "note": "لم يُقَس بعد. تُملأ القيم الرقمية من قياسات فعلية على نصوص عربية وإنجليزية متوازية — لا قيم مفترضة.",
-  "default_tokenizer": "gpt-4o",
+  "generated": "2026-10-17",
+  "method": {
+    "corpus": "FLORES+ (openlanguagedata/flores_plus), dev + devtest, CC BY-SA 4.0",
+    "sentences": 2009,
+    "metric": "sum(Arabic tokens) / sum(English tokens) over identical parallel sentences",
+    "ci": "95% percentile bootstrap over sentences, 2000 resamples, seed 42",
+    "special_tokens": "excluded",
+    "environment": {
+      "date": "2026-10-17",
+      "python": "3.9.7",
+      "platform": "macOS-10.16-x86_64-i386-64bit",
+      "transformers": "4.57.6",
+      "tiktoken": "0.14.0"
+    }
+  },
+  "varieties": [
+    {
+      "id": "eng",
+      "flores": "eng_Latn",
+      "label_ar": "الإنجليزية",
+      "label_en": "English"
+    },
+    {
+      "id": "msa",
+      "flores": "arb_Arab",
+      "label_ar": "الفصحى",
+      "label_en": "Modern Standard Arabic"
+    },
+    {
+      "id": "najdi",
+      "flores": "ars_Arab",
+      "label_ar": "النجدية",
+      "label_en": "Najdi"
+    },
+    {
+      "id": "mesopotamian",
+      "flores": "acm_Arab",
+      "label_ar": "العراقية",
+      "label_en": "Mesopotamian"
+    },
+    {
+      "id": "egyptian",
+      "flores": "arz_Arab",
+      "label_ar": "المصرية",
+      "label_en": "Egyptian"
+    },
+    {
+      "id": "levantine_n",
+      "flores": "apc_Arab_nort3139",
+      "label_ar": "الشامية الشمالية",
+      "label_en": "North Levantine"
+    },
+    {
+      "id": "levantine_s",
+      "flores": "apc_Arab_sout3123",
+      "label_ar": "الشامية الجنوبية",
+      "label_en": "South Levantine"
+    },
+    {
+      "id": "moroccan",
+      "flores": "ary_Arab",
+      "label_ar": "المغربية",
+      "label_en": "Moroccan"
+    }
+  ],
   "tokenizers": [
     {
-      "id": "gpt-4o",
-      "name": "GPT-4o",
-      "encoding": "o200k_base",
+      "id": "o200k",
+      "source": "o200k_base",
+      "vocab": 200019,
+      "revision": "tiktoken 0.14.0",
+      "status": "measured",
+      "ratios": {
+        "eng": {
+          "ratio": 1,
+          "ci95": [
+            1,
+            1
+          ],
+          "tokens_per_word": 1.223
+        },
+        "msa": {
+          "ratio": 1.382,
+          "ci95": [
+            1.372,
+            1.392
+          ],
+          "tokens_per_word": 1.886
+        },
+        "najdi": {
+          "ratio": 1.387,
+          "ci95": [
+            1.377,
+            1.397
+          ],
+          "tokens_per_word": 1.889
+        },
+        "mesopotamian": {
+          "ratio": 1.386,
+          "ci95": [
+            1.376,
+            1.397
+          ],
+          "tokens_per_word": 1.982
+        },
+        "egyptian": {
+          "ratio": 1.408,
+          "ci95": [
+            1.397,
+            1.419
+          ],
+          "tokens_per_word": 1.932
+        },
+        "levantine_n": {
+          "ratio": 1.351,
+          "ci95": [
+            1.342,
+            1.361
+          ],
+          "tokens_per_word": 2.016
+        },
+        "levantine_s": {
+          "ratio": 1.341,
+          "ci95": [
+            1.332,
+            1.35
+          ],
+          "tokens_per_word": 1.904
+        },
+        "moroccan": {
+          "ratio": 1.484,
+          "ci95": [
+            1.472,
+            1.496
+          ],
+          "tokens_per_word": 2.078
+        }
+      },
+      "name": "o200k (GPT-4o)",
       "provider": "OpenAI",
+      "license": "proprietary (tokenizer public via tiktoken, MIT)",
       "hf_model": "Xenova/gpt-4o",
-      "english_tokens_per_word": null,
-      "arabic_tokens_per_word": null,
-      "ratio": null,
-      "sample_size": null
+      "ratio": 1.382,
+      "ci95": [
+        1.372,
+        1.392
+      ],
+      "arabic_tokens_per_word": 1.886,
+      "english_tokens_per_word": 1.223
     },
     {
-      "id": "gpt-3.5-4",
-      "name": "GPT-3.5 / GPT-4",
-      "encoding": "cl100k_base",
-      "provider": "OpenAI",
-      "hf_model": "Xenova/gpt-3.5-turbo",
-      "english_tokens_per_word": null,
-      "arabic_tokens_per_word": null,
-      "ratio": null,
-      "sample_size": null
+      "id": "qwen3",
+      "source": "Qwen/Qwen3-4B",
+      "vocab": 151669,
+      "revision": "1cfa9a7208912126459214e8b04321603b3df60c",
+      "status": "measured",
+      "ratios": {
+        "eng": {
+          "ratio": 1,
+          "ci95": [
+            1,
+            1
+          ],
+          "tokens_per_word": 1.257
+        },
+        "msa": {
+          "ratio": 1.629,
+          "ci95": [
+            1.617,
+            1.642
+          ],
+          "tokens_per_word": 2.286
+        },
+        "najdi": {
+          "ratio": 1.633,
+          "ci95": [
+            1.621,
+            1.647
+          ],
+          "tokens_per_word": 2.288
+        },
+        "mesopotamian": {
+          "ratio": 1.622,
+          "ci95": [
+            1.61,
+            1.635
+          ],
+          "tokens_per_word": 2.384
+        },
+        "egyptian": {
+          "ratio": 1.636,
+          "ci95": [
+            1.622,
+            1.649
+          ],
+          "tokens_per_word": 2.307
+        },
+        "levantine_n": {
+          "ratio": 1.581,
+          "ci95": [
+            1.569,
+            1.592
+          ],
+          "tokens_per_word": 2.424
+        },
+        "levantine_s": {
+          "ratio": 1.55,
+          "ci95": [
+            1.539,
+            1.561
+          ],
+          "tokens_per_word": 2.263
+        },
+        "moroccan": {
+          "ratio": 1.695,
+          "ci95": [
+            1.68,
+            1.709
+          ],
+          "tokens_per_word": 2.44
+        }
+      },
+      "name": "Qwen3",
+      "provider": "Alibaba",
+      "license": "Apache 2.0",
+      "hf_model": "Qwen/Qwen3-4B",
+      "ratio": 1.629,
+      "ci95": [
+        1.617,
+        1.642
+      ],
+      "arabic_tokens_per_word": 2.286,
+      "english_tokens_per_word": 1.257
     },
     {
-      "id": "llama-3",
-      "name": "Llama 3",
-      "encoding": null,
+      "id": "llama3.2",
+      "source": "meta-llama/Llama-3.2-1B-Instruct",
+      "vocab": 128256,
+      "revision": "9213176726f574b556790deb65791e0c5aa438b6",
+      "status": "measured",
+      "ratios": {
+        "eng": {
+          "ratio": 1,
+          "ci95": [
+            1,
+            1
+          ],
+          "tokens_per_word": 1.236
+        },
+        "msa": {
+          "ratio": 1.656,
+          "ci95": [
+            1.644,
+            1.668
+          ],
+          "tokens_per_word": 2.284
+        },
+        "najdi": {
+          "ratio": 1.663,
+          "ci95": [
+            1.651,
+            1.675
+          ],
+          "tokens_per_word": 2.29
+        },
+        "mesopotamian": {
+          "ratio": 1.649,
+          "ci95": [
+            1.637,
+            1.661
+          ],
+          "tokens_per_word": 2.382
+        },
+        "egyptian": {
+          "ratio": 1.649,
+          "ci95": [
+            1.636,
+            1.662
+          ],
+          "tokens_per_word": 2.287
+        },
+        "levantine_n": {
+          "ratio": 1.593,
+          "ci95": [
+            1.582,
+            1.605
+          ],
+          "tokens_per_word": 2.402
+        },
+        "levantine_s": {
+          "ratio": 1.576,
+          "ci95": [
+            1.565,
+            1.587
+          ],
+          "tokens_per_word": 2.261
+        },
+        "moroccan": {
+          "ratio": 1.706,
+          "ci95": [
+            1.692,
+            1.72
+          ],
+          "tokens_per_word": 2.415
+        }
+      },
+      "name": "Llama 3.2",
       "provider": "Meta",
+      "license": "Llama 3.2 Community License",
       "hf_model": "Xenova/llama-3-tokenizer",
-      "english_tokens_per_word": null,
-      "arabic_tokens_per_word": null,
-      "ratio": null,
-      "sample_size": null
+      "hf_model_note": "Llama 3.2 shares the Llama 3 tokenizer (128,256 tokens); the official repo is gated, so the browser loads a public mirror.",
+      "ratio": 1.656,
+      "ci95": [
+        1.644,
+        1.668
+      ],
+      "arabic_tokens_per_word": 2.284,
+      "english_tokens_per_word": 1.236
     },
     {
-      "id": "mistral",
-      "name": "Mistral",
-      "encoding": null,
+      "id": "gemma3",
+      "source": "google/gemma-3-1b-it",
+      "vocab": 262145,
+      "revision": "dcc83ea841ab6100d6b47a070329e1ba4cf78752",
+      "status": "measured",
+      "ratios": {
+        "eng": {
+          "ratio": 1,
+          "ci95": [
+            1,
+            1
+          ],
+          "tokens_per_word": 1.237
+        },
+        "msa": {
+          "ratio": 1.47,
+          "ci95": [
+            1.459,
+            1.481
+          ],
+          "tokens_per_word": 2.028
+        },
+        "najdi": {
+          "ratio": 1.474,
+          "ci95": [
+            1.463,
+            1.486
+          ],
+          "tokens_per_word": 2.031
+        },
+        "mesopotamian": {
+          "ratio": 1.461,
+          "ci95": [
+            1.45,
+            1.472
+          ],
+          "tokens_per_word": 2.112
+        },
+        "egyptian": {
+          "ratio": 1.436,
+          "ci95": [
+            1.424,
+            1.447
+          ],
+          "tokens_per_word": 1.992
+        },
+        "levantine_n": {
+          "ratio": 1.415,
+          "ci95": [
+            1.404,
+            1.425
+          ],
+          "tokens_per_word": 2.135
+        },
+        "levantine_s": {
+          "ratio": 1.389,
+          "ci95": [
+            1.379,
+            1.399
+          ],
+          "tokens_per_word": 1.994
+        },
+        "moroccan": {
+          "ratio": 1.519,
+          "ci95": [
+            1.507,
+            1.531
+          ],
+          "tokens_per_word": 2.151
+        }
+      },
+      "name": "Gemma 3",
+      "provider": "Google",
+      "license": "Gemma Terms of Use",
+      "hf_model": null,
+      "hf_model_note": "gated repo; measured locally, not loadable in the browser",
+      "ratio": 1.47,
+      "ci95": [
+        1.459,
+        1.481
+      ],
+      "arabic_tokens_per_word": 2.028,
+      "english_tokens_per_word": 1.237
+    },
+    {
+      "id": "mistral-tekken",
+      "source": "mistralai/Mistral-Nemo-Instruct-2407",
+      "vocab": 131072,
+      "revision": "04d8a90549d23fc6bd7f642064003592df51e9b3",
+      "status": "measured",
+      "ratios": {
+        "eng": {
+          "ratio": 1,
+          "ci95": [
+            1,
+            1
+          ],
+          "tokens_per_word": 1.267
+        },
+        "msa": {
+          "ratio": 1.245,
+          "ci95": [
+            1.236,
+            1.254
+          ],
+          "tokens_per_word": 1.761
+        },
+        "najdi": {
+          "ratio": 1.25,
+          "ci95": [
+            1.241,
+            1.26
+          ],
+          "tokens_per_word": 1.765
+        },
+        "mesopotamian": {
+          "ratio": 1.262,
+          "ci95": [
+            1.253,
+            1.271
+          ],
+          "tokens_per_word": 1.869
+        },
+        "egyptian": {
+          "ratio": 1.288,
+          "ci95": [
+            1.278,
+            1.297
+          ],
+          "tokens_per_word": 1.831
+        },
+        "levantine_n": {
+          "ratio": 1.236,
+          "ci95": [
+            1.227,
+            1.244
+          ],
+          "tokens_per_word": 1.911
+        },
+        "levantine_s": {
+          "ratio": 1.229,
+          "ci95": [
+            1.221,
+            1.237
+          ],
+          "tokens_per_word": 1.808
+        },
+        "moroccan": {
+          "ratio": 1.37,
+          "ci95": [
+            1.359,
+            1.382
+          ],
+          "tokens_per_word": 1.988
+        }
+      },
+      "name": "Mistral Tekken",
       "provider": "Mistral AI",
-      "hf_model": "Xenova/mistral-tokenizer-v3",
-      "english_tokens_per_word": null,
-      "arabic_tokens_per_word": null,
-      "ratio": null,
-      "sample_size": null
+      "license": "Apache 2.0",
+      "hf_model": "mistralai/Mistral-Nemo-Instruct-2407",
+      "ratio": 1.245,
+      "ci95": [
+        1.236,
+        1.254
+      ],
+      "arabic_tokens_per_word": 1.761,
+      "english_tokens_per_word": 1.267
+    },
+    {
+      "id": "allam",
+      "source": "humain-ai/ALLaM-7B-Instruct-preview",
+      "vocab": 64000,
+      "revision": "a28dd1e67420cde72d3629c8633a974cf7d9c366",
+      "status": "measured",
+      "ratios": {
+        "eng": {
+          "ratio": 1,
+          "ci95": [
+            1,
+            1
+          ],
+          "tokens_per_word": 1.339
+        },
+        "msa": {
+          "ratio": 0.966,
+          "ci95": [
+            0.959,
+            0.973
+          ],
+          "tokens_per_word": 1.444
+        },
+        "najdi": {
+          "ratio": 0.969,
+          "ci95": [
+            0.962,
+            0.976
+          ],
+          "tokens_per_word": 1.446
+        },
+        "mesopotamian": {
+          "ratio": 0.958,
+          "ci95": [
+            0.951,
+            0.964
+          ],
+          "tokens_per_word": 1.499
+        },
+        "egyptian": {
+          "ratio": 0.973,
+          "ci95": [
+            0.965,
+            0.98
+          ],
+          "tokens_per_word": 1.462
+        },
+        "levantine_n": {
+          "ratio": 0.942,
+          "ci95": [
+            0.936,
+            0.949
+          ],
+          "tokens_per_word": 1.54
+        },
+        "levantine_s": {
+          "ratio": 0.936,
+          "ci95": [
+            0.93,
+            0.942
+          ],
+          "tokens_per_word": 1.456
+        },
+        "moroccan": {
+          "ratio": 1.075,
+          "ci95": [
+            1.066,
+            1.084
+          ],
+          "tokens_per_word": 1.648
+        }
+      },
+      "name": "ALLaM",
+      "provider": "HUMAIN / SDAIA",
+      "license": "ALLaM license (gated)",
+      "hf_model": null,
+      "hf_model_note": "gated repo; measured locally, not loadable in the browser",
+      "ratio": 0.966,
+      "ci95": [
+        0.959,
+        0.973
+      ],
+      "arabic_tokens_per_word": 1.444,
+      "english_tokens_per_word": 1.339
     },
     {
       "id": "jais",
-      "name": "Jais",
-      "encoding": null,
-      "provider": "G42 / Inception",
+      "source": "inceptionai/jais-family-6p7b-chat",
+      "vocab": 84992,
+      "revision": "683805efe6126c6536feb4aa23317e70222ac94c",
+      "status": "measured",
+      "ratios": {
+        "eng": {
+          "ratio": 1,
+          "ci95": [
+            1,
+            1
+          ],
+          "tokens_per_word": 1.268
+        },
+        "msa": {
+          "ratio": 1.013,
+          "ci95": [
+            1.005,
+            1.021
+          ],
+          "tokens_per_word": 1.433
+        },
+        "najdi": {
+          "ratio": 1.016,
+          "ci95": [
+            1.008,
+            1.025
+          ],
+          "tokens_per_word": 1.436
+        },
+        "mesopotamian": {
+          "ratio": 0.982,
+          "ci95": [
+            0.975,
+            0.99
+          ],
+          "tokens_per_word": 1.455
+        },
+        "egyptian": {
+          "ratio": 1.004,
+          "ci95": [
+            0.996,
+            1.012
+          ],
+          "tokens_per_word": 1.428
+        },
+        "levantine_n": {
+          "ratio": 0.972,
+          "ci95": [
+            0.965,
+            0.979
+          ],
+          "tokens_per_word": 1.503
+        },
+        "levantine_s": {
+          "ratio": 0.957,
+          "ci95": [
+            0.951,
+            0.963
+          ],
+          "tokens_per_word": 1.408
+        },
+        "moroccan": {
+          "ratio": 1.103,
+          "ci95": [
+            1.092,
+            1.113
+          ],
+          "tokens_per_word": 1.6
+        }
+      },
+      "name": "Jais (family 6.7B)",
+      "provider": "Inception / G42",
+      "license": "Apache 2.0 (gated repo)",
       "hf_model": "derek-thomas/jais-13b-chat-hf",
-      "hf_model_note": "مرآة مجتمعية غير رسمية — مستودع Inception الرسمي مقيّد ويتطلب مصادقة، وهذا الموقع لا يخزّن مفاتيح وصول.",
-      "english_tokens_per_word": null,
-      "arabic_tokens_per_word": null,
-      "ratio": null,
-      "sample_size": null
+      "hf_model_note": "official repo is gated; the browser loads a community mirror with the same 84,992-token vocabulary",
+      "ratio": 1.013,
+      "ci95": [
+        1.005,
+        1.021
+      ],
+      "arabic_tokens_per_word": 1.433,
+      "english_tokens_per_word": 1.268
     },
     {
-      "id": "command-r",
-      "name": "Command R",
-      "encoding": null,
-      "provider": "Cohere",
-      "hf_model": "Xenova/c4ai-command-r-v01-tokenizer",
-      "english_tokens_per_word": null,
-      "arabic_tokens_per_word": null,
-      "ratio": null,
-      "sample_size": null
+      "id": "jais2",
+      "source": "inception42/Jais-2-8B-Chat",
+      "vocab": 150222,
+      "revision": "da0e1639cd92b508b24120f7f77f5270a8465dc4",
+      "status": "measured",
+      "ratios": {
+        "eng": {
+          "ratio": 1,
+          "ci95": [
+            1,
+            1
+          ],
+          "tokens_per_word": 1.249
+        },
+        "msa": {
+          "ratio": 1.047,
+          "ci95": [
+            1.038,
+            1.057
+          ],
+          "tokens_per_word": 1.46
+        },
+        "najdi": {
+          "ratio": 1.05,
+          "ci95": [
+            1.041,
+            1.059
+          ],
+          "tokens_per_word": 1.461
+        },
+        "mesopotamian": {
+          "ratio": 1.001,
+          "ci95": [
+            0.993,
+            1.008
+          ],
+          "tokens_per_word": 1.461
+        },
+        "egyptian": {
+          "ratio": 1.018,
+          "ci95": [
+            1.01,
+            1.026
+          ],
+          "tokens_per_word": 1.427
+        },
+        "levantine_n": {
+          "ratio": 1,
+          "ci95": [
+            0.993,
+            1.008
+          ],
+          "tokens_per_word": 1.524
+        },
+        "levantine_s": {
+          "ratio": 0.995,
+          "ci95": [
+            0.988,
+            1.001
+          ],
+          "tokens_per_word": 1.442
+        },
+        "moroccan": {
+          "ratio": 1.128,
+          "ci95": [
+            1.117,
+            1.139
+          ],
+          "tokens_per_word": 1.613
+        }
+      },
+      "name": "Jais 2",
+      "provider": "Inception",
+      "license": "gated repo",
+      "hf_model": null,
+      "hf_model_note": "gated repo; measured locally, not loadable in the browser",
+      "ratio": 1.047,
+      "ci95": [
+        1.038,
+        1.057
+      ],
+      "arabic_tokens_per_word": 1.46,
+      "english_tokens_per_word": 1.249
+    },
+    {
+      "id": "jais3",
+      "source": "IFM/Jais-3-7B-FP8",
+      "vocab": 250624,
+      "revision": "10d6507ddb2f43e34f9c4d3ae37c89f61f2685de",
+      "status": "measured",
+      "ratios": {
+        "eng": {
+          "ratio": 1,
+          "ci95": [
+            1,
+            1
+          ],
+          "tokens_per_word": 1.21
+        },
+        "msa": {
+          "ratio": 1.05,
+          "ci95": [
+            1.042,
+            1.058
+          ],
+          "tokens_per_word": 1.418
+        },
+        "najdi": {
+          "ratio": 1.054,
+          "ci95": [
+            1.046,
+            1.062
+          ],
+          "tokens_per_word": 1.421
+        },
+        "mesopotamian": {
+          "ratio": 1.033,
+          "ci95": [
+            1.025,
+            1.04
+          ],
+          "tokens_per_word": 1.461
+        },
+        "egyptian": {
+          "ratio": 1.048,
+          "ci95": [
+            1.041,
+            1.056
+          ],
+          "tokens_per_word": 1.424
+        },
+        "levantine_n": {
+          "ratio": 1.012,
+          "ci95": [
+            1.005,
+            1.019
+          ],
+          "tokens_per_word": 1.494
+        },
+        "levantine_s": {
+          "ratio": 1.006,
+          "ci95": [
+            0.999,
+            1.012
+          ],
+          "tokens_per_word": 1.413
+        },
+        "moroccan": {
+          "ratio": 1.14,
+          "ci95": [
+            1.131,
+            1.15
+          ],
+          "tokens_per_word": 1.58
+        }
+      },
+      "name": "Jais 3 (3.7B–375B)",
+      "provider": "MBZUAI IFM / Inception",
+      "license": "Apache 2.0",
+      "hf_model": "IFM/Jais-3-7B-FP8",
+      "ratio": 1.05,
+      "ci95": [
+        1.042,
+        1.058
+      ],
+      "arabic_tokens_per_word": 1.418,
+      "english_tokens_per_word": 1.21
+    },
+    {
+      "id": "jais3-0.9b",
+      "source": "IFM/Jais-3-0.9B-MLX-bf16",
+      "vocab": 64256,
+      "revision": "1d5cf547ae5292eaf066408bcf763b4aa21c03e9",
+      "status": "measured",
+      "ratios": {
+        "eng": {
+          "ratio": 1,
+          "ci95": [
+            1,
+            1
+          ],
+          "tokens_per_word": 1.31
+        },
+        "msa": {
+          "ratio": 1.165,
+          "ci95": [
+            1.156,
+            1.174
+          ],
+          "tokens_per_word": 1.703
+        },
+        "najdi": {
+          "ratio": 1.168,
+          "ci95": [
+            1.16,
+            1.177
+          ],
+          "tokens_per_word": 1.705
+        },
+        "mesopotamian": {
+          "ratio": 1.163,
+          "ci95": [
+            1.154,
+            1.171
+          ],
+          "tokens_per_word": 1.78
+        },
+        "egyptian": {
+          "ratio": 1.176,
+          "ci95": [
+            1.167,
+            1.185
+          ],
+          "tokens_per_word": 1.728
+        },
+        "levantine_n": {
+          "ratio": 1.143,
+          "ci95": [
+            1.135,
+            1.151
+          ],
+          "tokens_per_word": 1.826
+        },
+        "levantine_s": {
+          "ratio": 1.127,
+          "ci95": [
+            1.12,
+            1.134
+          ],
+          "tokens_per_word": 1.713
+        },
+        "moroccan": {
+          "ratio": 1.264,
+          "ci95": [
+            1.253,
+            1.275
+          ],
+          "tokens_per_word": 1.896
+        }
+      },
+      "name": "Jais 3 0.9B",
+      "provider": "MBZUAI IFM / Inception",
+      "license": "Apache 2.0",
+      "hf_model": "IFM/Jais-3-0.9B-MLX-bf16",
+      "ratio": 1.165,
+      "ci95": [
+        1.156,
+        1.174
+      ],
+      "arabic_tokens_per_word": 1.703,
+      "english_tokens_per_word": 1.31
+    },
+    {
+      "id": "fanar",
+      "source": "QCRI/Fanar-1-9B-Instruct",
+      "vocab": 128256,
+      "revision": "d30938d0efb1fd251727ee96df6987802ff84662",
+      "status": "measured",
+      "ratios": {
+        "eng": {
+          "ratio": 1,
+          "ci95": [
+            1,
+            1
+          ],
+          "tokens_per_word": 1.269
+        },
+        "msa": {
+          "ratio": 1.453,
+          "ci95": [
+            1.442,
+            1.465
+          ],
+          "tokens_per_word": 2.058
+        },
+        "najdi": {
+          "ratio": 1.459,
+          "ci95": [
+            1.448,
+            1.47
+          ],
+          "tokens_per_word": 2.062
+        },
+        "mesopotamian": {
+          "ratio": 1.458,
+          "ci95": [
+            1.447,
+            1.469
+          ],
+          "tokens_per_word": 2.163
+        },
+        "egyptian": {
+          "ratio": 1.458,
+          "ci95": [
+            1.446,
+            1.469
+          ],
+          "tokens_per_word": 2.076
+        },
+        "levantine_n": {
+          "ratio": 1.412,
+          "ci95": [
+            1.402,
+            1.423
+          ],
+          "tokens_per_word": 2.187
+        },
+        "levantine_s": {
+          "ratio": 1.391,
+          "ci95": [
+            1.381,
+            1.401
+          ],
+          "tokens_per_word": 2.05
+        },
+        "moroccan": {
+          "ratio": 1.522,
+          "ci95": [
+            1.509,
+            1.535
+          ],
+          "tokens_per_word": 2.212
+        }
+      },
+      "name": "Fanar",
+      "provider": "QCRI",
+      "license": "gated repo",
+      "hf_model": null,
+      "hf_model_note": "gated repo; measured locally, not loadable in the browser",
+      "ratio": 1.453,
+      "ci95": [
+        1.442,
+        1.465
+      ],
+      "arabic_tokens_per_word": 2.058,
+      "english_tokens_per_word": 1.269
     }
-  ]
+  ],
+  "custom_sets": {
+    "gulf_v0": {
+      "source": "drafted with AI assistance (Claude), reviewed and edited by a native Gulf speaker; corpus/gulf_v0.txt, MIT",
+      "items": 20,
+      "results": {
+        "o200k": {
+          "gulf_vs_en": 1.149,
+          "gulf_vs_en_ci95": "1.071–1.222",
+          "msa_vs_en": 1.213,
+          "msa_vs_en_ci95": "1.120–1.313",
+          "gulf_vs_msa": 0.947,
+          "gulf_vs_msa_ci95": "0.889–1.002"
+        },
+        "qwen3": {
+          "gulf_vs_en": 1.243,
+          "gulf_vs_en_ci95": "1.176–1.310",
+          "msa_vs_en": 1.308,
+          "msa_vs_en_ci95": "1.215–1.405",
+          "gulf_vs_msa": 0.951,
+          "gulf_vs_msa_ci95": "0.893–1.011"
+        },
+        "llama3.2": {
+          "gulf_vs_en": 1.24,
+          "gulf_vs_en_ci95": "1.165–1.307",
+          "msa_vs_en": 1.39,
+          "msa_vs_en_ci95": "1.296–1.489",
+          "gulf_vs_msa": 0.892,
+          "gulf_vs_msa_ci95": "0.837–0.943"
+        },
+        "gemma3": {
+          "gulf_vs_en": 1.043,
+          "gulf_vs_en_ci95": "0.982–1.102",
+          "msa_vs_en": 1.193,
+          "msa_vs_en_ci95": "1.107–1.282",
+          "gulf_vs_msa": 0.874,
+          "gulf_vs_msa_ci95": "0.810–0.934"
+        },
+        "mistral-tekken": {
+          "gulf_vs_en": 1.049,
+          "gulf_vs_en_ci95": "0.978–1.109",
+          "msa_vs_en": 1.07,
+          "msa_vs_en_ci95": "1.005–1.139",
+          "gulf_vs_msa": 0.981,
+          "gulf_vs_msa_ci95": "0.916–1.040"
+        },
+        "allam": {
+          "gulf_vs_en": 0.729,
+          "gulf_vs_en_ci95": "0.663–0.789",
+          "msa_vs_en": 0.77,
+          "msa_vs_en_ci95": "0.710–0.827",
+          "gulf_vs_msa": 0.947,
+          "gulf_vs_msa_ci95": "0.891–1.000"
+        },
+        "jais": {
+          "gulf_vs_en": 0.81,
+          "gulf_vs_en_ci95": "0.752–0.864",
+          "msa_vs_en": 0.894,
+          "msa_vs_en_ci95": "0.824–0.952",
+          "gulf_vs_msa": 0.907,
+          "gulf_vs_msa_ci95": "0.842–0.981"
+        },
+        "jais2": {
+          "gulf_vs_en": 0.819,
+          "gulf_vs_en_ci95": "0.764–0.870",
+          "msa_vs_en": 0.907,
+          "msa_vs_en_ci95": "0.835–0.969",
+          "gulf_vs_msa": 0.904,
+          "gulf_vs_msa_ci95": "0.840–0.978"
+        },
+        "jais3": {
+          "gulf_vs_en": 0.838,
+          "gulf_vs_en_ci95": "0.782–0.890",
+          "msa_vs_en": 0.874,
+          "msa_vs_en_ci95": "0.807–0.937",
+          "gulf_vs_msa": 0.96,
+          "gulf_vs_msa_ci95": "0.904–1.026"
+        },
+        "jais3-0.9b": {
+          "gulf_vs_en": 0.932,
+          "gulf_vs_en_ci95": "0.876–0.990",
+          "msa_vs_en": 0.994,
+          "msa_vs_en_ci95": "0.939–1.052",
+          "gulf_vs_msa": 0.937,
+          "gulf_vs_msa_ci95": "0.880–0.991"
+        },
+        "fanar": {
+          "gulf_vs_en": 1.099,
+          "gulf_vs_en_ci95": "1.022–1.167",
+          "msa_vs_en": 1.226,
+          "msa_vs_en_ci95": "1.147–1.307",
+          "gulf_vs_msa": 0.896,
+          "gulf_vs_msa_ci95": "0.847–0.947"
+        }
+      }
+    }
+  },
+  "updated": "2026-10-17",
+  "default_tokenizer": "o200k",
+  "note": "ratio = مجموع رموز النص العربي ÷ مجموع رموز النص الإنجليزي على الجمل المتوازية نفسها (FLORES+). الحقول العلوية ratio/ci95/tokens_per_word هي صف الفصحى (msa) منسوخًا لتوافق الصفحات؛ التفاصيل لكل لهجة في ratios."
 }
 </script>
 
@@ -153,43 +1215,49 @@
     }
   }
 
-  function ratioOf(t){
-    if (t.ratio != null) return t.ratio;
-    if (t.arabic_tokens_per_word != null && t.english_tokens_per_word != null) {
-      return t.arabic_tokens_per_word / t.english_tokens_per_word;
-    }
-    return null;
-  }
+  const esc = s => MiqyasUtil.escapeHtml(String(s));
+  const msa = t => (t.ratios && t.ratios.msa) ? t.ratios.msa : null;
 
   function renderChart(data){
-    const area = document.getElementById("chart-area");
-    const ratios = data.tokenizers.map(ratioOf);
-    const measuredCount = ratios.filter(r => r != null).length;
-    const max = Math.max(0.001, ...ratios.filter(r => r != null)) * 1.2;
-
-    let rows = data.tokenizers.map((t, i) => {
-      const r = ratios[i];
-      const pct = r != null ? Math.min(100, (r / max) * 100) : 0;
-      const trackClass = "bar-track" + (r != null ? " has-value" : "");
-      const valueText = r != null ? "×" + r.toFixed(2) : "لم يُقَس بعد";
-      const valueClass = "bar-value" + (r != null ? " measured" : "");
+    const rows = data.tokenizers.filter(t => msa(t)).sort((a, b) => msa(a).ratio - msa(b).ratio);
+    const max = Math.max(...rows.map(t => msa(t).ci95[1])) * 1.08;
+    const html = rows.map(t => {
+      const m = msa(t);
+      const pct = (m.ratio / max) * 100;
+      const lo = (m.ci95[0] / max) * 100, hi = (m.ci95[1] / max) * 100;
       return "<tr>"
-        + '<td class="bar-label">' + MiqyasUtil.escapeHtml(t.name) + "</td>"
-        + '<td class="bar-cell"><div class="' + trackClass + '"><div class="bar-fill" style="width:' + pct + '%"></div></div></td>'
-        + '<td class="' + valueClass + '">' + valueText + "</td>"
+        + '<td class="bar-label">' + esc(t.name) + "</td>"
+        + '<td class="bar-cell"><div class="bar-track has-value" style="position:relative">'
+        +   '<div class="bar-fill" style="width:' + pct.toFixed(2) + '%"></div>'
+        +   '<div style="position:absolute;top:0;height:100%;inset-inline-start:' + lo.toFixed(2) + '%;width:' + Math.max(0.4, hi - lo).toFixed(2) + '%;background:var(--ink);opacity:.35"></div>'
+        + "</div></td>"
+        + '<td class="bar-value measured">×' + m.ratio.toFixed(2) + ' <span class="ci">[' + m.ci95[0].toFixed(2) + '–' + m.ci95[1].toFixed(2) + ']</span></td>'
         + "</tr>";
     }).join("");
+    document.getElementById("chart-area").innerHTML = '<table class="bar-table">'
+      + '<caption>' + rows.length + ' مقسّمًا · ' + esc(data.method.sentences) + ' جملة · الفصحى ÷ الإنجليزية</caption>'
+      + "<tbody>" + html + "</tbody></table>";
+  }
 
-    area.innerHTML = '<table class="bar-table">'
-      + '<caption>' + measuredCount + ' من ' + data.tokenizers.length + ' مقسّمات مقاسة</caption>'
-      + "<tbody>" + rows + "</tbody></table>";
+  function renderDialects(data){
+    const vars = data.varieties.filter(v => v.id !== "eng");
+    const rows = data.tokenizers.filter(t => msa(t)).sort((a, b) => msa(a).ratio - msa(b).ratio);
+    let h = '<table class="data-table"><thead><tr><th>المقسّم</th>' + vars.map(v => "<th>" + esc(v.label_ar) + "</th>").join("") + "</tr></thead><tbody>";
+    for (const t of rows) {
+      const best = Math.min(...vars.map(v => t.ratios[v.id] ? t.ratios[v.id].ratio : Infinity));
+      h += "<tr><td>" + esc(t.name) + "</td>" + vars.map(v => {
+        const r = t.ratios[v.id];
+        return r ? '<td class="num' + (r.ratio === best ? " best" : "") + '">' + r.ratio.toFixed(2) + "</td>" : "<td>—</td>";
+      }).join("") + "</tr>";
+    }
+    document.getElementById("dialect-area").innerHTML = h + "</tbody></table>";
   }
 
   loadData().then(data => {
-    document.getElementById("d").textContent = data.updated || "لم يُحدَّث بعد";
-    const anyMeasured = data.tokenizers.some(t => ratioOf(t) != null);
-    document.getElementById("status").textContent = anyMeasured ? "مقاسة جزئيًا" : "قيد القياس";
+    document.getElementById("d").textContent = data.updated || data.generated || "—";
+    document.getElementById("n").textContent = String(data.tokenizers.length);
     renderChart(data);
+    renderDialects(data);
   });
 })();
 </script>

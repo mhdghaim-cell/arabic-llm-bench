@@ -1,8 +1,21 @@
 # مقياس (miqyas)
 
-مرجع عربي مفتوح لتشغيل نماذج الذكاء الاصطناعي محليًا: مسرد مصطلحات، أداة لقياس
-الرموز في النصوص العربية، نتائج قياسات على أجهزة حقيقية، وحاسبة تكلفة. كل رقم في
-الموقع مصدره ملف بيانات يمكن لأي أحد فحصه أو إعادة استخدامه.
+**اختبار مستقل للنماذج مفتوحة الأوزان بالعربية.** لوحة الصدارة تقول لك كم سجّل
+النموذج؛ مقياس يقول لك ماذا يحدث عندما تستخدمه: كلفة الرموز، اللهجات، استدعاء
+الأدوات في مهام حقيقية، والسرعة على أجهزة يملكها الناس فعلًا. البروتوكولات تُسجَّل
+في git قبل التشغيل، والمخرجات الخام تُنشر كاملة.
+
+المؤسّس: **محمود دغيم** (Mahmoud Deghaim). سياسة [الاستقلالية والتمويل](docs/independence.md).
+
+## النتائج المنشورة
+
+| | التاريخ | الصفحة | البيانات |
+|---|---|---|---|
+| **ضريبة الرموز** — ٢٬٠٠٩ جملة، ١١ مقسّمًا، ٧ لهجات، مع فترات ثقة | 2026-10-17 | [findings/token-tax](findings/token-tax/) | [results/w4](results/w4/) |
+| **موظف الاستقبال v1** — الإجراء الأول على ٤٠ رسالة خليجية (استكشافي) | 2026-10-19 | [docs/frontdesk_protocol_v1.md](docs/frontdesk_protocol_v1.md) | [results/frontdesk](results/frontdesk/) |
+| **موظف الاستقبال v2** — محادثات كاملة مع عيادة محاكاة (مسجَّل مسبقًا، قيد التشغيل) | — | [docs/frontdesk_protocol_v2.md](docs/frontdesk_protocol_v2.md) | — |
+
+الموقع يضم أيضًا مسرد مصطلحات، وأداة لقياس الرموز في النصوص العربية، وحاسبة تكلفة.
 
 - **مجاني ومفتوح** — بلا تسجيل، بلا إعلانات، بلا تتبّع.
 - **لا نخترع القياسات** — أي قيمة لم تُقَس بعد تظهر كـ«لم يُقَس بعد»، لا رقم افتراضي.
@@ -55,9 +68,24 @@ MIT. استخدم البيانات والكود كما تشاء.
 
 ## miqyas (English)
 
-An open Arabic reference for running AI models locally: a glossary, a
-tokenizer playground for Arabic text, benchmark results on real hardware, and
-a TCO calculator. Every number on the site is sourced from a JSON data file
+**Independent testing of open-weight AI for Arabic.** A leaderboard tells you
+how a model scored; Miqyas tells you what happens when you try to use it:
+tokenizer cost, dialect handling, tool use in real workflows, and speed on
+hardware people actually own. Protocols are committed to git before any run;
+raw outputs are published in full.
+
+Founder: **Mahmoud Deghaim**. [Independence and funding policy](docs/independence.md).
+
+### Published findings
+
+| | Date | Page | Data |
+|---|---|---|---|
+| **Arabic token tax** — 2,009 parallel sentences, 11 tokenizers, 7 varieties, bootstrap CIs | 2026-10-17 | [findings/token-tax](findings/token-tax/) | [results/w4](results/w4/) |
+| **Front desk v1** — first-action routing on 40 Gulf WhatsApp messages (exploratory) | 2026-10-19 | [protocol v1](docs/frontdesk_protocol_v1.md) | [results/frontdesk](results/frontdesk/) |
+| **Front desk v2** — full conversations against a simulated clinic (pre-registered, running) | — | [protocol v2](docs/frontdesk_protocol_v2.md) | — |
+
+The site also has a glossary, a tokenizer playground for Arabic text, and a
+TCO calculator. Every number on the site is sourced from a JSON data file
 anyone can inspect or reuse.
 
 - **Free and open** — no signup, no ads, no tracking.

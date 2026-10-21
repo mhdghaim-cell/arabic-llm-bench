@@ -1,5 +1,7 @@
 # Front-desk test — protocol v1 (frozen before running)
 
+> **Status (added 2026-10-24): first-action routing test, exploratory.** v1 scored only the model's *first* action on a single message; tools never answered back, so it is not evidence of a deployable receptionist. The blind audit agreed with the scorer on 24/30 (80%), below this protocol's own 90% bar, and the reproducibility check matched 10/10 on outcome but 9/10 byte-for-byte. The results stand as published, with those limits. The full-conversation test is [protocol v2](frontdesk_protocol_v2.md).
+
 **Question.** Could a small Dubai clinic run Jais 3 as its offline WhatsApp receptionist on hardware it already owns?
 **Status.** Written and committed to git *before* any v1 run. Run 1 (prompt v0, 2026-10-17) is a pilot; its numbers are not publishable.
 

@@ -20,6 +20,7 @@ Usage:
 """
 import csv
 import json
+import os
 import random
 import re
 import statistics as st
@@ -301,6 +302,17 @@ def scorecard(folder):
                   f"unknown-tool {sum(r['unknown_tool'] for r in rs)}  bad-args {sum(r['tool_errors_bad_args'] for r in rs)}")
             if waits:
                 print(f"  wait per message (this hardware): median {st.median(waits):.1f}s   p90 {waits[int(0.9 * (len(waits) - 1))]:.1f}s")
+            # cost per correctly completed conversation: ALL attempts (failures included) ÷ successes
+            tot_s = sum(r["wait_mean_s"] * r["n_turns"] for r in base3)
+            tot_tok = sum(r["gen_tokens"] for r in base3)
+            n_ok = sum(r["success"] for r in base3)
+            if n_ok:
+                usd_h = float(os.environ.get("MIQYAS_GPU_USD_H", "0") or 0)
+                line = (f"  per correctly completed conversation: {tot_s / n_ok:.1f} s of compute, {tot_tok / n_ok:.0f} generated tokens "
+                        f"(failures included in the numerator; {n_ok}/{len(base3)} succeeded)")
+                if usd_h:
+                    line += f"  ≈ ${usd_h * tot_s / 3600 / n_ok:.4f} at ${usd_h}/h"
+                print(line)
             if arm == "tool":
                 print(f"  used find_date in {sum(r['used_find_date'] for r in rs)}/{len(rs)} runs")
             cats = {}

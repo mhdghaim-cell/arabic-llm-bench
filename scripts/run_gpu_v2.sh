@@ -59,6 +59,8 @@ setup)
       echo "DOWNLOAD FAILED: $repo/$file. Files in that repo:"; hf download "$repo" --dry-run 2>/dev/null | grep -i gguf; exit 1; }
   done
   ls -la models/gpu
+  mkdir -p results/frontdesk_v2
+  (cd models/gpu && sha256sum *.gguf) > results/frontdesk_v2/models_sha256.txt   # exact files used, for reproduction
   python3 scripts/test_v2.py || exit 1
   echo "SETUP OK"
   ;;

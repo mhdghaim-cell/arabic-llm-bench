@@ -3,13 +3,17 @@ title: "مقياس (miqyas) — Arabic LLM Benchmark"
 message: "If you use these measurements, please cite them."
 type: dataset
 authors:
-  - alias: mhdghaim-cell
+  - family-names: Deghaim
+    given-names: Mahmoud
+    alias: mhdghaim-cell
     website: "https://github.com/mhdghaim-cell"
 repository-code: "https://github.com/mhdghaim-cell/arabic-llm-bench"
 abstract: >-
-  Open measurements of how locally-run language models handle Arabic:
-  tokenizer efficiency, quantization effects, dialect comprehension,
-  and regional knowledge. All raw outputs published.
+  Miqyas: independent testing of open-weight AI for Arabic. A leaderboard
+  tells you how a model scored; Miqyas tells you what happens when you try
+  to use it: tokenizer cost, dialect handling, tool use in real workflows,
+  and speed on hardware people own. Protocols pre-registered, raw outputs
+  published.
 keywords:
   - arabic
   - nlp
@@ -17,5 +21,5 @@ keywords:
   - local-inference
   - llm
 license: MIT
-version: "0.1"
-date-released: "2026-08-20"
+version: "0.2"
+date-released: "2026-10-24"
