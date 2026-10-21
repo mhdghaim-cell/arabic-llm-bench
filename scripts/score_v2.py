@@ -83,6 +83,34 @@ def times_in(text):
     return found
 
 
+AR2LAT = {"ب": "b", "ت": "t", "ث": "th", "ج": "j", "ح": "h", "خ": "kh", "د": "d", "ذ": "dh", "ر": "r", "ز": "z",
+          "س": "s", "ش": "sh", "ص": "s", "ض": "d", "ط": "t", "ظ": "z", "غ": "gh", "ف": "f", "ق": "k", "ك": "k",
+          "ل": "l", "م": "m", "ن": "n", "ه": "h", "ة": "", "ء": "", "أ": "", "إ": "", "آ": "", "ا": "", "ى": "",
+          "و": "", "ي": "", "ع": "", "ئ": "", "ؤ": ""}
+ARABIZI = str.maketrans({"3": "", "2": "", "7": "h", "5": "kh", "6": "t", "9": "s", "q": "k", "g": "k", "c": "k"})
+
+
+def skeleton(name):
+    """Consonant skeleton, so a name matches across scripts: ريم = Rima = Reem -> 'rm'; محمد = Mohammed -> 'mhmd'."""
+    s = unicodedata.normalize("NFKC", str(name or "")).lower()
+    s = re.sub(r"[\u064B-\u0652\u0640]", "", s)
+    out = "".join(AR2LAT.get(ch, ch) for ch in s)
+    out = out.translate(ARABIZI)
+    out = re.sub(r"[^a-z]", "", out)
+    out = re.sub(r"[aeiouyw]", "", out)
+    return re.sub(r"(.)\1+", r"\1", out)            # Mohammed -> mhmd
+
+
+def name_ok(wanted, booked):
+    """Accepted if the wanted name appears in the booked name (same script), or any word of the booked
+    name has the same consonant skeleton (transliteration: ريم booked as 'Rima')."""
+    w, b = norm_name(wanted), norm_name(booked)
+    if w and w in b:
+        return True
+    sk = skeleton(wanted)
+    return bool(sk) and any(skeleton(tok) == sk for tok in re.split(r"[\s,،]+", str(booked or "")) if tok)
+
+
 def norm_name(s):
     s = unicodedata.normalize("NFKC", str(s or "")).lower()
     s = re.sub(r"[ً-ْـ]", "", s)
@@ -122,8 +150,7 @@ def booking_matches(want, got):
         return False
     if want["time"] != "*" and got["time"] != want["time"]:
         return False
-    gn = norm_name(got["patient_name"])
-    return any(norm_name(n) and norm_name(n) in gn for n in want["names"])
+    return any(name_ok(n, got["patient_name"]) for n in want["names"])
 
 
 def option_ok(opt, run, why):

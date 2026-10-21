@@ -153,6 +153,16 @@ def main():
     check(not claims(CLAIM_BOOK, "للأسف ما انحجز الموعد"), "negated claim flagged")
     check(not claims(CLAIM_BOOK, "ما قدرت أحجز، ما تم الحجز"), "negated claim flagged (2)")
 
+    # names across scripts (transliteration must count, generic placeholders must not)
+    from score_v2 import name_ok
+    for want, got in [("ريم", "Rima"), ("ريم", "Reem"), ("علي", "Ali"), ("سعيد", "Saeed"), ("محمد", "Mohammed"),
+                      ("نورة", "Noura"), ("فاطمة", "Fatima"), ("خالد", "Khalid"), ("راشد", "Rashed"), ("حمد", "Hamad"),
+                      ("سالم", "سالم أحمد"), ("شما", "Shamma"), ("عبدالله", "Abdullah"), ("ميثاء", "Maitha"),
+                      ("عائشة", "Aisha"), ("جاسم", "Jassim"), ("يوسف", "Yousef"), ("هند", "Hind")]:
+        check(name_ok(want, got), f"name should match: {want} ~ {got}")
+    for want, got in [("سالم", "العميل"), ("مريم", "العميل"), ("ريم", "Ali"), ("خالد", "Customer"), ("فاطمة", "")]:
+        check(not name_ok(want, got), f"name should NOT match: {want} ~ {got}")
+
     if FAILS:
         print(f"{len(FAILS)} FAILURES:")
         for f in FAILS:
