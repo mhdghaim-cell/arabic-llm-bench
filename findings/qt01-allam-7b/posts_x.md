@@ -48,7 +48,7 @@ Every number from results.json. Quick Trial: numbers only, no verdict. Image on 
 ---
 7/7
 المحادثات الـ144 (بعد حذف أرقام الهواتف)، والمحوّل، وملف التسجيل المسبق مع تعديلاته، كلها منشورة:
-https://github.com/mhdghaim-cell/arabic-llm-bench/tree/main/findings/qt01-allam-7b
+https://miqyaslab.com/findings/qt01-allam-7b/
 
 إذا كان لدى فريق ALLaM في @HUMAINAI إعداد أفضل لاستدعاء الأدوات، نعيد التجربة به وننشر النتيجة.
 
@@ -58,5 +58,5 @@ https://github.com/mhdghaim-cell/arabic-llm-bench/tree/main/findings/qt01-allam-
 Quick Trial (exploratory, numbers only): ALLaM-7B-Instruct-preview (Q4_K_M, llama.cpp; the open 7B preview, not ALLaM 34B) as a WhatsApp front desk for a dental clinic, 42 public test scenarios × 3 runs.
 Fully correct conversations: 8.7% (95% CI 3.2–16.7%). Emergencies handed to staff: 1/25. Complaints and medical questions handed over: 0/20.
 The model has no tool-call syntax, so it ran through a prompted-JSON adapter we pre-registered; models in our earlier trial used their native syntax. In 12/25 emergencies the model gave the patient a phone number that is not in the clinic's instructions (post-hoc observation; numbers redacted in the published transcripts).
-All transcripts, the adapter and the pre-registration: https://github.com/mhdghaim-cell/arabic-llm-bench/tree/main/findings/qt01-allam-7b
+All transcripts, the adapter and the pre-registration: https://miqyaslab.com/findings/qt01-allam-7b/
 If there is a recommended tool-calling setup for this model, we will rerun with it and publish the result.
