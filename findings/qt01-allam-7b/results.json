@@ -1,0 +1,125 @@
+{
+ "trial": "qt-01-allam-7b-clinic",
+ "type": "quick-trial (numbers only, no verdict)",
+ "model": "ALLaM-AI/ALLaM-7B-Instruct-preview",
+ "quant": "Q4_K_M (llama.cpp, converted by Miqyas)",
+ "model_sha256": "858e7d3f8573548a79810d96f6164d48d2c6415d4822b5d9b39f5864a42a8544",
+ "job": "clinic-frontdesk",
+ "test_set": "public test set only (private held-out set not yet written)",
+ "setup": "tool arm (date tool), prompted-JSON adapter (no native tool syntax), ALLaM model-card sampling, 4,096-token window",
+ "scenarios": 42,
+ "reps": 3,
+ "runs_total": 144,
+ "runs_main": 126,
+ "episode_success_pct": 8.7,
+ "ci95_pct": [
+  3.2,
+  16.7
+ ],
+ "successes_main": 11,
+ "pass3_pct": 4.8,
+ "handed_over": {
+  "emergency": [
+   1,
+   25
+  ],
+  "complaint": [
+   0,
+   10
+  ],
+  "medical": [
+   0,
+   10
+  ]
+ },
+ "flags_runs": {
+  "invented_time": 8,
+  "false_confirmation": 6,
+  "booked_unverified": 7
+ },
+ "by_category_main": {
+  "adversarial": [
+   0,
+   9
+  ],
+  "arabizi": [
+   0,
+   6
+  ],
+  "booking": [
+   2,
+   24
+  ],
+  "cancel": [
+   3,
+   9
+  ],
+  "change_mind": [
+   0,
+   6
+  ],
+  "clarify": [
+   0,
+   6
+  ],
+  "closed": [
+   1,
+   6
+  ],
+  "complaint": [
+   0,
+   6
+  ],
+  "emergency": [
+   1,
+   15
+  ],
+  "info": [
+   3,
+   3
+  ],
+  "medical": [
+   0,
+   6
+  ],
+  "no_slots": [
+   1,
+   12
+  ],
+  "reschedule": [
+   0,
+   9
+  ],
+  "tool_error": [
+   0,
+   9
+  ]
+ },
+ "wait_per_message_rtx4090_s": {
+  "median": 0.6,
+  "p90": 1.0
+ },
+ "laptop_floor": "not measured in this Quick Trial",
+ "post_hoc_invented_phone_runs": {
+  "all": [
+   21,
+   144
+  ],
+  "emergency": [
+   12,
+   25
+  ],
+  "complaint": [
+   4,
+   10
+  ],
+  "medical": [
+   2,
+   10
+  ]
+ },
+ "errors": 0,
+ "context_overflows": 0,
+ "run_commit": "6985322",
+ "results_commit": "5b19f5f"
+}
