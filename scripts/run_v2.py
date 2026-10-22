@@ -273,6 +273,69 @@ class PromptedPolicy(ChatPolicy):
                 "gen_n": r["usage"]["completion_tokens"], "timings": tm}
 
 
+# Template-documented tool calls (qt-02, amendment 1): some chat templates document a tool-call format that
+# llama.cpp's parser does not recognise (Falcon-H1: {'arguments': {...}, 'name': ...} inside <tool_call> tags,
+# often written without the tags). When llama.cpp returns no tool_calls, we read that documented format from the
+# reply text: every top-level {...} that parses (JSON, else Python literal) into a dict with exactly a "name" string
+# and an "arguments" dict is a call; it and any <tool_call> tags are removed from the reply.
+def _top_level_objects(text):
+    out, depth, start, quote, esc = [], 0, None, None, False
+    for i, ch in enumerate(text):
+        if quote:
+            if esc: esc = False
+            elif ch == "\\": esc = True
+            elif ch == quote: quote = None
+            continue
+        if ch in "\"'" and depth > 0:
+            quote = ch
+        elif ch == "{":
+            if depth == 0: start = i
+            depth += 1
+        elif ch == "}" and depth > 0:
+            depth -= 1
+            if depth == 0: out.append((start, i + 1))
+    return out
+
+
+def parse_template_calls(text):
+    import ast
+    calls, spans = [], []
+    for a, b in _top_level_objects(text):
+        frag = text[a:b]
+        obj = None
+        try:
+            obj = json.loads(frag)
+        except Exception:
+            try:
+                obj = ast.literal_eval(frag)
+            except Exception:
+                obj = None
+        if isinstance(obj, dict) and set(obj) == {"name", "arguments"} and isinstance(obj["name"], str) \
+                and isinstance(obj["arguments"], dict):
+            calls.append({"name": obj["name"], "args": obj["arguments"]})
+            spans.append((a, b))
+    if not calls:
+        return [], text
+    rest, last = [], 0
+    for a, b in spans:
+        rest.append(text[last:a]); last = b
+    rest.append(text[last:])
+    clean = re.sub(r"</?tool_call>", "", "".join(rest)).strip()
+    return calls, clean
+
+
+class TemplateCallPolicy(ChatPolicy):
+    """Chat completions with native tool calling, plus the template-documented call format read from the text."""
+
+    def step(self, messages, tools, seed, ctx):
+        out = super().step(messages, tools, seed, ctx)
+        if not out["calls"] and out["answer"]:
+            calls, clean = parse_template_calls(out["answer"])
+            if calls:
+                out["calls"], out["answer"], out["parsed_from_text"] = calls, clean, True
+        return out
+
+
 class OraclePolicy:
     """Replays an episode's oracle (what a correct receptionist does). Used to validate harness + scorer."""
 
@@ -332,7 +395,7 @@ def run_episode(ep, arm, policy, rep):
             g += 1
             turn_wall += out["wall_s"]
             steps.append({"turn": k, "step": s, **{x: out.get(x) for x in
-                          ("wall_s", "stop", "prompt_n", "cached_n", "gen_n", "think_open", "think_close", "reasoning", "raw", "parsed")},
+                          ("wall_s", "stop", "prompt_n", "cached_n", "gen_n", "think_open", "think_close", "reasoning", "raw", "parsed", "parsed_from_text")},
                           "calls": out["calls"], "answer": out["answer"]})
             if out.get("stop") in ("limit", "length", "context"):
                 flags["cap"] = True
@@ -383,7 +446,7 @@ def current_model():
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--label", required=True)
-    ap.add_argument("--mode", choices=["jais", "chat", "prompted", "oracle"], required=True)
+    ap.add_argument("--mode", choices=["jais", "chat", "prompted", "template", "oracle"], required=True)
     ap.add_argument("--arms", nargs="+", default=["base", "table", "tool"], choices=["base", "table", "tool"])
     ap.add_argument("--efforts", nargs="+", default=["high"])
     ap.add_argument("--reps", type=int, default=3)
@@ -437,7 +500,8 @@ def main():
             sys.exit(f"STOP: the server's model changed to {current_model()} (expected {model_path}).")
         policy = (OraclePolicy(e, arm) if a.mode == "oracle" else
                   JaisPolicy(eff, a.n_predict) if a.mode == "jais" else
-                  PromptedPolicy(eff, a.n_predict) if a.mode == "prompted" else ChatPolicy(eff, a.n_predict))
+                  PromptedPolicy(eff, a.n_predict) if a.mode == "prompted" else
+                  TemplateCallPolicy(eff, a.n_predict) if a.mode == "template" else ChatPolicy(eff, a.n_predict))
         try:
             res = run_episode(e, arm, policy, r)
             fails = 0

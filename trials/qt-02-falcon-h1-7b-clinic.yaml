@@ -44,3 +44,17 @@ risks:
 publish: [results page on miqyaslab.com, results.json, redacted raw interactions, numbers-only scorecard, X thread, Hugging Face discussion]
 publication_checklist: [redact phone-like numbers and re-score, recompute numbers from raw data, read a random sample of failures, link to the miqyaslab.com page]
 preregistration_commit: 7397aae
+
+amendments:
+  - date: 2026-10-29
+    when: after the DEV pilot, before any TEST run (no test-split output seen)
+    what: >
+      Tool-call reading extended to the format documented in the model's own chat template. Reason: the probe showed
+      the tools reach the prompt (521 -> 1,557 tokens, native path chosen as pre-registered), but the DEV pilot recorded
+      0 tool calls in 12 runs: Falcon-H1 writes calls as {'arguments': {...}, 'name': ...} (its template's documented
+      schema, Python-style quotes, often without the <tool_call> tags), which llama.cpp's parser does not recognise.
+      New mode (scripts/run_v2.py --mode template): llama.cpp native tool calling first; when it returns no call, every
+      top-level {...} in the reply that parses into exactly {name: str, arguments: dict} is read as a call and removed
+      from the reply text. Validated before use: oracle replay in Falcon's text format identical on 162/162
+      episode-setups; look-alike text is not read as a call. Pilot 1 kept in results/qt02/pilot-falcon-h1-7b-q4-qt02;
+      a second DEV pilot runs before the TEST run. Adapter calibration and reference rows unchanged.

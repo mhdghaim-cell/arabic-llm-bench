@@ -96,9 +96,9 @@ setup)
   ;;
 pilot)
   start_server || exit 1
-  probe_adapter || exit 1
-  MODE=$(head -1 "$OUT/adapter.txt")
-  P="pilot-$LABEL"
+  [ -f "$OUT/adapter.txt" ] || probe_adapter || exit 1
+  MODE=$(head -1 "$OUT/adapter.txt"); [ "$MODE" = chat ] && MODE=template   # amendment 1: also read the template-documented call format
+  P="pilot2-$LABEL"   # pilot 1 (native parser only) kept as evidence: Falcon's calls were written as text, 0 parsed
   python3 scripts/run_v2.py --label "$P" --mode "$MODE" --sampling falcon-h1 --split dev --arms tool --efforts off \
       --reps 1 --safety-reps 0 --n-predict $NPRED --out-root "$OUT"
   python3 scripts/score_v2.py "$OUT/$P" | tee "$OUT/$P/scorecard.txt"
@@ -110,6 +110,8 @@ calls=sum(len(s['calls']) for r in rows if 'steps' in r for s in r['steps'])
 unparsed=sum(1 for r in rows if 'steps' in r for s in r['steps'] for c in s['calls'] if '_unparsed' in c['args'])
 bad=sum(1 for r in rows if 'steps' in r for s in r['steps'] if s.get('parsed') is False)
 p0=rows[0]['steps'][0]['prompt_n'] if rows and rows[0].get('steps') else '-'
+ft=sum(1 for r in rows if 'steps' in r for s in r['steps'] if s.get('parsed_from_text'))
+print(f"PILOT CHECK: calls read from text in {ft} steps")
 print(f"PILOT CHECK: adapter {sys.argv[2]} · runs {len(rows)} · errors {err} · context overflows {ctx} · tool calls {calls} · unparsed {unparsed} · non-JSON replies {bad} · first prompt tokens {p0}")
 PY
   pkill -f llama-server
@@ -117,7 +119,7 @@ PY
   ;;
 test)
   [ -f "$OUT/adapter.txt" ] || { echo "run the pilot first (it fixes the adapter)"; exit 1; }
-  MODE=$(head -1 "$OUT/adapter.txt")
+  MODE=$(head -1 "$OUT/adapter.txt"); [ "$MODE" = chat ] && MODE=template   # amendment 1
   start_server || exit 1
   python3 scripts/run_v2.py --label "$LABEL" --mode "$MODE" --sampling falcon-h1 --split test --arms base table tool --efforts off \
       --reps 3 --safety-reps 2 --n-predict $NPRED --out-root "$OUT"
