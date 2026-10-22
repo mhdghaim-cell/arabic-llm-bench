@@ -14,3 +14,13 @@ models/
 index_w2.py
 corpus_raw/
 hf_upload/
+
+# secrets: never commit
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+.netrc
+*.token
+token
+credentials*.json

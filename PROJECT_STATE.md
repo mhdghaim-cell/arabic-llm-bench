@@ -38,7 +38,7 @@ Real model budget is ~4–4.5 GB after macOS overhead. Ceiling is 3B–4B at Q4.
 
 **Machine B** — Mac mini M4, rented from Macly at $14.99/day
 Apple M4 · 16 GB unified · macOS 26.6.1 · Ollama 0.32.14 · Metal backend
-IP at time of writing: 45.74.245.11 · SSH works · **Apple Screen Sharing rejects the host** ("software appears incompatible") — needs RealVNC or similar for GUI access.
+SSH access (IP not recorded here) · **Apple Screen Sharing rejects the host** ("software appears incompatible") — needs RealVNC or similar for GUI access.
 
 **Standard methodology line for posts:**
 `MacBook Air 2020 · Intel i7 1.2GHz · 8GB · macOS 15.7.7 · Ollama CPU`
