@@ -8,7 +8,13 @@
 # Keep the laptop plugged in. The script keeps it awake with caffeinate.
 set -u
 cd "$(dirname "$0")/.."
-LLAMA_DIR="$HOME/llama.cpp"
+LLAMA_DIR="${LLAMA_DIR:-$HOME/llama.cpp}"          # override: LLAMA_DIR=/path/to/llama.cpp bash scripts/run_air_v2.sh bench
+if [ ! -d "$LLAMA_DIR" ]; then
+  echo "llama.cpp not found at $LLAMA_DIR."
+  echo "Find it with:  find ~ -maxdepth 4 -name llama-server -type f"
+  echo "then run:      LLAMA_DIR=<folder that contains build/> bash scripts/run_air_v2.sh $*"
+  exit 1
+fi
 export LLAMA_BENCH="$LLAMA_DIR/build/bin/llama-bench"
 STEP=${1:-}
 VALIDATE_EPS="t02 t06 t11 t13 t15 t20 t23 t29 t38 t41"
@@ -39,8 +45,9 @@ bench)
   ;;
 validate)
   pkill -f llama-server; sleep 2
-  "$LLAMA_DIR/build/bin/llama-server" -m models/air/Jais-3-3.7B-Q4_K_M.gguf --jinja -c 16384 -np 1 --port 8080 > /tmp/server_air.log 2>&1 &
+  "$LLAMA_DIR/build/bin/llama-server" -m models/air/Jais-3-3.7B-Q4_K_M.gguf --jinja -ngl 0 -c 16384 -np 1 --port 8080 > /tmp/server_air.log 2>&1 &
   for i in $(seq 1 300); do curl -s localhost:8080/health | grep -q '"ok"' && break; sleep 2; done
+  # CPU only (-ngl 0), exactly like the llama-bench measurement; the Intel graphics chip is not used.
   # warm-up: the first request after loading pays a one-off disk read; a real front desk keeps the model loaded
   curl -s localhost:8080/completion -d '{"prompt":"مرحبا","n_predict":8}' > /dev/null
   python3 scripts/run_v2.py --label jais3-3.7b-q4-air-v2 --mode jais --split test --arms tool --efforts low \
