@@ -7,7 +7,7 @@
 <meta name="description" content="مقياس مختبر مستقل يختبر النماذج العربية مفتوحة الأوزان في وظائف حقيقية، على أجهزة حقيقية. Independent Job Trials for open-weight Arabic AI.">
 <meta property="og:title" content="مقياس · Miqyas Lab">
 <meta property="og:description" content="Arabic AI, tested on the job.">
-<meta property="og:image" content="https://miqyaslab.com/findings/frontdesk-v2/scorecard.png">
+<meta property="og:image" content="https://miqyaslab.com/findings/frontdesk-v2/scorecard_x.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/brand/miqyas-favicon.svg" type="image/svg+xml">
 <style>
@@ -18,560 +18,375 @@
 @font-face{font-family:"Plex Ar";font-weight:600;font-display:swap;src:url("assets/fonts/sans-arabic-600.woff2") format("woff2")}
 @font-face{font-family:"Plex Mono";font-weight:400;font-display:swap;src:url("assets/fonts/mono-400.woff2") format("woff2")}
 @font-face{font-family:"Plex Mono";font-weight:500;font-display:swap;src:url("assets/fonts/mono-500.woff2") format("woff2")}
-
+/* Layout: the page is a Nilometer. A graduated column runs the full height of the start edge;
+   a red reading line rises as you scroll and carries the current section's reading.
+   Content and section order follow home page v3. */
 :root{
-  --paper:#FAF9F6; --ink:#12161C; --line:#12161C; --grid:#ECE9E2; --hair:#D9D5CC;
-  --body:#3D4148; --muted:#7A7D84; --red:#EB3B2C; --bad:#C42B1F;
-  --ar:"Plex Ar",system-ui,sans-serif; --mono:"Plex Mono",ui-monospace,monospace;
-  --w:78rem; --gut:clamp(1rem,4vw,2rem);
+  --paper:#FAF9F6; --ink:#12161C; --red:#EB3B2C; --signal:#C42B1F; --verify:#1B5E4A;
+  --rule:#D8D5CE; --dim:#6E7178; --soft:#EFEDE7; --grid:rgba(18,22,28,.045); --water:rgba(18,22,28,.035);
+  --ar:"Plex Ar",system-ui,"Segoe UI",Tahoma,sans-serif;
+  --mono:"Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --gw:132px;
+  color-scheme:light;
 }
-*{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{background:var(--paper);color:var(--ink);font-family:var(--ar);font-size:1.0625rem;line-height:1.65;-webkit-font-smoothing:antialiased}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background-color:var(--paper);color:var(--ink);font-family:var(--ar);font-size:17px;line-height:1.7;
+  -webkit-font-smoothing:antialiased}
 a{color:inherit}
-img,svg{display:block}
-.mono,.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
-.num{direction:ltr;unicode-bidi:isolate}
-.wrap{max-width:var(--w);margin-inline:auto;padding-inline:var(--gut)}
+.n{font-family:var(--mono);font-variant-numeric:tabular-nums;direction:ltr;unicode-bidi:isolate}
 :focus-visible{outline:2px solid var(--red);outline-offset:3px}
 .skip{position:absolute;inset-inline-start:-999px}
-.skip:focus{inset-inline-start:1rem;top:1rem;background:var(--paper);padding:.5rem 1rem;z-index:99}
+.skip:focus{inset-inline-start:150px;top:1rem;background:var(--paper);padding:.5rem 1rem;z-index:99}
 
-/* graph paper */
-.paper{background-color:#FCFBF9;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:32px 32px;background-position:-1px -1px}
+/* ── the column ── */
+.gauge{position:fixed;top:0;bottom:0;inset-inline-start:0;width:var(--gw);z-index:5;
+  border-inline-end:1px solid var(--ink);background:var(--paper);overflow:hidden}
+.gauge .water{position:absolute;inset-inline:0;bottom:0;height:var(--lvl,14%);background:var(--water);transition:height .9s cubic-bezier(.3,.6,.2,1)}
+.ticks{position:absolute;inset:0}
+.ticks i{position:absolute;inset-inline-end:0;height:1px;background:var(--ink);width:10px}
+.ticks i.mj{width:22px}
+.ticks b{position:absolute;inset-inline-end:28px;font:500 10px/1 var(--mono);color:var(--dim);transform:translateY(50%)}
+.level{position:absolute;inset-inline:0;bottom:var(--lvl,14%);height:0;transition:bottom .9s cubic-bezier(.3,.6,.2,1)}
+.level::before{content:"";position:absolute;inset-inline:0;top:-1px;height:2px;background:var(--red)}
+.tag{position:absolute;inset-inline-start:14px;bottom:8px;display:grid;gap:2px;max-width:calc(var(--gw) - 44px)}
+.tag .v{font:500 24px/1 var(--mono);color:var(--ink);direction:ltr;text-align:left}
+html[dir=rtl] .tag .v{text-align:right}
+.tag .l{font-size:11px;line-height:1.35;color:var(--dim)}
+.gauge .cubit{position:absolute;bottom:10px;inset-inline-start:14px;font:400 9.5px/1.3 var(--mono);color:var(--dim);direction:ltr}
 
-/* nav */
-.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;height:4.5rem}
-.nav .home img{height:34px;width:auto}
-.nav .links{display:flex;align-items:center;gap:1.75rem;font-size:.95rem}
-.nav .links a{text-decoration:none;color:var(--body)}
+/* ── page frame ── */
+.page{padding-inline-start:calc(var(--gw) + clamp(24px,5vw,80px));padding-inline-end:clamp(16px,5vw,80px)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-block:22px;flex-wrap:wrap}
+.nav .home img{height:34px;width:auto;display:block}
+.nav .links{display:flex;gap:26px;align-items:center;font-size:15px;flex-wrap:wrap}
+.nav .links a{text-decoration:none;color:var(--dim)}
 .nav .links a:hover{color:var(--ink)}
-.lang{font:inherit;font-family:var(--mono);font-size:.8rem;background:none;border:1px solid var(--hair);color:var(--ink);padding:.3rem .65rem;cursor:pointer}
-.lang:hover{border-color:var(--ink)}
-@media (max-width:52rem){.nav .links a{display:none}}
+.lang{font:500 12px/1 var(--mono);background:none;border:0;border-bottom:1px solid var(--ink);color:var(--ink);padding:4px 0;cursor:pointer}
+html[lang=en] .lang{font-family:var(--ar);font-size:14px}
+.lang:hover{color:var(--red);border-color:var(--red)}
+
+section{position:relative;padding-block:clamp(96px,14vw,200px)}
+section+section{border-top:1px solid var(--rule)}
+h1,h2,h3{font-weight:500;margin:0;text-wrap:balance}
+h2{font-size:clamp(24px,2.8vw,36px);line-height:1.3;max-width:24ch}
+html[lang=en] h2{letter-spacing:-.02em;line-height:1.1}
+.lede{font-size:clamp(16px,1.3vw,18px);color:var(--dim);max-width:32rem;margin:16px 0 0}
+.lab{font-size:14px;color:var(--dim);display:block;margin-bottom:12px}
+html[lang=en] .lab{font:400 12px/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase}
 
 /* hero */
-.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(2rem,5vw,4.5rem);align-items:center;padding-block:clamp(2rem,6vw,4.5rem) clamp(3rem,7vw,5.5rem);border-block-end:1px solid var(--hair)}
-.cap{font-family:var(--mono);font-size:.8rem;color:var(--muted);direction:ltr;unicode-bidi:isolate}
-html[dir=rtl] .cap{text-align:right}
-.hero h1{margin-block-start:0!important;font-weight:500;font-size:clamp(2.6rem,5.6vw,4.6rem);line-height:1.12;letter-spacing:-.01em;margin-block-start:.9rem}
-html[lang=en] .hero h1{letter-spacing:-.035em;line-height:1.02}
-.hero .sub{margin-block-start:1.4rem;color:var(--body);font-size:clamp(1.05rem,1.4vw,1.18rem);line-height:1.75;max-width:33rem}
-.vm{margin-block-start:1.6rem;display:grid;gap:.9rem;max-width:34rem;border-block-start:1px solid var(--hair);padding-block-start:1.1rem}
-.vm div{display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:1rem;align-items:baseline}
-.vm dt{font-family:var(--mono);font-size:.78rem;color:var(--muted)}
-html[lang=ar] .vm dt{font-family:var(--ar);font-size:.9rem}
-.vm dd{color:var(--body);font-size:clamp(1.02rem,1.35vw,1.14rem);line-height:1.7}
-@media (max-width:30rem){.vm div{grid-template-columns:1fr;gap:.1rem}}
+.hero{padding-block:clamp(72px,12vw,180px) clamp(96px,14vw,200px);border-top:0}
+.hero h1{font-size:clamp(38px,5.6vw,76px);line-height:1.12;letter-spacing:-.01em;max-width:12ch}
+html[lang=en] .hero h1{letter-spacing:-.045em;line-height:.98;max-width:12ch}
 .hero h1 .brand{color:var(--red)}
-.hero .lede{margin-block-start:1.25rem;font-size:clamp(1.15rem,1.7vw,1.4rem);line-height:1.6;color:var(--body);max-width:30rem}
-.vision{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(2rem,5vw,4.5rem);align-items:center;padding-block:clamp(4rem,8vw,6.5rem);border-block-end:1px solid var(--hair)}
-.vtext{display:grid;gap:2.5rem}
-.vblock{display:grid;gap:.6rem}
-.vlab{font-size:.9rem;color:var(--muted)}
-html[lang=en] .vlab{font-family:var(--mono);font-size:.8rem}
-.vision h2{font-weight:500;font-size:clamp(1.8rem,3.4vw,2.75rem);line-height:1.3;text-wrap:balance}
-html[lang=en] .vision h2{letter-spacing:-.03em;line-height:1.1}
-.vm2{font-size:clamp(1.25rem,2vw,1.6rem);line-height:1.45;font-weight:500}
-.vhow{color:var(--body);max-width:32rem}
-.vfig{aspect-ratio:1/1;max-width:100%}
-.vfig .q{font-family:var(--mono);font-size:13px;fill:#9A9DA3}
-.vfig .lvl{transform-box:fill-box;transform-origin:center bottom;transform:scaleY(0);transition:transform 1.3s cubic-bezier(.3,.6,.2,1) var(--d,0ms)}
-.vfig.in .lvl{transform:scaleY(1)}
-.vfig .lv{opacity:0;transition:opacity .4s var(--d,0ms)}
-.vfig.in .lv{opacity:1}
-.vfig .sweep{opacity:0}
-.vfig.in .sweep{animation:sweep 3.2s cubic-bezier(.45,.05,.3,1) 2.2s 1 both}
-@keyframes sweep{0%{opacity:0;transform:translateY(0)}8%{opacity:1}85%{opacity:1;transform:translateY(-240px)}100%{opacity:0;transform:translateY(-240px)}}
-@media (max-width:52rem){.vision{grid-template-columns:1fr}}
-.ctas{display:flex;flex-wrap:wrap;gap:1.25rem;align-items:center;margin-block-start:2rem}
-.btn{display:inline-flex;align-items:center;height:2.9rem;padding-inline:1.3rem;background:var(--ink);color:var(--paper);text-decoration:none;font-weight:500;font-size:.98rem}
-.btn:hover{background:#000}
-.link{font-weight:500;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
-.link:hover{text-decoration-color:var(--red)}
+.hero .lede{font-size:clamp(17px,1.5vw,20px);color:var(--ink);opacity:.8;max-width:28rem;margin-top:clamp(18px,2.5vw,28px)}
 
-/* tile: the shared unit, like a square explainer frame */
-.tile{position:relative;border:1px solid var(--hair);display:flex;flex-direction:column;padding:clamp(1.1rem,2.2vw,1.6rem);overflow:hidden}
-.tile h2,.tile h3{font-weight:500;font-size:clamp(1.35rem,2.1vw,1.75rem);line-height:1.25;letter-spacing:-.005em}
-html[lang=en] .tile h2,html[lang=en] .tile h3{letter-spacing:-.025em;line-height:1.15}
-.tile .cap{margin-block-start:.35rem}
-.fig{flex:1;position:relative;margin-block-start:1rem;min-height:0}
+/* index rows: the only kind of link block on the page */
+.rows{list-style:none;margin:clamp(40px,5vw,64px) 0 0;padding:0;border-top:1px solid var(--ink);max-width:46rem}
+.rows li{border-bottom:1px solid var(--rule)}
+.rows a,.rows .row{display:grid;grid-template-columns:minmax(0,1fr) auto 28px;gap:20px;align-items:baseline;padding-block:15px;text-decoration:none}
+.rows .t{font-size:clamp(16px,1.3vw,18px);font-weight:500;min-width:0}
+.rows .t small{display:block;font-size:14px;font-weight:400;color:var(--dim);margin-top:2px;line-height:1.55}
+.rows .m{font-size:14px;line-height:1.4;color:var(--dim)}
+.rows .go{font:400 18px/1 var(--mono);color:var(--dim);transition:color .2s}
+html[dir=ltr] .rows .go{transform:scaleX(-1)}
+.rows a:hover .go{color:var(--red)}
+.rows a:hover .t{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:6px}
+.rows .row .t{color:var(--dim);font-weight:400}
 
-/* hero tile: the conversation as a diagram */
-.convo{aspect-ratio:1/1}
-.steps{display:flex;gap:1.1rem;font-size:.86rem;color:var(--muted);margin-block-start:.5rem}
-.steps button{font:inherit;background:none;border:0;color:inherit;cursor:pointer;padding:0;border-block-end:1px solid transparent}
-.steps button[aria-selected=true]{color:var(--ink);border-color:var(--ink)}
-.steps b{font-family:var(--mono);font-weight:500;color:var(--ink);margin-inline-end:.35rem}
-.trace{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;padding-inline-start:1.5rem}
-.trace::before{content:"";position:absolute;inset-block:0;inset-inline-start:.42rem;width:1px;background:var(--ink)}
-.ev{position:relative;padding-block:.3rem;opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s}
-.ev.on{opacity:1;transform:none}
-.ev::before{content:"";position:absolute;inset-inline-start:calc(-1.5rem + .1rem);top:.85rem;width:9px;height:9px;border-radius:50%;background:var(--paper);border:1px solid var(--ink)}
-.ev.m::before{background:var(--ink)}
-.ev.t::before{border-radius:0;width:7px;height:7px;inset-inline-start:calc(-1.5rem + .2rem);top:.75rem;border-color:var(--muted)}
-.ev.end::before{width:13px;height:13px;inset-inline-start:calc(-1.5rem - .05rem);top:.7rem;background:var(--red);border-color:var(--red)}
-.ev.end.fail::before{background:var(--paper);border:2px solid var(--bad)}
-.ev .who{font-family:var(--mono);font-size:.7rem;color:var(--muted);display:block;direction:ltr;unicode-bidi:isolate}
-html[dir=rtl] .ev .who{text-align:right}
-.ev p{font-size:.93rem;line-height:1.55;max-width:30rem}
-.ev.p p{color:var(--body)}
-.ev.t p{font-family:var(--mono);font-size:.74rem;color:var(--muted);direction:ltr;text-align:left}
-.ev.t p b{color:var(--ink);font-weight:500}
-.ev.end p{font-weight:500;color:var(--ink)}
-.ev.end.fail p{color:var(--bad)}
+/* conversation: a transcript, played back */
+.convo{margin-top:clamp(80px,10vw,140px);max-width:50rem}
+.convo-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+.convo-head h2{font-size:clamp(18px,1.6vw,22px)}
+.tabs{display:flex;gap:22px;flex-wrap:wrap;font-size:15px}
+.tabs button{font:inherit;background:none;border:0;border-bottom:1px solid transparent;padding:2px 0;color:var(--dim);cursor:pointer;display:inline-flex;gap:6px;align-items:baseline}
+.tabs button b{font:500 12px/1 var(--mono)}
+.tabs button[aria-selected=true]{color:var(--ink);border-color:var(--ink)}
+.script{margin-top:16px;border-top:1px solid var(--ink);min-height:30rem}
+.ln{display:grid;grid-template-columns:6rem minmax(0,1fr);gap:20px;padding-block:11px;border-bottom:1px solid var(--rule);align-items:baseline;opacity:0;transform:translateY(6px);transition:opacity .35s,transform .35s}
+.ln.on{opacity:1;transform:none}
+.ln .s{font-size:13px;color:var(--dim)}
+html[lang=en] .ln .s{font:400 12px/1.4 var(--mono)}
+.ln .x{font-size:16px;line-height:1.6;min-width:0}
+.ln.t .x{font:400 12.5px/1.6 var(--mono);color:var(--dim);direction:ltr;text-align:left;overflow-wrap:anywhere}
+.ln.t .x b{color:var(--ink);font-weight:500}
+.ln.end .x{font-weight:600;color:var(--verify)}
+.ln.end{border-bottom:2px solid var(--verify)}
+.ln.end.fail .x{color:var(--signal)}
+.ln.end.fail{border-bottom-color:var(--signal)}
 
-/* the grid of explainer tiles */
-.section{padding-block:clamp(4rem,8vw,6.5rem) 0}
-.shead{display:flex;justify-content:space-between;align-items:flex-end;gap:1.5rem;flex-wrap:wrap;margin-block-end:2rem}
-.shead h2{font-weight:500;font-size:clamp(1.9rem,3.6vw,2.9rem);line-height:1.18;letter-spacing:-.005em;max-width:40rem}
-html[lang=en] .shead h2{letter-spacing:-.03em;line-height:1.08}
-.shead p{color:var(--body);max-width:30rem;margin-block-start:.8rem}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-inline-start:1px solid var(--hair);border-block-start:1px solid var(--hair)}
-.grid .tile{border-width:0;border-inline-end:1px solid var(--hair);border-block-end:1px solid var(--hair);aspect-ratio:1/1}
-@media (max-width:62rem){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:40rem){.grid{grid-template-columns:1fr}.grid .tile{aspect-ratio:auto;min-height:24rem}}
+/* vision: one tube per model */
+.vision{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(48px,8vw,140px);align-items:start;max-width:72rem}
+.vtext{display:grid;gap:48px;max-width:28rem}
+.vision h2{font-size:clamp(22px,2.4vw,32px);max-width:none}
+.vm2{font-size:clamp(18px,1.6vw,22px);line-height:1.5;font-weight:500;margin:0}
+.vhow{color:var(--dim);margin:10px 0 0}
+.shelf{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:clamp(6px,1.2vw,14px);align-items:end;direction:ltr;max-width:30rem}
+.shelf .c{display:grid;gap:8px;justify-items:center}
+.shelf .p{font:500 13px/1 var(--mono);min-height:13px}
+.tube{position:relative;width:100%;height:clamp(160px,17vw,230px);border:1px solid var(--ink);border-bottom-width:2px;
+  background:repeating-linear-gradient(to top,transparent 0 calc(10% - 1px),var(--rule) calc(10% - 1px) 10%)}
+.tube.empty{border-style:dashed;border-color:var(--dim);border-bottom:2px solid var(--ink);background:none}
+.tube.empty::after{content:"?";position:absolute;inset:0;display:grid;place-items:center;font:500 15px/1 var(--mono);color:var(--dim)}
+.fill{position:absolute;inset-inline:0;bottom:0;height:var(--h);background:var(--ink);transition:height 1.4s cubic-bezier(.3,.6,.2,1)}
+.js .anim:not(.in) .fill{height:0}
+.mname{font:500 11px/1.25 var(--mono);color:var(--dim);writing-mode:vertical-rl;transform:rotate(180deg);height:6.5rem;white-space:nowrap}
+.mname .real{display:none}
+body.names .mname .real{display:inline}
+body.names .mname .anon{display:none}
+.vhead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.vhead h3{font-size:clamp(17px,1.5vw,20px)}
+.toggle{font:inherit;font-size:14px;color:var(--ink);background:none;border:0;border-bottom:1px solid var(--ink);padding:2px 0;cursor:pointer}
+.toggle:hover{color:var(--red);border-color:var(--red)}
 
-/* figures */
-.fig svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;direction:ltr}
-.fig .lbl{font-family:var(--mono);font-size:11px;fill:var(--muted)}
-.fig .lblk{font-family:var(--mono);font-size:11px;fill:var(--ink);font-weight:500}
-.fig .val{font-family:var(--mono);font-size:13px;fill:var(--ink);font-weight:500}
-.draw{stroke-dasharray:var(--len,1000);stroke-dashoffset:var(--len,1000);transition:stroke-dashoffset 1.4s cubic-bezier(.3,.6,.2,1)}
-.in .draw{stroke-dashoffset:0}
-.grow{transform-box:fill-box;transform-origin:left center;transform:scaleX(0);transition:transform 1.3s cubic-bezier(.3,.6,.2,1)}
-.in .grow{transform:scaleX(1)}
-.pop{opacity:0;transition:opacity .25s}
-.in .pop{opacity:1}
-.dots{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:1rem}
-.drow .nm{font-family:var(--mono);font-size:.74rem;color:var(--ink);font-weight:500;direction:ltr;display:flex;justify-content:space-between;margin-block-end:.4rem}
-.drow .nm span:last-child{color:var(--muted);font-weight:400}
-.dd{display:grid;gap:4px;direction:ltr;justify-content:start;grid-auto-rows:9px}
-.dd i{display:block;width:9px;height:9px;border-radius:50%;border:1px solid var(--ink);opacity:0;transform:scale(.4);transition:opacity .2s,transform .2s}
-.dd i.f{background:var(--ink)}
-.dots.sm{gap:.7rem}.dots.sm .dd{gap:3px;grid-auto-rows:7px}.dots.sm .dd i{width:7px;height:7px}.dots.sm .drow .nm{margin-block-end:.25rem}
-.dd i.x{border-color:var(--bad);border-width:1.5px}
-.dd i.on{opacity:1;transform:none}
-.fig .foot{position:absolute;inset-inline:0;bottom:0;font-family:var(--mono);font-size:.74rem;color:var(--muted)}
+/* trial: three slides */
+.shead{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.shead .link{font-size:16px;font-weight:500;text-underline-offset:6px;text-decoration-thickness:1px}
+.show{margin-top:clamp(40px,5vw,64px);max-width:50rem}
+.show-bar{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid var(--ink);border-bottom:1px solid var(--rule);padding-block:12px}
+.show-ctl{display:flex;gap:16px;align-items:center}
+.arw{width:36px;height:36px;background:none;border:1px solid var(--rule);color:var(--ink);font:400 18px/1 var(--mono);cursor:pointer}
+.arw:hover{border-color:var(--ink)}
+html[dir=ltr] .arw{transform:scaleX(-1)}
+.slide{padding-block:clamp(28px,4vw,48px) 8px}
+.slide h3{font-size:clamp(18px,1.7vw,23px);margin-bottom:clamp(20px,3vw,32px)}
+.chart{overflow-x:auto}
+.chart svg{display:block;width:100%;min-width:520px;height:auto;direction:ltr;color:var(--ink)}
+.chart text{font-family:var(--mono);font-size:12px;fill:var(--dim)}
+.chart .k{fill:var(--ink);font-weight:500;font-size:13px}
+.chart .big{fill:var(--ink);font-weight:500;font-size:15px}
+.chart .ka{font-family:var(--ar);fill:var(--ink);font-size:14px;font-weight:500}
+.chart .aa{font-family:var(--ar);fill:var(--dim);font-size:13px}
+.chart .r{fill:var(--red)}
+.chart .mn .real{display:none}
+body.names .chart .mn .real{display:inline}
+body.names .chart .mn .anon{display:none}
+.dot{fill:var(--paper)}
 
-/* positioning */
-.pos{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(2rem,5vw,4.5rem);padding-block:clamp(4rem,8vw,6.5rem);border-block-end:1px solid var(--hair)}
-.pos h2{font-weight:500;font-size:clamp(1.8rem,3.4vw,2.7rem);line-height:1.22}
-html[lang=en] .pos h2{letter-spacing:-.03em;line-height:1.1}
-.pos dl{border-block-start:1px solid var(--ink)}
-.pos .r{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;padding-block:.85rem;border-block-end:1px solid var(--hair);font-size:.98rem}
-.pos dt{color:var(--muted)}
-.pos dd{font-weight:500}
-.pos .h{font-family:var(--mono);font-size:.75rem;color:var(--muted);padding-block:.6rem}
-.pos .h dd{font-weight:400;color:var(--ink)}
-@media (max-width:52rem){.hero,.pos{grid-template-columns:1fr}}
-
-/* list rows */
-.rows{border-block-start:1px solid var(--ink)}
-.rows a,.rows div.row{display:grid;grid-template-columns:7.5rem minmax(0,1fr) auto;gap:1.5rem;align-items:baseline;padding-block:1.15rem;border-block-end:1px solid var(--hair);text-decoration:none}
-.rows a:hover .t{text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}
-.rows .d{font-family:var(--mono);font-size:.8rem;color:var(--muted);direction:ltr;unicode-bidi:isolate}
-html[dir=rtl] .rows .d{text-align:right}
-.rows .t{font-size:1.1rem;font-weight:500}
-.rows .t small{display:block;font-weight:400;font-size:.88rem;color:var(--muted);margin-block-start:.15rem}
-.rows .s{font-family:var(--mono);font-size:.78rem;color:var(--muted)}
-.rows .s.ok{color:var(--ink)}
-.rows .next .t,.rows .next .d{color:var(--muted)}
-@media (max-width:40rem){.rows a,.rows div.row{grid-template-columns:1fr auto}.rows .d{grid-column:1/-1}}
-
-/* three columns text */
-.cols3{display:grid;grid-template-columns:repeat(3,1fr);border-block-start:1px solid var(--ink)}
-.cols3>div{padding-block:1.4rem 1.6rem;padding-inline-end:1.75rem}
-.cols3>div+div{border-inline-start:1px solid var(--hair);padding-inline-start:1.75rem}
-.cols3 h3{font-size:1.15rem;font-weight:500;margin-block-end:.45rem}
-.cols3 p{color:var(--body);font-size:.95rem}
-.cols3 .link{display:inline-block;margin-block-start:.9rem;font-size:.95rem}
-@media (max-width:48rem){.cols3{grid-template-columns:1fr}.cols3>div+div{border-inline-start:0;padding-inline-start:0;border-block-start:1px solid var(--hair)}}
+/* vs */
+.versus{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(40px,7vw,120px);margin-top:clamp(48px,6vw,80px);max-width:52rem;align-items:start}
+.one{font:500 clamp(48px,6vw,76px)/.9 var(--mono);direction:ltr;letter-spacing:-.04em}
+html[dir=rtl] .one{text-align:right}
+.one+p{color:var(--dim);margin:14px 0 0}
+.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.list li{padding-block:11px;border-bottom:1px solid var(--rule);font-size:16px;display:flex;gap:12px;align-items:baseline}
+.list li::before{content:"";flex:none;width:9px;height:9px;border:1.5px solid var(--ink);border-radius:50%;transform:translateY(-1px)}
+.list li.ok::before{background:var(--ink)}
+.list li.bad{color:var(--signal)}.list li.bad::before{border-color:var(--signal)}
+.list li.hw::before{border-radius:0;border-color:var(--dim)}
+.list li.v{font-weight:600;color:var(--signal);font-size:18px;border-bottom:2px solid var(--signal)}
+.list li.v::before{background:var(--signal);border-color:var(--signal);border-radius:0;width:11px;height:11px}
 
 /* footer */
-footer{margin-block-start:clamp(4rem,8vw,6.5rem);border-block-start:1px solid var(--hair);padding-block:2.5rem}
-.fwrap{display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap;align-items:flex-start}
-.fwrap img{height:40px;width:auto}
-.fwrap p{margin-block-start:.8rem;font-size:.9rem;color:var(--muted);max-width:24rem}
-.flinks{display:flex;gap:2.75rem;flex-wrap:wrap;font-size:.9rem}
-.flinks div{display:flex;flex-direction:column;gap:.4rem}
-.flinks h4{font-family:var(--mono);font-weight:400;font-size:.75rem;color:var(--muted);margin-block-end:.2rem}
+footer{border-top:1px solid var(--ink);padding-block:56px 48px;display:grid;gap:40px;margin-top:clamp(40px,6vw,96px)}
+.fwrap{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.fwrap p{font-size:15px;color:var(--dim);max-width:26rem;margin:0}
+.flinks{display:flex;gap:44px;flex-wrap:wrap;font-size:15px}
+.flinks div{display:grid;gap:6px;align-content:start}
+.flinks h4{margin:0 0 4px;font-size:13px;font-weight:400;color:var(--dim)}
+html[lang=en] .flinks h4{font:400 12px/1.4 var(--mono);letter-spacing:.06em;text-transform:uppercase}
 .flinks a{text-decoration:none}
 .flinks a:hover{text-decoration:underline;text-underline-offset:4px}
-.legal{margin-block-start:2.5rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+.legal{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--dim)}
+.legal .home{font:500 14px/1 var(--mono);color:var(--ink);direction:ltr}
 
-
-/* ── balance pass: graphics lead, generous white space ── */
-.hero{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(2.5rem,6vw,6rem);padding-block:clamp(3rem,8vw,7rem) clamp(5rem,11vw,9.5rem)}
-.convo{aspect-ratio:1/1}
-.vision{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(2.5rem,6vw,6rem);padding-block:clamp(6rem,12vw,10.5rem)}
-.vtext{gap:3rem;max-width:30rem}
-.section{padding-block:clamp(6rem,12vw,10.5rem) 0}
-.shead{margin-block-end:clamp(2.5rem,5vw,4rem)}
-.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1.5rem,4vw,3.5rem);border:0}
-.grid .tile{border:1px solid var(--hair);aspect-ratio:5/4}
-.tile{padding:clamp(1.25rem,2.6vw,2.25rem)}
-.fig{margin-block-start:clamp(1rem,2.5vw,2rem)}
-.dd{gap:5px;grid-auto-rows:11px}
-.dd i{width:11px;height:11px}
-.dots{gap:1.4rem}
-.dots.sm{gap:1rem}.dots.sm .dd{gap:4px;grid-auto-rows:9px}.dots.sm .dd i{width:9px;height:9px}
-.drow .nm{font-size:.8rem}
-.pos{padding-block:clamp(6rem,12vw,10.5rem);gap:clamp(2.5rem,6vw,6rem)}
-footer{margin-block-start:clamp(6rem,12vw,10rem)}
-@media (max-width:52rem){.hero,.vision{grid-template-columns:1fr}}
-@media (max-width:48rem){.grid{grid-template-columns:1fr}.grid .tile{aspect-ratio:auto;min-height:26rem}.dd{gap:4px;grid-auto-rows:8px}.dd i{width:8px;height:8px}.dots.sm .dd{gap:3px;grid-auto-rows:7px}.dots.sm .dd i{width:7px;height:7px}}
-
-.dd{grid-auto-rows:auto!important;gap:5px!important;width:100%}
-.dd i{width:100%!important;height:auto!important;aspect-ratio:1/1;max-width:18px}
-.dots.sm .dd{gap:4px!important;max-width:24rem}.dots.sm .dd i{max-width:11px}
-
-/* slideshow */
-.show{border:1px solid var(--hair)}
-.show-bar{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;padding:.9rem clamp(1rem,2.5vw,2rem);border-block-end:1px solid var(--hair)}
-.show-tabs{display:flex;gap:clamp(1rem,3vw,2rem);flex-wrap:wrap}
-.show-tabs button{font:inherit;font-size:.95rem;background:none;border:0;border-block-end:1px solid transparent;padding:.2rem 0;color:var(--muted);cursor:pointer;display:inline-flex;gap:.45rem;align-items:baseline}
-.show-tabs button b{font-family:var(--mono);font-weight:500;font-size:.8rem}
-.show-tabs button[aria-selected=true]{color:var(--ink);border-color:var(--ink)}
-.show-ctl{display:flex;align-items:center;gap:.5rem}
-.names{font:inherit;font-size:.85rem;background:none;border:1px solid var(--hair);padding:.3rem .75rem;cursor:pointer;color:var(--body);margin-inline-end:.5rem}
-.names:hover,.arw:hover{border-color:var(--ink);color:var(--ink)}
-.arw{width:2.3rem;height:2.3rem;font-size:1.3rem;line-height:1;background:none;border:1px solid var(--hair);cursor:pointer;color:var(--body)}
-html[dir=ltr] #sprev,html[dir=ltr] #snext{transform:scaleX(-1)}
-.slides{position:relative}
-html[lang=ar] .rows .s,html[lang=ar] .rows .d[data-i18n],html[lang=ar] .flinks h4{font-family:var(--ar);font-size:.85rem}
-html[lang=ar] .ev .who{font-family:var(--ar);font-size:.74rem}
-.vhead{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap}
-.vhead .names{margin-inline-end:0}
-.slide{border:0!important;aspect-ratio:16/9;padding:clamp(1.5rem,3.5vw,3rem)!important}
-.slide[hidden]{display:none!important}
-.slide h3{font-size:clamp(1.5rem,2.6vw,2.2rem)!important}
-.slide .fig{max-width:46rem;width:100%;margin-inline:auto}
-.mname{filter:blur(4.5px);transition:filter .35s}
-body.reveal .mname{filter:none}
-@media (max-width:48rem){.slide{aspect-ratio:auto;min-height:24rem}}
-
-/* section 4: score vs trial */
-.vs{padding-block:clamp(6rem,12vw,10.5rem);border-block-end:1px solid var(--hair)}
-.vs h2{font-weight:500;font-size:clamp(1.8rem,3.4vw,2.75rem);line-height:1.3;max-width:42rem;text-wrap:balance}
-html[lang=en] .vs h2{letter-spacing:-.03em;line-height:1.1}
-.vsgrid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(1.5rem,4vw,3.5rem);margin-block-start:clamp(2.5rem,5vw,4rem)}
-.vscell{border:1px solid var(--hair);padding:clamp(1.5rem,3.5vw,3rem);display:flex;flex-direction:column;min-height:24rem}
-.vstag{font-size:.95rem;color:var(--muted)}
-.lbfig{flex:1;display:flex;align-items:center}
-.lbfig svg{width:100%;direction:ltr;overflow:visible}
-.lbnum{font-family:var(--mono);font-weight:500;font-size:34px;fill:#12161C;opacity:0;transition:opacity .5s .9s}
-.lbdot{transform-box:fill-box;transform-origin:center;transform:translateX(-218px);transition:transform 1.1s cubic-bezier(.3,.6,.2,1) .2s}
-.vs.in .lbdot{transform:none}.vs.in .lbnum{opacity:1}
-.vsnote{color:var(--muted);font-size:.95rem}
-.vslist{list-style:none;margin-block-start:1.5rem;position:relative;padding-inline-start:1.75rem;display:grid;gap:1.15rem;flex:1;align-content:center}
-.vslist::before{content:"";position:absolute;inset-inline-start:.42rem;top:.6rem;bottom:.6rem;width:1px;background:var(--ink);transform-origin:top;transform:scaleY(0);transition:transform 1.6s ease .2s}
-.vs.in .vslist::before{transform:none}
-.vslist li{position:relative;font-size:clamp(1.02rem,1.5vw,1.2rem);opacity:0;transform:translateY(6px);transition:opacity .4s,transform .4s}
-.vslist li::before{content:"";position:absolute;inset-inline-start:-1.5rem;top:.55em;width:10px;height:10px;border-radius:50%;border:1px solid var(--ink);background:var(--paper)}
-.vslist li.ok::before{background:var(--ink)}
-.vslist li.bad{color:var(--bad)}.vslist li.bad::before{border-color:var(--bad);border-width:1.5px}
-.vslist li.hw::before{border-radius:0;border-color:var(--muted)}
-.vslist li.verdict{font-weight:500;color:var(--bad);font-size:clamp(1.2rem,1.9vw,1.5rem)}
-.vslist li.verdict::before{width:13px;height:13px;inset-inline-start:calc(-1.5rem - 2px);background:var(--bad);border-color:var(--bad);border-radius:2px}
-.vs.in .vslist li{opacity:1;transform:none}
-.vs.in .vslist li:nth-child(1){transition-delay:.5s}.vs.in .vslist li:nth-child(2){transition-delay:.9s}.vs.in .vslist li:nth-child(3){transition-delay:1.3s}.vs.in .vslist li:nth-child(4){transition-delay:1.7s}.vs.in .vslist li:nth-child(5){transition-delay:2.2s}
-@media (max-width:52rem){.vsgrid{grid-template-columns:1fr}.vscell{min-height:auto}.lbfig{min-height:9rem}}
-
-/* section 5: timeline line */
-.tlsec h2{font-weight:500;font-size:clamp(1.8rem,3.4vw,2.75rem);line-height:1.25}
-.tline{list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin-block:clamp(3rem,6vw,5rem) 0;position:relative}
-.tline::before{content:"";position:absolute;inset-inline:0;top:2.35rem;height:1px;background:var(--ink);transform-origin:right;transform:scaleX(0);transition:transform 1.6s cubic-bezier(.3,.6,.2,1)}
-html[dir=ltr] .tline::before{transform-origin:left}
-.tlsec.in .tline::before{transform:none}
-.tline li{position:relative;opacity:0;transition:opacity .4s}
-.tlsec.in .tline li{opacity:1}
-.tlsec.in .tline li:nth-child(2){transition-delay:.3s}.tlsec.in .tline li:nth-child(3){transition-delay:.6s}.tlsec.in .tline li:nth-child(4){transition-delay:.9s}.tlsec.in .tline li:nth-child(5){transition-delay:1.2s}
-.tline a,.tline div{display:flex;flex-direction:column;gap:.9rem;text-decoration:none;padding-inline-end:1rem}
-.tline time{font-family:var(--mono);font-size:.8rem;color:var(--muted);direction:ltr;unicode-bidi:isolate;height:1.4rem}
-html[dir=rtl] .tline time{text-align:right}
-html[lang=ar] .tline time[data-i18n]{font-family:var(--ar);font-size:.85rem}
-.tline i{display:block;width:13px;height:13px;border-radius:50%;background:var(--ink);position:relative;z-index:1}
-.tline li.next i{background:var(--paper);border:1.5px solid var(--muted)}
-.tline span{font-size:1.05rem;font-weight:500;line-height:1.4}
-.tline li.next span{color:var(--muted);font-weight:400}
-.tline a:hover span{text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}
-.tline li:first-child i{outline:0}
-@media (max-width:48rem){.tline{grid-template-columns:1fr;gap:1.6rem;padding-inline-start:1.75rem}.tline::before{inset-inline:auto;inset-inline-start:.38rem;top:.4rem;bottom:.4rem;width:1px;height:auto;transform-origin:top}.tline a,.tline div{flex-direction:row;align-items:baseline;gap:1rem}.tline i{position:absolute;inset-inline-start:-1.75rem;top:.35rem}.tline time{height:auto;min-width:6.5rem}}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}html{scroll-behavior:auto}}
+/* phone: the column narrows to a strip */
+@media (max-width:820px){.vision{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:760px){
+  :root{--gw:30px}
+  .tag,.ticks b,.gauge .cubit{display:none}
+  .ticks i{width:7px}.ticks i.mj{width:14px}
+  .page{padding-inline-start:calc(var(--gw) + 16px)}
+  .nav .links{gap:18px;font-size:14px}
+  .ln{grid-template-columns:minmax(0,1fr);gap:2px}
+  .script{min-height:46rem}
+  .versus{grid-template-columns:minmax(0,1fr)}
+  .rows a,.rows .row{grid-template-columns:minmax(0,1fr) 20px}
+  .rows .m{grid-column:1;grid-row:2}
+  .mname{height:5.5rem;font-size:10px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
 <a class="skip" href="#main" data-i18n="skip">انتقل إلى المحتوى</a>
 
-<header class="nav">
-  <div class="wrap">
-    <a class="home" href="./" aria-label="مقياس"><img src="assets/brand/miqyas-lockup-on-light.svg" alt="مقياس · Miqyas" width="122" height="34"></a>
-    <nav class="links" aria-label="الأقسام">
-      <a href="#trial" data-i18n="n1">التجربة الأولى</a>
-      <a href="#published" data-i18n="n2">ما نشرناه</a>
-      <a href="https://github.com/mhdghaim-cell/arabic-llm-bench/blob/main/docs/job_trial_standard.md" data-i18n="n3">المعيار</a>
-      <a href="#about" data-i18n="n4">من نحن</a>
+<aside class="gauge" id="gauge" aria-hidden="true">
+  <div class="water"></div>
+  <div class="ticks" id="ticks"></div>
+  <div class="level"><div class="tag"><span class="v" id="tv"></span><span class="l" id="tl"></span></div></div>
+  <span class="cubit">Roda · 861</span>
+</aside>
+
+<div class="page">
+  <header class="nav">
+    <a class="home" href="#main" aria-label="مقياس"><img alt="مقياس · Miqyas" src="assets/brand/miqyas-lockup-on-light.svg" width="122" height="34"></a>
+    <nav class="links" aria-label="روابط">
+      <a href="المسرد/" data-i18n="f4">المسرد</a>
+      <a href="https://github.com/mhdghaim-cell/arabic-llm-bench">GitHub</a>
+      <a href="https://huggingface.co/mhdghaim">Hugging Face</a>
       <button class="lang" type="button" id="lang">EN</button>
     </nav>
-  </div>
-</header>
+  </header>
 
-<main id="main">
-<div class="wrap">
-  <section class="hero">
-    <div>
+  <main id="main">
+    <!-- 1. Miqyas and its message, then a real conversation -->
+    <section class="hero" data-read="2,016" data-label="محادثة حقيقية" data-label-en="real conversations" data-lvl="14">
       <h1 data-i18n="h1"><span class="brand">مقياس</span> مختبر ذكاء اصطناعي مستقل</h1>
       <p class="lede" data-i18n="lede">نختبر نماذج الذكاء الاصطناعي العربية وننشر فعاليتها وجودتها.</p>
-      <div class="ctas">
-        <a class="btn" href="findings/frontdesk-v2/" data-i18n="c1">اقرأ التجربة الأولى</a>
-        <a class="link" href="https://github.com/mhdghaim-cell/arabic-llm-bench/issues/new?title=Model%20test%20request%3A%20" data-i18n="c2">اطلب اختبارًا لنموذجك</a>
+      <ul class="rows">
+        <li><a href="findings/frontdesk-v2/"><span class="t" data-i18n="c1">اقرأ التجربة الأولى</span><span class="m"><span class="n">2,016</span> <span data-i18n="conv">محادثة</span></span><span class="go">←</span></a></li>
+        <li><a href="https://github.com/mhdghaim-cell/arabic-llm-bench/issues/new?title=Model%20test%20request%3A%20"><span class="t" data-i18n="c2">اطلب اختبارًا لنموذجك</span><span class="m"></span><span class="go">←</span></a></li>
+      </ul>
+      <div class="convo" aria-label="محادثة حقيقية من تجربة العمل الأولى">
+        <div class="convo-head"><h2 data-i18n="cvh">محادثة حقيقية</h2><div class="tabs" role="tablist" id="tabs"></div></div>
+        <div class="script" id="trace" aria-live="polite"></div>
       </div>
-    </div>
+    </section>
 
-    <div class="tile convo paper" aria-label="محادثة حقيقية من تجربة العمل الأولى">
-      <h2 data-i18n="cvh">محادثة حقيقية</h2>
-      <div class="steps" role="tablist" id="tabs"></div>
-      <div class="fig"><div class="trace" id="trace" aria-live="polite"></div></div>
-    </div>
-  </section>
-  <section class="vision" aria-labelledby="v-h">
-    <div class="vtext">
-      <div class="vblock">
-        <span class="vlab" data-i18n="vl1">رؤيتنا</span>
-        <h2 id="v-h" data-i18n="vh">أن يكون لكل نموذج ذكاء اصطناعي عربي مقياسٌ يُعرف به قبل استخدامه.</h2>
-      </div>
-      <div class="vblock">
-        <span class="vlab" data-i18n="vl2">مهمتنا</span>
-        <p class="vm2" data-i18n="vmis">نبني الثقة التي يحتاجها الذكاء الاصطناعي العربي لينتشر حول العالم.</p>
-        <p class="vhow" data-i18n="vhow">نضع كل نموذج في وظيفة حقيقية، ونحكم عليه بوضوح، وننشر البيانات كاملة.</p>
-      </div>
-    </div>
-    <figure class="tile paper vfig anim" id="vfig">
-      <div class="vhead"><h3 data-i18n="vft">لكل نموذج مقياسه</h3><button type="button" class="names" aria-pressed="false" data-i18n="names">إظهار أسماء النماذج</button></div>
-      <div class="fig"><svg viewBox="0 0 380 330" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-<line x1="40" y1="262.0" x2="52" y2="262.0" stroke="#12161C" stroke-width="1"/>
-<line x1="40" y1="238.0" x2="48" y2="238.0" stroke="#12161C" stroke-width="1"/>
-<line x1="40" y1="214.0" x2="48" y2="214.0" stroke="#12161C" stroke-width="1"/>
-<line x1="40" y1="190.0" x2="48" y2="190.0" stroke="#12161C" stroke-width="1"/>
-<line x1="40" y1="166.0" x2="48" y2="166.0" stroke="#12161C" stroke-width="1"/>
-<line x1="40" y1="142.0" x2="52" y2="142.0" stroke="#12161C" stroke-width="1"/>
-<line x1="40" y1="118.0" x2="48" y2="118.0" stroke="#12161C" stroke-width="1"/>
-<line x1="40" y1="94.0" x2="48" y2="94.0" stroke="#12161C" stroke-width="1"/>
-<line x1="40" y1="70.0" x2="48" y2="70.0" stroke="#12161C" stroke-width="1"/>
-<line x1="40" y1="46.0" x2="48" y2="46.0" stroke="#12161C" stroke-width="1"/>
-<line x1="40" y1="22.0" x2="52" y2="22.0" stroke="#12161C" stroke-width="1"/>
-<text class="lbl" x="34" y="266.0" text-anchor="end">0%</text>
-<text class="lbl" x="34" y="146.0" text-anchor="end">50%</text>
-<text class="lbl" x="34" y="26.0" text-anchor="end">100%</text>
-<line x1="44" y1="262.0" x2="44" y2="22.0" stroke="#12161C"/>
-<line x1="44" y1="262.0" x2="372" y2="262.0" stroke="#12161C"/>
-<rect x="66" y="22.0" width="12" height="240" fill="none" stroke="#D9D5CC"/>
-<rect class="lvl" style="--d:0ms" x="66" y="33.5" width="12" height="228.5" fill="#12161C"/>
-<text class="val lv" style="--d:900ms" x="72" y="25.5" text-anchor="middle">95</text>
-<text class="lbl mname" transform="translate(75,274.0) rotate(-55)" text-anchor="end">Jais 3 7B</text>
-<rect x="102" y="22.0" width="12" height="240" fill="none" stroke="#D9D5CC"/>
-<rect class="lvl" style="--d:180ms" x="102" y="37.1" width="12" height="224.9" fill="#12161C"/>
-<text class="val lv" style="--d:1080ms" x="108" y="29.1" text-anchor="middle">94</text>
-<text class="lbl mname" transform="translate(111,274.0) rotate(-55)" text-anchor="end">Jais 3 3.7B</text>
-<rect x="138" y="22.0" width="12" height="240" fill="none" stroke="#D9D5CC"/>
-<rect class="lvl" style="--d:360ms" x="138" y="75.3" width="12" height="186.7" fill="#12161C"/>
-<text class="val lv" style="--d:1260ms" x="144" y="67.3" text-anchor="middle">78</text>
-<text class="lbl mname" transform="translate(147,274.0) rotate(-55)" text-anchor="end">Qwen3 8B</text>
-<rect x="174" y="22.0" width="12" height="240" fill="none" stroke="#D9D5CC"/>
-<rect class="lvl" style="--d:540ms" x="174" y="105.8" width="12" height="156.2" fill="#12161C"/>
-<text class="val lv" style="--d:1440ms" x="180" y="97.8" text-anchor="middle">65</text>
-<text class="lbl mname" transform="translate(183,274.0) rotate(-55)" text-anchor="end">Qwen3 4B</text>
-<rect x="210" y="22.0" width="12" height="240" fill="none" stroke="#B9B5AC" stroke-dasharray="3 3"/>
-<text class="q" x="216" y="147.0" text-anchor="middle">?</text>
-<text class="lbl mname" transform="translate(219,274.0) rotate(-55)" text-anchor="end">Falcon</text>
-<rect x="246" y="22.0" width="12" height="240" fill="none" stroke="#B9B5AC" stroke-dasharray="3 3"/>
-<text class="q" x="252" y="147.0" text-anchor="middle">?</text>
-<text class="lbl mname" transform="translate(255,274.0) rotate(-55)" text-anchor="end">ALLaM</text>
-<rect x="282" y="22.0" width="12" height="240" fill="none" stroke="#B9B5AC" stroke-dasharray="3 3"/>
-<text class="q" x="288" y="147.0" text-anchor="middle">?</text>
-<text class="lbl mname" transform="translate(291,274.0) rotate(-55)" text-anchor="end">Fanar</text>
-<rect x="318" y="22.0" width="12" height="240" fill="none" stroke="#B9B5AC" stroke-dasharray="3 3"/>
-<text class="q" x="324" y="147.0" text-anchor="middle">?</text>
-<text class="lbl mname" transform="translate(327,274.0) rotate(-55)" text-anchor="end">SILMA</text>
-<rect x="354" y="22.0" width="12" height="240" fill="none" stroke="#B9B5AC" stroke-dasharray="3 3"/>
-<text class="q" x="360" y="147.0" text-anchor="middle">?</text>
-<text class="lbl mname" transform="translate(363,274.0) rotate(-55)" text-anchor="end">Gemma</text>
-<line class="sweep" x1="44" x2="372" y1="262.0" y2="262.0" stroke="#EB3B2C" stroke-width="1.5"/>
-</svg></div>
-    </figure>
-  </section>
-
-
-  <section class="section" id="trial" aria-labelledby="g-h">
-    <div class="shead">
-      <div>
-        <h2 id="g-h" data-i18n="g_h">هل يستطيع نموذج عربي مفتوح أن يدير استقبال عيادة؟</h2>
-      </div>
-      <a class="link" href="findings/frontdesk-v2/" data-i18n="g_a">التقرير الكامل</a>
-    </div>
-
-    <div class="show" id="show">
-      <div class="show-bar">
-        <div class="show-tabs" role="tablist" id="stabs">
-          <button type="button" role="tab" aria-selected="true" data-to="0"><b>1</b><span data-i18n="st1">وقت الانتظار</span></button>
-          <button type="button" role="tab" aria-selected="false" data-to="1"><b>2</b><span data-i18n="st2">المحادثات الناجحة</span></button>
-          <button type="button" role="tab" aria-selected="false" data-to="2"><b>3</b><span data-i18n="st3">التقويم أم الأداة</span></button>
+    <!-- 2. vision and mission -->
+    <section data-read="4/9" data-label="نماذج قِيست حتى الآن" data-label-en="models measured so far" data-lvl="30">
+      <div class="vision">
+        <div class="vtext">
+          <div><span class="lab" data-i18n="vl1">رؤيتنا</span><h2 data-i18n="vh">أن يكون لكل نموذج ذكاء اصطناعي عربي مقياسٌ يُعرف به قبل استخدامه.</h2></div>
+          <div><span class="lab" data-i18n="vl2">مهمتنا</span><p class="vm2" data-i18n="vmis">نبني الثقة التي يحتاجها الذكاء الاصطناعي العربي لينتشر حول العالم.</p><p class="vhow" data-i18n="vhow">نضع كل نموذج في وظيفة حقيقية، ونحكم عليه بوضوح، وننشر البيانات كاملة.</p></div>
         </div>
-        <div class="show-ctl">
-          <button type="button" class="names" aria-pressed="false" data-i18n="names">إظهار أسماء النماذج</button>
-          <button type="button" class="arw" id="sprev" aria-label="السابق">&#8250;</button>
-          <button type="button" class="arw" id="snext" aria-label="التالي">&#8249;</button>
-        </div>
+        <figure class="anim" style="margin:0">
+          <div class="vhead"><h3 data-i18n="vft">لكل نموذج مقياسه</h3><button type="button" class="toggle names" aria-pressed="false">إظهار أسماء النماذج</button></div>
+          <div class="shelf">
+            <div class="c"><span class="p">95</span><div class="tube"><div class="fill" style="--h:95%"></div></div><span class="mname"><span class="anon">A</span><span class="real">Jais 3 7B</span></span></div>
+            <div class="c"><span class="p">94</span><div class="tube"><div class="fill" style="--h:94%"></div></div><span class="mname"><span class="anon">B</span><span class="real">Jais 3 3.7B</span></span></div>
+            <div class="c"><span class="p">78</span><div class="tube"><div class="fill" style="--h:78%"></div></div><span class="mname"><span class="anon">C</span><span class="real">Qwen3 8B</span></span></div>
+            <div class="c"><span class="p">65</span><div class="tube"><div class="fill" style="--h:65%"></div></div><span class="mname"><span class="anon">D</span><span class="real">Qwen3 4B</span></span></div>
+            <div class="c"><span class="p"></span><div class="tube empty"></div><span class="mname"><span class="anon">E</span><span class="real">Falcon</span></span></div>
+            <div class="c"><span class="p"></span><div class="tube empty"></div><span class="mname"><span class="anon">F</span><span class="real">ALLaM</span></span></div>
+            <div class="c"><span class="p"></span><div class="tube empty"></div><span class="mname"><span class="anon">G</span><span class="real">Fanar</span></span></div>
+            <div class="c"><span class="p"></span><div class="tube empty"></div><span class="mname"><span class="anon">H</span><span class="real">SILMA</span></span></div>
+            <div class="c"><span class="p"></span><div class="tube empty"></div><span class="mname"><span class="anon">I</span><span class="real">Gemma</span></span></div>
+          </div>
+        </figure>
       </div>
-      <div class="slides">
-<figure class="tile slide paper" data-i="0" id="f5">
-        <h3 data-i18n="t5">كم ينتظر المريض الرد؟</h3>
-        <div class="fig">
-          <svg viewBox="0 0 320 250" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-            <!-- x = 10 + s*5.5 (0..55s) -->
-            <line class="draw" style="--len:310" x1="10" y1="150" x2="315" y2="150" stroke="#12161C"/>
-            <g class="lbl"><text x="10" y="172" text-anchor="middle">0</text><text x="65" y="172" text-anchor="middle">10</text><text x="175" y="172" text-anchor="middle">30</text><text x="285" y="172" text-anchor="middle">50 s</text></g>
-            <g stroke="#12161C"><line x1="10" y1="146" x2="10" y2="154"/><line x1="65" y1="146" x2="65" y2="154"/><line x1="175" y1="146" x2="175" y2="154"/><line x1="285" y1="146" x2="285" y2="154"/></g>
-            <rect x="10" y="132" width="55" height="36" fill="#12161C" opacity=".05"/>
-            <text class="lbl" x="37" y="126" text-anchor="middle" data-i18n-svg="wa">WhatsApp</text>
-            <circle class="pop" cx="21" cy="150" r="6" fill="#12161C"/>
-            <line class="draw" style="--len:60" x1="21" y1="144" x2="21" y2="84" stroke="#12161C"/>
-            <text class="lblk pop" x="21" y="66" data-i18n-svg="hw1">RTX 4090</text>
-            <text class="val pop" x="21" y="80">~2 s</text>
-            <circle class="pop" cx="301.5" cy="150" r="6" fill="#EB3B2C"/>
-            <line class="draw" style="--len:60" x1="301.5" y1="144" x2="301.5" y2="84" stroke="#EB3B2C"/>
-            <text class="lblk pop" x="315" y="66" text-anchor="end" data-i18n-svg="hw2">2020 laptop · 8 GB</text>
-            <text class="val pop" x="315" y="80" text-anchor="end">~53 s</text>
-            <line x1="40" y1="200" x2="200" y2="200" stroke="#7A7D84" stroke-dasharray="3 4"/>
-            <text class="lbl" x="40" y="220" data-i18n-svg="hw3">12 GB GPU: measuring next</text>
-          </svg>
+    </section>
+
+    <!-- 3. the trial, as three slides -->
+    <section id="trial" data-read="2,016" data-label="محادثة في التجربة الأولى" data-label-en="conversations in Job Trial #1" data-lvl="48">
+      <div class="shead"><h2 data-i18n="g_h">هل يستطيع نموذج عربي مفتوح أن يدير استقبال عيادة؟</h2><a class="link" href="findings/frontdesk-v2/" data-i18n="g_a">التقرير الكامل</a></div>
+      <div class="show" id="show">
+        <div class="show-bar">
+          <div class="tabs" role="tablist" id="stabs">
+            <button type="button" role="tab" aria-selected="true" data-to="0"><b>1</b><span data-i18n="st1">وقت الانتظار</span></button>
+            <button type="button" role="tab" aria-selected="false" data-to="1"><b>2</b><span data-i18n="st2">المحادثات الناجحة</span></button>
+            <button type="button" role="tab" aria-selected="false" data-to="2"><b>3</b><span data-i18n="st3">التقويم أم الأداة</span></button>
+          </div>
+          <div class="show-ctl">
+            <button type="button" class="toggle names" aria-pressed="false">إظهار أسماء النماذج</button>
+            <button type="button" class="arw" id="sprev" aria-label="السابق">›</button>
+            <button type="button" class="arw" id="snext" aria-label="التالي">‹</button>
+          </div>
         </div>
-      </figure>
-<figure class="tile slide paper" data-i="1" id="f1">
-        <h3 data-i18n="t1">كم محادثة انتهت بنجاح؟</h3>
-        <div class="fig">
-          <svg viewBox="0 0 320 250" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-            <line x1="0" y1="232" x2="320" y2="232" stroke="#12161C" stroke-width="1"/>
-            <line x1="320" y1="16" x2="320" y2="232" stroke="#D9D5CC" stroke-dasharray="3 4"/>
-            <text class="lbl" x="320" y="248" text-anchor="end">100%</text>
-            <text class="lbl" x="0" y="248">0</text>
-            <g>
-              <text class="lblk mname" x="0" y="30" data-m="1">Jais 3 · 7B</text>
-              <rect class="grow" x="0" y="38" width="304.6" height="10" fill="#12161C"/>
-              <text class="val pop" x="320" y="30" text-anchor="end">95%</text>
-              <text class="lblk mname" x="0" y="82" data-m="1">Jais 3 · 3.7B</text>
-              <rect class="grow" x="0" y="90" width="299.8" height="10" fill="#12161C"/>
-              <text class="val pop" x="320" y="82" text-anchor="end">94%</text>
-              <text class="lblk mname" x="0" y="134" data-m="1">Qwen3 · 8B</text>
-              <rect class="grow" x="0" y="142" width="249" height="10" fill="none" stroke="#12161C"/>
-              <text class="val pop" x="320" y="134" text-anchor="end">78%</text>
-              <text class="lblk mname" x="0" y="186" data-m="1">Qwen3 · 4B</text>
-              <rect class="grow" x="0" y="194" width="208.3" height="10" fill="none" stroke="#12161C"/>
-              <text class="val pop" x="320" y="186" text-anchor="end">65%</text>
+
+        <figure class="slide" style="margin:0">
+          <h3 data-i18n="t5">كم ينتظر المريض الرد؟</h3>
+          <div class="chart"><svg viewBox="0 -8 760 218" role="img" aria-label="~2 s on an RTX 4090, ~53 s on a 2020 laptop with 8 GB">
+            <rect x="40" y="120" width="120" height="34" fill="currentColor" opacity=".06"/>
+            <text class="aa" x="100" y="176" text-anchor="middle" data-svg="wa">WhatsApp</text>
+            <line x1="40" y1="137" x2="720" y2="137" stroke="currentColor"/>
+            <g stroke="currentColor"><line x1="40" y1="131" x2="40" y2="143"/><line x1="160" y1="131" x2="160" y2="143"/><line x1="280" y1="131" x2="280" y2="143"/><line x1="400" y1="131" x2="400" y2="143"/><line x1="520" y1="131" x2="520" y2="143"/><line x1="640" y1="131" x2="640" y2="143"/></g>
+            <g><text x="40" y="200" text-anchor="middle">0</text><text x="160" y="200" text-anchor="middle">10</text><text x="280" y="200" text-anchor="middle">20</text><text x="400" y="200" text-anchor="middle">30</text><text x="520" y="200" text-anchor="middle">40</text><text x="640" y="200" text-anchor="middle">50 s</text></g>
+            <line x1="64" y1="131" x2="64" y2="62" stroke="currentColor"/><circle cx="64" cy="137" r="7" fill="currentColor"/>
+            <text class="big" x="72" y="52">~2 s</text><text class="k" x="72" y="32" data-svg="hw1">RTX 4090</text>
+            <line x1="676" y1="131" x2="676" y2="62" stroke="#EB3B2C" stroke-width="1.5"/><circle cx="676" cy="137" r="7" fill="#EB3B2C"/>
+            <text class="big" x="668" y="52" text-anchor="end">~53 s</text><text class="k" x="668" y="32" text-anchor="end" data-svg="hw2">2020 laptop · 8 GB</text><text class="ka" x="668" y="12" text-anchor="end" data-svg="hw2b"></text>
+            <line x1="200" y1="96" x2="560" y2="96" stroke="currentColor" stroke-dasharray="4 5" opacity=".6"/>
+            <text class="aa" x="380" y="86" text-anchor="middle" data-svg="hw3">12 GB GPU: measuring next</text>
+          </svg></div>
+        </figure>
+
+        <figure class="slide" style="margin:0" hidden>
+          <h3 data-i18n="t1">كم محادثة انتهت بنجاح؟</h3>
+          <div class="chart"><svg viewBox="0 0 760 250" role="img" aria-label="95%, 94%, 78%, 65%">
+            <line x1="120" y1="16" x2="120" y2="222" stroke="currentColor"/>
+            <line x1="660" y1="10" x2="660" y2="222" stroke="#EB3B2C" stroke-width="1.5"/>
+            <text class="r" x="660" y="240" text-anchor="middle" data-svg="bar">90% bar</text>
+            <text x="120" y="240" text-anchor="middle">0</text><text x="720" y="240" text-anchor="middle">100%</text>
+            <g class="mn">
+              <text class="k" x="110" y="44" text-anchor="end"><tspan class="anon">A</tspan><tspan class="real">Jais 3 · 7B</tspan></text>
+              <rect x="120" y="30" width="570" height="18" fill="currentColor"/><text class="big" x="698" y="45">95%</text>
+              <text class="k" x="110" y="96" text-anchor="end"><tspan class="anon">B</tspan><tspan class="real">Jais 3 · 3.7B</tspan></text>
+              <rect x="120" y="82" width="564" height="18" fill="currentColor"/><text class="big" x="692" y="97">94%</text>
+              <text class="k" x="110" y="148" text-anchor="end"><tspan class="anon">C</tspan><tspan class="real">Qwen3 · 8B</tspan></text>
+              <rect x="120.5" y="134.5" width="468" height="17" fill="none" stroke="currentColor"/><text class="big" x="596" y="149">78%</text>
+              <text class="k" x="110" y="200" text-anchor="end"><tspan class="anon">D</tspan><tspan class="real">Qwen3 · 4B</tspan></text>
+              <rect x="120.5" y="186.5" width="390" height="17" fill="none" stroke="currentColor"/><text class="big" x="518" y="201">65%</text>
             </g>
-          </svg>
-        </div>
-      </figure>
-<figure class="tile slide paper" data-i="2" id="f4">
-        <h3 data-i18n="t4">تقويم في التعليمات أم أداة للتاريخ؟</h3>
-        <div class="fig">
-          <svg viewBox="0 0 320 250" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-            <g stroke="#E6E3DB"><line x1="0" y1="20" x2="320" y2="20"/><line x1="0" y1="80" x2="320" y2="80"/><line x1="0" y1="140" x2="320" y2="140"/><line x1="0" y1="200" x2="320" y2="200"/></g>
-            <text class="lbl" x="0" y="16">100%</text><text class="lbl" x="0" y="76">90%</text><text class="lbl" x="0" y="136">80%</text><text class="lbl" x="0" y="196">70%</text>
-            <line x1="0" y1="226" x2="320" y2="226" stroke="#12161C"/>
-            <!-- y = 20 + (100-v)*6 -->
-            <line class="draw" style="--len:90" x1="80" y1="56" x2="80" y2="146" stroke="#12161C"/>
-            <circle class="pop" cx="80" cy="101" r="5" fill="#FAF9F6" stroke="#12161C"/>
-            <text class="lblk" x="80" y="244" text-anchor="middle" data-i18n-svg="a1">none</text>
-            <line class="draw" style="--len:60" x1="170" y1="26" x2="170" y2="86" stroke="#EB3B2C" stroke-width="1.5"/>
-            <circle class="pop" cx="170" cy="49" r="6" fill="#EB3B2C"/>
-            <text class="val pop" x="182" y="53">95%</text>
-            <text class="lblk" x="170" y="244" text-anchor="middle" data-i18n-svg="a2">calendar</text>
-            <line class="draw" style="--len:60" x1="260" y1="44" x2="260" y2="104" stroke="#12161C"/>
-            <circle class="pop" cx="260" cy="72" r="5" fill="#FAF9F6" stroke="#12161C"/>
-            <text class="lblk" x="260" y="244" text-anchor="middle" data-i18n-svg="a3">date tool</text>
-            <text class="lbl pop" x="92" y="105">87%</text><text class="lbl pop" x="272" y="76">91%</text>
-          </svg>
-        </div>
-      </figure>
+          </svg></div>
+        </figure>
+
+        <figure class="slide" style="margin:0" hidden>
+          <h3 data-i18n="t4">تقويم في التعليمات أم أداة للتاريخ؟</h3>
+          <div class="chart"><svg viewBox="0 0 760 250" role="img" aria-label="none 87%, calendar 95%, date tool 91%">
+            <g stroke="currentColor" opacity=".15"><line x1="60" y1="20" x2="740" y2="20"/><line x1="60" y1="80" x2="740" y2="80"/><line x1="60" y1="140" x2="740" y2="140"/><line x1="60" y1="200" x2="740" y2="200"/></g>
+            <text x="50" y="24" text-anchor="end">100%</text><text x="50" y="84" text-anchor="end">90%</text><text x="50" y="144" text-anchor="end">80%</text><text x="50" y="204" text-anchor="end">70%</text>
+            <line x1="200" y1="56" x2="200" y2="146" stroke="currentColor"/><circle class="dot" cx="200" cy="98" r="6" stroke="currentColor"/>
+            <text class="big" x="214" y="103">87%</text><text class="ka" x="200" y="238" text-anchor="middle" data-svg="a1">none</text>
+            <line x1="400" y1="26" x2="400" y2="86" stroke="#EB3B2C" stroke-width="1.5"/><circle cx="400" cy="50" r="7" fill="#EB3B2C"/>
+            <text class="big" x="414" y="55">95%</text><text class="ka" x="400" y="238" text-anchor="middle" data-svg="a2">calendar</text>
+            <line x1="600" y1="44" x2="600" y2="104" stroke="currentColor"/><circle class="dot" cx="600" cy="74" r="6" stroke="currentColor"/>
+            <text class="big" x="614" y="79">91%</text><text class="ka" x="600" y="238" text-anchor="middle" data-svg="a3">date tool</text>
+          </svg></div>
+        </figure>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="vs anim2" id="vs" aria-labelledby="p-h">
-    <h2 id="p-h" data-i18n="p_h">لوحات الصدارة تخبرك بدرجة النموذج. مقياس يخبرك بما يحدث حين تستخدمه.</h2>
-    <div class="vsgrid">
-      <figure class="vscell paper">
-        <span class="vstag" data-i18n="ph1">لوحة الصدارة</span>
-        <div class="lbfig">
-          <svg viewBox="0 0 300 120" aria-hidden="true">
-            <line x1="10" y1="80" x2="290" y2="80" stroke="#12161C"/>
-            <g class="lbl"><text x="10" y="102" text-anchor="middle">0</text><text x="290" y="102" text-anchor="middle">100%</text></g>
-            <circle class="lbdot" cx="228.4" cy="80" r="8" fill="#12161C"/>
-            <text class="lbnum" x="228.4" y="56" text-anchor="middle">78%</text>
-          </svg>
+    <!-- 4. leaderboard vs trial -->
+    <section id="vs" data-read="1" data-label="رقم واحد من لوحة الصدارة" data-label-en="number from a leaderboard" data-lvl="64">
+      <h2 data-i18n="p_h">لوحات الصدارة تخبرك بدرجة النموذج. مقياس يخبرك بما يحدث حين تستخدمه.</h2>
+      <div class="versus">
+        <div><span class="lab" data-i18n="ph1">لوحة الصدارة</span><div class="one">78%</div><p data-i18n="lbnote">رقم واحد. هذا كل شيء.</p></div>
+        <div><span class="lab" data-i18n="ph2">تجربة العمل</span>
+          <ul class="list">
+            <li class="ok"><span data-i18n="vs1">انتهت 78% من المحادثات بنجاح، بأفضل إعداد</span></li>
+            <li class="bad"><span data-i18n="vs2">فاتته 3 حالات طارئة من 75</span></li>
+            <li class="bad"><span data-i18n="vs3">لم ينجح في تغيير الموعد إلا 8 مرات من 27</span></li>
+            <li class="hw"><span data-i18n="vs4">لا يتسع في ذاكرة لابتوب <span class="n">8 GB</span></span></li>
+            <li class="v"><span data-i18n="vs5">الحكم: لا يُنشر</span></li>
+          </ul>
         </div>
-        <p class="vsnote" data-i18n="lbnote">رقم واحد. هذا كل شيء.</p>
-      </figure>
-      <figure class="vscell">
-        <span class="vstag" data-i18n="ph2">تجربة العمل</span>
-        <ol class="vslist">
-          <li class="ok"><span data-i18n="vs1">انتهت 78% من المحادثات بنجاح، بأفضل إعداد</span></li>
-          <li class="bad"><span data-i18n="vs2">فاتته 3 حالات طارئة من 75</span></li>
-          <li class="bad"><span data-i18n="vs3">لم ينجح في تغيير الموعد إلا 8 مرات من 27</span></li>
-          <li class="hw"><span data-i18n="vs4">لا يتسع في ذاكرة لابتوب <span class="num">8 GB</span></span></li>
-          <li class="verdict"><span data-i18n="vs5">الحكم: لا يُنشر</span></li>
-        </ol>
-      </figure>
-    </div>
-  </section>
-
-  <section class="section tlsec anim2" id="published" aria-labelledby="pub-h">
-    <h2 id="pub-h" data-i18n="pub_h">ما نشرناه، وما هو قادم.</h2>
-    <ol class="tline">
-      <li class="done"><a href="findings/token-tax/"><time>2026-10-17</time><i></i><span data-i18n="tl_a">ضريبة الرموز</span></a></li>
-      <li class="done"><a href="findings/frontdesk-v2/"><time>2026-10-25</time><i></i><span data-i18n="tl_b">التجربة الأولى</span></a></li>
-      <li class="done"><a href="https://github.com/mhdghaim-cell/arabic-llm-bench/blob/main/docs/job_trial_standard.md"><time>2026-10-26</time><i></i><span data-i18n="tl_c">معيار تجربة العمل</span></a></li>
-      <li class="next"><div><time data-i18n="tl_dt">قريبًا</time><i></i><span data-i18n="tl_d">الجهاز المتوسط</span></div></li>
-      <li class="next"><div><time data-i18n="tl_et">لاحقًا</time><i></i><span data-i18n="tl_e">المريض نفسه بثلاث صيغ</span></div></li>
-    </ol>
-  </section>
-
-  <section class="section" id="about" aria-labelledby="a-h">
-    <div class="shead">
-      <div>
-        <h2 id="a-h" data-i18n="a_h">مختبر مستقل، وقواعد واحدة للجميع.</h2>
-        <p data-i18n="a_p">لا نتلقى تمويلًا أو أجهزة من أي مختبر نماذج، ولا تربط فريقنا أي علاقة عمل أو استشارة بمختبر نختبر نماذجه. مقرّ مقياس في دبي.</p>
       </div>
-      <a class="link" href="https://github.com/mhdghaim-cell/arabic-llm-bench/blob/main/docs/independence.md" data-i18n="a_a">سياسة الاستقلالية</a>
-    </div>
-    <div class="cols3">
-      <div><h3 data-i18n="d1h">فرق تطوير النماذج</h3><p data-i18n="d1p">اطلبوا اختبار نموذجكم أو ردّوا على نتيجة. ننشر الردود والإصلاحات مع ذكر أصحابها.</p><a class="link" href="https://github.com/mhdghaim-cell/arabic-llm-bench/issues/new?title=Model%20test%20request%3A%20" data-i18n="d1a">اطلبوا اختبارًا</a></div>
-      <div><h3 data-i18n="d2h">مطوّرو الوكلاء</h3><p data-i18n="d2p">أعد التجربة على جهازك، وننشر نتيجتك كما هي باسمك.</p><a class="link" href="https://huggingface.co/datasets/mhdghaim/miqyas-frontdesk-v2" data-i18n="d2a">حمّل البيانات</a></div>
-      <div><h3 data-i18n="d3h">الجهات التي تعتمد الذكاء الاصطناعي العربي</h3><p data-i18n="d3p">أخبرنا بالوظيفة التي تريد اختبارها، فتجاربنا القادمة نختارها مما يحتاجه الناس فعلًا.</p><a class="link" href="https://github.com/mhdghaim-cell/arabic-llm-bench/issues/new?title=Job%20to%20test%3A%20" data-i18n="d3a">اقترح وظيفة</a></div>
-    </div>
-  </section>
-</div>
-</main>
+    </section>
 
-<footer>
-  <div class="wrap">
+
+    <!-- 6. independence and the three doors -->
+    <section id="about" data-read="0" data-label="تمويل من مختبرات النماذج" data-label-en="funding from model labs" data-lvl="94">
+      <div class="shead"><div><h2 data-i18n="a_h">مختبر مستقل، وقواعد واحدة للجميع.</h2><p class="lede" data-i18n="a_p">لا نتلقى تمويلًا أو أجهزة من أي مختبر نماذج، ولا تربط فريقنا أي علاقة عمل أو استشارة بمختبر نختبر نماذجه. مقرّ مقياس في دبي.</p></div><a class="link" href="https://github.com/mhdghaim-cell/arabic-llm-bench/blob/main/docs/independence.md" data-i18n="a_a">سياسة الاستقلالية</a></div>
+      <ul class="rows">
+        <li><a href="https://github.com/mhdghaim-cell/arabic-llm-bench/issues/new?title=Model%20test%20request%3A%20"><span class="t"><span data-i18n="d1h">فرق تطوير النماذج</span><small data-i18n="d1p">اطلبوا اختبار نموذجكم أو ردّوا على نتيجة. ننشر الردود والإصلاحات مع ذكر أصحابها.</small></span><span class="m" data-i18n="d1a">اطلبوا اختبارًا</span><span class="go">←</span></a></li>
+        <li><a href="https://huggingface.co/datasets/mhdghaim/miqyas-frontdesk-v2"><span class="t"><span data-i18n="d2h">مطوّرو الوكلاء</span><small data-i18n="d2p">أعد التجربة على جهازك، وننشر نتيجتك كما هي باسمك.</small></span><span class="m" data-i18n="d2a">حمّل البيانات</span><span class="go">←</span></a></li>
+        <li><a href="https://github.com/mhdghaim-cell/arabic-llm-bench/issues/new?title=Job%20to%20test%3A%20"><span class="t"><span data-i18n="d3h">الجهات التي تعتمد الذكاء الاصطناعي العربي</span><small data-i18n="d3p">أخبرنا بالوظيفة التي تريد اختبارها، فتجاربنا القادمة نختارها مما يحتاجه الناس فعلًا.</small></span><span class="m" data-i18n="d3a">اقترح وظيفة</span><span class="go">←</span></a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
     <div class="fwrap">
-      <div><img src="assets/brand/miqyas-lockup-on-light.svg" alt="مقياس · Miqyas" width="143" height="40"><p data-i18n="fp">مختبر مستقل يختبر نماذج الذكاء الاصطناعي العربية في الاستخدام الحقيقي: اللهجات، وموثوقية التشغيل، والأداء على الأجهزة المحلية.</p></div>
+      <p data-i18n="fp">مختبر مستقل يختبر نماذج الذكاء الاصطناعي العربية في الاستخدام الحقيقي: اللهجات، وموثوقية التشغيل، والأداء على الأجهزة المحلية.</p>
       <div class="flinks">
         <div><h4 data-i18n="fh1">المختبر</h4><a href="https://github.com/mhdghaim-cell/arabic-llm-bench/blob/main/docs/job_trial_standard.md" data-i18n="f1">المعيار</a><a href="https://github.com/mhdghaim-cell/arabic-llm-bench/blob/main/docs/independence.md" data-i18n="f2">الاستقلالية</a><a href="https://github.com/mhdghaim-cell/arabic-llm-bench/blob/main/CITATION.cff" data-i18n="f3">كيف تستشهد بنا</a></div>
         <div><h4 data-i18n="fh2">الأدوات</h4><a href="المسرد/" data-i18n="f4">المسرد</a><a href="الأداة/" data-i18n="f5">أداة الرموز</a><a href="الحاسبة/" data-i18n="f6">حاسبة التكلفة</a></div>
         <div><h4 data-i18n="fh3">البيانات</h4><a href="https://github.com/mhdghaim-cell/arabic-llm-bench">GitHub</a><a href="https://huggingface.co/mhdghaim">Hugging Face</a></div>
       </div>
     </div>
-    <div class="legal"><span data-i18n="legal">مقياس · دبي · رخصة MIT · بلا تتبّع</span><span>miqyaslab.com</span></div>
-  </div>
-</footer>
+    <div class="legal"><span data-i18n="legal">مقياس · رخصة MIT · بلا تتبّع</span><span class="home">miqyaslab.com</span></div>
+  </footer>
+</div>
 
 <script>
 (function(){
 "use strict";
+var D=document.documentElement;D.classList.add("js");D.lang="ar";D.dir="rtl";
+
 /* Verbatim transcripts from results/frontdesk_v2 (Jais 3 3.7B, calendar arm). */
 var S=[
  {en:"booking",ar:"حجز موعد",lines:[
@@ -604,100 +419,95 @@ var S=[
   end:{ok:0,ar:"لم يُلغِ النموذج الموعد القديم: بقي موعدان محجوزان · محادثة خاطئة",en:"Cancel was never called: two bookings remain · wrong"}}
 ];
 
-var EN={skip:"Skip to content",p_h:"A leaderboard tells you a model's score. Miqyas tells you what happens when you use it.",ph1:"A leaderboard",ph2:"A Job Trial",lbnote:"One number. That's all.",vs1:"78% of conversations ended right, in its best setup",vs2:"Missed 3 of 75 emergencies",vs3:"Rescheduled correctly only 8 times out of 27",vs4:"Doesn't fit in an 8 GB laptop's memory",vs5:"Verdict: don't deploy",pub_h:"What we have published, and what comes next.",tl_a:"Token tax",tl_b:"Job Trial #1",tl_c:"Job Trial Standard",tl_dt:"Next",tl_d:"The mid-range machine",tl_et:"Later",tl_e:"Same patient, three ways",valid:"validated",open:"open",expl:"exploratory",nx:"next",fh1:"lab",fh2:"tools",fh3:"data",st1:"Waiting time",st2:"Correct conversations",st3:"Calendar or tool",names:"Show model names",vl1:"Vision",vh:"Every Arabic AI model has a measure, known before anyone relies on it.",vl2:"Mission",vmis:"We build the trust Arabic AI needs to spread worldwide.",vhow:"We test each model in a real job, give a clear verdict, and publish the full data.",vft:"Every model, measured",n1:"Trial #1",n2:"Published",n3:"Standard",n4:"About",
- h1:"<span class=\"brand\">Miqyas</span> is an independent AI lab",lede:"We test Arabic AI models and publish how well they work.",hcap:"miqyas lab · independent · not-for-profit · dubai",mt:"Mission",md:"Help the world adopt Arabic AI that works, on evidence, not claims.",vt:"Not-for-profit",vd:"We don't sell results or rankings. Every trial is published free, with its full data.",
- sub:"A leaderboard tells you how a model scored. Miqyas tells you what happens when you try to use it: a full conversation in dialect, a system that really changes, a machine you own, and a clear verdict at the end.",
- c1:"Read Job Trial #1",c2:"Request a test for your model",cvh:"A real conversation",
- g_h:"Can an open Arabic model run a clinic front desk?",g_a:"Full report",
- t1:"How many conversations ended right?",t2:"Did emergencies reach a person?",t3:"Can it reschedule an appointment?",t4:"Calendar in the prompt, or a date tool?",t5:"How long does the patient wait?",t6:"How do we know the scorer is honest?",
- p_h:"A leaderboard tells you how a model scored. Miqyas tells you what happens when you try to use it.",
- ph1:"A leaderboard",ph2:"A Job Trial",pa1:"One question, one answer",pb1:"A full conversation, first message to last",pa2:"The answer is matched to a text",pb2:"Success is what changed in the system",pa3:"Standard Arabic, often translated",pb3:"Dialect as people write it",pa4:"No named hardware",pb4:"Waiting time on a named machine",pa5:"A rank and a score",pb5:"A verdict: deploy, supervise, don't deploy",
- pub_h:"What we have published, and what comes next.",
- r1:"Job Trial #1: a clinic front desk",r1s:"2,016 conversations · 4 models · pre-registered",r2:"Job Trial Standard v1",r2s:"Ten requirements · CC BY 4.0",r3:"Token tax",r3s:"2,009 sentences · 11 tokenizers · 7 dialects",r4:"The mid-range machine, and the same patient three ways",r4s:"12 GB GPU · Gulf Arabic, MSA, Arabic-Indic digits",
+var EN={skip:"Skip to content",n1:"Trial #1",n2:"Published",n3:"Standard",n4:"About",
+ h1:"<span class=\"brand\">Miqyas</span> is an independent AI lab",lede:"We test Arabic AI models and publish how well they work.",
+ c1:"Read Job Trial #1",c2:"Request a test for your model",conv:"conversations",cvh:"A real conversation",
+ vl1:"Vision",vh:"Every Arabic AI model has a measure, known before anyone relies on it.",vl2:"Mission",vmis:"We build the trust Arabic AI needs to spread worldwide.",vhow:"We test each model in a real job, give a clear verdict, and publish the full data.",vft:"Every model, measured",
+ g_h:"Can an open Arabic model run a clinic front desk?",g_a:"Full report",st1:"Waiting time",st2:"Correct conversations",st3:"Calendar or tool",
+ t5:"How long does the patient wait?",t1:"How many conversations ended right?",t4:"Calendar in the prompt, or a date tool?",
+ p_h:"A leaderboard tells you a model's score. Miqyas tells you what happens when you use it.",ph1:"A leaderboard",ph2:"A Job Trial",lbnote:"One number. That's all.",
+ vs1:"78% of conversations ended right, in its best setup",vs2:"Missed 3 of 75 emergencies",vs3:"Rescheduled correctly only 8 times out of 27",vs4:"Doesn't fit in an 8 GB laptop's memory",vs5:"Verdict: don't deploy",
+ pub_h:"What we have published, and what comes next.",tl_a:"Token tax",tl_b:"Job Trial #1",tl_c:"Job Trial Standard",tl_dt:"Next",tl_d:"The mid-range machine",tl_et:"Later",tl_e:"Same patient, three ways",
  a_h:"An independent lab. Same rules for every lab.",a_p:"No money or hardware from any model lab, and no employment or advisory tie between our team and any lab whose models are tested. Based in Dubai.",a_a:"Independence policy",
  d1h:"Model teams",d1p:"Ask for your model to be tested, or reply to a result. Replies and fixes are published with credit.",d1a:"Request a test",
  d2h:"Agent builders",d2p:"Rerun the trial on your machine. Your result is published as received, under your name.",d2a:"Download the data",
  d3h:"Organisations deploying Arabic AI",d3p:"Describe the job you need tested. Next trials are chosen from what people need.",d3a:"Suggest a job",
- fp:"Independent testing of open-weight AI for Arabic: dialects, deployment reliability, local performance.",
- f1:"Standard",f2:"Independence",f3:"How to cite",f4:"Glossary",f5:"Token tool",f6:"Cost calculator",legal:"Miqyas · Dubai · MIT · no tracking"};
-var SVG_AR=null;
-var SVG_EN={a1:"none",a2:"calendar",a3:"date tool",wa:"WhatsApp",hw1:"RTX 4090",hw2:"2020 laptop · 8 GB",hw3:"12 GB GPU: measuring next"};
+ fp:"Independent testing of open-weight AI for Arabic: dialects, deployment reliability, local performance.",fh1:"Lab",fh2:"Tools",fh3:"Data",
+ f1:"Standard",f2:"Independence",f3:"How to cite",f4:"Glossary",f5:"Token tool",f6:"Cost calculator",legal:"Miqyas · MIT · no tracking"};
+/* SVG labels: Arabic is written for this page, English matches v3 */
+var SVG_AR={wa:"حدّ الانتظار المقبول",hw1:"RTX 4090",hw2:"2020 · 8 GB",hw2b:"لابتوب العيادة",hw3:"بطاقة 12 GB: نقيسها الآن",bar:"حدّ القبول 90%",a1:"بلا تقويم",a2:"تقويم في التعليمات",a3:"أداة للتاريخ"};
+var SVG_EN={wa:"WhatsApp",hw1:"RTX 4090",hw2:"2020 laptop · 8 GB",hw2b:"",hw3:"12 GB GPU: measuring next",bar:"90% bar",a1:"none",a2:"calendar",a3:"date tool"};
 
 var AR={};document.querySelectorAll("[data-i18n]").forEach(function(e){var k=e.getAttribute("data-i18n");if(!(k in AR))AR[k]=e.innerHTML;});
 var lang="ar";
-function applySvg(){document.querySelectorAll("[data-i18n-svg]").forEach(function(e){var k=e.getAttribute("data-i18n-svg");e.textContent=SVG_EN[k];});}
-function setLang(l){lang=l;var d=document.documentElement;d.lang=l;d.dir=l==="en"?"ltr":"rtl";
+var arabic=/[؀-ۿ]/;
+function applySvg(){var M=lang==="en"?SVG_EN:SVG_AR;document.querySelectorAll("[data-svg]").forEach(function(e){var v=M[e.getAttribute("data-svg")];e.textContent=v;
+  if(arabic.test(v)){e.setAttribute("direction","rtl");e.style.fontFamily="var(--ar)";}else{e.removeAttribute("direction");e.style.fontFamily="";}});}
+
+/* the column */
+var g=document.getElementById("gauge"),tk=document.getElementById("ticks"),tv=document.getElementById("tv"),tl=document.getElementById("tl");
+function ticks(){tk.innerHTML="";var h=g.clientHeight,step=14,k=0,c=0,wide=innerWidth>760;
+  for(var y=0;y<h;y+=step){var i=document.createElement("i");i.style.bottom=y+"px";
+    if(k%5===0){i.className="mj";if(wide){var b=document.createElement("b");b.textContent=c;b.style.bottom=y+"px";tk.appendChild(b);}c++;}
+    tk.appendChild(i);k++;}}
+ticks();addEventListener("resize",ticks);
+var secs=[].slice.call(document.querySelectorAll("section[data-read]")),active=secs[0];
+function setG(s){active=s;g.style.setProperty("--lvl",s.dataset.lvl+"%");tv.textContent=s.dataset.read;tl.textContent=lang==="en"?s.dataset.labelEn:s.dataset.label;}
+setG(secs[0]);
+
+/* conversation playback */
+var trace=document.getElementById("trace"),tabs=document.getElementById("tabs"),cur=0,T=[],picked=false;
+var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+function esc(s){return s.replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[c];});}
+function who(t){return lang==="en"?{p:"patient",m:"model",t:"tool",e:"clinic state"}[t]:{p:"المريض",m:"النموذج",t:"أداة",e:"حالة العيادة"}[t];}
+function tabsBuild(){tabs.innerHTML="";S.forEach(function(s,i){var b=document.createElement("button");b.type="button";b.setAttribute("role","tab");b.setAttribute("aria-selected",i===cur?"true":"false");b.innerHTML="<b>"+(i+1)+"</b>"+s[lang==="en"?"en":"ar"];b.addEventListener("click",function(){picked=true;play(i);});tabs.appendChild(b);});}
+function line(L){var d=document.createElement("div");
+  if(L[0]==="end"){var e=S[cur].end;d.className="ln end"+(e.ok?"":" fail");d.innerHTML='<span class="s">'+who("e")+'</span><span class="x">'+(lang==="en"?e.en:e.ar)+"</span>";return d;}
+  if(L[0]==="t"){d.className="ln t";d.innerHTML='<span class="s">'+who("t")+'</span><span class="x"><b>'+L[1]+"</b> "+esc(L[2])+"</span>";return d;}
+  d.className="ln "+L[0];d.innerHTML='<span class="s">'+who(L[0])+'</span><span class="x" dir="rtl" lang="ar">'+esc(L[1])+"</span>";return d;}
+function play(i){T.forEach(clearTimeout);T=[];cur=i;tabsBuild();trace.innerHTML="";var all=S[i].lines.concat([["end"]]);
+  if(reduce){all.forEach(function(L){var d=line(L);d.classList.add("on");trace.appendChild(d);});return;}
+  /* the first line shows at once so the block is never empty */
+  var t=0;all.forEach(function(L,k){if(k)t+=L[0]==="m"?1000:(L[0]==="t"?650:800);
+    T.push(setTimeout(function(){var d=line(L);trace.appendChild(d);requestAnimationFrame(function(){d.classList.add("on");});},t));});
+  if(!picked)T.push(setTimeout(function(){play((cur+1)%S.length);},t+5000));}
+
+/* names toggle */
+var nbs=[].slice.call(document.querySelectorAll(".names"));
+function namesLabel(){var on=document.body.classList.contains("names"),en=lang==="en";
+  nbs.forEach(function(b){b.setAttribute("aria-pressed",on);b.textContent=on?(en?"Hide model names":"إخفاء أسماء النماذج"):(en?"Show model names":"إظهار أسماء النماذج");});}
+nbs.forEach(function(b){b.addEventListener("click",function(){document.body.classList.toggle("names");namesLabel();});});
+
+/* language */
+function setLang(l){lang=l;D.lang=l;D.dir=l==="en"?"ltr":"rtl";
   document.querySelectorAll("[data-i18n]").forEach(function(e){var k=e.getAttribute("data-i18n");var v=l==="en"?EN[k]:AR[k];if(v!=null)e.innerHTML=v;});
   applySvg();document.getElementById("lang").textContent=l==="en"?"عربي":"EN";
   document.title=l==="en"?"Miqyas Lab · Arabic AI, tested on the job":"مقياس · Miqyas Lab";
-  try{localStorage.setItem("miqyas-lang",l);}catch(e){}}
-applySvg();
-
-var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-/* conversation trace */
-var trace=document.getElementById("trace"),tabs=document.getElementById("tabs"),cur=0,T=[],picked=false;
-function esc(s){return s.replace(/[&<>]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;"}[c];});}
-function tabsBuild(){tabs.innerHTML="";S.forEach(function(s,i){var b=document.createElement("button");b.type="button";b.setAttribute("role","tab");b.setAttribute("aria-selected",i===cur?"true":"false");b.innerHTML="<b>"+(i+1)+"</b>"+s[lang==="en"?"en":"ar"];b.addEventListener("click",function(){picked=true;play(i);});tabs.appendChild(b);});}
-function ev(L){var d=document.createElement("div");
-  if(L[0]==="t"){d.className="ev t";d.innerHTML="<p><b>"+L[1]+"</b> "+esc(L[2])+"</p>";return d;}
-  d.className="ev "+L[0];d.innerHTML='<span class="who">'+(L[0]==="p"?(lang==="en"?"patient":"المريض"):(lang==="en"?"model":"النموذج"))+'</span><p dir="rtl" lang="ar">'+esc(L[1])+"</p>";return d;}
-function trim(){var top=trace.getBoundingClientRect().top;while(trace.children.length>1&&trace.firstChild.getBoundingClientRect().top<top-2)trace.removeChild(trace.firstChild);}
-function endEv(){var e=S[cur].end,d=document.createElement("div");d.className="ev end"+(e.ok?"":" fail");d.innerHTML='<span class="who">'+(lang==="en"?"clinic state":"حالة العيادة")+'</span><p>'+(lang==="en"?e.en:e.ar)+"</p>";return d;}
-function play(i){T.forEach(clearTimeout);T=[];cur=i;tabsBuild();trace.innerHTML="";var s=S[i];
-  if(reduce){s.lines.forEach(function(L){var d=ev(L);d.classList.add("on");trace.appendChild(d);});var e=endEv();e.classList.add("on");trace.appendChild(e);trim();return;}
-  var t=200;s.lines.concat([["end"]]).forEach(function(L){t+=L[0]==="m"?1100:(L[0]==="t"?700:850);
-    T.push(setTimeout(function(){var d=L[0]==="end"?endEv():ev(L);trace.appendChild(d);requestAnimationFrame(function(){d.classList.add("on");});trim();},t));});
-  if(!picked)T.push(setTimeout(function(){play((cur+1)%S.length);},t+5200));}
+  namesLabel();setG(active);try{localStorage.setItem("miqyas-lang",l);}catch(e){}}
 document.getElementById("lang").addEventListener("click",function(){setLang(lang==="ar"?"en":"ar");play(cur);});
 
-/* dot figures */
-document.querySelectorAll(".dots").forEach(function(box){
-  JSON.parse(box.getAttribute("data-dots")).forEach(function(r){
-    var row=document.createElement("div");row.className="drow";
-    row.innerHTML='<div class="nm"><span>'+r[0]+'</span><span>'+(r[5]||(r[2]+"/"+r[1]))+'</span></div>';
-    var g=document.createElement("div");g.className="dd";g.style.gridTemplateColumns="repeat("+r[4]+",minmax(0,1fr))";
-    for(var k=0;k<r[1];k++){var i=document.createElement("i");if(k<r[2])i.className="f";else if(k<r[2]+r[3])i.className="x";g.appendChild(i);}
-    row.appendChild(g);box.appendChild(row);});
-});
-function reveal(fig){fig.classList.add("in");var ds=fig.querySelectorAll(".dd i");
-  if(reduce){ds.forEach(function(d){d.classList.add("on");});return;}
-  ds.forEach(function(d,k){setTimeout(function(){d.classList.add("on");},k*9);});}
-/* measure line lengths for draw */
-document.querySelectorAll(".draw").forEach(function(l){try{l.style.setProperty("--len",Math.ceil(l.getTotalLength()));}catch(e){}});
-var figs=document.querySelectorAll(".anim");
-if(reduce||!("IntersectionObserver" in window))figs.forEach(reveal);
-else{var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){reveal(e.target);io.unobserve(e.target);}});},{threshold:.35});figs.forEach(function(f){io.observe(f);});}
-
-
 /* slideshow */
-(function(){
-  var show=document.getElementById("show"); if(!show) return;
-  var sl=[].slice.call(show.querySelectorAll(".slide")), tb=[].slice.call(show.querySelectorAll("#stabs button")), cur=0;
-  function go(i){cur=(i+sl.length)%sl.length;
-    sl.forEach(function(f,k){f.hidden=k!==cur;f.classList.remove("in");});
-    tb.forEach(function(b,k){b.setAttribute("aria-selected",k===cur?"true":"false");});
-    var f=sl[cur]; f.querySelectorAll(".draw").forEach(function(l){try{l.style.setProperty("--len",Math.ceil(l.getTotalLength()));}catch(e){}});
-    requestAnimationFrame(function(){requestAnimationFrame(function(){f.classList.add("in");});});}
-  tb.forEach(function(b){b.addEventListener("click",function(){go(+b.getAttribute("data-to"));});});
-  document.getElementById("sprev").addEventListener("click",function(){go(cur-1);});
-  document.getElementById("snext").addEventListener("click",function(){go(cur+1);});
-  var nbs=[].slice.call(document.querySelectorAll(".names"));
-  function lbl(on){var en=document.documentElement.lang==="en";return on?(en?"Hide model names":"إخفاء أسماء النماذج"):(en?"Show model names":"إظهار أسماء النماذج");}
-  nbs.forEach(function(nb){nb.addEventListener("click",function(){var on=document.body.classList.toggle("reveal");
-    nbs.forEach(function(b){b.setAttribute("aria-pressed",on?"true":"false");b.textContent=lbl(on);});});});
-  go(0);
-})();
+var sl=[].slice.call(document.querySelectorAll("#show .slide")),tb=[].slice.call(document.querySelectorAll("#stabs button")),sc=0;
+function go(i){sc=(i+sl.length)%sl.length;sl.forEach(function(f,k){f.hidden=k!==sc;});tb.forEach(function(b,k){b.setAttribute("aria-selected",k===sc?"true":"false");});}
+tb.forEach(function(b){b.addEventListener("click",function(){go(+b.getAttribute("data-to"));});});
+document.getElementById("sprev").addEventListener("click",function(){go(sc-1);});
+document.getElementById("snext").addEventListener("click",function(){go(sc+1);});
 
-/* sections 4 and 5 reveal */
-(function(){var els=document.querySelectorAll(".anim2");
-  if(reduce||!("IntersectionObserver" in window)){els.forEach(function(e){e.classList.add("in");});return;}
-  var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io2.unobserve(e.target);}});},{threshold:.3});
-  els.forEach(function(e){io2.observe(e);});})();
-var st="ar";try{var q=new URLSearchParams(location.search).get("lang");var ls=localStorage.getItem("miqyas-lang");st=(q==="en"||q==="ar")?q:(ls||"ar");}catch(e){}
+/* reveal + gauge tracking */
+var anims=document.querySelectorAll(".anim");
+if("IntersectionObserver" in window){
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)setG(e.target);});},{rootMargin:"-45% 0px -50% 0px"});
+  secs.forEach(function(s){io.observe(s);});
+  var io2=new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");o.unobserve(e.target);}});},{threshold:.3});
+  anims.forEach(function(a){io2.observe(a);});
+} else anims.forEach(function(a){a.classList.add("in");});
+
+applySvg();namesLabel();
+var st="ar";try{if(localStorage.getItem("miqyas-lang")==="en")st="en";}catch(e){}
 if(st==="en")setLang("en");
 play(0);
 })();
 </script>
+
 </body>
 </html>
