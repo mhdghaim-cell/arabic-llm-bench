@@ -1,5 +1,5 @@
 id: qt-02-falcon-h1-7b-clinic
-type: quick-trial            # numbers only, no verdict (standard v1.1)
+type: quick-trial            # numbers only, no verdict (standard v1.2)
 status: preregistered
 approved_by: Mahmoud Deghaim
 approved_on: 2026-10-29
@@ -43,4 +43,4 @@ risks:
   - licence (TII Falcon licence, Apache-2.0-based with an acceptable-use policy): LICENSE file saved by setup and read before publishing.
 publish: [results page on miqyaslab.com, results.json, redacted raw interactions, numbers-only scorecard, X thread, Hugging Face discussion]
 publication_checklist: [redact phone-like numbers and re-score, recompute numbers from raw data, read a random sample of failures, link to the miqyaslab.com page]
-preregistration_commit:
+preregistration_commit: 7397aae
