@@ -32,11 +32,23 @@
 }
 
 :root{
+  /* Brand book v1 (26 Oct 2026). --signal is the brand's signal-text. */
   --ink:#12161C; --paper:#FAF9F6; --rule:#D8D5CE;
-  --signal:#B8342A; --verify:#1B5E4A; --dim:#6E7178;
+  --signal:#C42B1F; --verify:#1B5E4A; --dim:#6E7178;
+  --brand-red:#EB3B2C; --fold:#B8261C; --soft:#EFEDE7; --surface:#fff;
   --ar:"IBM Plex Sans Arabic",system-ui,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,monospace;
+  color-scheme:light dark;
 }
+@media (prefers-color-scheme:dark){
+  :root{
+    --ink:#FAF9F6; --paper:#12161C; --rule:#3A3F47; --dim:#A9ACB2;
+    --soft:#1C2129; --surface:#1C2129; --signal:#F0685C; --verify:#4FA383;
+  }
+}
+/* logo: light/dark lockup swap */
+.logo-dark{display:none}
+@media (prefers-color-scheme:dark){.logo-light{display:none}.logo-dark{display:inline}}
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
 body{
@@ -85,7 +97,7 @@ h1 span{color:var(--dim);font-weight:400}
 }
 .search-input{
   width:100%;padding:.85rem 1rem;font-family:var(--ar);font-size:1rem;
-  background:#fff;border:1px solid var(--rule);border-radius:2px;color:var(--ink)
+  background:var(--surface);border:1px solid var(--rule);border-radius:0;color:var(--ink)
 }
 .search-input:focus{outline:2px solid var(--verify);outline-offset:1px;border-color:transparent}
 .search-input::placeholder{color:var(--dim)}
@@ -117,7 +129,7 @@ h1 span{color:var(--dim);font-weight:400}
 .why b{color:var(--signal);font-weight:600}
 .card-btn{
   grid-column:2;grid-row:1;font-family:var(--mono);font-size:.7rem;
-  background:none;border:1px solid var(--rule);border-radius:2px;
+  background:none;border:1px solid var(--rule);border-radius:0;
   color:var(--dim);padding:.3rem .6rem;cursor:pointer;white-space:nowrap
 }
 .card-btn:hover{border-color:var(--verify);color:var(--verify)}
@@ -136,7 +148,7 @@ h1 span{color:var(--dim);font-weight:400}
   background:var(--paper); padding:1.75rem; display:flex; flex-direction:column; gap:.6rem;
   text-decoration:none; color:inherit;
 }
-.tool-card:hover{background:#fff}
+.tool-card:hover{background:var(--surface)}
 .tool-card .name{font-size:1.25rem;font-weight:600;letter-spacing:-.01em;color:var(--ink)}
 .tool-card .desc{font-size:.9375rem;color:var(--ink);max-width:28rem}
 .tool-card .stats{
@@ -152,8 +164,8 @@ h1 span{color:var(--dim);font-weight:400}
 /* ── text input field (tokenizer playground, calculator) ─ */
 .field-textarea{
   width:100%;min-height:8rem;padding:.85rem 1rem;font-family:var(--ar);
-  font-size:1.0625rem;line-height:1.85;background:#fff;border:1px solid var(--rule);
-  border-radius:2px;color:var(--ink);resize:vertical
+  font-size:1.0625rem;line-height:1.85;background:var(--surface);border:1px solid var(--rule);
+  border-radius:0;color:var(--ink);resize:vertical
 }
 .field-textarea:focus{outline:2px solid var(--verify);outline-offset:1px;border-color:transparent}
 .field-textarea::placeholder{color:var(--dim)}
@@ -172,13 +184,13 @@ h1 span{color:var(--dim);font-weight:400}
 .data-table th,.data-table td{padding:.6rem .75rem;border-block-end:1px solid var(--rule);text-align:start}
 .data-table th{font-family:var(--mono);font-size:.7rem;color:var(--dim);font-weight:500}
 .data-table td.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
-.data-table tbody tr:hover{background:#fff}
+.data-table tbody tr:hover{background:var(--surface)}
 
 /* ── token chips (tokenizer playground) ─────────────────── */
 .token-chips{display:flex;flex-wrap:wrap;gap:.25rem;margin-block-start:1rem}
 .token-chip{
   font-family:var(--mono);font-size:.75rem;padding:.15rem .4rem;border:1px solid var(--rule);
-  border-radius:2px;background:#fff;color:var(--ink);white-space:pre
+  border-radius:0;background:var(--surface);color:var(--ink);white-space:pre
 }
 
 @media (max-width:34rem){
@@ -195,7 +207,7 @@ h1 span{color:var(--dim);font-weight:400}
 /* ── provenance tag (community submissions) ─────────────── */
 .tag{
   display:inline-block;font-family:var(--mono);font-size:.65rem;
-  border:1px solid var(--rule);padding:.1rem .45rem;border-radius:2px;
+  border:1px solid var(--rule);padding:.1rem .45rem;border-radius:0;
   color:var(--verify);white-space:nowrap
 }
 
@@ -212,13 +224,13 @@ h1 span{color:var(--dim);font-weight:400}
 .field label{font-size:.8125rem;color:var(--ink)}
 .field .field-hint{font-size:.72rem;color:var(--dim)}
 .field input[type="number"], .field input[type="text"]{
-  padding:.6rem .75rem;font-family:var(--mono);font-size:.9375rem;background:#fff;
-  border:1px solid var(--rule);border-radius:2px;color:var(--ink);
+  padding:.6rem .75rem;font-family:var(--mono);font-size:.9375rem;background:var(--surface);
+  border:1px solid var(--rule);border-radius:0;color:var(--ink);
   font-variant-numeric:tabular-nums;width:100%;
 }
 .field select{
-  padding:.6rem .75rem;font-family:var(--ar);font-size:.9375rem;background:#fff;
-  border:1px solid var(--rule);border-radius:2px;color:var(--ink);width:100%;
+  padding:.6rem .75rem;font-family:var(--ar);font-size:.9375rem;background:var(--surface);
+  border:1px solid var(--rule);border-radius:0;color:var(--ink);width:100%;
 }
 .field input:focus, .field select:focus{outline:2px solid var(--verify);outline-offset:1px;border-color:transparent}
 
@@ -248,9 +260,10 @@ h1 span{color:var(--dim);font-weight:400}
 .bar-table caption{caption-side:top;text-align:start;font-size:.8125rem;color:var(--dim);margin-block-end:.75rem}
 .bar-label{font-size:.875rem;color:var(--ink);width:9rem;white-space:nowrap;padding-inline-end:1rem}
 .bar-cell{width:100%}
-.bar-track{background:var(--paper);border:1px dashed var(--rule);height:.6rem;border-radius:3px;overflow:hidden}
+.bar-track{background:var(--paper);border:1px dashed var(--rule);height:.6rem;border-radius:0;overflow:hidden}
 .bar-track.has-value{border-style:solid;background:var(--rule)}
-.bar-fill{height:100%;background:var(--signal);border-radius:3px}
+.bar-fill{height:100%;background:var(--ink);border-radius:0}
+.bar-fill.key{background:var(--brand-red)}
 .bar-value{
   font-family:var(--mono);font-size:.8125rem;color:var(--dim);width:8rem;
   text-align:end;padding-inline-start:.75rem;white-space:nowrap;font-variant-numeric:tabular-nums;
@@ -264,7 +277,7 @@ h1 span{color:var(--dim);font-weight:400}
 
 /* ── citation box (methodology) ──────────────────────── */
 .citation-box{
-  background:#fff;border:1px solid var(--rule);border-radius:2px;padding:1rem 1.15rem;
+  background:var(--surface);border:1px solid var(--rule);border-radius:0;padding:1rem 1.15rem;
   margin-block-start:.75rem;font-family:var(--mono);font-size:.8125rem;line-height:1.7;
   color:var(--ink);direction:ltr;text-align:left;overflow-x:auto;white-space:pre-wrap;
 }

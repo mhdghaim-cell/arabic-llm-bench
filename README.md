@@ -1,3 +1,8 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/brand/miqyas-lockup-on-dark.svg">
+  <img src="assets/brand/miqyas-lockup-on-light.svg" alt="مقياس · Miqyas" width="320">
+</picture>
+
 # مقياس (miqyas)
 
 **اختبار مستقل للنماذج مفتوحة الأوزان بالعربية.** لوحة الصدارة تقول لك كم سجّل
