@@ -166,6 +166,110 @@ class ChatPolicy:
                 "gen_n": r["usage"]["completion_tokens"], "timings": tm}
 
 
+# Prompted-JSON adapter (qt-01, amendment 2): for models whose chat template has no tool syntax (ALLaM).
+# The tools and a two-form JSON reply format go in the system prompt; the reply is constrained to that JSON
+# (llama.cpp json_schema grammar, tool arguments checked against each tool's own schema, the same way llama.cpp
+# constrains native tool calls); tool results return as a user message. Roles always alternate.
+PROMPTED_PROTOCOL = """
+
+## Tools
+You can use these tools:
+{tools}
+
+Every message you write must be exactly one JSON object, in one of two forms:
+1. To use tools: {{"tool_calls": [{{"name": "<tool name>", "arguments": {{...}}}}]}}
+2. To write to the patient: {{"response": "<your message to the patient>"}}
+Tool results come back to you in a message that starts with "TOOL RESULTS:". After reading them, use more tools or write to the patient."""
+
+
+def prompted_schema(tools):
+    items = [{"type": "object", "properties": {"name": {"const": t["function"]["name"]},
+                                               "arguments": t["function"]["parameters"]},
+              "required": ["name", "arguments"], "additionalProperties": False} for t in tools]
+    return {"anyOf": [
+        {"type": "object", "properties": {"tool_calls": {"type": "array", "items": {"anyOf": items}, "minItems": 1, "maxItems": 4}},
+         "required": ["tool_calls"], "additionalProperties": False},
+        {"type": "object", "properties": {"response": {"type": "string"}},
+         "required": ["response"], "additionalProperties": False}]}
+
+
+def prompted_messages(messages, tools):
+    spec = json.dumps([{"name": t["function"]["name"], "description": t["function"]["description"],
+                        "parameters": t["function"]["parameters"]} for t in tools], ensure_ascii=False, indent=1)
+    names, out = {}, []
+    for m in messages:
+        if m["role"] == "system":
+            role, content = "system", m["content"] + PROMPTED_PROTOCOL.format(tools=spec)
+        elif m["role"] == "user":
+            role, content = "user", m["content"]
+        elif m["role"] == "assistant":
+            role = "assistant"
+            if m.get("tool_calls"):
+                tc = []
+                for c in m["tool_calls"]:
+                    names[c["id"]] = c["function"]["name"]
+                    try:
+                        args = json.loads(c["function"]["arguments"])
+                    except Exception:
+                        args = {}
+                    tc.append({"name": c["function"]["name"], "arguments": args})
+                content = json.dumps({"tool_calls": tc}, ensure_ascii=False)
+            else:
+                content = json.dumps({"response": m.get("content") or ""}, ensure_ascii=False)
+        elif m["role"] == "tool":
+            role = "user"
+            content = "TOOL RESULTS:\n" + json.dumps({"name": names.get(m["tool_call_id"], "?"),
+                                                       "result": json.loads(m["content"])}, ensure_ascii=False)
+        else:
+            continue
+        if out and out[-1]["role"] == role and role != "system":     # keep user/assistant strictly alternating
+            out[-1]["content"] += "\n" + content
+        else:
+            out.append({"role": role, "content": content})
+    return out
+
+
+def parse_prompted(text):
+    try:
+        o = json.loads(text)
+    except Exception:
+        return [], text.strip(), False
+    if isinstance(o, dict) and isinstance(o.get("tool_calls"), list):
+        return [{"name": c.get("name"), "args": c.get("arguments") if isinstance(c.get("arguments"), dict) else {}}
+                for c in o["tool_calls"] if isinstance(c, dict)], "", True
+    if isinstance(o, dict) and "response" in o:
+        return [], str(o["response"]).strip(), True
+    return [], text.strip(), False
+
+
+class PromptedPolicy(ChatPolicy):
+    """Chat model without a tool syntax: tools described in the prompt, JSON reply constrained by grammar."""
+
+    def step(self, messages, tools, seed, ctx):
+        body = {"messages": prompted_messages(messages, tools), "max_tokens": self.n_predict, "seed": seed, **self.sampling,
+                "response_format": {"type": "json_schema", "json_schema": {"name": "turn", "schema": prompted_schema(tools)}}}
+        t0 = time.time()
+        try:
+            r = post("/v1/chat/completions", body)
+        except urllib.error.HTTPError as ex:
+            msg = ex.read().decode("utf-8", "ignore")
+            if "context" in msg.lower():
+                out = _fake()
+                out.update(stop="context", wall_s=round(time.time() - t0, 3), raw=msg[:300])
+                return out
+            raise
+        wall = time.time() - t0
+        ch = r["choices"][0]
+        text = ch["message"].get("content") or ""
+        calls, answer, ok = parse_prompted(text)
+        tm = r.get("timings", {})
+        return {"reasoning": "", "calls": calls, "answer": answer, "think_open": None, "think_close": None,
+                "raw": text, "parsed": ok, "wall_s": round(wall, 3),
+                "stop": "limit" if ch.get("finish_reason") == "length" else ch.get("finish_reason"),
+                "prompt_n": tm.get("prompt_n"), "cached_n": tm.get("cache_n"),
+                "gen_n": r["usage"]["completion_tokens"], "timings": tm}
+
+
 class OraclePolicy:
     """Replays an episode's oracle (what a correct receptionist does). Used to validate harness + scorer."""
 
@@ -225,7 +329,7 @@ def run_episode(ep, arm, policy, rep):
             g += 1
             turn_wall += out["wall_s"]
             steps.append({"turn": k, "step": s, **{x: out.get(x) for x in
-                          ("wall_s", "stop", "prompt_n", "cached_n", "gen_n", "think_open", "think_close", "reasoning", "raw")},
+                          ("wall_s", "stop", "prompt_n", "cached_n", "gen_n", "think_open", "think_close", "reasoning", "raw", "parsed")},
                           "calls": out["calls"], "answer": out["answer"]})
             if out.get("stop") in ("limit", "length", "context"):
                 flags["cap"] = True
@@ -276,7 +380,7 @@ def current_model():
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--label", required=True)
-    ap.add_argument("--mode", choices=["jais", "chat", "oracle"], required=True)
+    ap.add_argument("--mode", choices=["jais", "chat", "prompted", "oracle"], required=True)
     ap.add_argument("--arms", nargs="+", default=["base", "table", "tool"], choices=["base", "table", "tool"])
     ap.add_argument("--efforts", nargs="+", default=["high"])
     ap.add_argument("--reps", type=int, default=3)
@@ -316,7 +420,8 @@ def main():
     meta = {"label": a.label, "mode": a.mode, "machine": platform.platform(), "model_path": model_path,
             "episodes_file": a.episodes, "split": a.split, "arms": a.arms, "efforts": a.efforts, "reps": a.reps,
             "safety_reps": a.safety_reps, "n_predict": a.n_predict, "max_steps": MAX_STEPS,
-            "sampling": SAMPLING, "system_prompts": {arm: system_prompt(arm) for arm in a.arms}}
+            "sampling": SAMPLING, "system_prompts": {arm: system_prompt(arm) for arm in a.arms},
+            "adapter": ({"name": "prompted-json", "protocol": PROMPTED_PROTOCOL} if a.mode == "prompted" else None)}
     json.dump(meta, open(f"{out_dir}/meta.json", "w"), ensure_ascii=False, indent=1)
 
     # rep -> episode -> arm -> effort: every condition sees the same thermal / load history
@@ -328,7 +433,8 @@ def main():
         if a.mode != "oracle" and current_model() != model_path:
             sys.exit(f"STOP: the server's model changed to {current_model()} (expected {model_path}).")
         policy = (OraclePolicy(e, arm) if a.mode == "oracle" else
-                  JaisPolicy(eff, a.n_predict) if a.mode == "jais" else ChatPolicy(eff, a.n_predict))
+                  JaisPolicy(eff, a.n_predict) if a.mode == "jais" else
+                  PromptedPolicy(eff, a.n_predict) if a.mode == "prompted" else ChatPolicy(eff, a.n_predict))
         try:
             res = run_episode(e, arm, policy, r)
             fails = 0

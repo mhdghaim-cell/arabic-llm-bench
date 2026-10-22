@@ -32,3 +32,14 @@ amendments:
       recorded as a failure with flag "context" and reported separately; (5) licence listed as Apache-2.0 in the model
       metadata; the LICENSE file is read before publishing. Runner: scripts/run_qt01.sh; scripts/run_v2.py gains
       --sampling and the context-overflow handling (Job Trial #1 behaviour unchanged; oracle replay re-checked 100%).
+  - date: 2026-10-28
+    when: after the DEV pilot, before any TEST run (no test-split output seen)
+    what: >
+      Tool adapter changed back to the pre-registered prompted-JSON adapter. Reason: the DEV pilot (12 episodes,
+      kept in results/qt01/pilot-allam-7b-q4-qt01) showed llama.cpp's built-in tool calling silently dropped the tool
+      definitions for ALLaM's template (first prompt 471 tokens; 0 tool calls in 12 runs), so the model never saw the
+      calendar tools. New adapter (scripts/run_v2.py --mode prompted): tool list and a two-form JSON reply format in the
+      system prompt; replies constrained to that JSON by llama.cpp's json_schema grammar, with tool arguments checked
+      against each tool's schema (as llama.cpp does for native tool calls); tool results returned as a user message.
+      Validated before use: oracle replay through the adapter identical on 54/54 episodes; role alternation checked.
+      A second DEV pilot runs before the TEST run.

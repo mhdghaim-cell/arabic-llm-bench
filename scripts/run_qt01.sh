@@ -1,6 +1,6 @@
 #!/bin/bash
 # miqyas · qt-01 — ALLaM 7B Quick Trial on the clinic front desk (trials/qt-01-allam-7b-clinic.yaml).
-# Pre-registered setup: tool arm, chat mode (llama.cpp tool calling via --jinja), ALLaM model-card sampling,
+# Pre-registered setup: tool arm, prompted-JSON adapter (amendment 2), ALLaM model-card sampling,
 # 4,096-token window, public test set (42 episodes) x 3 reps + 2 extra reps for safety episodes.
 #
 # On a RunPod pod (RTX 4090, PyTorch template), from the repo root:
@@ -56,23 +56,26 @@ setup)
   ;;
 pilot)
   start_server || exit 1
-  python3 scripts/run_v2.py --label "pilot-$LABEL" --mode chat --sampling allam --split dev --arms tool --efforts off \
+  P="pilot2-$LABEL"   # pilot 1 (llama.cpp generic tools) dropped the tool definitions: kept as evidence, see amendment 2
+  python3 scripts/run_v2.py --label "$P" --mode prompted --sampling allam --split dev --arms tool --efforts off \
       --reps 1 --safety-reps 0 --n-predict 4096 --out-root "$OUT"
-  python3 scripts/score_v2.py "$OUT/pilot-$LABEL" | tee "$OUT/pilot-$LABEL/scorecard.txt"
-  python3 - "$OUT/pilot-$LABEL/runs.jsonl" <<'PY'
+  python3 scripts/score_v2.py "$OUT/$P" | tee "$OUT/$P/scorecard.txt"
+  python3 - "$OUT/$P/runs.jsonl" <<'PY'
 import json,sys
 rows=[json.loads(l) for l in open(sys.argv[1])]
 err=sum('error' in r for r in rows); ctx=sum(r.get('flags',{}).get('context',False) for r in rows)
 calls=sum(len(s['calls']) for r in rows if 'steps' in r for s in r['steps'])
 unparsed=sum(1 for r in rows if 'steps' in r for s in r['steps'] for c in s['calls'] if '_unparsed' in c['args'])
-print(f"PILOT CHECK: runs {len(rows)} · errors {err} · context overflows {ctx} · tool calls {calls} · unparsed {unparsed}")
+bad=sum(1 for r in rows if 'steps' in r for s in r['steps'] if s.get('parsed') is False)
+p0=[r['steps'][0]['prompt_n'] for r in rows if r.get('steps')]
+print(f"PILOT CHECK: runs {len(rows)} · errors {err} · context overflows {ctx} · tool calls {calls} · unparsed {unparsed} · non-JSON replies {bad} · first prompt tokens {min(p0) if p0 else '-'}")
 PY
   pkill -f llama-server
   echo "PILOT DONE — send the PILOT CHECK line and scorecard to Claude before running 'test'."
   ;;
 test)
   start_server || exit 1
-  python3 scripts/run_v2.py --label "$LABEL" --mode chat --sampling allam --split test --arms tool --efforts off \
+  python3 scripts/run_v2.py --label "$LABEL" --mode prompted --sampling allam --split test --arms tool --efforts off \
       --reps 3 --safety-reps 2 --n-predict 4096 --out-root "$OUT"
   python3 scripts/score_v2.py "$OUT/$LABEL" | tee "$OUT/$LABEL/scorecard.txt"
   pkill -f llama-server; echo "TEST DONE — next: bash scripts/run_qt01.sh pack"
