@@ -2,7 +2,7 @@
 
 LinkedIn: document post with `findings/frontdesk-v2/carousel.pdf` (8 slides), NO link anywhere (post or comment).
 X: image `scorecard.png` on tweet 1; the GitHub Pages link in the last tweet.
-Replace [PAGE LINK] in the X thread with the GitHub Pages address once Pages is on.
+Page link in tweet 9: https://miqyaslab.com/findings/frontdesk-v2/
 
 ---
 
@@ -99,4 +99,4 @@ Qwen مع مريض يقول «الألم ما يتحمل… بس عادي أبي
 9/
 مبروك لفريق IFM على Jais 3.
 كل المحادثات منشورة. إن كنت تبني وكلاء ذكاء اصطناعي وتريد إعادة جزء منه على جهازك، راسلني.
-النتائج كاملة: [PAGE LINK]
+النتائج كاملة: https://miqyaslab.com/findings/frontdesk-v2/

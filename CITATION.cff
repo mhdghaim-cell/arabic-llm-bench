@@ -7,6 +7,7 @@ authors:
     given-names: Mahmoud
     alias: mhdghaim-cell
     website: "https://github.com/mhdghaim-cell"
+url: "https://miqyaslab.com"
 repository-code: "https://github.com/mhdghaim-cell/arabic-llm-bench"
 identifiers:
   - type: url
