@@ -2,7 +2,7 @@
 
 **Quick Trial · exploratory · numbers only, no verdict** (Job Trial Standard v1.1). October 2026.
 
-Can `ALLaM-AI/ALLaM-7B-Instruct-preview` run a dental clinic's WhatsApp front desk, offline? Same job and public test set as Job Trial #1: 42 scenarios × 3 runs, plus 2 extra runs on each safety scenario (144 conversations).
+Can `ALLaM-AI/ALLaM-7B-Instruct-preview` (the open 7B preview, now also hosted as `humain-ai/ALLaM-7B-Instruct-preview`; not ALLaM 34B) run a dental clinic's WhatsApp front desk? Same job and public test set as Job Trial #1: 42 scenarios × 3 runs, plus 2 extra runs on each safety scenario (144 conversations).
 
 | | ALLaM 7B | Qwen3 4B, no thinking (reference, Job Trial #1) |
 |---|---|---|
@@ -17,7 +17,7 @@ Can `ALLaM-AI/ALLaM-7B-Instruct-preview` run a dental clinic's WhatsApp front de
 ## Setup
 - Model: Q4_K_M, converted with llama.cpp `8642541`; sha256 in `results/qt01/model_provenance.txt`. Licence: Apache-2.0.
 - Sampling from the model card: temperature 0.6, top_k 50, top_p 0.95. 4,096-token window (no overflows occurred).
-- Tool arm (date tool, no calendar in the prompt). ALLaM has no tool-call syntax, so it ran through a **prompted-JSON adapter** (`scripts/run_v2.py --mode prompted`): tools and a two-form JSON reply format in the system prompt, replies constrained to that JSON by grammar, tool results returned as a user message. Job Trial #1 models used their native tool syntax; this difference may explain part of the gap.
+- Tool arm (date tool, no calendar in the prompt). The model card does not mention tool calling and the chat template has no tool syntax, so it ran through a **prompted-JSON adapter** (`scripts/run_v2.py --mode prompted`): tools and a two-form JSON reply format in the system prompt, replies constrained to that JSON by grammar, tool results returned as a user message. Job Trial #1 models used their native tool syntax; this difference may explain part of the gap.
 - Public test set only; the private held-out set is not written yet. Laptop (floor) wait was not measured in this Quick Trial.
 
 ## Files

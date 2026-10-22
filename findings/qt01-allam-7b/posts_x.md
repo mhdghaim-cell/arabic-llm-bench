@@ -6,7 +6,7 @@ Every number from results.json. Quick Trial: numbers only, no verdict. Image on 
 1/7
 تجربة سريعة · استكشافية
 
-اختبرنا ALLaM 7B على استقبال عيادة أسنان عبر واتساب: نفس الحالات الـ42 من تجربة العمل #1، ثلاث محاولات لكل حالة، على جهاز واحد بلا إنترنت.
+اختبرنا ALLaM 7B، النسخة المفتوحة من ALLaM، على استقبال عيادة أسنان عبر واتساب: نفس الحالات الـ42 من تجربة العمل #1، ثلاث محاولات لكل حالة.
 
 محادثات صحيحة كاملة: 9%
 
@@ -15,7 +15,7 @@ Every number from results.json. Quick Trial: numbers only, no verdict. Image on 
 ---
 2/7
 الأرقام:
-محادثات صحيحة كاملة: 9% (11 من 126، والنطاق المرجّح 3% إلى 17%)
+محادثات صحيحة كاملة: 9% (11 من 126، وبثقة 95% بين 3% و17%)
 صحيحة في المحاولات الثلاث: 5%
 طوارئ وصلت لموظف: 1 من 25
 شكاوى وأسئلة طبية وصلت لموظف: 0 من 20
@@ -23,7 +23,7 @@ Every number from results.json. Quick Trial: numbers only, no verdict. Image on 
 
 ---
 3/7
-أبرز ما رأيناه: ALLaM يتعرّف على الطوارئ ويقول إنها تحتاج تدخلًا فوريًا، لكنه لا يحوّل المحادثة لموظف.
+أبرز ما رأيناه: ALLaM غالبًا يتعرّف على الطوارئ وينصح المريض بالتواصل مع العيادة، لكنه لا يحوّل المحادثة لموظف كما تطلب التعليمات.
 
 في 12 من 25 حالة طوارئ أعطى المريض رقم هاتف ليتصل عليه، وتعليمات العيادة لا تحتوي أي رقم.
 
@@ -36,26 +36,26 @@ Every number from results.json. Quick Trial: numbers only, no verdict. Image on 
 ---
 5/7
 لماذا "تجربة سريعة" وليس حكمًا:
-إعداد واحد، ومجموعة الاختبار العامة فقط.
-ALLaM لا يملك صيغة خاصة لاستدعاء الأدوات، فشغّلناه عبر محوّل JSON كتبناه وسجّلناه قبل تشغيل الاختبار، بينما استخدم Jais 3 وQwen3 صيغهما الخاصة. قد يفسّر هذا جزءًا من الفارق.
+إعداد واحد، ومجموعة الاختبار العامة فقط، ونسخة 7B التجريبية لا ALLaM 34B.
+بطاقة النموذج لا تذكر استدعاء الأدوات، فشغّلناه عبر محوّل JSON سجّلناه قبل الاختبار، بينما استخدمت نماذج تجربة العمل #1 صيغها الخاصة.
 
 ---
 6/7
-للمقارنة على الإعداد نفسه (أداة التاريخ، بلا تفكير قبل الرد): Qwen3 4B وصل إلى 28%، وحوّل 20 من 25 حالة طوارئ.
+للمقارنة على الإعداد نفسه (أداة التاريخ، بلا تفكير قبل الرد): Qwen3 4B وصل إلى 28%، وحوّل 20 من 25 حالة طوارئ لموظف.
 
-ALLaM لا يملك وضع تفكير. النماذج التي تفكّر قبل الرد وصلت إلى 92% على الحالات نفسها.
+قد يفسّر اختلاف المحوّل جزءًا من الفارق، لذلك لا نقرأ هذه الأرقام حكمًا على النموذج.
 
 ---
 7/7
-المحادثات الـ144 كاملة، والمحوّل، وملف التسجيل المسبق مع تعديلاته، كلها منشورة:
+المحادثات الـ144 (بعد حذف أرقام الهواتف)، والمحوّل، وملف التسجيل المسبق مع تعديلاته، كلها منشورة:
 https://github.com/mhdghaim-cell/arabic-llm-bench/tree/main/findings/qt01-allam-7b
 
-إذا كان لدى فريق ALLaM إعداد أفضل لاستدعاء الأدوات، نعيد التجربة به وننشر النتيجة.
+إذا كان لدى فريق ALLaM في @HUMAINAI إعداد أفضل لاستدعاء الأدوات، نعيد التجربة به وننشر النتيجة.
 
 ---
 ## Hugging Face comment (ALLaM-AI/ALLaM-7B-Instruct-preview, Community tab) — English
 
-Quick Trial (exploratory, numbers only): ALLaM-7B-Instruct-preview (Q4_K_M, llama.cpp) as a WhatsApp front desk for a dental clinic, 42 public test scenarios × 3 runs, offline.
+Quick Trial (exploratory, numbers only): ALLaM-7B-Instruct-preview (Q4_K_M, llama.cpp; the open 7B preview, not ALLaM 34B) as a WhatsApp front desk for a dental clinic, 42 public test scenarios × 3 runs.
 Fully correct conversations: 8.7% (95% CI 3.2–16.7%). Emergencies handed to staff: 1/25. Complaints and medical questions handed over: 0/20.
 The model has no tool-call syntax, so it ran through a prompted-JSON adapter we pre-registered; models in our earlier trial used their native syntax. In 12/25 emergencies the model gave the patient a phone number that is not in the clinic's instructions (post-hoc observation; numbers redacted in the published transcripts).
 All transcripts, the adapter and the pre-registration: https://github.com/mhdghaim-cell/arabic-llm-bench/tree/main/findings/qt01-allam-7b
