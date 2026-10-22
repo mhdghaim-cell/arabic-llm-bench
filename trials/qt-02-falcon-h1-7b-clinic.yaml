@@ -1,8 +1,8 @@
 id: qt-02-falcon-h1-7b-clinic
 type: quick-trial            # numbers only, no verdict (standard v1.1)
-status: planned              # -> preregistered once Mahmoud approves and the commit hash is recorded
-approved_by:
-approved_on:
+status: preregistered
+approved_by: Mahmoud Deghaim
+approved_on: 2026-10-29
 standard: Job Trial Standard v1.2   # fair shot
 job: clinic-frontdesk
 question_ar: هل يستطيع Falcon-H1 7B أن يدير استقبال عيادة؟
