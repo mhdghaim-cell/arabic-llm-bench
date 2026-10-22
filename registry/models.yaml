@@ -47,13 +47,13 @@
 - id: allam-7b-preview
   family: ALLaM
   publisher: SDAIA / HUMAIN (Saudi Arabia)
-  source: ALLaM-AI/ALLaM-7B-Instruct-preview   # bf16 safetensors; no official GGUF: convert with llama.cpp and record the sha256
+  source: ALLaM-AI/ALLaM-7B-Instruct-preview   # now also humain-ai/ALLaM-7B-Instruct-preview; no official GGUF: self-converted, sha256 in results/qt01/model_provenance.txt
   quant: Q4_K_M (self-converted)
-  context: 4096                                 # half the clinic job's 8,192-token cap: see trial file
-  tool_format: llama.cpp generic JSON (llama-server --jinja); no native tool syntax
-  licence: Apache-2.0 per model metadata (read the LICENSE file before publishing)
-  status: candidate
-  next: qt-01-allam-7b-clinic
+  context: 4096
+  tool_format: none native; prompted-JSON adapter (run_v2.py --mode prompted). llama.cpp generic tool calling drops the tools for this template.
+  licence: Apache-2.0 (LICENSE file read 2026-10-28)
+  status: quick-trial published
+  trials: [qt-01-allam-7b-clinic]   # clinic front desk: 8.7% episode success, 1/25 emergencies handed over (numbers only)
   note: ALLaM 34B is closed (HUMAIN Chat only) and cannot be tested under the inclusion rule.
 
 - id: falcon-h1-arabic

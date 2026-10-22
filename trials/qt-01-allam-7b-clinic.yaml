@@ -1,6 +1,6 @@
 id: qt-01-allam-7b-clinic
 type: quick-trial            # numbers only, no verdict (standard v1.1)
-status: run-complete      # results in, publication pending (numbers only)
+status: published          # numbers only, 2026-10-29
 approved_by: Mahmoud Deghaim
 approved_on: 2026-10-28
 standard: Job Trial Standard v1.1
@@ -75,4 +75,11 @@ results:                     # TEST split, public test set only; scored by scrip
     jais3-3.7b_low: 28.6%
     qwen3-4b_off: 27.8%
   cost_usd: ~2               # estimate (~2.5 pod-hours at 0.74); confirm from RunPod billing
-  still_to_do: [floor-machine wait estimate (air-2020), publish numbers only]
+  not_done: floor-machine wait (air-2020) not measured; declared on the results page
+publication:
+  date: 2026-10-29
+  page: https://miqyaslab.com/findings/qt01-allam-7b/
+  x_thread: https://x.com/miqyaslab/status/2115698007471767651
+  huggingface: https://huggingface.co/humain-ai/ALLaM-7B-Instruct-preview/discussions/11
+  tagged: "@HUMAINAI (tweet 7, rerun offer)"
+  pre_publication_review: numbers recomputed from raw data; 10 random failures read (all model errors); wording fixed (scope to 7B preview, no offline claim, no cross-lab comparison beyond the same-setup reference)
