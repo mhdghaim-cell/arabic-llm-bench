@@ -19,3 +19,4 @@ risks:
   - no native tool calling: uses the prompted-JSON adapter; the report names the adapter and links its prompt.
   - licence is a research licence: check redistribution of transcripts before publishing.
 publish: [results.json, raw interactions, numbers-only scorecard, X post, comment on the model's Hugging Face page]
+preregistration_commit: 6f919bd
