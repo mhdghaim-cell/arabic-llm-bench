@@ -1,0 +1,92 @@
+# Models: tested and queued. Inclusion rule (standard §4): open weights, Arabic claimed by the publisher,
+# runs in llama.cpp at the stated quantisation. Status: candidate → quick-tested → fully-tested.
+# "verify: true" means the source has not been checked yet; check it before writing a trial file.
+
+- id: jais3-3.7b
+  family: Jais 3
+  publisher: MBZUAI IFM / Inception42 (UAE)
+  source: IFM/Jais-3-3.7B-GGUF  # Jais-3-3.7B-Q4_K_M.gguf
+  quant: Q4_K_M
+  tool_format: jais-native       # adapter: llama.cpp native chat template
+  sampling: {temperature: 0.7, top_p: 0.95, top_k: 20}
+  status: fully-tested
+  trials: [jt-01-clinic]
+
+- id: jais3-7b
+  family: Jais 3
+  publisher: MBZUAI IFM / Inception42 (UAE)
+  source: IFM/Jais-3-7B-GGUF  # Jais-3-7B-Q4_K_M.gguf
+  quant: Q4_K_M
+  tool_format: jais-native
+  sampling: {temperature: 0.7, top_p: 0.95, top_k: 20}
+  status: fully-tested
+  trials: [jt-01-clinic]
+
+- id: qwen3-4b
+  family: Qwen3
+  publisher: Alibaba Qwen (China)
+  source: Qwen/Qwen3-4B-GGUF  # Qwen3-4B-Q4_K_M.gguf
+  quant: Q4_K_M
+  tool_format: chat-completions
+  sampling: {temperature: 0.6, top_p: 0.95, top_k: 20, presence_penalty: 1.5}
+  status: fully-tested
+  trials: [jt-01-clinic]
+
+- id: qwen3-8b
+  family: Qwen3
+  publisher: Alibaba Qwen (China)
+  source: Qwen/Qwen3-8B-GGUF  # Qwen3-8B-Q4_K_M.gguf
+  quant: Q4_K_M
+  tool_format: chat-completions
+  sampling: {temperature: 0.6, top_p: 0.95, top_k: 20, presence_penalty: 1.5}
+  status: fully-tested
+  trials: [jt-01-clinic]
+
+# ── queue (order = neutrality rule: cover other labs before testing Jais again) ──
+
+- id: allam-7b-preview
+  family: ALLaM
+  publisher: SDAIA / HUMAIN (Saudi Arabia)
+  source: ALLaM-AI/ALLaM-7B-Instruct-preview   # bf16 safetensors; no official GGUF: convert with llama.cpp and record the sha256
+  quant: Q4_K_M (self-converted)
+  context: 4096                                 # half the clinic job's 8,192-token cap: see trial file
+  tool_format: prompted-json                    # no native tool calling; Miqyas JSON tool adapter
+  licence: research licence (check model card before publishing)
+  status: candidate
+  next: qt-01-allam-7b-clinic
+  note: ALLaM 34B is closed (HUMAIN Chat only) and cannot be tested under the inclusion rule.
+
+- id: falcon-h1-arabic
+  family: Falcon-H1-Arabic
+  publisher: TII (UAE)
+  source: verify (3B / 7B / 34B released Jan 2026)
+  status: candidate
+  verify: true
+
+- id: fanar
+  family: Fanar
+  publisher: QCRI (Qatar)
+  source: verify (Fanar 2.0, open sizes?)
+  status: candidate
+  verify: true
+
+- id: silma-9b
+  family: SILMA
+  publisher: SILMA AI (Saudi Arabia)
+  source: silma-ai/SILMA-9B-Instruct-v1.0
+  status: candidate
+  verify: true
+
+- id: gemma3
+  family: Gemma 3
+  publisher: Google
+  source: verify (4B / 12B)
+  status: candidate
+  verify: true
+
+- id: tiny-aya
+  family: Tiny Aya
+  publisher: Cohere Labs
+  source: verify (3.35B, Feb 2026, built for offline laptops)
+  status: candidate
+  verify: true

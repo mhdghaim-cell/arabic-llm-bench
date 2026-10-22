@@ -1,0 +1,30 @@
+# The rental menu. Miqyas does not buy hardware. Prices change: check before each run and log the actual cost in the trial file.
+# Budget cap: USD 100 per month across all rentals (see MIQYAS_OS.md).
+
+- id: air-2020
+  rung: floor
+  what: MacBook Air 2020, Intel Core i7, 8 GB, CPU only
+  owner: Miqyas (owned)
+  cost: 0
+  use: speed bench + 10-episode validation of the speed model (scripts/air_speed.py, scripts/run_air_v2.sh)
+
+- id: runpod-16gb
+  rung: middle
+  what: consumer-class GPU with 12-16 GB (e.g. RTX 4060 Ti 16 GB / A4000 16 GB, whichever RunPod has)
+  owner: RunPod (rented per second)
+  cost: check console; budget ~USD 0.3-0.5/h
+  use: speed bench + validation for the middle rung
+
+- id: macly-m4
+  rung: middle (Apple silicon)
+  what: Mac mini M4, 16 GB unified
+  owner: Macly (rented per day)
+  cost: USD 14.99/day (Aug 2026 price)
+  use: only when a trial needs a Mac result; SSH access, no screen sharing
+
+- id: runpod-4090
+  rung: ceiling
+  what: RTX 4090, 24 GB
+  owner: RunPod (rented per second)
+  cost: ~USD 0.74/h on-demand (Aug 2026)
+  use: all full runs (scripts/run_gpu_v2.sh pattern); stop the pod as soon as results are copied

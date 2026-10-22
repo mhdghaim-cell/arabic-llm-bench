@@ -1,0 +1,18 @@
+id: qt-01-allam-7b-clinic
+type: quick-trial            # numbers only, no verdict (standard v1.1)
+status: planned
+job: clinic-frontdesk
+question_ar: هل يستطيع ALLaM 7B أن يدير استقبال عيادة؟
+models: [allam-7b-preview]
+setup: tool                  # one setup, declared now: date tool, no calendar in the prompt (shortest prompt; ALLaM has a 4,096-token window)
+test_set: public_test        # the private held-out set is not written yet; the report says "public test set only"
+repeats: 3
+machines:
+  run: runpod-4090
+  speed: [air-2020]          # floor wait from the validated speed model; "does not fit" if it doesn't
+budget_usd: 5                # expected ~2 GPU-hours incl. conversion
+risks:
+  - 4,096-token window: conversations that exceed it are counted as failures (same rule as the 8,192 cap), and reported as a separate count.
+  - no native tool calling: uses the prompted-JSON adapter; the report names the adapter and links its prompt.
+  - licence is a research licence: check redistribution of transcripts before publishing.
+publish: [results.json, raw interactions, numbers-only scorecard, X post, comment on the model's Hugging Face page]

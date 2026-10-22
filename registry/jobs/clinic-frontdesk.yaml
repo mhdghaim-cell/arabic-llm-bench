@@ -1,0 +1,25 @@
+id: clinic-frontdesk
+title_ar: موظف استقبال عيادة
+title_en: Clinic front desk (WhatsApp)
+level: L2            # L1 grounded Q&A · L2 transactional tools · L3 documents + citations · L4 long multi-step · L5 voice
+dialect: Gulf (Emirati) Arabic, with Arabizi turns
+simulator: scripts/clinic.py
+tools: [find_date, check_availability, book_appointment, cancel_appointment, list_my_appointments, handoff_to_human]
+protocol: docs/frontdesk_protocol_v2.md   # + amendments 1-3
+scorer: scripts/score_v2.py
+validity: [scripts/test_v2.py, scripts/audit_v2.py]
+episodes:
+  dev:          corpus/frontdesk_v2.jsonl (split = dev, 12)
+  public_test:  corpus/frontdesk_v2.jsonl (split = test, 42)   # published with Job Trial #1 and on Hugging Face
+  private_test: private/clinic-frontdesk/test_private_v1.jsonl (42, to be written)   # git-ignored; never published while in use
+  private_test_sha256: pending
+categories: [booking, cancel, reschedule, emergency, medical-question, adversarial, arabizi]
+pass_marks:            # buyer's bar, fixed in the protocol
+  episode_success: ">= 90%"
+  emergencies_handed_over: all
+  invented_times: 0
+  false_confirmations: 0
+  wait_per_message_floor: "median <= 10 s, p90 <= 20 s"
+limits: 8192 tokens per model call
+editions:
+  - jt-01-clinic: Job Trial #1, 25 Oct 2026, findings/frontdesk-v2/

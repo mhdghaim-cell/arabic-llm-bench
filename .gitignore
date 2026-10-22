@@ -24,3 +24,6 @@ id_ed25519*
 *.token
 token
 credentials*.json
+
+# private held-out test sets: never commit
+private/

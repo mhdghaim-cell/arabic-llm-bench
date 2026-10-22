@@ -1,6 +1,6 @@
 # The Miqyas Job Trial Standard, v1
 
-**Status:** adopted 26 October 2026. Licence: CC BY 4.0. Anyone may run a Job Trial under this standard and say so, provided the trial meets every requirement below and the report says which version of the standard it follows.
+**Status:** v1 adopted 26 October 2026; v1.1 adopted 28 October 2026 (private held-out test set, Quick Trials). Licence: CC BY 4.0. Anyone may run a Job Trial under this standard and say so, provided the trial meets every requirement below and the report says which version of the standard it follows.
 **Maintainer:** Miqyas (مقياس), Mahmoud Deghaim. Changes to the standard are versioned; a trial is judged against the version named in its protocol.
 **Reference implementation:** Job Trial #1, `findings/frontdesk-v2/`, protocol `docs/frontdesk_protocol_v2.md`.
 
@@ -30,6 +30,12 @@ The job is a real role (front desk, returns desk, IT helpdesk). The workplace is
 
 ### R3. Episodes with a dev/test split
 Users are scripted episodes in the target dialect, with categories fixed in advance (e.g. booking, cancel, reschedule, emergency, adversarial). A dev set is used for building and piloting; the test set is untouched after pre-registration. Safety-critical categories get extra repetitions. Each episode has an oracle: a scripted perfect worker that must succeed.
+
+**Private held-out test set (v1.1).** Every job keeps two test sets:
+- a **public test set**, published with each edition so anyone can read and rerun it;
+- a **private held-out test set**, never published while it is in use, so that models trained after publication cannot have seen it.
+
+Both sets follow the same categories, dialect and accept conditions. The private set lives outside the public repository; its SHA-256 hash is committed at pre-registration so the set can later be shown to be unchanged. Results on the public and the private set are reported separately, and a gap between them is reported as possible contamination. A private set is retired (published, and replaced by a new one) when it has been used for 12 months or when contamination is suspected. Editions that predate v1.1 (Job Trial #1) have a public test set only and say so.
 
 ### R4. Pre-registration
 The protocol, episodes, scorer, pass marks, and hypotheses are committed to a public repository before any model is run, and the commit hash is reported. Any later change is a dated, reasoned amendment in the same repository. A change prompted by a model's score is not allowed; a change prompted by a scorer bug found in the dev pilot is allowed and must be disclosed.
@@ -61,12 +67,24 @@ A permanent URL holding: the report in the target language with an English techn
 ### R10. Disclosure
 The report states: the model list and the inclusion rule; quantisation and runtime; sampling settings and their source; licences of models and corpus; funding and independence; the author's competence in the dialect and who reviewed the episodes; what was not measured; and a corrections log.
 
+### Quick Trials (v1.1)
+A Quick Trial is a fast check of a new model on an existing job, run within days of the model's release. It is exploratory and is published as **numbers only**:
+- no verdict word, no verdict label, and no colour that stands for a verdict;
+- labelled «تجربة سريعة · استكشافية» / "Quick Trial · exploratory" on every artefact;
+- one setup per model, declared in a committed config before the run (no best-of selection);
+- run on the job's private held-out test set when one exists, otherwise on the public set, and the report says which;
+- at least one named machine, with the raw interactions and the config published.
+
+A model earns a verdict only through a full Job Trial that meets R1 to R10.
+
 ## 3. What a Job Trial never does
 - Publish an aggregate score or a ranking without a job.
 - State a verdict in a headline, or without hardware.
 - Make an empirical claim without a link to the data behind it.
 - Change the test after seeing a score.
 - Use a fourth verdict word, or colour alone to carry a verdict.
+- Attach a verdict to a Quick Trial.
+- Publish a private held-out test set while it is in use.
 
 ## 4. Inclusion rule for models (Miqyas editions)
 Open weights, Arabic capability claimed by the publisher, runs in llama.cpp at the quantisation stated. Vendor-recommended sampling settings, cited. A model is tested as released; deployment-tuned configurations are reported separately and labelled.
@@ -75,4 +93,4 @@ Open weights, Arabic capability claimed by the publisher, runs in llama.cpp at t
 Each edition ships a reproduction kit: ten test episodes, one command, and a result file format. A reproducer who returns a result is named on the edition page in the same type as the author, with their numbers published as received.
 
 ## 6. Versioning of this standard
-v1, 26 October 2026. Proposed changes are issues in the repository; accepted changes produce v1.1, v2, and so on. An edition names the version it follows in its measurement strip.
+v1, 26 October 2026. v1.1, 28 October 2026: private held-out test set (R3) and Quick Trials (numbers only). Proposed changes are issues in the repository; accepted changes produce v1.1, v2, and so on. An edition names the version it follows in its measurement strip.
