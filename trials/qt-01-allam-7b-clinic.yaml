@@ -1,6 +1,9 @@
 id: qt-01-allam-7b-clinic
 type: quick-trial            # numbers only, no verdict (standard v1.1)
-status: planned
+status: preregistered
+approved_by: Mahmoud Deghaim
+approved_on: 2026-10-28
+standard: Job Trial Standard v1.1
 job: clinic-frontdesk
 question_ar: هل يستطيع ALLaM 7B أن يدير استقبال عيادة؟
 models: [allam-7b-preview]
