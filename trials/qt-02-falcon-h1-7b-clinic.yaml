@@ -3,7 +3,7 @@ type: quick-trial            # numbers only, no verdict (standard v1.1)
 status: planned              # -> preregistered once Mahmoud approves and the commit hash is recorded
 approved_by:
 approved_on:
-standard: Job Trial Standard v1.1
+standard: Job Trial Standard v1.2   # fair shot
 job: clinic-frontdesk
 question_ar: هل يستطيع Falcon-H1 7B أن يدير استقبال عيادة؟
 models: [falcon-h1-7b-instruct]
@@ -11,7 +11,8 @@ why_this_model: >
   Neutrality rule: next lab after G42/Inception (Jais) and HUMAIN/SDAIA (ALLaM). TII's Arabic-specific models
   (Falcon-H1-Arabic, Falcon-Arabic) have no downloadable weights (checked 29 Oct 2026), so they fall outside the
   inclusion rule; Falcon-H1-7B-Instruct is TII's open model with Arabic among its 18 trained languages.
-setup: tool                  # same as qt-01: date tool, no calendar in the prompt, no thinking (the model has no thinking mode)
+setups: [base, table, tool]  # all three Job Trial #1 setups (window allows); every one reported, no best-of selection
+headline_setup: tool         # common setup (standard v1.2): date tool, no thinking (the model has no thinking mode)
 adapter_rule: >
   Decided by a probe before any model answer is read (scripts/run_qt02.sh probe_adapter): the same first request is
   sent with and without the tool list (max_tokens 1). If the tools add >= 200 prompt tokens, llama.cpp's native tool
@@ -23,12 +24,19 @@ generation_cap_tokens: 8192   # same as Job Trial #1; a cap counts as a failure
 quant: Q4_K_M                 # official GGUF from tiiuae/Falcon-H1-7B-Instruct-GGUF if present, else self-converted; sha256 recorded
 test_set: public_test         # the private held-out set is not written yet; the report says "public test set only"
 repeats: 3                    # + 2 extra reps on safety episodes, as in Job Trial #1 and qt-01
-pilot: DEV split, 12 episodes, 1 rep; checks adapter, first-prompt size, tool calls, parse failures before the test run
+pilot: DEV split, 12 episodes, 1 rep, tool setup; checks adapter, first-prompt size, tool calls, parse failures before the test run
+extras:                      # same pod session, test split, tool setup, 3 reps + 2 safety reps, exact Job Trial #1 GGUFs (sha256 checked)
+  adapter_calibration: >
+    Qwen3 4B, no thinking, run twice on the same llama.cpp build: native tool calling vs the prompted-JSON adapter.
+    The difference in episode success is the adapter's measured cost; it is published and cited next to every adapter
+    result, including qt-01 (ALLaM). If the cost is material, the ALLaM page gets a dated correction note.
+  common_setup_rows: [Qwen3 8B no thinking, Jais 3 7B low effort]   # missing like-for-like rows from Job Trial #1
+
 machines:
   run: runpod-4090
   speed: none                 # laptop (floor) wait not measured in this Quick Trial; stated on the results page
-budget_usd: 5                 # expected ~1-1.5 GPU-hours (official GGUF, no conversion)
-comparison: Qwen3 4B, no thinking, same setup (Job Trial #1) and ALLaM 7B (qt-01); both shown as reference rows, no verdict
+budget_usd: 6                 # expected ~2.5-3 GPU-hours on the RTX 4090 (~USD 2-2.5)
+comparison: common setup table for every model measured so far (Jais 3 3.7B/7B low, Qwen3 4B/8B off, ALLaM 7B, Falcon-H1 7B), rows chosen by setup, never by lab; Falcon's base/table setups shown next to Job Trial #1's same setups
 risks:
   - hybrid attention + Mamba architecture: needs a recent llama.cpp; the setup step stops if the server fails to load it.
   - general multilingual model, not Arabic-specific: the page says so.

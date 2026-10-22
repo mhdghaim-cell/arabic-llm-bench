@@ -249,6 +249,7 @@ class PromptedPolicy(ChatPolicy):
 
     def step(self, messages, tools, seed, ctx):
         body = {"messages": prompted_messages(messages, tools), "max_tokens": self.n_predict, "seed": seed, **self.sampling,
+                "chat_template_kwargs": {"enable_thinking": self.effort == "on"},   # ignored by templates without a thinking switch (ALLaM)
                 "response_format": {"type": "json_schema", "json_schema": {"name": "turn", "schema": prompted_schema(tools)}}}
         t0 = time.time()
         try:

@@ -1,6 +1,6 @@
-# The Miqyas Job Trial Standard, v1
+# The Miqyas Job Trial Standard, v1.2
 
-**Status:** v1 adopted 26 October 2026; v1.1 adopted 28 October 2026 (private held-out test set, Quick Trials). Licence: CC BY 4.0. Anyone may run a Job Trial under this standard and say so, provided the trial meets every requirement below and the report says which version of the standard it follows.
+**Status:** v1 adopted 26 October 2026; v1.1 adopted 28 October 2026 (private held-out test set, Quick Trials); v1.2 adopted 29 October 2026 (fair shot). Licence: CC BY 4.0. Anyone may run a Job Trial under this standard and say so, provided the trial meets every requirement below and the report says which version of the standard it follows.
 **Maintainer:** Miqyas (مقياس), Mahmoud Deghaim. Changes to the standard are versioned; a trial is judged against the version named in its protocol.
 **Reference implementation:** Job Trial #1, `findings/frontdesk-v2/`, protocol `docs/frontdesk_protocol_v2.md`.
 
@@ -71,11 +71,20 @@ The report states: the model list and the inclusion rule; quantisation and runti
 A Quick Trial is a fast check of a new model on an existing job, run within days of the model's release. It is exploratory and is published as **numbers only**:
 - no verdict word, no verdict label, and no colour that stands for a verdict;
 - labelled «تجربة سريعة · استكشافية» / "Quick Trial · exploratory" on every artefact;
-- one setup per model, declared in a committed config before the run (no best-of selection);
+- the setups are declared in a committed config before the run, and every declared setup is reported (no best-of selection); the headline number is the common setup (see Fair shot);
 - run on the job's private held-out test set when one exists, otherwise on the public set, and the report says which;
 - at least one named machine, with the raw interactions and the config published.
 
 A model earns a verdict only through a full Job Trial that meets R1 to R10.
+
+### Fair shot (v1.2)
+Every lab's model gets the same chance to do its best, and every comparison is like for like:
+1. **Common setup.** Every model is reported in one shared setup: the job's tool setup, with thinking off (or the lowest effort the model offers). This is the like-for-like column, and the headline number of a Quick Trial.
+2. **The model's own best.** Where the model's context window allows, the job's other declared setups are run too and all are reported. A setup that does not fit the window is reported as "does not fit", never hidden.
+3. **Tool format.** A probe sent before any model answer is read decides the path: native tool calling when the tool list reaches the model, otherwise the Miqyas prompted-JSON adapter. The adapter's cost is measured on a calibration model that has native tool syntax (the same model run both ways, same test set), published, and cited next to every adapter result.
+4. **Maker's settings.** Each model runs with its maker's recommended sampling, cited; thinking or effort modes are reported as separate setups.
+5. **Comparison rows are chosen by setup, never by lab.** A reference row is shown only when it was measured in the same setup.
+6. **Lab rerun.** Any lab may send a recommended configuration for its model (template, tool format, sampling, quantisation). Miqyas runs it once on the same test set and publishes both results side by side. The same terms apply to every lab.
 
 ## 3. What a Job Trial never does
 - Publish an aggregate score or a ranking without a job.
@@ -93,4 +102,4 @@ Open weights, Arabic capability claimed by the publisher, runs in llama.cpp at t
 Each edition ships a reproduction kit: ten test episodes, one command, and a result file format. A reproducer who returns a result is named on the edition page in the same type as the author, with their numbers published as received.
 
 ## 6. Versioning of this standard
-v1, 26 October 2026. v1.1, 28 October 2026: private held-out test set (R3) and Quick Trials (numbers only). Proposed changes are issues in the repository; accepted changes produce v1.1, v2, and so on. An edition names the version it follows in its measurement strip.
+v1, 26 October 2026. v1.1, 28 October 2026: private held-out test set (R3) and Quick Trials (numbers only). v1.2, 29 October 2026: fair shot (common setup, all declared setups reported, adapter calibration, lab rerun). Proposed changes are issues in the repository; accepted changes produce v1.1, v2, and so on. An edition names the version it follows in its measurement strip.

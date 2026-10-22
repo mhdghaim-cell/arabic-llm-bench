@@ -1,13 +1,17 @@
 #!/bin/bash
 # miqyas · qt-02 — Falcon-H1-7B-Instruct Quick Trial on the clinic front desk (trials/qt-02-falcon-h1-7b-clinic.yaml).
-# Same job, test set, window (32,768) and generation cap (8,192) as Job Trial #1. Tool arm, no thinking.
+# Same job, test set, window (32,768) and generation cap (8,192) as Job Trial #1. Standard v1.2 (fair shot):
+# Falcon on all three setups (base, table, tool; the model has no thinking mode); 'extras' adds the adapter
+# calibration (Qwen3 4B no-thinking through the prompted-JSON adapter) and the missing common-setup rows from
+# Job Trial #1 (Jais 3 7B low effort, Qwen3 8B no thinking), with the exact Job Trial #1 GGUF files (sha256 checked).
 # Adapter rule (pre-registered): probe once before any model output is read; if tools reach the prompt through
 # llama.cpp's native tool calling, use it (--mode chat, like Qwen3); otherwise the prompted-JSON adapter (--mode prompted).
 #
 # On a RunPod pod (RTX 4090, PyTorch template), from the repo root. Run every step DETACHED:
 #   setsid nohup bash scripts/run_qt02.sh setup > qt02_setup.log 2>&1 < /dev/null &   (~15 min)
 #   setsid nohup bash scripts/run_qt02.sh pilot > qt02_pilot.log 2>&1 < /dev/null &   (~5 min)
-#   setsid nohup bash scripts/run_qt02.sh test  > qt02_test.log  2>&1 < /dev/null &   (~15-40 min)
+#   setsid nohup bash scripts/run_qt02.sh test  > qt02_test.log  2>&1 < /dev/null &   (~45-75 min)
+#   setsid nohup bash scripts/run_qt02.sh extras > qt02_extras.log 2>&1 < /dev/null &  (~45-75 min)
 #   bash scripts/run_qt02.sh pack
 # Check progress with: tail -5 qt02_<step>.log   (closing the terminal does not stop the run)
 set -u
@@ -81,6 +85,11 @@ setup)
   cp models/hf/falcon-h1-7b-card/LICENSE "$OUT/LICENSE.txt" 2>/dev/null || echo "no LICENSE file in $REPO" > "$OUT/LICENSE.txt"
   { echo "llama.cpp $(cat /tmp/llama_commit.txt)"; echo "repo commit $(git rev-parse --short HEAD)"; echo "source: $SRC"; sha256sum "$GGUF"; } > "$OUT/model_provenance.txt"
   cat "$OUT/model_provenance.txt"; head -5 "$OUT/LICENSE.txt"
+  for row in "Qwen/Qwen3-4B-GGUF Qwen3-4B-Q4_K_M.gguf" "Qwen/Qwen3-8B-GGUF Qwen3-8B-Q4_K_M.gguf" "IFM/Jais-3-7B-GGUF Jais-3-7B-Q4_K_M.gguf"; do
+    set -- $row
+    [ -f "models/gpu/$2" ] || hf download "$1" "$2" --local-dir models/gpu >/dev/null || { echo "DOWNLOAD FAILED: $1/$2"; exit 1; }
+  done
+  (cd models/gpu && grep -E "Qwen3-4B|Qwen3-8B|Jais-3-7B" ../../results/frontdesk_v2/models_sha256.txt | sha256sum -c -) || { echo "STOP: reference GGUFs differ from Job Trial #1"; exit 1; }
   nvidia-smi --query-gpu=name,memory.total --format=csv,noheader
   python3 scripts/test_v2.py || exit 1
   echo "SETUP OK — next: setsid nohup bash scripts/run_qt02.sh pilot > qt02_pilot.log 2>&1 < /dev/null &"
@@ -110,10 +119,24 @@ test)
   [ -f "$OUT/adapter.txt" ] || { echo "run the pilot first (it fixes the adapter)"; exit 1; }
   MODE=$(head -1 "$OUT/adapter.txt")
   start_server || exit 1
-  python3 scripts/run_v2.py --label "$LABEL" --mode "$MODE" --sampling falcon-h1 --split test --arms tool --efforts off \
+  python3 scripts/run_v2.py --label "$LABEL" --mode "$MODE" --sampling falcon-h1 --split test --arms base table tool --efforts off \
       --reps 3 --safety-reps 2 --n-predict $NPRED --out-root "$OUT"
   python3 scripts/score_v2.py "$OUT/$LABEL" | tee "$OUT/$LABEL/scorecard.txt"
-  pkill -f llama-server; echo "TEST DONE — next: bash scripts/run_qt02.sh pack"
+  pkill -f llama-server; echo "TEST DONE — next: setsid nohup bash scripts/run_qt02.sh extras > qt02_extras.log 2>&1 < /dev/null &"
+  ;;
+extras)
+  run_ref () {   # $1 gguf  $2 label  $3 mode  $4 effort
+    pkill -f llama-server; sleep 2
+    "$SERVER" -m "models/gpu/$1" --jinja -ngl 99 -c $CTX -np 1 --port 8080 > "/tmp/server_$2.log" 2>&1 &
+    for i in $(seq 1 180); do curl -s localhost:8080/health | grep -q '"ok"' && break; sleep 2; done
+    python3 scripts/run_v2.py --label "$2" --mode "$3" --split test --arms tool --efforts "$4" --reps 3 --safety-reps 2 --out-root "$OUT" || return 1
+    python3 scripts/score_v2.py "$OUT/$2" | tee "$OUT/$2/scorecard.txt"
+  }
+  run_ref Qwen3-4B-Q4_K_M.gguf  calib-qwen3-4b-off-native   chat     off || exit 1   # adapter calibration, native path, same llama.cpp build
+  run_ref Qwen3-4B-Q4_K_M.gguf  calib-qwen3-4b-off-prompted prompted off || exit 1   # adapter calibration (prompted path)
+  run_ref Qwen3-8B-Q4_K_M.gguf  common-qwen3-8b-off         chat     off || exit 1   # common setup row
+  run_ref Jais-3-7B-Q4_K_M.gguf common-jais3-7b-low         jais     low || exit 1   # common setup row (lowest effort used in Job Trial #1)
+  pkill -f llama-server; echo "EXTRAS DONE — next: bash scripts/run_qt02.sh pack"
   ;;
 pack)
   tar czf qt02_results.tar.gz "$OUT" && ls -la qt02_results.tar.gz
