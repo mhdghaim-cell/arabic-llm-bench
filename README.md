@@ -13,7 +13,7 @@
 |---|---|---|---|
 | **ضريبة الرموز** — ٢٬٠٠٩ جملة، ١١ مقسّمًا، ٧ لهجات، مع فترات ثقة | 2026-10-17 | [findings/token-tax](findings/token-tax/) | [results/w4](results/w4/) |
 | **موظف الاستقبال v1** — الإجراء الأول على ٤٠ رسالة خليجية (استكشافي) | 2026-10-19 | [docs/frontdesk_protocol_v1.md](docs/frontdesk_protocol_v1.md) | [results/frontdesk](results/frontdesk/) |
-| **موظف الاستقبال v2** — محادثات كاملة مع عيادة محاكاة (مسجَّل مسبقًا، قيد التشغيل) | — | [docs/frontdesk_protocol_v2.md](docs/frontdesk_protocol_v2.md) | — |
+| **هل يقدر يشتغل؟ #1: موظف الاستقبال v2** — ٢٬٠١٦ محادثة كاملة مع عيادة محاكاة، ٤ نماذج (مسجَّل مسبقًا) | 2026-10-25 | [findings/frontdesk-v2](findings/frontdesk-v2/) | [results/frontdesk_v2](results/frontdesk_v2/) |
 
 الموقع يضم أيضًا مسرد مصطلحات، وأداة لقياس الرموز في النصوص العربية، وحاسبة تكلفة.
 
@@ -82,7 +82,7 @@ Founder: **Mahmoud Deghaim**. [Independence and funding policy](docs/independenc
 |---|---|---|---|
 | **Arabic token tax** — 2,009 parallel sentences, 11 tokenizers, 7 varieties, bootstrap CIs | 2026-10-17 | [findings/token-tax](findings/token-tax/) | [results/w4](results/w4/) |
 | **Front desk v1** — first-action routing on 40 Gulf WhatsApp messages (exploratory) | 2026-10-19 | [protocol v1](docs/frontdesk_protocol_v1.md) | [results/frontdesk](results/frontdesk/) |
-| **Front desk v2** — full conversations against a simulated clinic (pre-registered, running) | — | [protocol v2](docs/frontdesk_protocol_v2.md) | — |
+| **Can it do the job? #1: front desk v2** — 2,016 full conversations against a simulated clinic, 4 models (pre-registered) | 2026-10-25 | [findings/frontdesk-v2](findings/frontdesk-v2/) | [results/frontdesk_v2](results/frontdesk_v2/) |
 
 The site also has a glossary, a tokenizer playground for Arabic text, and a
 TCO calculator. Every number on the site is sourced from a JSON data file

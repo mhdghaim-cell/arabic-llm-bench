@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مقياس — هل يقدر يشتغل؟ موظف استقبال</title>
+<meta name="description" content="اختبار مستقل: هل يدير نموذج مفتوح الأوزان استقبال واتساب لعيادة أسنان في دبي، من غير إنترنت؟ ٢٬٠١٦ محادثة كاملة، ٤ نماذج، بروتوكول مسجّل مسبقًا.">
+<link rel="stylesheet" href="../../assets/base.css">
+<style>
+  .num{font-family:var(--mono);font-variant-numeric:tabular-nums;direction:ltr;unicode-bidi:isolate}
+  .data-table td.num{text-align:end}
+  .data-table td.best{color:var(--signal);font-weight:600}
+  .ci{font-family:var(--mono);font-size:.75rem;color:var(--dim);direction:ltr;unicode-bidi:isolate}
+  .memo{border:1px solid var(--ink);padding:1.25rem 1.5rem;margin-block:1.5rem;background:#fff}
+  .memo h3{margin:0 0 .75rem;font-size:1.05rem}
+  .memo dl{display:grid;grid-template-columns:max-content 1fr;gap:.6rem 1rem;margin:0}
+  .memo dt{font-weight:600}
+  .memo dd{margin:0}
+  .tag{display:inline-block;font-size:.75rem;padding:.1rem .45rem;border:1px solid currentColor;border-radius:3px;margin-inline-end:.35rem}
+  .go{color:#1B5E4A}.wait{color:#8a6d1a}.no{color:var(--signal)}
+  .note{font-size:.875rem;color:var(--dim)}
+  .en{direction:ltr;text-align:left;unicode-bidi:isolate;font-size:.9375rem;border-inline-start:3px solid var(--rule);padding-inline-start:1rem}
+  .en h3{font-size:1rem;margin-block:1.25rem .5rem}
+  .en table{direction:ltr}
+  blockquote{margin:.75rem 0;padding:.5rem 1rem;border-inline-start:3px solid var(--rule);font-size:.9375rem}
+  ul.tight li{margin-block:.35rem}
+</style>
+</head>
+<body>
+
+<div class="strip"><div class="wrap">
+  <span>تجربة عمل <b class="ver">#1</b></span>
+  <span>الحالة <b>منشورة</b></span>
+  <span>التشغيل <b class="num">2026-10-25</b></span>
+  <span>بروتوكول <b class="num">9a83bfe</b> مسجّل مسبقًا</span>
+</div></div>
+
+<div class="wrap">
+
+<header>
+  <h1>مقياس <span>· هل يقدر يشتغل؟</span></h1>
+  <p class="tagline">موظف استقبال واتساب لعيادة أسنان في دبي، يعمل من غير إنترنت. ٢٬٠١٦ محادثة كاملة، ٤ نماذج مفتوحة الأوزان، وعيادة محاكاة تردّ على كل أداة.</p>
+  <div class="meta">
+    <span>رابط دائم: <span dir="ltr">/findings/frontdesk-v2/</span></span>
+    <a href="../../docs/frontdesk_protocol_v2.md">البروتوكول ↗</a>
+    <a href="../../results/frontdesk_v2/">البيانات الخام ↗</a>
+    <a href="#en">English ↓</a>
+  </div>
+</header>
+
+<section class="memo">
+  <h3>القرار لصاحب العيادة</h3>
+  <dl>
+    <dt>النموذج</dt>
+    <dd><span class="tag go">يصلح مع إشراف</span>Jais 3 (3.7B أو 7B) بجهد تفكير عالٍ وتقويم ١٤ يومًا في التعليمات: ٩٤–٩٥٪ من المحادثات صحيحة من أولها لآخرها، وكل حالة طارئة وصلت لموظف في الوقت. Qwen3 بالحجم نفسه أو ضعفه: ٦٥–٧٨٪.</dd>
+    <dt>المهمة</dt>
+    <dd><span class="tag no">لا تتركه وحده</span>تغيير المواعيد: كل النماذج تحجز الموعد الجديد وتنسى إلغاء القديم، أو تقول «تم الإلغاء» من غير أن تلغي. حوّل تغيير المواعيد لموظف، أو أعطِ النموذج أداة تغيير واحدة.</dd>
+    <dt>الجهاز</dt>
+    <dd><span class="tag no">لا يكفي</span>على لابتوب ماك بوك إير ٢٠٢٠ (إنتل، ٨ غيغابايت): الإعداد الذي ينجح يحتاج نحو دقيقة لكل رد، والإعداد السريع ينجح في ٢٩٪ فقط. نماذج 7B و8B لا تتسع في الذاكرة أصلًا. تحتاج العيادة جهازًا أحدث؛ كم أحدث؟ لم نقسه بعد.</dd>
+    <dt>التاريخ</dt>
+    <dd><span class="tag go">الحل الرخيص يكفي</span>تقويم مكتوب في التعليمات كان جيدًا مثل أداة التاريخ أو أفضل. لا حاجة لبرمجة إضافية.</dd>
+  </dl>
+</section>
+
+<section class="section-head">
+  <h2>السؤال</h2>
+  <p>هل يقدر نموذج مفتوح الأوزان، يعمل على جهاز العيادة من غير إنترنت، أن يدير محادثات واتساب كاملة باللهجة الخليجية: يحجز، يلغي، يغيّر المواعيد، يقول «ما في وقت» بدل أن يخترع، ويحوّل الحالات الطارئة لإنسان فورًا؟ الاختبار السابق (<a href="../../docs/frontdesk_protocol_v1.md">v1</a>) قاس الخطوة الأولى فقط. هذا الاختبار يقيس المحادثة كلها، والعيادة تردّ على كل أداة.</p>
+</section>
+
+<section class="section-head">
+  <h2>النتيجة: محادثات صحيحة من أولها لآخرها</h2>
+  <p>نسبة المحادثات التي انتهت بالحالة الصحيحة تمامًا (الموعد الصحيح، الإلغاء الصحيح، التحويل لإنسان عند الحاجة) من غير أي فشل حرج. بين القوسين فترة الثقة ٩٥٪ (مجمّعة حسب الحلقة). «ثبات ×٣» = نسبة الحلقات التي نجح فيها النموذج في المحاولات الثلاث كلها.</p>
+  <table class="data-table">
+    <thead><tr><th>النموذج</th><th>من غير مساعدة في التاريخ</th><th>تقويم في التعليمات</th><th>أداة تاريخ</th><th>ثبات ×٣ (الأفضل)</th></tr></thead>
+    <tbody>
+      <tr><td>Jais 3 · 3.7B</td><td class="num">92.1% <span class="ci">[83–98]</span></td><td class="num best">93.7% <span class="ci">[87–99]</span></td><td class="num">92.1% <span class="ci">[84–98]</span></td><td class="num">90%</td></tr>
+      <tr><td>Jais 3 · 7B</td><td class="num">86.5% <span class="ci">[79–94]</span></td><td class="num best">95.2% <span class="ci">[89–99]</span></td><td class="num">91.3% <span class="ci">[86–96]</span></td><td class="num">90%</td></tr>
+      <tr><td>Qwen3 · 8B</td><td class="num">63.5% <span class="ci">[52–75]</span></td><td class="num">77.8% <span class="ci">[67–87]</span></td><td class="num">75.4% <span class="ci">[63–87]</span></td><td class="num">64%</td></tr>
+      <tr><td>Qwen3 · 4B</td><td class="num">44.4% <span class="ci">[32–57]</span></td><td class="num">65.1% <span class="ci">[53–76]</span></td><td class="num">59.5% <span class="ci">[47–71]</span></td><td class="num">50%</td></tr>
+    </tbody>
+  </table>
+  <p class="note">٤٢ حلقة اختبار × ٣ محاولات (+٢ لحلقات السلامة) = ١٤٤ محادثة لكل خلية. كل النماذج بصيغة Q4_K_M على llama.cpp، بجهد تفكير عالٍ (Jais) أو التفكير مفعّل (Qwen)، وبإعدادات العيّنة الموصى بها من كل جهة. النسب بعد المراجعة البشرية لكل إنذار حرج؛ الأرقام الآلية قبلها في <a href="../../results/frontdesk_v2/">البيانات</a> وتختلف بأقل من نقطة واحدة. بجهد منخفض أو من غير تفكير ينهار الأداء إلى ٢٨٪ للنموذجين.</p>
+  <ul class="tight">
+    <li><b>Jais 3 يتفوّق على Qwen3 في كل الإعدادات</b>، والفرق واضح إحصائيًا: Jais 3 3.7B يتقدّم على Qwen3-8B، ضعف حجمه، بـ١٦ إلى ٢٩ نقطة.</li>
+    <li><b>3.7B يساوي 7B</b>: لا فرق واضح بينهما في أي إعداد.</li>
+    <li><b>اللهجة</b>: ٦٣–٧٦٪ من محادثات Jais فيها ردود بمفردات خليجية، مقابل ٠–٢٪ لـQwen.</li>
+  </ul>
+</section>
+
+<section class="section-head">
+  <h2>السلامة</h2>
+  <ul class="tight">
+    <li><b>كل حالة طارئة وصلت لموظف في الوقت</b> عند Jais 3، بالحجمين، في الإعدادات الثلاثة (٢٥ من ٢٥ في كل خلية). في ٤ من الخلايا الست، صنّف Jais حالة أو حالتين من ٢٥ «شكوى» بدل «طارئة»، مع أن الملخص كتب «يحتاج تقييمًا طبيًا فوريًا». المعيار المسجّل مسبقًا يعدّها فشلًا، ونحن ننشرها كذلك.</li>
+    <li><b>Qwen فوّت طوارئ حقيقية</b>: مريض يقول «الألم ما يتحمل وما قدرت أنام، بس عادي أبي أحجز فحص الأسبوع الياي». Qwen عرض أوقاتًا ولم يحوّل لإنسان (٥ مرات).</li>
+    <li><b>إخفاقات حرجة مؤكَّدة بعد المراجعة</b> (من ١٤٤ محادثة لكل خلية): Jais 3 3.7B: صفر أوقات مخترعة، و١ ادعاء كاذب بالإلغاء في أفضل إعداد. Jais 3 7B بالتقويم: صفر وصفر. Qwen3-8B: حتى ٥ أوقات مخترعة في الخلية، أغلبها خطأ تحويل من نظام ٢٤ ساعة (١٨:٣٠ تصير «٩:٣٠ مساءً»).</li>
+  </ul>
+</section>
+
+<section class="section-head">
+  <h2>أين تفشل النماذج</h2>
+  <ol class="tight">
+    <li><b>تغيير الموعد يكسر الجميع.</b> النموذج يحجز الجديد ويترك القديم (حجز مزدوج)، أو لا يبحث عن موعد المريض أصلًا، أو يقول «تم الإلغاء» من غير أن يلغي. نجح Jais 3 3.7B في ١٠ من ٢٧، و7B في ١٥ من ٢٧، وQwen3-8B في ٨، وQwen3-4B في ٢. فقط ٥ من ١٠٨ إخفاقات سببها أن المريض المبرمج لم يجب على سؤال تأكيد إضافي.
+      <blockquote>«تم حجز موعد التبييض يوم 12 نوفمبر الساعة 7:00 مساءً. الحين شلون بغيت تلغي موعد 11 نوفمبر الحالي؟» ← المريض: «تمام» ← «تم إلغاء موعد 11 نوفمبر.» <span class="note">(لم تُستدعَ أداة الإلغاء. الموعد القديم ما زال محجوزًا.)</span></blockquote></li>
+    <li><b>«قالها ولم يفعلها».</b> ادعاءات «تم الحجز» أو «تم الإلغاء» من غير استدعاء الأداة. نادرة عند Jais، وموجودة عند الجميع.</li>
+    <li><b>تحويل الوقت.</b> الأداة تعطي ١٩:٠٠ والنموذج يكتب للمريض «٦:٠٠». خطأ متكرر عند Qwen3-8B، ونادر عند Jais 3 7B.</li>
+  </ol>
+</section>
+
+<section class="section-head">
+  <h2>على لابتوب العيادة</h2>
+  <p>ماك بوك إير ٢٠٢٠ (إنتل i7، ٨ غيغابايت، المعالج فقط). قسنا سرعة الجهاز، ثم حوّلنا عدد الرموز الفعلي في كل محادثة إلى زمن انتظار، وتحققنا من الطريقة بعشر محادثات حقيقية على الجهاز نفسه (خطأ وسيطي ١٠٪، والحد المسموح ٢٥٪).</p>
+  <table class="data-table">
+    <thead><tr><th>الإعداد</th><th>انتظار لكل رسالة (الوسيط / أبطأ ١٠٪)</th><th>نجاح</th></tr></thead>
+    <tbody>
+      <tr><td>Jais 3 3.7B، جهد عالٍ، تقويم</td><td class="num">~53 s / ~3 min</td><td class="num">93.7%</td></tr>
+      <tr><td>Jais 3 3.7B، جهد منخفض</td><td class="num">~10 s / ~29 s</td><td class="num">28.6%</td></tr>
+      <tr><td>Qwen3-4B، التفكير مفعّل، تقويم</td><td class="num">~2 min / ~5 min</td><td class="num">65.1%</td></tr>
+      <tr><td>Jais 3 7B · Qwen3-8B</td><td>لا يتسعان في ٨ غيغابايت</td><td>—</td></tr>
+    </tbody>
+  </table>
+  <p class="note">نحو ٨٧٪ من الانتظار هو النموذج يكتب تفكيره (وسيط ٢٣٥ رمزًا لكل رسالة). التحقق تمّ على ردود قصيرة بجهد منخفض؛ أرقام الجهد العالي تمتدّ على منحنيات السرعة المقاسة نفسها. للمقارنة: بطاقة RTX 4090 تردّ في ١٫٢–٢٫٢ ثانية.</p>
+</section>
+
+<section class="section-head">
+  <h2>الفرضيات المسجّلة مسبقًا</h2>
+  <ul class="tight">
+    <li><b>H1 — أداة التاريخ أفضل من لا شيء عند Jais: لم تثبت.</b> 3.7B: ٠٫٠ نقطة [−٦٫٣، +٧٫١]. 7B: +٤٫٨ [−٢٫٤، +١١٫٩]. التقويم في التعليمات ساعد 7B (+٨٫٧ [+١٫٦، +١٥٫٩]). المساعدة في التاريخ فرقت كثيرًا عند Qwen (+١٢ إلى +٢١).</li>
+    <li><b>H2 — Jais 3 3.7B يتجاوز ٩٠٪ في أفضل إعداد: نعم على التقدير النقطي</b> (٩٣٫٧٪)، والحد الأدنى لفترة الثقة ٨٦٫٥٪. اختيار الأفضل من ثلاثة يجمّل الرقم قليلًا؛ إعداد الأداة وحده ٩٢٫١٪.</li>
+    <li><b>H3 — صفر أوقات مخترعة وصفر ادعاءات كاذبة في أفضل إعداد: لم تتحقق لـ3.7B</b> (ادعاء إلغاء كاذب واحد في ١٤٤)، <b>وتحققت لـ7B</b>.</li>
+  </ul>
+</section>
+
+<section class="section-head">
+  <h2>كيف تحقّقنا</h2>
+  <ul class="tight">
+    <li><b>تسجيل مسبق</b>: البروتوكول والحلقات والمصحِّح في git قبل أي تشغيل (<span class="num">9a83bfe</span>)، وثلاثة تعديلات مؤرّخة ومعلّلة (<a href="../../docs/frontdesk_protocol_v2_amendment1.md">١</a>، <a href="../../docs/frontdesk_protocol_v2_amendment2.md">٢</a>، <a href="../../docs/frontdesk_protocol_v2_amendment3.md">٣</a>). لم يُغيَّر شيء بسبب نتيجة نموذج.</li>
+    <li><b>موظف استقبال مثالي</b> (أوراكل) نجح ١٠٠٪ في كل الحلقات والإعدادات، فكل حلقة قابلة للحل. <b>تسعة موظفين سيئين عمدًا</b> (يخترع، يسكت، يحجز بلا سؤال، يتأخر في الطوارئ…) التقطهم المصحِّح كلهم.</li>
+    <li><b>تدقيق بشري أعمى</b>: ٣٠ محادثة قيّمها محمود دغيم من غير معرفة النموذج أو الإعداد أو حكم المصحِّح. اتفاق ٣٠ من ٣٠.</li>
+    <li><b>كل إنذار حرج روجع يدويًا</b>: ٣٥ إنذارًا في الإعدادات الرئيسية، ٢٦ مؤكَّدة و٩ إنذارات كاذبة من فاحص النصوص.</li>
+    <li><b>إعادة الإنتاج</b>: ١٠ محادثات أُعيدت بالبذور نفسها. من خادم جديد إلى خادم جديد: ١٠ من ١٠ متطابقة حرفيًا. مقابل التشغيل الرئيسي: ٩ من ١٠ بالنتيجة نفسها؛ حالة الذاكرة المؤقتة للخادم بعد مئات المحادثات غيّرت محادثة واحدة. لهذا ننشر «ثبات ×٣».</li>
+  </ul>
+</section>
+
+<section class="section-head">
+  <h2>القيود</h2>
+  <p>عيادة واحدة، تعليمات بالعربية، ٤٢ حلقة اختبار: النتائج اتجاهية لا عامة. المريض مبرمج ولا يتكيّف، والمريض الحقيقي أكثر فوضى. الحلقات كُتبت بمساعدة الذكاء الاصطناعي وراجعها المؤلف (عربي، غير إماراتي). كل النماذج بتكميم Q4_K_M. سرعة الأجهزة الأحدث من لابتوب ٢٠٢٠ لم تُقَس. فاحص الأوقات المخترعة يقارن الوقت لا التاريخ.</p>
+</section>
+
+<section class="section-head" id="en">
+  <h2>English technical summary</h2>
+  <div class="en">
+    <p><b>Question.</b> Can an open-weight model run a small Dubai dental clinic's WhatsApp front desk end to end, offline, in Gulf Arabic, without inventing appointments? 42 pre-registered test episodes (2–5 scripted patient turns each) against a deterministic simulated clinic with 5 tools (+ <code>find_date</code> in one arm). 4 models (Jais 3 3.7B and 7B, Qwen3-4B and 8B; Q4_K_M, llama.cpp), 3 date-handling arms, 3 reps (+2 for safety episodes): 2,016 conversations on an RTX 4090, 0 harness errors.</p>
+    <h3>Episode success (state-based, after human review of critical flags; 95% CI clustered by episode)</h3>
+    <table class="data-table">
+      <thead><tr><th>Model</th><th>base</th><th>calendar in prompt</th><th>date tool</th><th>pass^3 (best)</th></tr></thead>
+      <tbody>
+        <tr><td>Jais 3 3.7B</td><td>92.1% [83–98]</td><td><b>93.7%</b> [87–99]</td><td>92.1% [84–98]</td><td>90%</td></tr>
+        <tr><td>Jais 3 7B</td><td>86.5% [79–94]</td><td><b>95.2%</b> [89–99]</td><td>91.3% [86–96]</td><td>90%</td></tr>
+        <tr><td>Qwen3-8B</td><td>63.5% [52–75]</td><td>77.8% [67–87]</td><td>75.4% [63–87]</td><td>64%</td></tr>
+        <tr><td>Qwen3-4B</td><td>44.4% [32–57]</td><td>65.1% [53–76]</td><td>59.5% [47–71]</td><td>50%</td></tr>
+      </tbody>
+    </table>
+    <h3>Findings</h3>
+    <ul>
+      <li>Jais 3 beats Qwen3 at matched and double size in every arm (paired CIs exclude zero; 3.7B vs Qwen3-8B: +16 to +29 pts). Jais 3 3.7B ≈ 7B.</li>
+      <li>Every emergency reached a human in time for both Jais models in all arms (25/25 per cell); in 4 of the 6 cells, 1–2 of 25 were labelled "complaint" rather than "emergency" (counted as failures under the pre-registered rule). Qwen missed a downplayed emergency 5 times.</li>
+      <li>Rescheduling is the weak spot for every model: double bookings (new slot booked, old one left), skipped lookups, and "cancelled" claims with no tool call.</li>
+      <li>H1 (date tool beats no help, Jais) not supported; a 14-day calendar in the prompt was at least as good as the tool for every model. H2 met on the point estimate (93.7%, CI lower bound 86.5%). H3 (zero critical failures) not met for 3.7B (one false cancellation claim in 144), met for 7B.</li>
+      <li>Laptop (2020 Intel MacBook Air, 8 GB, CPU): the configuration that works waits ~53 s per message (p90 ~3 min); low effort is ~10 s but 29% success; 7B/8B don't fit in memory. The speed model was validated on 10 real conversations (median absolute error 10%).</li>
+    </ul>
+    <h3>Validity</h3>
+    <p>Protocol, episodes and scorer committed before any run (<code>9a83bfe</code>), plus three dated amendments, none prompted by a model's score. Oracle replay 100% in every arm; nine negative-control agents all caught. Blind human audit of 30 conversations: 30/30 agreement. All 35 critical flags in the primary configurations reviewed by hand (26 confirmed, 9 regex false positives). Reproducibility: fresh vs fresh server 10/10 identical; main run vs fresh 9/10 same outcome (prompt-cache state changes GPU numerics). Limitations: one clinic, 42 episodes, scripted patient, author-reviewed (non-Emirati) dialect, Q4 only.</p>
+    <p><b>Data and code:</b> <code>results/frontdesk_v2/</code> (every conversation in full), <code>scripts/</code>, <code>corpus/frontdesk_v2.jsonl</code>. Independent work by Mahmoud Deghaim; <a href="../../docs/independence.md">independence and funding policy</a>.</p>
+  </div>
+</section>
+
+<footer>
+  <p>مقياس مشروع مستقل أسّسه محمود دغيم (<span dir="ltr">Mahmoud Deghaim</span>). كل محادثة منشورة كاملة في <a href="../../results/frontdesk_v2/">results/frontdesk_v2</a>.</p>
+  <p>للاستشهاد، راجع <a href="../../المنهجية/">المنهجية</a> و<a href="../../CITATION.cff">CITATION.cff</a>.</p>
+</footer>
+
+</div>
+</body>
+</html>

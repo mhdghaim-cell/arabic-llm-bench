@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<style>
+@font-face { font-family: "PlexAr"; src: url("../fonts/IBMPlexSansArabic-Regular.ttf"); font-weight: 400; }
+@font-face { font-family: "PlexAr"; src: url("../fonts/IBMPlexSansArabic-SemiBold.ttf"); font-weight: 600; }
+@font-face { font-family: "PlexMono"; src: url("../fonts/IBMPlexMono-Regular.ttf"); font-weight: 400; }
+@font-face { font-family: "PlexMono"; src: url("../fonts/IBMPlexMono-SemiBold.ttf"); font-weight: 600; }
+:root { --ink:#12161C; --paper:#FAF9F6; --rule:#D8D5CE; --signal:#B8342A; --verify:#1B5E4A; --dim:#6E7178; --soft:#EFEDE7; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { width:1200px; height:675px; background:var(--paper); color:var(--ink); font-family:"PlexAr",sans-serif; padding:28px 56px; position:relative; }
+.mono { font-family:"PlexMono",monospace; font-variant-numeric:tabular-nums; direction:ltr; unicode-bidi:isolate; }
+.strip { font-size:13px; color:var(--dim); border-bottom:1px solid var(--rule); padding-bottom:9px; display:flex; gap:20px; }
+.strip b { color:var(--ink); font-weight:400; }
+h1 { font-size:30px; font-weight:600; line-height:1.25; margin-top:16px; }
+.sub { font-size:15px; color:var(--dim); margin-top:5px; }
+table { width:100%; border-collapse:collapse; margin-top:18px; }
+th { font-size:13px; font-weight:400; color:var(--dim); text-align:center; padding:0 8px 8px; border-bottom:1px solid var(--rule); vertical-align:bottom; line-height:1.4; }
+th:first-child, td:first-child { text-align:right; }
+td { font-size:22px; text-align:center; padding:10px 8px; border-bottom:1px solid var(--rule); }
+td.name { font-size:18px; }
+td.name .lat { direction:ltr; unicode-bidi:isolate; font-weight:600; }
+td.name .note { display:block; font-size:12px; color:var(--dim); margin-top:1px; }
+.n { font-family:"PlexMono",monospace; font-weight:600; font-variant-numeric:tabular-nums; direction:ltr; unicode-bidi:isolate; }
+.small { font-size:16px; }
+.red { color:var(--signal); }
+.ok { color:var(--verify); }
+.dimtxt { color:var(--dim); font-size:15px; }
+tr.hl td { background:var(--soft); }
+.bar { margin-top:13px; font-size:13.5px; color:var(--dim); line-height:1.6; }
+.bar b { color:var(--ink); font-weight:600; }
+.foot { position:absolute; bottom:20px; left:56px; right:56px; display:flex; justify-content:space-between; font-size:13px; color:var(--dim); border-top:1px solid var(--rule); padding-top:8px; }
+.brand { color:var(--ink); font-weight:600; font-size:15px; }
+</style>
+</head>
+<body>
+  <div class="strip">
+    <span>عيادة أسنان محاكاة في دبي</span>
+    <span><b class="mono">42</b> حلقة · <b class="mono">2,016</b> محادثة كاملة</span>
+    <span>بلا إنترنت · <b class="mono">llama.cpp · Q4</b></span>
+    <span>بروتوكول مسجّل مسبقًا</span>
+  </div>
+
+  <h1>هل يقدر يشتغل؟ موظف استقبال واتساب… من أول رسالة لآخرها</h1>
+  <p class="sub">يحجز ويلغي ويغيّر المواعيد ويحوّل الطوارئ، والعيادة تردّ على كل أداة. أفضل إعداد لكل نموذج: تقويم ١٤ يومًا في التعليمات، وتفكير مفعّل.</p>
+
+  <table>
+    <tr>
+      <th>النموذج</th>
+      <th>محادثات صحيحة<br>من أولها لآخرها</th>
+      <th>صحيحة في المحاولات<br>الثلاث كلها</th>
+      <th>الطوارئ وصلت<br>لموظف في الوقت</th>
+      <th>على لابتوب ٢٠٢٠<br>(إنتل، ٨ غيغابايت)</th>
+    </tr>
+    <tr class="hl">
+      <td class="name"><span class="lat">Jais 3 · 7B</span><span class="note">IFM / MBZUAI</span></td>
+      <td><span class="n ok">95%</span></td>
+      <td><span class="n">90%</span></td>
+      <td><span class="n ok">75/75</span></td>
+      <td><span class="dimtxt">لا يتسع في الذاكرة</span></td>
+    </tr>
+    <tr class="hl">
+      <td class="name"><span class="lat">Jais 3 · 3.7B</span><span class="note">IFM / MBZUAI</span></td>
+      <td><span class="n ok">94%</span></td>
+      <td><span class="n">90%</span></td>
+      <td><span class="n ok">75/75</span></td>
+      <td><span class="n small red">~53</span><span class="dimtxt"> ثانية لكل رد</span></td>
+    </tr>
+    <tr>
+      <td class="name"><span class="lat">Qwen3 · 8B</span><span class="note">Alibaba</span></td>
+      <td><span class="n">78%</span></td>
+      <td><span class="n">64%</span></td>
+      <td><span class="n red">72/75</span></td>
+      <td><span class="dimtxt">لا يتسع في الذاكرة</span></td>
+    </tr>
+    <tr>
+      <td class="name"><span class="lat">Qwen3 · 4B</span><span class="note">Alibaba</span></td>
+      <td><span class="n">65%</span></td>
+      <td><span class="n">50%</span></td>
+      <td><span class="n red">73/75</span></td>
+      <td><span class="n small red">~2</span><span class="dimtxt"> دقيقة لكل رد</span></td>
+    </tr>
+  </table>
+
+  <div class="bar">
+    <div><b>أضعف نقطة عند الجميع: تغيير الموعد.</b> النموذج يحجز الجديد وينسى إلغاء القديم، أو يقول «تم الإلغاء» من غير أن يلغي.</div>
+    <div>الطوارئ عبر الإعدادات الثلاثة. التدقيق البشري الأعمى: اتفاق <b class="mono">30/30</b>. للمقارنة: بطاقة RTX 4090 تردّ في ١–٢ ثانية.</div>
+  </div>
+
+  <div class="foot">
+    <span><span class="brand">مقياس</span> · محمود دغيم</span>
+    <span class="mono">github.com/mhdghaim-cell/arabic-llm-bench · findings/frontdesk-v2</span>
+  </div>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<style>
+@font-face { font-family: "PlexAr"; src: url("../fonts/IBMPlexSansArabic-Regular.ttf"); font-weight: 400; }
+@font-face { font-family: "PlexAr"; src: url("../fonts/IBMPlexSansArabic-SemiBold.ttf"); font-weight: 600; }
+@font-face { font-family: "PlexMono"; src: url("../fonts/IBMPlexMono-Regular.ttf"); font-weight: 400; }
+@font-face { font-family: "PlexMono"; src: url("../fonts/IBMPlexMono-SemiBold.ttf"); font-weight: 600; }
+:root { --ink:#12161C; --paper:#FAF9F6; --rule:#D8D5CE; --signal:#B8342A; --verify:#1B5E4A; --dim:#6E7178; --soft:#EFEDE7; }
+@page { size: 1080px 1350px; margin: 0; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:var(--paper); color:var(--ink); font-family:"PlexAr",sans-serif; }
+.slide { width:1080px; height:1350px; padding:84px 84px 0; position:relative; page-break-after:always; overflow:hidden; background:var(--paper); }
+.slide:last-child { page-break-after:auto; }
+.n { font-family:"PlexMono",monospace; font-weight:600; font-variant-numeric:tabular-nums; direction:ltr; unicode-bidi:isolate; }
+.lat { direction:ltr; unicode-bidi:isolate; }
+.kicker { font-size:26px; color:var(--dim); letter-spacing:.5px; border-bottom:2px solid var(--rule); padding-bottom:18px; display:flex; justify-content:space-between; }
+.kicker .n { font-weight:400; }
+h1 { font-size:76px; line-height:1.2; font-weight:600; margin-top:120px; }
+h2 { font-size:56px; line-height:1.25; font-weight:600; margin-top:60px; }
+p.body { font-size:34px; line-height:1.65; margin-top:36px; }
+p.en { font-size:24px; line-height:1.5; color:var(--dim); margin-top:28px; direction:ltr; text-align:left; font-family:"PlexMono",monospace; }
+.big { font-size:150px; font-weight:600; line-height:1; }
+.ok { color:var(--verify); } .red { color:var(--signal); } .dim { color:var(--dim); }
+.foot { position:absolute; bottom:56px; left:84px; right:84px; display:flex; justify-content:space-between; font-size:24px; color:var(--dim); border-top:2px solid var(--rule); padding-top:18px; }
+.foot b { color:var(--ink); font-weight:600; }
+table { width:100%; border-collapse:collapse; margin-top:56px; }
+td { padding:30px 0; border-bottom:2px solid var(--rule); font-size:40px; vertical-align:middle; }
+td.v { text-align:left; }
+td .sub { display:block; font-size:24px; color:var(--dim); margin-top:4px; }
+tr.hl td { background:var(--soft); }
+blockquote { margin-top:40px; padding:28px 34px; border-inline-start:6px solid var(--rule); background:#fff; font-size:32px; line-height:1.65; }
+blockquote .who { display:block; font-size:22px; color:var(--dim); margin-bottom:10px; }
+ul.list { margin-top:40px; list-style:none; }
+ul.list li { font-size:34px; line-height:1.55; padding:22px 0; border-bottom:2px solid var(--rule); }
+ul.list li b { font-weight:600; }
+.tag { display:inline-block; font-size:24px; padding:4px 14px; border:2px solid currentColor; border-radius:6px; margin-inline-end:14px; vertical-align:middle; font-weight:600; }
+.pill-row { display:flex; gap:24px; margin-top:56px; }
+.pill { flex:1; background:#fff; border:2px solid var(--rule); padding:34px 30px; }
+.pill .big { font-size:96px; }
+.pill .lbl { font-size:28px; margin-top:12px; line-height:1.4; }
+</style>
+</head>
+<body>
+
+<!-- 1 cover -->
+<section class="slide">
+  <div class="kicker"><span>مقياس · هل يقدر يشتغل؟ <span class="n">#1</span></span><span class="n">2026-10</span></div>
+  <h1>هل يقدر نموذج عربي مفتوح يدير استقبال عيادة على واتساب… من غير إنترنت؟</h1>
+  <p class="body"><span class="n">2,016</span> محادثة كاملة بالخليجي. <span class="n">4</span> نماذج. عيادة محاكاة تردّ على كل أداة.</p>
+  <p class="en">Can an open Arabic model run a clinic's WhatsApp front desk, offline? 2,016 full conversations.</p>
+  <div class="foot"><span><b>مقياس</b> · محمود دغيم</span><span>اسحب ←</span></div>
+</section>
+
+<!-- 2 the test -->
+<section class="slide">
+  <div class="kicker"><span>الاختبار</span><span class="n">2/8</span></div>
+  <h2>ليس سؤالًا واحدًا. محادثة كاملة.</h2>
+  <ul class="list">
+    <li>عيادة أسنان في دبي: مواعيد فاضية، أيام مسكّرة، <b>تقويم يتعطّل</b>، ومواعيد قديمة يريد المريض تغييرها.</li>
+    <li><span class="n">42</span> مريضًا بالخليجي، منهم من يكتب Arabizi، ومنهم من <b>يغيّر رأيه</b> في منتصف المحادثة.</li>
+    <li>النموذج يحجز ويلغي ويغيّر المواعيد ويحوّل الطوارئ لموظف.</li>
+    <li>معيار النجاح <b>مسجّل في GitHub قبل أي تشغيل</b>.</li>
+  </ul>
+  <p class="en">Simulated clinic, 42 scripted Gulf-Arabic patients, 5 tools, pre-registered pass mark.</p>
+  <div class="foot"><span><b>مقياس</b> · محمود دغيم</span><span class="lat">Jais 3 · Qwen3 · llama.cpp · Q4</span></div>
+</section>
+
+<!-- 3 results -->
+<section class="slide">
+  <div class="kicker"><span>النتيجة</span><span class="n">3/8</span></div>
+  <h2>محادثات صحيحة من أولها لآخرها</h2>
+  <table>
+    <tr class="hl"><td><span class="lat"><b>Jais 3 · 7B</b></span><span class="sub">IFM / MBZUAI</span></td><td class="v"><span class="n ok" style="font-size:64px">95%</span></td></tr>
+    <tr class="hl"><td><span class="lat"><b>Jais 3 · 3.7B</b></span><span class="sub">IFM / MBZUAI</span></td><td class="v"><span class="n ok" style="font-size:64px">94%</span></td></tr>
+    <tr><td><span class="lat"><b>Qwen3 · 8B</b></span><span class="sub">Alibaba</span></td><td class="v"><span class="n" style="font-size:64px">78%</span></td></tr>
+    <tr><td><span class="lat"><b>Qwen3 · 4B</b></span><span class="sub">Alibaba</span></td><td class="v"><span class="n" style="font-size:64px">65%</span></td></tr>
+  </table>
+  <p class="body">Jais 3 الصغير (<span class="n">3.7B</span>) تفوّق على Qwen ضعف حجمه. ونحو ٧٠٪ من محادثاته فيها ردود بمفردات خليجية، مقابل ٢٪ أو أقل لـQwen.</p>
+  <div class="foot"><span><b>مقياس</b> · محمود دغيم</span><span>أفضل إعداد لكل نموذج · <span class="n">144</span> محادثة لكل رقم</span></div>
+</section>
+
+<!-- 4 safety -->
+<section class="slide">
+  <div class="kicker"><span>السلامة</span><span class="n">4/8</span></div>
+  <h2>الحالات الطارئة</h2>
+  <div class="pill-row">
+    <div class="pill"><div class="big n ok">75/75</div><div class="lbl">مع Jais 3 بالحجمين: كل حالة طارئة وصلت لموظف في الوقت</div></div>
+  </div>
+  <blockquote><span class="who">مريض:</span>«الألم ما يتحمل وما قدرت أنام، بس عادي أبي أحجز فحص الأسبوع الياي»</blockquote>
+  <p class="body">Qwen عرض عليه مواعيد ولم يحوّله لإنسان، <span class="n red">5</span> مرات. الألم الشديد حالة طارئة حتى لو قلّل المريض منها.</p>
+  <div class="foot"><span><b>مقياس</b> · محمود دغيم</span><span>عبر ٣ إعدادات للتاريخ</span></div>
+</section>
+
+<!-- 5 rescheduling -->
+<section class="slide">
+  <div class="kicker"><span>أين يفشل الجميع</span><span class="n">5/8</span></div>
+  <h2>تغيير الموعد يكسر كل النماذج</h2>
+  <p class="body">النموذج يحجز الموعد الجديد و<b>ينسى إلغاء القديم</b>، أو يقول «تم الإلغاء» من غير أن يلغي.</p>
+  <blockquote><span class="who">النموذج، بعد أن حجز الموعد الجديد:</span>«الحين شلون بغيت تلغي موعد 11 نوفمبر؟»<br>المريض: «تمام»<br>النموذج: «تم إلغاء موعد 11 نوفمبر.» <span class="red">← لم يُلغَ شيء.</span></blockquote>
+  <p class="body">من <span class="n">27</span> محاولة لتغيير موعد، نجح Jais 3 في <span class="n">10</span> إلى <span class="n">15</span> منها، وQwen في <span class="n">2</span> إلى <span class="n">8</span> فقط.</p>
+  <div class="foot"><span><b>مقياس</b> · محمود دغيم</span><span>الحل: أداة تغيير واحدة، أو موظف</span></div>
+</section>
+
+<!-- 6 laptop -->
+<section class="slide">
+  <div class="kicker"><span>على جهاز العيادة</span><span class="n">6/8</span></div>
+  <h2>النموذج جاهز. اللابتوب لا.</h2>
+  <div class="pill-row">
+    <div class="pill"><div class="big n red">~53</div><div class="lbl">ثانية لكل رد: Jais 3 3.7B بالإعداد الذي ينجح (٩٤٪)</div></div>
+    <div class="pill"><div class="big n">29%</div><div class="lbl">نجاح الإعداد السريع (~10 ثوانٍ)</div></div>
+  </div>
+  <p class="body">ماك بوك إير ٢٠٢٠ (إنتل، ٨ غيغابايت). نماذج <span class="n">7B</span> و<span class="n">8B</span> لا تتسع في ذاكرته أصلًا. للمقارنة: بطاقة <span class="lat">RTX 4090</span> تردّ في ١–٢ ثانية.</p>
+  <div class="foot"><span><b>مقياس</b> · محمود دغيم</span><span>توقّع السرعة تحقّقنا منه بـ١٠ محادثات حقيقية (خطأ ١٠٪)</span></div>
+</section>
+
+<!-- 7 decision memo -->
+<section class="slide">
+  <div class="kicker"><span>القرار لصاحب العيادة</span><span class="n">7/8</span></div>
+  <ul class="list" style="margin-top:70px">
+    <li><span class="tag ok">نعم، مع إشراف</span><b>Jais 3</b> لاستقبال الحجوزات والاستفسارات وتحويل الطوارئ.</li>
+    <li><span class="tag red">لا</span>لا تترك له <b>تغيير المواعيد</b> وحده. حوّلها لموظف أو أعطه أداة تغيير واحدة.</li>
+    <li><span class="tag ok">الرخيص يكفي</span><b>تقويم مكتوب في التعليمات</b> نفع مثل أداة تاريخ مبرمجة أو أكثر.</li>
+    <li><span class="tag red">ليس هذا الجهاز</span>لابتوب ٢٠٢٠ بطيء جدًا. تحتاج العيادة جهازًا أحدث، وسرعته لم نقسها بعد.</li>
+  </ul>
+  <div class="foot"><span><b>مقياس</b> · محمود دغيم</span><span>كل سطر له رقم في التقرير الكامل</span></div>
+</section>
+
+<!-- 8 trust + where -->
+<section class="slide">
+  <div class="kicker"><span>لماذا تثق بالأرقام</span><span class="n">8/8</span></div>
+  <ul class="list" style="margin-top:56px">
+    <li><b>موظف مثالي</b> نجح ١٠٠٪: كل محادثة قابلة للحل.</li>
+    <li><b>تسعة موظفين سيئين عمدًا</b>: التقطهم المصحِّح كلهم.</li>
+    <li><b>تدقيق بشري أعمى</b> لـ<span class="n">30</span> محادثة: اتفاق <span class="n">30/30</span>.</li>
+    <li><b>ننشر ما فشل أيضًا</b>: فرضية لم تثبت، وأخرى تحققت لـ<span class="n">7B</span> فقط.</li>
+  </ul>
+  <p class="body" style="margin-top:48px">كل المحادثات والكود والبروتوكول على GitHub:<br><span class="lat n" style="font-size:36px">mhdghaim-cell/arabic-llm-bench</span></p>
+  <p class="en">Every conversation, the code and the pre-registered protocol are public. Independent work; no funding from any model lab.</p>
+  <div class="foot"><span><b>مقياس</b> · محمود دغيم</span><span>اختبار مستقل للنماذج مفتوحة الأوزان بالعربية</span></div>
+</section>
+
+</body>
+</html>
