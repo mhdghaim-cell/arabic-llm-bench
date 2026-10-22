@@ -37,6 +37,8 @@ SAMPLING = {
     "qwen-nothink": {"temperature": 0.7, "top_p": 0.8, "top_k": 20, "min_p": 0.0, "presence_penalty": 1.5, "repeat_penalty": 1.0},
     # ALLaM-7B-Instruct-preview model card (example generation settings), added for qt-01
     "allam": {"temperature": 0.6, "top_p": 0.95, "top_k": 50, "min_p": 0.0, "presence_penalty": 0.0, "repeat_penalty": 1.0},
+    # Falcon-H1 (TII README: temperature 0.1; other samplers neutral), added for qt-02
+    "falcon-h1": {"temperature": 0.1, "top_p": 1.0, "top_k": 0, "min_p": 0.0, "presence_penalty": 0.0, "repeat_penalty": 1.0},
 }
 SAMPLING_OVERRIDE = None   # set by --sampling; None keeps the original Job Trial #1 behaviour
 

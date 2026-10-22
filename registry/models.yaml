@@ -59,9 +59,21 @@
 - id: falcon-h1-arabic
   family: Falcon-H1-Arabic
   publisher: TII (UAE)
-  source: verify (3B / 7B / 34B released Jan 2026)
+  source: none public (3B / 7B / 34B announced Jan 2026; chat demo only)
+  status: excluded (no downloadable weights, checked 2026-10-29); same for Falcon-Arabic 7B (May 2025)
+
+- id: falcon-h1-7b-instruct
+  family: Falcon-H1
+  publisher: TII (UAE)
+  source: tiiuae/Falcon-H1-7B-Instruct   # official GGUF: tiiuae/Falcon-H1-7B-Instruct-GGUF
+  quant: Q4_K_M
+  context: 262144                       # trial uses 32,768 like Job Trial #1
+  languages: 18 incl. Arabic (general multilingual, not Arabic-specific)
+  tool_format: decided by probe (native llama.cpp if tools reach the prompt, else prompted-JSON)
+  licence: TII Falcon licence (Apache-2.0-based); read LICENSE before publishing
+  sampling: temperature 0.1 (TII README)
   status: candidate
-  verify: true
+  next: qt-02-falcon-h1-7b-clinic
 
 - id: fanar
   family: Fanar

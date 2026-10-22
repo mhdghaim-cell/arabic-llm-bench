@@ -1,0 +1,38 @@
+id: qt-02-falcon-h1-7b-clinic
+type: quick-trial            # numbers only, no verdict (standard v1.1)
+status: planned              # -> preregistered once Mahmoud approves and the commit hash is recorded
+approved_by:
+approved_on:
+standard: Job Trial Standard v1.1
+job: clinic-frontdesk
+question_ar: هل يستطيع Falcon-H1 7B أن يدير استقبال عيادة؟
+models: [falcon-h1-7b-instruct]
+why_this_model: >
+  Neutrality rule: next lab after G42/Inception (Jais) and HUMAIN/SDAIA (ALLaM). TII's Arabic-specific models
+  (Falcon-H1-Arabic, Falcon-Arabic) have no downloadable weights (checked 29 Oct 2026), so they fall outside the
+  inclusion rule; Falcon-H1-7B-Instruct is TII's open model with Arabic among its 18 trained languages.
+setup: tool                  # same as qt-01: date tool, no calendar in the prompt, no thinking (the model has no thinking mode)
+adapter_rule: >
+  Decided by a probe before any model answer is read (scripts/run_qt02.sh probe_adapter): the same first request is
+  sent with and without the tool list (max_tokens 1). If the tools add >= 200 prompt tokens, llama.cpp's native tool
+  calling is used (--mode chat, as for Qwen3 in Job Trial #1); otherwise the prompted-JSON adapter (--mode prompted,
+  as for ALLaM in qt-01). The probe result is saved in results/qt02/adapter.txt and reported.
+sampling: falcon-h1           # TII README: temperature 0.1 (higher values may drop performance); top_p 1.0, top_k off, min_p 0, no penalties
+window_tokens: 32768          # same as Job Trial #1
+generation_cap_tokens: 8192   # same as Job Trial #1; a cap counts as a failure
+quant: Q4_K_M                 # official GGUF from tiiuae/Falcon-H1-7B-Instruct-GGUF if present, else self-converted; sha256 recorded
+test_set: public_test         # the private held-out set is not written yet; the report says "public test set only"
+repeats: 3                    # + 2 extra reps on safety episodes, as in Job Trial #1 and qt-01
+pilot: DEV split, 12 episodes, 1 rep; checks adapter, first-prompt size, tool calls, parse failures before the test run
+machines:
+  run: runpod-4090
+  speed: none                 # laptop (floor) wait not measured in this Quick Trial; stated on the results page
+budget_usd: 5                 # expected ~1-1.5 GPU-hours (official GGUF, no conversion)
+comparison: Qwen3 4B, no thinking, same setup (Job Trial #1) and ALLaM 7B (qt-01); both shown as reference rows, no verdict
+risks:
+  - hybrid attention + Mamba architecture: needs a recent llama.cpp; the setup step stops if the server fails to load it.
+  - general multilingual model, not Arabic-specific: the page says so.
+  - licence (TII Falcon licence, Apache-2.0-based with an acceptable-use policy): LICENSE file saved by setup and read before publishing.
+publish: [results page on miqyaslab.com, results.json, redacted raw interactions, numbers-only scorecard, X thread, Hugging Face discussion]
+publication_checklist: [redact phone-like numbers and re-score, recompute numbers from raw data, read a random sample of failures, link to the miqyaslab.com page]
+preregistration_commit:
