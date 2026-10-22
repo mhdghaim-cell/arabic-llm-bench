@@ -20,6 +20,7 @@ import platform
 import re
 import sys
 import time
+import urllib.error
 import urllib.request
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -34,7 +35,10 @@ SAMPLING = {
     "jais": {"temperature": 0.7, "top_p": 0.95, "top_k": 20, "min_p": 0.0, "presence_penalty": 0.0, "repeat_penalty": 1.0},
     "qwen-think": {"temperature": 0.6, "top_p": 0.95, "top_k": 20, "min_p": 0.0, "presence_penalty": 1.5, "repeat_penalty": 1.0},
     "qwen-nothink": {"temperature": 0.7, "top_p": 0.8, "top_k": 20, "min_p": 0.0, "presence_penalty": 1.5, "repeat_penalty": 1.0},
+    # ALLaM-7B-Instruct-preview model card (example generation settings), added for qt-01
+    "allam": {"temperature": 0.6, "top_p": 0.95, "top_k": 50, "min_p": 0.0, "presence_penalty": 0.0, "repeat_penalty": 1.0},
 }
+SAMPLING_OVERRIDE = None   # set by --sampling; None keeps the original Job Trial #1 behaviour
 
 
 # ------------------------------------------------------------------ llama-server helpers
@@ -129,13 +133,21 @@ class ChatPolicy:
 
     def __init__(self, effort, n_predict):
         self.effort, self.n_predict = effort, n_predict
-        self.sampling = SAMPLING["qwen-think" if effort == "on" else "qwen-nothink"]
+        self.sampling = SAMPLING[SAMPLING_OVERRIDE] if SAMPLING_OVERRIDE else SAMPLING["qwen-think" if effort == "on" else "qwen-nothink"]
 
     def step(self, messages, tools, seed, ctx):
         body = {"messages": messages, "tools": tools, "max_tokens": self.n_predict, "seed": seed, **self.sampling,
                 "chat_template_kwargs": {"enable_thinking": self.effort == "on"}}
         t0 = time.time()
-        r = post("/v1/chat/completions", body)
+        try:
+            r = post("/v1/chat/completions", body)
+        except urllib.error.HTTPError as ex:
+            msg = ex.read().decode("utf-8", "ignore")
+            if "context" in msg.lower():   # conversation no longer fits the model's window: a failure, not a crash
+                out = _fake()
+                out.update(stop="context", wall_s=round(time.time() - t0, 3), raw=msg[:300])
+                return out
+            raise
         wall = time.time() - t0
         ch = r["choices"][0]
         m = ch["message"]
@@ -215,8 +227,10 @@ def run_episode(ep, arm, policy, rep):
             steps.append({"turn": k, "step": s, **{x: out.get(x) for x in
                           ("wall_s", "stop", "prompt_n", "cached_n", "gen_n", "think_open", "think_close", "reasoning", "raw")},
                           "calls": out["calls"], "answer": out["answer"]})
-            if out.get("stop") in ("limit", "length"):
+            if out.get("stop") in ("limit", "length", "context"):
                 flags["cap"] = True
+                if out.get("stop") == "context":
+                    flags["context"] = True
                 break
             amsg = {"role": "assistant", "content": out["answer"]}
             if out["calls"]:
@@ -272,7 +286,10 @@ def main():
     ap.add_argument("--episodes", default="corpus/frontdesk_v2.jsonl")
     ap.add_argument("--n-predict", type=int, default=8192)
     ap.add_argument("--out-root", default="results/frontdesk_v2")
+    ap.add_argument("--sampling", choices=sorted(SAMPLING), help="force one sampling preset for chat mode (default: Job Trial #1 behaviour)")
     a = ap.parse_args()
+    global SAMPLING_OVERRIDE
+    SAMPLING_OVERRIDE = a.sampling
 
     eps = [json.loads(l) for l in open(a.episodes, encoding="utf-8") if l.strip()]
     eps = [e for e in eps if a.split == "all" or e["split"] == a.split]

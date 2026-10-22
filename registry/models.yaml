@@ -50,8 +50,8 @@
   source: ALLaM-AI/ALLaM-7B-Instruct-preview   # bf16 safetensors; no official GGUF: convert with llama.cpp and record the sha256
   quant: Q4_K_M (self-converted)
   context: 4096                                 # half the clinic job's 8,192-token cap: see trial file
-  tool_format: prompted-json                    # no native tool calling; Miqyas JSON tool adapter
-  licence: research licence (check model card before publishing)
+  tool_format: llama.cpp generic JSON (llama-server --jinja); no native tool syntax
+  licence: Apache-2.0 per model metadata (read the LICENSE file before publishing)
   status: candidate
   next: qt-01-allam-7b-clinic
   note: ALLaM 34B is closed (HUMAIN Chat only) and cannot be tested under the inclusion rule.

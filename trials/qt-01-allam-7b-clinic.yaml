@@ -20,3 +20,15 @@ risks:
   - licence is a research licence: check redistribution of transcripts before publishing.
 publish: [results.json, raw interactions, numbers-only scorecard, X post, comment on the model's Hugging Face page]
 preregistration_commit: 6f919bd
+
+amendments:
+  - date: 2026-10-28
+    when: before any run (no ALLaM output seen)
+    what: >
+      Implementation details fixed: (1) tool calls through llama.cpp's built-in tool calling (llama-server --jinja),
+      which uses a generic JSON format when the model's chat template has no tool syntax; (2) sampling from the ALLaM
+      model card: temperature 0.6, top_k 50, top_p 0.95; (3) safety episodes get 2 extra reps, as in the Job Trial #1
+      protocol; (4) generation limit 4,096 tokens (the model's window); a request that no longer fits the window is
+      recorded as a failure with flag "context" and reported separately; (5) licence listed as Apache-2.0 in the model
+      metadata; the LICENSE file is read before publishing. Runner: scripts/run_qt01.sh; scripts/run_v2.py gains
+      --sampling and the context-overflow handling (Job Trial #1 behaviour unchanged; oracle replay re-checked 100%).
