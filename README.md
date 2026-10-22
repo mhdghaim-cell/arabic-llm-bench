@@ -18,7 +18,7 @@
 |---|---|---|---|
 | **ضريبة الرموز** — ٢٬٠٠٩ جملة، ١١ مقسّمًا، ٧ لهجات، مع فترات ثقة | 2026-10-17 | [findings/token-tax](findings/token-tax/) | [results/w4](results/w4/) |
 | **موظف الاستقبال v1** — الإجراء الأول على ٤٠ رسالة خليجية (استكشافي) | 2026-10-19 | [docs/frontdesk_protocol_v1.md](docs/frontdesk_protocol_v1.md) | [results/frontdesk](results/frontdesk/) |
-| **هل يقدر يشتغل؟ #1: موظف الاستقبال v2** — ٢٬٠١٦ محادثة كاملة مع عيادة محاكاة، ٤ نماذج (مسجَّل مسبقًا) | 2026-10-25 | [findings/frontdesk-v2](findings/frontdesk-v2/) | [results/frontdesk_v2](results/frontdesk_v2/) |
+| **هل يقدر يشتغل؟ #1: موظف الاستقبال v2** — ٢٬٠١٦ محادثة كاملة مع عيادة محاكاة، ٤ نماذج (مسجَّل مسبقًا) | 2026-10-25 | [findings/frontdesk-v2](findings/frontdesk-v2/) | [results/frontdesk_v2](results/frontdesk_v2/) · [Hugging Face](https://huggingface.co/datasets/mhdghaim/miqyas-frontdesk-v2) |
 
 الموقع يضم أيضًا مسرد مصطلحات، وأداة لقياس الرموز في النصوص العربية، وحاسبة تكلفة.
 

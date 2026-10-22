@@ -8,6 +8,10 @@ authors:
     alias: mhdghaim-cell
     website: "https://github.com/mhdghaim-cell"
 repository-code: "https://github.com/mhdghaim-cell/arabic-llm-bench"
+identifiers:
+  - type: url
+    value: "https://huggingface.co/datasets/mhdghaim/miqyas-frontdesk-v2"
+    description: "Job Trial #1 dataset (episodes and 2,016 conversations) on Hugging Face"
 abstract: >-
   Miqyas: independent testing of open-weight AI for Arabic. A leaderboard
   tells you how a model scored; Miqyas tells you what happens when you try

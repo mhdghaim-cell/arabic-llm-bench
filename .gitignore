@@ -13,3 +13,4 @@ migrate.py
 models/
 index_w2.py
 corpus_raw/
+hf_upload/
