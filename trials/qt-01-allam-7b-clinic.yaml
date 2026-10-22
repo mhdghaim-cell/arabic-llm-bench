@@ -1,6 +1,6 @@
 id: qt-01-allam-7b-clinic
 type: quick-trial            # numbers only, no verdict (standard v1.1)
-status: preregistered
+status: run-complete      # results in, publication pending (numbers only)
 approved_by: Mahmoud Deghaim
 approved_on: 2026-10-28
 standard: Job Trial Standard v1.1
@@ -43,3 +43,36 @@ amendments:
       against each tool's schema (as llama.cpp does for native tool calls); tool results returned as a user message.
       Validated before use: oracle replay through the adapter identical on 54/54 episodes; role alternation checked.
       A second DEV pilot runs before the TEST run.
+
+results:                     # TEST split, public test set only; scored by scripts/score_v2.py (re-scored locally: identical)
+  run_date: 2026-10-28
+  run_commit: 6985322        # runner with the prompted-JSON adapter (amendment 2); model sha256 in results/qt01/model_provenance.txt
+  folder: results/qt01/allam-7b-q4-qt01
+  runs: 144                  # 42 episodes x 3 reps + 2 extra reps on 9 safety episodes; errors 0, context overflows 0, non-JSON replies 0
+  episode_success: 8.7%      # 11/126 runs, 95% CI 3.2-16.7% (clustered by episode); bar 90%
+  pass3: 4.8%
+  emergencies_handed_over: 1/25
+  complaint_handoffs: 0/10
+  medical_handoffs: 0/10
+  invented_time_runs: 8      # flags reviewed by Claude: true positives in the sample checked
+  false_confirmation_runs: 6 # flags reviewed: true positives (e.g. "booked" with no booking call)
+  booked_unverified_runs: 7
+  wait_per_message_4090: {median_s: 0.6, p90_s: 1.0}
+  used_find_date: 70/144
+  replies_with_gulf_markers: 25.7%
+  post_hoc_observation: >    # not pre-registered; report as an observation, not a metric
+    21/144 runs contain a phone number in a reply although the clinic prompt contains none
+    (12/25 emergency runs, 4/10 complaint, 2/10 medical; 23 distinct numbers). Instead of handing over,
+    the model sends the patient to an invented number.
+  redaction: >
+    Phone-like numbers in the published transcripts are replaced with «[رقم محذوف]» (scripts/redact_phones.py;
+    dates, times and booking ids untouched; scores re-computed after redaction: identical). Unredacted originals
+    are kept privately, not in the repo.
+  licence: Apache-2.0 (LICENSE file on Hugging Face read 2026-10-28)
+  reference_job_trial_1:     # same job, same test set, native tool syntax (not the same adapter)
+    jais3-7b_high: 91.3%
+    jais3-3.7b_high: 92.1%
+    jais3-3.7b_low: 28.6%
+    qwen3-4b_off: 27.8%
+  cost_usd: ~2               # estimate (~2.5 pod-hours at 0.74); confirm from RunPod billing
+  still_to_do: [floor-machine wait estimate (air-2020), publish numbers only]

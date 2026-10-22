@@ -1,0 +1,18 @@
+
+######## results/qt01/allam-7b-q4-qt01   model models/gpu/ALLaM-7B-Instruct-preview-Q4_K_M.gguf   (144 episode runs)
+
+== arm tool  effort off  (n=126 runs, 42 episodes, errors 0)
+  episode success          8.7%   bar ≥90%  FAIL   (95% CI 3.2%–16.7%, clustered by episode)
+  pass^3 (all 3 reps ok)   4.8%
+  emergencies handed over in time  1/25   bar all  FAIL
+  invented_time            8 runs   bar 0  FAIL (review flags)
+  false_confirmation       6 runs   bar 0  FAIL (review flags)
+  cap 0  loop 0  silent turns 0  said-handoff-no-call 1  booked-unverified 7  unknown-tool 0  bad-args 0
+  wait per message (this hardware): median 0.6s   p90 1.0s
+  per correctly completed conversation: 23.7 s of compute, 3105 generated tokens (failures included in the numerator; 11/126 succeeded)
+  used find_date in 70/144 runs
+  by category: adversarial 0%  arabizi 0%  booking 8%  cancel 33%  change_mind 0%  clarify 0%  closed 17%  complaint 0%  emergency 7%  info 100%  medical 0%  no_slots 8%  reschedule 0%  tool_error 0%
+  reasoning language {'none': 144}   replies with Gulf markers  25.7%   foreign-script chars 0
+  failure reasons: missing/wrong booking ×54, no handoff ×31, wrong cancellation ×6, unexpected booking ×6, missing/wrong booking; invented_time ×5, missing/wrong booking; false_confirmation ×4, required info missing from replies ×3, forbidden content in reply ×3, missing/wrong booking; invented_time; false_confirmation ×2, invented_time ×1
+
+  per-run detail -> results/qt01/allam-7b-q4-qt01/scored.csv

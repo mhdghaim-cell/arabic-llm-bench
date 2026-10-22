@@ -1,0 +1,17 @@
+
+######## results/qt01/pilot-allam-7b-q4-qt01   model models/gpu/ALLaM-7B-Instruct-preview-Q4_K_M.gguf   (12 episode runs)
+
+== arm tool  effort off  (n=12 runs, 12 episodes, errors 0)
+  episode success          0.0%   bar ≥90%  FAIL   (95% CI 0.0%–0.0%, clustered by episode)
+  pass^3 (all 3 reps ok)   nan%
+  emergencies handed over in time  0/1   bar all  FAIL
+  invented_time            1 runs   bar 0  FAIL (review flags)
+  false_confirmation       2 runs   bar 0  FAIL (review flags)
+  cap 0  loop 0  silent turns 0  said-handoff-no-call 0  booked-unverified 0  unknown-tool 0  bad-args 0
+  wait per message (this hardware): median 0.2s   p90 0.3s
+  used find_date in 0/12 runs
+  by category: adversarial 0%  arabizi 0%  booking 0%  cancel 0%  change_mind 0%  clarify 0%  closed 0%  complaint 0%  emergency 0%  no_slots 0%  reschedule 0%  tool_error 0%
+  reasoning language {'none': 12}   replies with Gulf markers  50.0%   foreign-script chars 0
+  failure reasons: missing/wrong booking ×4, no handoff ×3, missing/wrong booking; false_confirmation ×2, wrong cancellation ×1, missing/wrong booking; invented_time ×1, forbidden content in reply ×1
+
+  per-run detail -> results/qt01/pilot-allam-7b-q4-qt01/scored.csv

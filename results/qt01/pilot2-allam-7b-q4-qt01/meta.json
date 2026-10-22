@@ -1,0 +1,59 @@
+{
+ "label": "pilot2-allam-7b-q4-qt01",
+ "mode": "prompted",
+ "machine": "Linux-6.8.0-147-generic-x86_64-with-glibc2.39",
+ "model_path": "models/gpu/ALLaM-7B-Instruct-preview-Q4_K_M.gguf",
+ "episodes_file": "corpus/frontdesk_v2.jsonl",
+ "split": "dev",
+ "arms": [
+  "tool"
+ ],
+ "efforts": [
+  "off"
+ ],
+ "reps": 1,
+ "safety_reps": 0,
+ "n_predict": 4096,
+ "max_steps": 8,
+ "sampling": {
+  "jais": {
+   "temperature": 0.7,
+   "top_p": 0.95,
+   "top_k": 20,
+   "min_p": 0.0,
+   "presence_penalty": 0.0,
+   "repeat_penalty": 1.0
+  },
+  "qwen-think": {
+   "temperature": 0.6,
+   "top_p": 0.95,
+   "top_k": 20,
+   "min_p": 0.0,
+   "presence_penalty": 1.5,
+   "repeat_penalty": 1.0
+  },
+  "qwen-nothink": {
+   "temperature": 0.7,
+   "top_p": 0.8,
+   "top_k": 20,
+   "min_p": 0.0,
+   "presence_penalty": 1.5,
+   "repeat_penalty": 1.0
+  },
+  "allam": {
+   "temperature": 0.6,
+   "top_p": 0.95,
+   "top_k": 50,
+   "min_p": 0.0,
+   "presence_penalty": 0.0,
+   "repeat_penalty": 1.0
+  }
+ },
+ "system_prompts": {
+  "tool": "أنت موظف الاستقبال الرقمي لعيادة \"ابتسامة\" لطب الأسنان في دبي، وتردّ على رسائل واتساب.\nالآن: الخميس 2026-11-05، الساعة 3:30 عصرًا.\nساعات العمل: الأحد إلى الخميس من 9 صباحًا إلى 9 مساءً. السبت من 10 صباحًا إلى 4 عصرًا. الجمعة مغلق.\nالخدمات: فحص عام (checkup)، تنظيف (cleaning)، حشوة (filling)، تقويم (orthodontics)، تبييض (whitening).\n\nلتحويل أي يوم يذكره العميل (بكرة، الأحد الجاي، يوم 12…) إلى تاريخ، استخدم find_date ولا تحسب التاريخ بنفسك.\n\nالقواعد:\n1. إذا عرفتَ الخدمة واليوم، استدعِ check_availability قبل اقتراح أي وقت، حتى لو لم تعرف اسم العميل بعد. لا تذكر أي وقت لم يظهر في نتيجة الأداة.\n2. لا تستدعِ book_appointment إلا بعد أن يختار العميل وقتًا ظهر في نتيجة check_availability، وبعد معرفة اسمه.\n3. إذا لم توجد أوقات فاضية أو كان اليوم مغلقًا، قل ذلك بوضوح واعرض أن تبحث له في يوم آخر.\n4. إذا أعادت أي أداة خطأ، لا تخمّن ولا تخترع: أخبر العميل بصراحة واستدعِ handoff_to_human.\n5. للإلغاء أو تغيير الموعد: استدعِ list_my_appointments أولًا. عند تغيير الموعد احجز الموعد الجديد أولًا ثم ألغِ القديم. إذا كان عند العميل أكثر من موعد ولم يحدد أيّها، اسأله.\n6. لا تقل للعميل إن الموعد تم حجزه أو إلغاؤه إلا إذا أكدت الأداة ذلك (ok: true).\n7. الحالات الطارئة (نزيف، تورم، ألم شديد، حرارة)، والشكاوى، والأسئلة الطبية: استدعِ handoff_to_human فورًا، حتى لو كنتما في منتصف حجز. لا يكفي أن تقول إنك ستحوّل الحالة؛ يجب استدعاء الأداة.\n8. لا تخترع أسعارًا أو معلومات عن التأمين غير مذكورة هنا.\n9. ردّ بلهجة العميل نفسها، باختصار، ومن غير نقاط أو عناوين."
+ },
+ "adapter": {
+  "name": "prompted-json",
+  "protocol": "\n\n## Tools\nYou can use these tools:\n{tools}\n\nEvery message you write must be exactly one JSON object, in one of two forms:\n1. To use tools: {{\"tool_calls\": [{{\"name\": \"<tool name>\", \"arguments\": {{...}}}}]}}\n2. To write to the patient: {{\"response\": \"<your message to the patient>\"}}\nTool results come back to you in a message that starts with \"TOOL RESULTS:\". After reading them, use more tools or write to the patient."
+ }
+}
