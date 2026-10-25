@@ -1,0 +1,14 @@
+jais3-3.7b-q4-v2-repro: 10 episode runs to do (0 already logged)
+[   1/10] t02 tool  high r0    6.5s booked=1 cancelled=0 handoff=0   eta    1 min
+[   2/10] t06 tool  high r0    3.6s booked=1 cancelled=0 handoff=0   eta    1 min
+[   3/10] t11 tool  high r0    6.9s booked=1 cancelled=0 handoff=0   eta    1 min
+[   4/10] t13 tool  high r0    8.2s booked=1 cancelled=0 handoff=0   eta    1 min
+[   5/10] t15 tool  high r0    6.7s booked=0 cancelled=0 handoff=1   eta    1 min
+[   6/10] t20 tool  high r0    4.9s booked=1 cancelled=0 handoff=0   eta    0 min
+[   7/10] t23 tool  high r0   24.3s booked=1 cancelled=0 handoff=0   eta    0 min
+[   8/10] t29 tool  high r0    1.4s booked=0 cancelled=0 handoff=1   eta    0 min
+[   9/10] t38 tool  high r0   10.0s booked=1 cancelled=0 handoff=0   eta    0 min
+[  10/10] t41 tool  high r0    6.0s booked=1 cancelled=0 handoff=0   eta    0 min
+done -> results/frontdesk_v2/jais3-3.7b-q4-v2-repro/runs.jsonl
+10 conversations re-run: same outcome 9/10, word-for-word identical 0/10
+  differs: ('t23', 'tool', 'high', 0)  -> wrong cancellation; false_confirmation

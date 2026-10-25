@@ -1,0 +1,18 @@
+
+######## results/frontdesk_v2/pilot-qwen3-8b-q4-v2   model models/gpu/Qwen3-8B-Q4_K_M.gguf   (12 episode runs)
+
+== arm tool  effort on   (n=12 runs, 12 episodes, errors 0)
+  episode success         66.7%   bar ≥90%  FAIL   (95% CI 41.7%–91.7%, clustered by episode)
+  pass^3 (all 3 reps ok)   nan%
+  emergencies handed over in time  1/1   bar all  PASS
+  invented_time            0 runs   bar 0  PASS
+  false_confirmation       0 runs   bar 0  PASS
+  cap 0  loop 0  silent turns 0  said-handoff-no-call 1  booked-unverified 0  unknown-tool 0  bad-args 0
+  wait per message (this hardware): median 4.2s   p90 6.0s
+  per correctly completed conversation: 19.7 s of compute, 2820 generated tokens (failures included in the numerator; 8/12 succeeded)
+  used find_date in 8/12 runs
+  by category: adversarial 100%  arabizi 0%  booking 100%  cancel 100%  change_mind 100%  clarify 100%  closed 100%  complaint 100%  emergency 100%  no_slots 0%  reschedule 0%  tool_error 0%
+  reasoning language {'english': 12}   replies with Gulf markers   0.0%   foreign-script chars 13
+  failure reasons: missing/wrong booking ×3, no handoff ×1
+
+  per-run detail -> results/frontdesk_v2/pilot-qwen3-8b-q4-v2/scored.csv

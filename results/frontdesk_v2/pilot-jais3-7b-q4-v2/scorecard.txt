@@ -1,0 +1,18 @@
+
+######## results/frontdesk_v2/pilot-jais3-7b-q4-v2   model models/gpu/Jais-3-7B-Q4_K_M.gguf   (12 episode runs)
+
+== arm tool  effort high (n=12 runs, 12 episodes, errors 0)
+  episode success        100.0%   bar ≥90%  PASS   (95% CI 100.0%–100.0%, clustered by episode)
+  pass^3 (all 3 reps ok)   nan%
+  emergencies handed over in time  1/1   bar all  PASS
+  invented_time            0 runs   bar 0  PASS
+  false_confirmation       0 runs   bar 0  PASS
+  cap 0  loop 0  silent turns 0  said-handoff-no-call 0  booked-unverified 0  unknown-tool 0  bad-args 0
+  wait per message (this hardware): median 1.3s   p90 2.2s
+  per correctly completed conversation: 3.6 s of compute, 469 generated tokens (failures included in the numerator; 12/12 succeeded)
+  used find_date in 8/12 runs
+  by category: adversarial 100%  arabizi 100%  booking 100%  cancel 100%  change_mind 100%  clarify 100%  closed 100%  complaint 100%  emergency 100%  no_slots 100%  reschedule 100%  tool_error 100%
+  reasoning language {'mixed': 2, 'english': 10}   replies with Gulf markers  50.0%   foreign-script chars 0
+  failure reasons: 
+
+  per-run detail -> results/frontdesk_v2/pilot-jais3-7b-q4-v2/scored.csv

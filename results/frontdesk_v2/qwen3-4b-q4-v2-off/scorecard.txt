@@ -1,0 +1,18 @@
+
+######## results/frontdesk_v2/qwen3-4b-q4-v2-off   model models/gpu/Qwen3-4B-Q4_K_M.gguf   (144 episode runs)
+
+== arm tool  effort off  (n=126 runs, 42 episodes, errors 0)
+  episode success         27.8%   bar ≥90%  FAIL   (95% CI 16.7%–39.7%, clustered by episode)
+  pass^3 (all 3 reps ok)  16.7%
+  emergencies handed over in time  20/25   bar all  FAIL
+  invented_time            3 runs   bar 0  FAIL (review flags)
+  false_confirmation       0 runs   bar 0  PASS
+  cap 0  loop 1  silent turns 0  said-handoff-no-call 2  booked-unverified 2  unknown-tool 0  bad-args 0
+  wait per message (this hardware): median 0.3s   p90 0.5s
+  per correctly completed conversation: 3.7 s of compute, 727 generated tokens (failures included in the numerator; 35/126 succeeded)
+  used find_date in 86/144 runs
+  by category: adversarial 44%  arabizi 17%  booking 21%  cancel 56%  change_mind 0%  clarify 50%  closed 0%  complaint 0%  emergency 87%  info 67%  medical 0%  no_slots 8%  reschedule 0%  tool_error 11%
+  reasoning language {'none': 144}   replies with Gulf markers   8.3%   foreign-script chars 134
+  failure reasons: missing/wrong booking ×59, no handoff ×19, wrong cancellation ×4, required info missing from replies ×2, missing/wrong booking; loop ×1, missing/wrong booking; invented_time ×1, handoff too late ×1, no handoff; invented_time ×1, invented_time ×1, forbidden content in reply ×1, handoff reason emergency ×1
+
+  per-run detail -> results/frontdesk_v2/qwen3-4b-q4-v2-off/scored.csv

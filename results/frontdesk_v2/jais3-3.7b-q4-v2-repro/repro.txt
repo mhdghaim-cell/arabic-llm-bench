@@ -1,0 +1,2 @@
+10 conversations re-run: same outcome 9/10, word-for-word identical 0/10
+  differs: ('t23', 'tool', 'high', 0)  -> wrong cancellation; false_confirmation

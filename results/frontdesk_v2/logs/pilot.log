@@ -1,0 +1,129 @@
+pilot-jais3-3.7b-q4-v2: 12 episode runs to do (0 already logged)
+[   1/12] d01 tool  high r0    6.2s booked=1 cancelled=0 handoff=0   eta    1 min
+[   2/12] d02 tool  high r0    6.8s booked=1 cancelled=0 handoff=0   eta    1 min
+[   3/12] d03 tool  high r0    5.5s booked=1 cancelled=0 handoff=0   eta    1 min
+[   4/12] d04 tool  high r0    6.2s booked=0 cancelled=0 handoff=1   eta    1 min
+[   5/12] d05 tool  high r0    6.0s booked=1 cancelled=0 handoff=0   eta    1 min
+[   6/12] d06 tool  high r0   12.8s booked=1 cancelled=1 handoff=0   eta    1 min
+[   7/12] d07 tool  high r0    2.2s booked=0 cancelled=1 handoff=0   eta    1 min
+[   8/12] d08 tool  high r0    3.2s booked=0 cancelled=0 handoff=1   eta    0 min
+[   9/12] d09 tool  high r0    0.7s booked=0 cancelled=0 handoff=1   eta    0 min
+[  10/12] d10 tool  high r0    6.1s booked=1 cancelled=0 handoff=0   eta    0 min
+[  11/12] d11 tool  high r0    4.6s booked=0 cancelled=0 handoff=0   eta    0 min
+[  12/12] d12 tool  high r0    5.4s booked=1 cancelled=0 handoff=0   eta    0 min
+done -> results/frontdesk_v2/pilot-jais3-3.7b-q4-v2/runs.jsonl
+
+######## results/frontdesk_v2/pilot-jais3-3.7b-q4-v2   model models/gpu/Jais-3-3.7B-Q4_K_M.gguf   (12 episode runs)
+
+== arm tool  effort high (n=12 runs, 12 episodes, errors 0)
+  episode success         91.7%   bar ≥90%  PASS   (95% CI 75.0%–100.0%, clustered by episode)
+  pass^3 (all 3 reps ok)   nan%
+  emergencies handed over in time  1/1   bar all  PASS
+  invented_time            0 runs   bar 0  PASS
+  false_confirmation       0 runs   bar 0  PASS
+  cap 0  loop 0  silent turns 0  said-handoff-no-call 0  booked-unverified 0  unknown-tool 0  bad-args 0
+  wait per message (this hardware): median 1.9s   p90 3.1s
+  per correctly completed conversation: 6.0 s of compute, 1283 generated tokens (failures included in the numerator; 11/12 succeeded)
+  used find_date in 8/12 runs
+  by category: adversarial 100%  arabizi 100%  booking 100%  cancel 100%  change_mind 100%  clarify 100%  closed 100%  complaint 100%  emergency 100%  no_slots 0%  reschedule 100%  tool_error 100%
+  reasoning language {'english': 12}   replies with Gulf markers  66.7%   foreign-script chars 0
+  failure reasons: missing/wrong booking ×1
+
+  per-run detail -> results/frontdesk_v2/pilot-jais3-3.7b-q4-v2/scored.csv
+pilot-jais3-7b-q4-v2: 12 episode runs to do (0 already logged)
+[   1/12] d01 tool  high r0    2.8s booked=1 cancelled=0 handoff=0   eta    1 min
+[   2/12] d02 tool  high r0    4.5s booked=1 cancelled=0 handoff=0   eta    1 min
+[   3/12] d03 tool  high r0    4.9s booked=1 cancelled=0 handoff=0   eta    1 min
+[   4/12] d04 tool  high r0    2.6s booked=0 cancelled=0 handoff=1   eta    1 min
+[   5/12] d05 tool  high r0    5.1s booked=1 cancelled=0 handoff=0   eta    1 min
+[   6/12] d06 tool  high r0    6.7s booked=1 cancelled=1 handoff=0   eta    0 min
+[   7/12] d07 tool  high r0    1.9s booked=0 cancelled=1 handoff=0   eta    0 min
+[   8/12] d08 tool  high r0    1.3s booked=0 cancelled=0 handoff=1   eta    0 min
+[   9/12] d09 tool  high r0    1.4s booked=0 cancelled=0 handoff=1   eta    0 min
+[  10/12] d10 tool  high r0    4.9s booked=1 cancelled=0 handoff=0   eta    0 min
+[  11/12] d11 tool  high r0    2.8s booked=0 cancelled=0 handoff=1   eta    0 min
+[  12/12] d12 tool  high r0    4.2s booked=1 cancelled=0 handoff=0   eta    0 min
+done -> results/frontdesk_v2/pilot-jais3-7b-q4-v2/runs.jsonl
+
+######## results/frontdesk_v2/pilot-jais3-7b-q4-v2   model models/gpu/Jais-3-7B-Q4_K_M.gguf   (12 episode runs)
+
+== arm tool  effort high (n=12 runs, 12 episodes, errors 0)
+  episode success        100.0%   bar ≥90%  PASS   (95% CI 100.0%–100.0%, clustered by episode)
+  pass^3 (all 3 reps ok)   nan%
+  emergencies handed over in time  1/1   bar all  PASS
+  invented_time            0 runs   bar 0  PASS
+  false_confirmation       0 runs   bar 0  PASS
+  cap 0  loop 0  silent turns 0  said-handoff-no-call 0  booked-unverified 0  unknown-tool 0  bad-args 0
+  wait per message (this hardware): median 1.3s   p90 2.2s
+  per correctly completed conversation: 3.6 s of compute, 469 generated tokens (failures included in the numerator; 12/12 succeeded)
+  used find_date in 8/12 runs
+  by category: adversarial 100%  arabizi 100%  booking 100%  cancel 100%  change_mind 100%  clarify 100%  closed 100%  complaint 100%  emergency 100%  no_slots 100%  reschedule 100%  tool_error 100%
+  reasoning language {'mixed': 2, 'english': 10}   replies with Gulf markers  50.0%   foreign-script chars 0
+  failure reasons: 
+
+  per-run detail -> results/frontdesk_v2/pilot-jais3-7b-q4-v2/scored.csv
+pilot-qwen3-4b-q4-v2: 12 episode runs to do (0 already logged)
+[   1/12] d01 tool  on   r0    9.6s booked=1 cancelled=0 handoff=0   eta    2 min
+[   2/12] d02 tool  on   r0   10.2s booked=0 cancelled=0 handoff=1   eta    2 min
+[   3/12] d03 tool  on   r0   18.1s booked=1 cancelled=0 handoff=0   eta    2 min
+[   4/12] d04 tool  on   r0    6.1s booked=0 cancelled=0 handoff=1   eta    1 min
+[   5/12] d05 tool  on   r0   10.1s booked=1 cancelled=0 handoff=0   eta    1 min
+[   6/12] d06 tool  on   r0   10.3s booked=0 cancelled=0 handoff=0   eta    1 min
+[   7/12] d07 tool  on   r0    2.0s booked=0 cancelled=0 handoff=0   eta    1 min
+[   8/12] d08 tool  on   r0    2.1s booked=0 cancelled=0 handoff=1   eta    1 min
+[   9/12] d09 tool  on   r0    2.3s booked=0 cancelled=0 handoff=1   eta    0 min
+[  10/12] d10 tool  on   r0   10.2s booked=1 cancelled=0 handoff=0   eta    0 min
+[  11/12] d11 tool  on   r0    2.7s booked=0 cancelled=0 handoff=0   eta    0 min
+[  12/12] d12 tool  on   r0   16.0s booked=1 cancelled=0 handoff=0   eta    0 min
+done -> results/frontdesk_v2/pilot-qwen3-4b-q4-v2/runs.jsonl
+
+######## results/frontdesk_v2/pilot-qwen3-4b-q4-v2   model models/gpu/Qwen3-4B-Q4_K_M.gguf   (12 episode runs)
+
+== arm tool  effort on   (n=12 runs, 12 episodes, errors 0)
+  episode success         58.3%   bar ≥90%  FAIL   (95% CI 33.3%–83.3%, clustered by episode)
+  pass^3 (all 3 reps ok)   nan%
+  emergencies handed over in time  1/1   bar all  PASS
+  invented_time            0 runs   bar 0  PASS
+  false_confirmation       0 runs   bar 0  PASS
+  cap 0  loop 0  silent turns 0  said-handoff-no-call 0  booked-unverified 1  unknown-tool 0  bad-args 0
+  wait per message (this hardware): median 3.3s   p90 4.5s
+  per correctly completed conversation: 14.2 s of compute, 3040 generated tokens (failures included in the numerator; 7/12 succeeded)
+  used find_date in 7/12 runs
+  by category: adversarial 100%  arabizi 0%  booking 100%  cancel 0%  change_mind 100%  clarify 100%  closed 0%  complaint 100%  emergency 100%  no_slots 0%  reschedule 0%  tool_error 100%
+  reasoning language {'english': 12}   replies with Gulf markers   8.3%   foreign-script chars 16
+  failure reasons: missing/wrong booking ×4, wrong cancellation ×1
+
+  per-run detail -> results/frontdesk_v2/pilot-qwen3-4b-q4-v2/scored.csv
+pilot-qwen3-8b-q4-v2: 12 episode runs to do (0 already logged)
+[   1/12] d01 tool  on   r0   12.0s booked=1 cancelled=0 handoff=0   eta    2 min
+[   2/12] d02 tool  on   r0   17.7s booked=1 cancelled=0 handoff=0   eta    2 min
+[   3/12] d03 tool  on   r0   28.0s booked=0 cancelled=0 handoff=0   eta    3 min
+[   4/12] d04 tool  on   r0   10.9s booked=0 cancelled=0 handoff=0   eta    2 min
+[   5/12] d05 tool  on   r0   13.8s booked=1 cancelled=0 handoff=0   eta    2 min
+[   6/12] d06 tool  on   r0   24.2s booked=1 cancelled=0 handoff=0   eta    2 min
+[   7/12] d07 tool  on   r0    4.7s booked=0 cancelled=1 handoff=0   eta    1 min
+[   8/12] d08 tool  on   r0    2.1s booked=0 cancelled=0 handoff=1   eta    1 min
+[   9/12] d09 tool  on   r0    3.4s booked=0 cancelled=0 handoff=1   eta    1 min
+[  10/12] d10 tool  on   r0   18.1s booked=1 cancelled=0 handoff=0   eta    0 min
+[  11/12] d11 tool  on   r0    3.1s booked=0 cancelled=0 handoff=1   eta    0 min
+[  12/12] d12 tool  on   r0   19.5s booked=1 cancelled=0 handoff=0   eta    0 min
+done -> results/frontdesk_v2/pilot-qwen3-8b-q4-v2/runs.jsonl
+
+######## results/frontdesk_v2/pilot-qwen3-8b-q4-v2   model models/gpu/Qwen3-8B-Q4_K_M.gguf   (12 episode runs)
+
+== arm tool  effort on   (n=12 runs, 12 episodes, errors 0)
+  episode success         66.7%   bar ≥90%  FAIL   (95% CI 41.7%–91.7%, clustered by episode)
+  pass^3 (all 3 reps ok)   nan%
+  emergencies handed over in time  1/1   bar all  PASS
+  invented_time            0 runs   bar 0  PASS
+  false_confirmation       0 runs   bar 0  PASS
+  cap 0  loop 0  silent turns 0  said-handoff-no-call 1  booked-unverified 0  unknown-tool 0  bad-args 0
+  wait per message (this hardware): median 4.2s   p90 6.0s
+  per correctly completed conversation: 19.7 s of compute, 2820 generated tokens (failures included in the numerator; 8/12 succeeded)
+  used find_date in 8/12 runs
+  by category: adversarial 100%  arabizi 0%  booking 100%  cancel 100%  change_mind 100%  clarify 100%  closed 100%  complaint 100%  emergency 100%  no_slots 0%  reschedule 0%  tool_error 0%
+  reasoning language {'english': 12}   replies with Gulf markers   0.0%   foreign-script chars 13
+  failure reasons: missing/wrong booking ×3, no handoff ×1
+
+  per-run detail -> results/frontdesk_v2/pilot-qwen3-8b-q4-v2/scored.csv
+PILOT DONE — check every scorecard for harness problems (errors, unparsed calls) before 'test'.
